@@ -307,16 +307,22 @@ function normalize(text) {
 function calcScore(qN, tN, tR) {
   if (!qN || !tN) return 0;
   if (qN === tN) return 100;
+  // 略称マッチ（括弧内）を先に判定 — 「TP」→「総蛋白(TP)」でスコア95
+  if (/^[a-z0-9\-]+$/i.test(qN) && qN.length <= 6) {
+    var raw = tR.toLowerCase();
+    // 括弧内の完全一致は最高スコア
+    if (raw.includes("("+qN+")") || tN.includes("("+qN+")")) return 95;
+    // 全角括弧
+    if (raw.includes("\uff08"+qN+"\uff09") || tN.includes("\uff08"+qN+"\uff09")) return 95;
+    // 区切り文字付き
+    for (var p of [qN+"/", "/"+qN, " "+qN+" ", " "+qN+")", qN+"_", "_"+qN]) {
+      if (raw.includes(p)) return 85;
+    }
+  }
   if (tN.startsWith(qN)) return 80 + qN.length / tN.length * 10;
   if (tN.includes(qN)) return 60 + qN.length / tN.length * 10;
   var words = qN.split(/\s+/);
   if (words.length > 1 && words.every(function(w){return tN.includes(w);})) return 50 + qN.length / tN.length * 10;
-  if (/^[a-z0-9]+$/i.test(qN) && qN.length <= 5) {
-    var raw = tR.toLowerCase();
-    for (var p of ["("+qN+")", qN+"/", "/"+qN, " "+qN+" ", " "+qN+")"]) {
-      if (raw.includes(p)) return 75;
-    }
-  }
   return 0;
 }
 

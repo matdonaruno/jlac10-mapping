@@ -49,7 +49,20 @@ def _score(query_norm: str, target_norm: str, target_raw: str) -> float:
     if query_norm == target_norm:
         return 100.0
 
-    # 先頭一致（略称でよくあるパターン）
+    # 略称マッチ（括弧内）を先に判定 — 「TP」→「総蛋白(TP)」で高スコア
+    if re.match(r"^[a-z0-9\-]+$", query_norm) and len(query_norm) <= 6:
+        target_lower = target_raw.lower()
+        # 括弧内完全一致
+        if f"({query_norm})" in target_lower or f"（{query_norm}）" in target_lower:
+            return 95.0
+        if f"({query_norm})" in target_norm or f"（{query_norm}）" in target_norm:
+            return 95.0
+        # 区切り文字付き
+        for pat in [f"{query_norm}/", f"/{query_norm}", f" {query_norm} ", f" {query_norm})"]:
+            if pat in target_lower:
+                return 85.0
+
+    # 先頭一致
     if target_norm.startswith(query_norm):
         return 80.0 + len(query_norm) / len(target_norm) * 10
 
@@ -61,22 +74,6 @@ def _score(query_norm: str, target_norm: str, target_raw: str) -> float:
     words = query_norm.split()
     if len(words) > 1 and all(w in target_norm for w in words):
         return 50.0 + len(query_norm) / len(target_norm) * 10
-
-    # 英字略称チェック: "TP" → "(TP)" や "TP/" を探す
-    if query_norm.isascii() and len(query_norm) <= 5:
-        # 括弧内の略称
-        patterns = [
-            f"({query_norm})",
-            f"（{query_norm}）",
-            f"{query_norm}/",
-            f"/{query_norm}",
-            f" {query_norm} ",
-            f" {query_norm})",
-        ]
-        target_lower = target_raw.lower()
-        for pat in patterns:
-            if pat.lower() in target_lower:
-                return 75.0
 
     return 0.0
 
