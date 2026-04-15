@@ -144,6 +144,9 @@ def parse_test_row(tr: Tag) -> dict | None:
     item_name = lines[0] if lines else ""
     jlac10_raw = lines[1] if len(lines) > 1 else ""
     jlac10 = jlac10_raw.replace("-", "")
+    # JLAC10 バリデーション: 英数字15〜17桁のみ有効
+    if jlac10 and not re.match(r"^[0-9A-Za-z]{15,17}$", jlac10):
+        jlac10 = ""
 
     tds = tr.find_all("td")
     if len(tds) < 8:

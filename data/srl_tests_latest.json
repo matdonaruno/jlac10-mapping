@@ -1,12 +1,12 @@
 {
   "metadata": {
     "source": "https://test-directory.srl.info/akiruno",
-    "scraped_at": "2026-04-13T11:44:32.888826+00:00",
+    "scraped_at": "2026-04-15T23:38:47.395524+00:00",
     "last_update_date": null,
     "total_categories": 93,
     "total_items": 2120,
-    "fetched_from_server": 93,
-    "served_from_cache": 0,
+    "fetched_from_server": 50,
+    "served_from_cache": 43,
     "errors": []
   },
   "items": [
@@ -984,7 +984,7 @@
     },
     {
       "item_name": "膵ホスホリパーゼA",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/004750200",
       "material": "血清",
       "volume_ml": "0.3",
@@ -1011,7 +1011,7 @@
     },
     {
       "item_name": "膵ホスホリパーゼA",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/004750300",
       "material": "血漿",
       "volume_ml": "0.3",
@@ -2847,7 +2847,7 @@
     },
     {
       "item_name": "HDL",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/001880200",
       "material": "血清",
       "volume_ml": "1.0",
@@ -3576,7 +3576,7 @@
     },
     {
       "item_name": "リポ蛋白脂質分画定量〔",
-      "jlac10": "リポ蛋白コレステロール分画定量",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/005500200",
       "material": "血清",
       "volume_ml": "1.0",
@@ -3873,7 +3873,7 @@
     },
     {
       "item_name": "ビタミンB",
-      "jlac10": "1",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/000250100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "0.5",
@@ -3900,7 +3900,7 @@
     },
     {
       "item_name": "ビタミンB",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/027200100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "0.5",
@@ -3927,7 +3927,7 @@
     },
     {
       "item_name": "ビタミンB",
-      "jlac10": "6",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/008700200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -3954,7 +3954,7 @@
     },
     {
       "item_name": "ビタミンB",
-      "jlac10": "12",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/000260200",
       "material": "血清",
       "volume_ml": "0.6",
@@ -4089,7 +4089,7 @@
     },
     {
       "item_name": "1，25-(OH)",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/024790200",
       "material": "血清",
       "volume_ml": "0.6",
@@ -6681,7 +6681,7 @@
     },
     {
       "item_name": "アンチプラスミン (α",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/002210300",
       "material": "血漿",
       "volume_ml": "0.5",
@@ -6708,7 +6708,7 @@
     },
     {
       "item_name": "α",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/052980300",
       "material": "血漿",
       "volume_ml": "0.2",
@@ -7896,7 +7896,7 @@
     },
     {
       "item_name": "トリヨードサイロニン (T",
-      "jlac10": "3",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4080200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -7923,7 +7923,7 @@
     },
     {
       "item_name": "遊離トリヨードサイロニン(Free T",
-      "jlac10": "3",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4190200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -7950,7 +7950,7 @@
     },
     {
       "item_name": "サイロキシン (T",
-      "jlac10": "4",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4960200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -7977,7 +7977,7 @@
     },
     {
       "item_name": "遊離サイロキシン(Free T",
-      "jlac10": "4",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4970200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -8058,7 +8058,7 @@
     },
     {
       "item_name": "遊離サイロキシン (Free T",
-      "jlac10": "4",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/001190200",
       "material": "血清",
       "volume_ml": "0.3",
@@ -8085,7 +8085,7 @@
     },
     {
       "item_name": "遊離トリヨードサイロニン (Free T",
-      "jlac10": "3",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/006280200",
       "material": "血清",
       "volume_ml": "0.3",
@@ -8166,7 +8166,7 @@
     },
     {
       "item_name": "サイロキシン(T",
-      "jlac10": "4",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/000170200",
       "material": "血清",
       "volume_ml": "0.3",
@@ -8193,7 +8193,7 @@
     },
     {
       "item_name": "トリヨードサイロニン (T",
-      "jlac10": "3",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/000160200",
       "material": "血清",
       "volume_ml": "0.3",
@@ -9624,7 +9624,7 @@
     },
     {
       "item_name": "メタネフリン2分画〔",
-      "jlac10": "MN:メタネフリン",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/001370500",
       "material": "酸性蓄尿",
       "volume_ml": "2",
@@ -9705,7 +9705,7 @@
     },
     {
       "item_name": "エストラジオール(E",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/026330200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -9948,7 +9948,7 @@
     },
     {
       "item_name": "IVF-エストラジオール(E",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/026440200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -9975,7 +9975,7 @@
     },
     {
       "item_name": "エストラジオール(E",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/058410500",
       "material": "蓄尿",
       "volume_ml": "3",
@@ -10056,7 +10056,7 @@
     },
     {
       "item_name": "エストラジオール(E",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/008160200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -10164,7 +10164,7 @@
     },
     {
       "item_name": "エストロン(E",
-      "jlac10": "1",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/051210500",
       "material": "蓄尿",
       "volume_ml": "5",
@@ -10218,7 +10218,7 @@
     },
     {
       "item_name": "IVF-エストラジオール(E",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068410200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -10245,7 +10245,7 @@
     },
     {
       "item_name": "エストリオール(E",
-      "jlac10": "3",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/051220500",
       "material": "蓄尿",
       "volume_ml": "5",
@@ -11027,74 +11027,47 @@
       "category_group": "内分泌学的検査"
     },
     {
-      "item_name": "アンギオテンシンⅡ（2022年3月31日ご依頼分をもって受託中止）",
-      "jlac10": "4Z0300000022001",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/008080300",
-      "material": "血漿",
+      "item_name": "FGF-23（2020年3月31日ご依頼分をもって受託中止）",
+      "jlac10": "4Z3230000023023",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0M8950200",
+      "material": "血清",
       "volume_ml": "0.3",
-      "container": "PN2,PN5↓A00",
-      "cap_color": "PN2",
+      "container": "S09↓A00",
+      "cap_color": "S09",
       "storage": {
-        "condition": "凍結",
-        "stability": ""
+        "condition": "冷蔵",
+        "stability": "14日"
       },
-      "turnaround_days": "6～12",
+      "turnaround_days": "2～8",
       "fee": {
         "fee": "",
         "note": null,
         "包括": false
       },
       "method": {
-        "name": "RIA2抗体法",
-        "description": "RIA(Radio immunoassay)放射性免疫測定法抗体に対して放射性同位元素（RI）で標識した抗原と検体中の抗原を競合的に抗原抗体反応を行い，抗体と結合した標識抗原（結合型：Bound）と抗体と結合していない標識抗原（遊離型：Free）を分離し，その割合を放射活性から抗原の濃度として測定する方法。結合型と遊離型の分離方法（B/F分離）として，抗体を固相化しておく固相法，抗原抗体複合体に第2抗体を結合させて沈澱させる2抗体法，抗原抗体複合体を硫酸アンモニウム（硫安）で沈澱させる硫安塩析法，抗原抗体複合体を沈澱試薬で沈澱させるPEG法などがある。"
+        "name": "ELISA",
+        "description": "ELISA(Enzyme-Linked immunosorbent assay)酵素免疫測定法固相化した抗体に対して抗原を反応させた後，酵素標識した抗体を抗原に2次反応させ，発色基質を加えて酵素活性を測定する方法。"
       },
-      "reference_value": "22以下(pg/mL)",
+      "reference_value": "16～69 (pg/mL)",
       "category_id": 30,
       "category_name": "内分泌学的（その他）",
       "category_group": "内分泌学的検査"
     },
     {
-      "item_name": "アルドステロン/レニン濃度比（2022年12月1日ご依頼分をもって受託中止）",
-      "jlac10": "4D1220000022919",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/080380300",
-      "material": "血漿",
-      "volume_ml": "1.0",
-      "container": "PN2,PN5↓A00",
-      "cap_color": "PN2",
+      "item_name": "オステオカルシン（2016年3月31日ご依頼分をもって受託中止）",
+      "jlac10": "",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/052270200",
+      "material": "血清",
+      "volume_ml": "0.2",
+      "container": "S09↓A00",
+      "cap_color": "S09",
       "storage": {
         "condition": "凍結",
-        "stability": "21日"
+        "stability": ""
       },
-      "turnaround_days": "2～4",
+      "turnaround_days": "",
       "fee": {
-        "fee": "125+105",
-        "note": "※5",
-        "包括": false
-      },
-      "method": {
-        "name": "CLEIA",
-        "description": "CLEIA(Chemiluminescent enzyme immunoassay)化学発光酵素免疫測定法固相化した抗体に対して抗原を反応させた後，酵素標識した抗体を抗原に2次反応させ，化学発光基質を加えて発光強度を測定する方法。"
-      },
-      "reference_value": "下記参照",
-      "category_id": 30,
-      "category_name": "内分泌学的（その他）",
-      "category_group": "内分泌学的検査"
-    },
-    {
-      "item_name": "レニン定量(活性型)（2021年3月31日ご依頼分をもって受託中止）",
-      "jlac10": "4Z0200000022006",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/056310300",
-      "material": "血漿",
-      "volume_ml": "0.5",
-      "container": "PN2,PN5↓A00",
-      "cap_color": "PN2",
-      "storage": {
-        "condition": "凍結",
-        "stability": "20日"
-      },
-      "turnaround_days": "2～5",
-      "fee": {
-        "fee": "108",
+        "fee": "170",
         "note": "※5",
         "包括": true
       },
@@ -11102,34 +11075,7 @@
         "name": "RIA固相法(IRMA)",
         "description": "IRMA(Immuno radio metric assay)免疫放射定量法RIＡの1つで，固相化した抗体に対して抗原を反応させた後，放射性同位元素（RI）で標識した抗体を抗原に2次反応させる方法。固相化抗体と標識抗体が抗原を挟む形で結合することから，サンドイッチ法とも呼ばれる。"
       },
-      "reference_value": "随時 3.2～36 臥位 2.5～21 立位 3.6～64 (pg/mL)",
-      "category_id": 30,
-      "category_name": "内分泌学的（その他）",
-      "category_group": "内分泌学的検査"
-    },
-    {
-      "item_name": "アルドステロン/レニン活性比（2022年12月1日ご依頼分をもって受託中止）",
-      "jlac10": "4D1200000022919",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/080530300",
-      "material": "血漿",
-      "volume_ml": "1.2",
-      "container": "PN2,PN5↓A00",
-      "cap_color": "PN2",
-      "storage": {
-        "condition": "凍結",
-        "stability": "14日"
-      },
-      "turnaround_days": "3～5",
-      "fee": {
-        "fee": "125+100",
-        "note": "※5",
-        "包括": false
-      },
-      "method": {
-        "name": "アルドステロン：CLEIA レニン活性：EIA",
-        "description": ""
-      },
-      "reference_value": "下記参照",
+      "reference_value": "2.5～13(ng/mL)",
       "category_id": 30,
       "category_name": "内分泌学的（その他）",
       "category_group": "内分泌学的検査"
@@ -11157,33 +11103,6 @@
         "description": "RIA(Radio immunoassay)放射性免疫測定法抗体に対して放射性同位元素（RI）で標識した抗原と検体中の抗原を競合的に抗原抗体反応を行い，抗体と結合した標識抗原（結合型：Bound）と抗体と結合していない標識抗原（遊離型：Free）を分離し，その割合を放射活性から抗原の濃度として測定する方法。結合型と遊離型の分離方法（B/F分離）として，抗体を固相化しておく固相法，抗原抗体複合体に第2抗体を結合させて沈澱させる2抗体法，抗原抗体複合体を硫酸アンモニウム（硫安）で沈澱させる硫安塩析法，抗原抗体複合体を沈澱試薬で沈澱させるPEG法などがある。"
       },
       "reference_value": "臥位 0.3～2.9 立位 0.3～5.4 (ng/mL/hr)",
-      "category_id": 30,
-      "category_name": "内分泌学的（その他）",
-      "category_group": "内分泌学的検査"
-    },
-    {
-      "item_name": "FGF-23（2020年3月31日ご依頼分をもって受託中止）",
-      "jlac10": "4Z3230000023023",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0M8950200",
-      "material": "血清",
-      "volume_ml": "0.3",
-      "container": "S09↓A00",
-      "cap_color": "S09",
-      "storage": {
-        "condition": "冷蔵",
-        "stability": "14日"
-      },
-      "turnaround_days": "2～8",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "ELISA",
-        "description": "ELISA(Enzyme-Linked immunosorbent assay)酵素免疫測定法固相化した抗体に対して抗原を反応させた後，酵素標識した抗体を抗原に2次反応させ，発色基質を加えて酵素活性を測定する方法。"
-      },
-      "reference_value": "16～69 (pg/mL)",
       "category_id": 30,
       "category_name": "内分泌学的（その他）",
       "category_group": "内分泌学的検査"
@@ -11243,20 +11162,74 @@
       "category_group": "内分泌学的検査"
     },
     {
-      "item_name": "オステオカルシン（2016年3月31日ご依頼分をもって受託中止）",
-      "jlac10": "",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/052270200",
-      "material": "血清",
-      "volume_ml": "0.2",
-      "container": "S09↓A00",
-      "cap_color": "S09",
+      "item_name": "アルドステロン/レニン濃度比（2022年12月1日ご依頼分をもって受託中止）",
+      "jlac10": "4D1220000022919",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/080380300",
+      "material": "血漿",
+      "volume_ml": "1.0",
+      "container": "PN2,PN5↓A00",
+      "cap_color": "PN2",
+      "storage": {
+        "condition": "凍結",
+        "stability": "21日"
+      },
+      "turnaround_days": "2～4",
+      "fee": {
+        "fee": "125+105",
+        "note": "※5",
+        "包括": false
+      },
+      "method": {
+        "name": "CLEIA",
+        "description": "CLEIA(Chemiluminescent enzyme immunoassay)化学発光酵素免疫測定法固相化した抗体に対して抗原を反応させた後，酵素標識した抗体を抗原に2次反応させ，化学発光基質を加えて発光強度を測定する方法。"
+      },
+      "reference_value": "下記参照",
+      "category_id": 30,
+      "category_name": "内分泌学的（その他）",
+      "category_group": "内分泌学的検査"
+    },
+    {
+      "item_name": "アンギオテンシンⅡ（2022年3月31日ご依頼分をもって受託中止）",
+      "jlac10": "4Z0300000022001",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/008080300",
+      "material": "血漿",
+      "volume_ml": "0.3",
+      "container": "PN2,PN5↓A00",
+      "cap_color": "PN2",
       "storage": {
         "condition": "凍結",
         "stability": ""
       },
-      "turnaround_days": "",
+      "turnaround_days": "6～12",
       "fee": {
-        "fee": "170",
+        "fee": "",
+        "note": null,
+        "包括": false
+      },
+      "method": {
+        "name": "RIA2抗体法",
+        "description": "RIA(Radio immunoassay)放射性免疫測定法抗体に対して放射性同位元素（RI）で標識した抗原と検体中の抗原を競合的に抗原抗体反応を行い，抗体と結合した標識抗原（結合型：Bound）と抗体と結合していない標識抗原（遊離型：Free）を分離し，その割合を放射活性から抗原の濃度として測定する方法。結合型と遊離型の分離方法（B/F分離）として，抗体を固相化しておく固相法，抗原抗体複合体に第2抗体を結合させて沈澱させる2抗体法，抗原抗体複合体を硫酸アンモニウム（硫安）で沈澱させる硫安塩析法，抗原抗体複合体を沈澱試薬で沈澱させるPEG法などがある。"
+      },
+      "reference_value": "22以下(pg/mL)",
+      "category_id": 30,
+      "category_name": "内分泌学的（その他）",
+      "category_group": "内分泌学的検査"
+    },
+    {
+      "item_name": "レニン定量(活性型)（2021年3月31日ご依頼分をもって受託中止）",
+      "jlac10": "4Z0200000022006",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/056310300",
+      "material": "血漿",
+      "volume_ml": "0.5",
+      "container": "PN2,PN5↓A00",
+      "cap_color": "PN2",
+      "storage": {
+        "condition": "凍結",
+        "stability": "20日"
+      },
+      "turnaround_days": "2～5",
+      "fee": {
+        "fee": "108",
         "note": "※5",
         "包括": true
       },
@@ -11264,7 +11237,34 @@
         "name": "RIA固相法(IRMA)",
         "description": "IRMA(Immuno radio metric assay)免疫放射定量法RIＡの1つで，固相化した抗体に対して抗原を反応させた後，放射性同位元素（RI）で標識した抗体を抗原に2次反応させる方法。固相化抗体と標識抗体が抗原を挟む形で結合することから，サンドイッチ法とも呼ばれる。"
       },
-      "reference_value": "2.5～13(ng/mL)",
+      "reference_value": "随時 3.2～36 臥位 2.5～21 立位 3.6～64 (pg/mL)",
+      "category_id": 30,
+      "category_name": "内分泌学的（その他）",
+      "category_group": "内分泌学的検査"
+    },
+    {
+      "item_name": "アルドステロン/レニン活性比（2022年12月1日ご依頼分をもって受託中止）",
+      "jlac10": "4D1200000022919",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/080530300",
+      "material": "血漿",
+      "volume_ml": "1.2",
+      "container": "PN2,PN5↓A00",
+      "cap_color": "PN2",
+      "storage": {
+        "condition": "凍結",
+        "stability": "14日"
+      },
+      "turnaround_days": "3～5",
+      "fee": {
+        "fee": "125+100",
+        "note": "※5",
+        "包括": false
+      },
+      "method": {
+        "name": "アルドステロン：CLEIA レニン活性：EIA",
+        "description": ""
+      },
+      "reference_value": "下記参照",
       "category_id": 30,
       "category_name": "内分泌学的（その他）",
       "category_group": "内分泌学的検査"
@@ -11649,7 +11649,7 @@
     },
     {
       "item_name": "シアリルLe",
-      "jlac10": "x",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/052040200",
       "material": "血清",
       "volume_ml": "0.2",
@@ -11676,7 +11676,7 @@
     },
     {
       "item_name": "シアリルLe",
-      "jlac10": "x",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022410200",
       "material": "血清",
       "volume_ml": "0.4",
@@ -22233,7 +22233,7 @@
     },
     {
       "item_name": "抗カルジオリピン β",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022470200",
       "material": "血清",
       "volume_ml": "0.3",
@@ -22260,7 +22260,7 @@
     },
     {
       "item_name": "抗β",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E240200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -22287,7 +22287,7 @@
     },
     {
       "item_name": "抗β",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E220200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -23988,7 +23988,7 @@
     },
     {
       "item_name": "α",
-      "jlac10": "1",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/051820200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -24015,7 +24015,7 @@
     },
     {
       "item_name": "α",
-      "jlac10": "1",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/051825400",
       "material": "部分尿",
       "volume_ml": "0.5",
@@ -24042,7 +24042,7 @@
     },
     {
       "item_name": "α",
-      "jlac10": "1",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/001740200",
       "material": "血清",
       "volume_ml": "0.4",
@@ -24069,7 +24069,7 @@
     },
     {
       "item_name": "α",
-      "jlac10": "1",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/001750200",
       "material": "血清",
       "volume_ml": "0.4",
@@ -24123,7 +24123,7 @@
     },
     {
       "item_name": "α",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/001760200",
       "material": "血清",
       "volume_ml": "0.4",
@@ -24285,7 +24285,7 @@
     },
     {
       "item_name": "β",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/008500200",
       "material": "血清",
       "volume_ml": "0.5",
@@ -24312,7 +24312,7 @@
     },
     {
       "item_name": "β",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/002100500",
       "material": "蓄尿",
       "volume_ml": "0.5",
@@ -24339,7 +24339,7 @@
     },
     {
       "item_name": "β",
-      "jlac10": "2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/002105400",
       "material": "部分尿",
       "volume_ml": "0.5",
@@ -37569,7 +37569,7 @@
     },
     {
       "item_name": "IgG-FcR",
-      "jlac10": "+",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/005220100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "1.0",
@@ -37704,7 +37704,7 @@
     },
     {
       "item_name": "サイトメガロウイルス 特異的CTL解析 (HLA-A",
-      "jlac10": "*",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068640100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -37731,7 +37731,7 @@
     },
     {
       "item_name": "サイトメガロウイルス 特異的CTL解析 (HLA-A",
-      "jlac10": "*",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068680100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39162,7 +39162,7 @@
     },
     {
       "item_name": "Y染色体(睾丸決定遺伝子",
-      "jlac10": "SRY",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060070100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "3.0",
@@ -39189,7 +39189,7 @@
     },
     {
       "item_name": "X, Y染色体(身長関連遺伝子",
-      "jlac10": "SHOX",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029740100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "3.0",
@@ -39513,7 +39513,7 @@
     },
     {
       "item_name": "TCF3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065111400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39540,7 +39540,7 @@
     },
     {
       "item_name": "TCF3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065110100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39567,7 +39567,7 @@
     },
     {
       "item_name": "CKS1B",
-      "jlac10": "1q21 増幅",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065591400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39594,7 +39594,7 @@
     },
     {
       "item_name": "CKS1B",
-      "jlac10": "1q21 増幅",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065590100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39621,7 +39621,7 @@
     },
     {
       "item_name": "ALK",
-      "jlac10": "2p23転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029313500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -39648,7 +39648,7 @@
     },
     {
       "item_name": "ALK",
-      "jlac10": "2p23転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029311400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39675,7 +39675,7 @@
     },
     {
       "item_name": "ALK",
-      "jlac10": "2p23転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029310100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39702,7 +39702,7 @@
     },
     {
       "item_name": "GATA2",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6651400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39729,7 +39729,7 @@
     },
     {
       "item_name": "GATA2",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6650100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39756,7 +39756,7 @@
     },
     {
       "item_name": "BCL6",
-      "jlac10": "3q27転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028773500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -39783,7 +39783,7 @@
     },
     {
       "item_name": "BCL6",
-      "jlac10": "3q27転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028771400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39810,7 +39810,7 @@
     },
     {
       "item_name": "BCL6",
-      "jlac10": "3q27転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028770100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39837,7 +39837,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061691400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39864,7 +39864,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061690100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39891,7 +39891,7 @@
     },
     {
       "item_name": "FIP1L1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063321400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39918,7 +39918,7 @@
     },
     {
       "item_name": "FIP1L1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063320100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39945,7 +39945,7 @@
     },
     {
       "item_name": "CSF1R",
-      "jlac10": "del(5)長腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022251400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -39972,7 +39972,7 @@
     },
     {
       "item_name": "CSF1R",
-      "jlac10": "del(5)長腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022250100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -39999,7 +39999,7 @@
     },
     {
       "item_name": "EGR1",
-      "jlac10": "del(5)長腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064101400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40026,7 +40026,7 @@
     },
     {
       "item_name": "EGR1",
-      "jlac10": "del(5)長腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064100100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40053,7 +40053,7 @@
     },
     {
       "item_name": "PDGFRB",
-      "jlac10": "5q32転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064741400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40080,7 +40080,7 @@
     },
     {
       "item_name": "PDGFRB",
-      "jlac10": "5q32転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064740100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40215,7 +40215,7 @@
     },
     {
       "item_name": "MYC",
-      "jlac10": "8q24転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065123500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -40242,7 +40242,7 @@
     },
     {
       "item_name": "MYC",
-      "jlac10": "8q24転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065121400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40269,7 +40269,7 @@
     },
     {
       "item_name": "MYC",
-      "jlac10": "8q24転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065120100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40296,7 +40296,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028783500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -40323,7 +40323,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028781400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40350,7 +40350,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028780100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40377,7 +40377,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061451400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40404,7 +40404,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061450100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40431,7 +40431,7 @@
     },
     {
       "item_name": "FGFR1",
-      "jlac10": "8p11.2転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064751400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40458,7 +40458,7 @@
     },
     {
       "item_name": "FGFR1",
-      "jlac10": "8p11.2転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064750100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40485,7 +40485,7 @@
     },
     {
       "item_name": "BCR",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/021301400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40512,7 +40512,7 @@
     },
     {
       "item_name": "BCR",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/021300100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40539,7 +40539,7 @@
     },
     {
       "item_name": "末梢血好中球",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029360100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40566,7 +40566,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "11q23.3転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061141400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40593,7 +40593,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "11q23.3転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061140100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40620,7 +40620,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028373500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -40647,7 +40647,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028371400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40674,7 +40674,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028370100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40701,7 +40701,7 @@
     },
     {
       "item_name": "NUP98",
-      "jlac10": "11p15転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029491400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40728,7 +40728,7 @@
     },
     {
       "item_name": "NUP98",
-      "jlac10": "11p15転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029490100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40755,7 +40755,7 @@
     },
     {
       "item_name": "BIRC3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/062083500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -40782,7 +40782,7 @@
     },
     {
       "item_name": "BIRC3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/062081400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40809,7 +40809,7 @@
     },
     {
       "item_name": "BIRC3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/062080100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40836,7 +40836,7 @@
     },
     {
       "item_name": "ATM",
-      "jlac10": "del(11)長腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064761400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40863,7 +40863,7 @@
     },
     {
       "item_name": "ATM",
-      "jlac10": "del(11)長腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064760100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -40944,7 +40944,7 @@
     },
     {
       "item_name": "ETV6",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068131400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -40971,7 +40971,7 @@
     },
     {
       "item_name": "ETV6",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068130100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41052,7 +41052,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028383500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -41079,7 +41079,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028381400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41106,7 +41106,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028380100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41133,7 +41133,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061811400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41160,7 +41160,7 @@
     },
     {
       "item_name": "IGH",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061810100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41187,7 +41187,7 @@
     },
     {
       "item_name": "PML",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/025051400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41214,7 +41214,7 @@
     },
     {
       "item_name": "PML",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/025050100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41241,7 +41241,7 @@
     },
     {
       "item_name": "CBFB",
-      "jlac10": "inv(16)逆位、t(16;16)転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028361400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41268,7 +41268,7 @@
     },
     {
       "item_name": "CBFB",
-      "jlac10": "inv(16)逆位、t(16;16)転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028360100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41295,7 +41295,7 @@
     },
     {
       "item_name": "TP53",
-      "jlac10": "del(17)短腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068111400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41322,7 +41322,7 @@
     },
     {
       "item_name": "TP53",
-      "jlac10": "del(17)短腕欠失",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068110100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41349,7 +41349,7 @@
     },
     {
       "item_name": "MALT1",
-      "jlac10": "18q21転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061413500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -41376,7 +41376,7 @@
     },
     {
       "item_name": "MALT1",
-      "jlac10": "18q21転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061411400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41403,7 +41403,7 @@
     },
     {
       "item_name": "MALT1",
-      "jlac10": "18q21転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061410100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41430,7 +41430,7 @@
     },
     {
       "item_name": "BCL2",
-      "jlac10": "18q21転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4223500",
       "material": "リンパ節",
       "volume_ml": "5×5×5mm",
@@ -41457,7 +41457,7 @@
     },
     {
       "item_name": "BCL2",
-      "jlac10": "18q21転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4221400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41484,7 +41484,7 @@
     },
     {
       "item_name": "BCL2",
-      "jlac10": "18q21転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X4220100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -41754,7 +41754,7 @@
     },
     {
       "item_name": "MYCN",
-      "jlac10": "2p24増幅",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068073700",
       "material": "組織",
       "volume_ml": "5×5×5mm",
@@ -41781,7 +41781,7 @@
     },
     {
       "item_name": "MYCN",
-      "jlac10": "2p24増幅",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068071400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -41835,7 +41835,7 @@
     },
     {
       "item_name": "EWSR1",
-      "jlac10": "22q12転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061723700",
       "material": "組織",
       "volume_ml": "5×5×5mm",
@@ -41862,7 +41862,7 @@
     },
     {
       "item_name": "EWSR1",
-      "jlac10": "22q12転座",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/061721400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -42483,7 +42483,7 @@
     },
     {
       "item_name": "FLT3",
-      "jlac10": "/ITD 変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063021400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -42510,7 +42510,7 @@
     },
     {
       "item_name": "FLT3",
-      "jlac10": "/ITD 変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063020100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -42537,7 +42537,7 @@
     },
     {
       "item_name": "FLT3",
-      "jlac10": "変異解析ITD/TKD",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028751400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -42564,7 +42564,7 @@
     },
     {
       "item_name": "FLT3",
-      "jlac10": "変異解析ITD/TKD",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028750100",
       "material": "血液(ヘパリン加)",
       "volume_ml": "5.0",
@@ -42591,7 +42591,7 @@
     },
     {
       "item_name": "IDH1",
-      "jlac10": "遺伝子解析(AML)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00X751400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -42618,7 +42618,7 @@
     },
     {
       "item_name": "IDH1",
-      "jlac10": "遺伝子解析(AML)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00X750100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "5.0",
@@ -42645,7 +42645,7 @@
     },
     {
       "item_name": "NPM1",
-      "jlac10": "変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029041400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -42672,7 +42672,7 @@
     },
     {
       "item_name": "NPM1",
-      "jlac10": "変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029040100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -42699,7 +42699,7 @@
     },
     {
       "item_name": "KIT",
-      "jlac10": "シーケンス解析(白血病)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063051400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -42726,7 +42726,7 @@
     },
     {
       "item_name": "KIT",
-      "jlac10": "シーケンス解析(白血病)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063050100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -42753,7 +42753,7 @@
     },
     {
       "item_name": "JAK2",
-      "jlac10": "V617F遺伝子変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R9530100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -42807,7 +42807,7 @@
     },
     {
       "item_name": "CREB3L1",
-      "jlac10": "mRNA定量",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00U610100",
       "material": "血液(3.2％クエン酸Na加)",
       "volume_ml": "4.5",
@@ -42834,7 +42834,7 @@
     },
     {
       "item_name": "MYD88",
-      "jlac10": "遺伝子変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6333700",
       "material": "組織",
       "volume_ml": "125mg",
@@ -42861,7 +42861,7 @@
     },
     {
       "item_name": "CD79B",
-      "jlac10": "遺伝子変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6343700",
       "material": "組織",
       "volume_ml": "125mg",
@@ -42888,7 +42888,7 @@
     },
     {
       "item_name": "EZH2",
-      "jlac10": "遺伝子変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00D033700",
       "material": "未染標本 スライド",
       "volume_ml": "5枚",
@@ -42969,7 +42969,7 @@
     },
     {
       "item_name": "WT1",
-      "jlac10": "mRNA定量",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0M0170100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -42996,7 +42996,7 @@
     },
     {
       "item_name": "WT1",
-      "jlac10": "mRNA定量",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0M0171400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43023,7 +43023,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/026461400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43050,7 +43050,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065170100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43077,7 +43077,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00N080100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43104,7 +43104,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00N081400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43131,7 +43131,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063240100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43158,7 +43158,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063241400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43185,7 +43185,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060981400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43212,7 +43212,7 @@
     },
     {
       "item_name": "Major",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060980100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43239,7 +43239,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00G470100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43266,7 +43266,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00G471400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43293,7 +43293,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029841400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43320,7 +43320,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029840100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43347,7 +43347,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063250100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43374,7 +43374,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063251400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43401,7 +43401,7 @@
     },
     {
       "item_name": "micro",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00B920100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43428,7 +43428,7 @@
     },
     {
       "item_name": "micro",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00B921400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43455,7 +43455,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060991400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43482,7 +43482,7 @@
     },
     {
       "item_name": "minor",
-      "jlac10": "BCR",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060990100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43509,7 +43509,7 @@
     },
     {
       "item_name": "TCF3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029461400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43536,7 +43536,7 @@
     },
     {
       "item_name": "TCF3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029460100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43563,7 +43563,7 @@
     },
     {
       "item_name": "TCF3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/024980100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43590,7 +43590,7 @@
     },
     {
       "item_name": "TCF3",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/024981400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43617,7 +43617,7 @@
     },
     {
       "item_name": "PML",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029891400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43644,7 +43644,7 @@
     },
     {
       "item_name": "PML",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029890100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43671,7 +43671,7 @@
     },
     {
       "item_name": "PML",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063211400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43698,7 +43698,7 @@
     },
     {
       "item_name": "PML",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063210100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43725,7 +43725,7 @@
     },
     {
       "item_name": "CBFB",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029881400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43752,7 +43752,7 @@
     },
     {
       "item_name": "CBFB",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029880100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43779,7 +43779,7 @@
     },
     {
       "item_name": "CBFB",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/027341400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43806,7 +43806,7 @@
     },
     {
       "item_name": "CBFB",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/027340100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43833,7 +43833,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029911400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43860,7 +43860,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029910100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43887,7 +43887,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060101400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43914,7 +43914,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060100100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43941,7 +43941,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060161400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -43968,7 +43968,7 @@
     },
     {
       "item_name": "RUNX1",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060160100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -43995,7 +43995,7 @@
     },
     {
       "item_name": "ETV6",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029931400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44022,7 +44022,7 @@
     },
     {
       "item_name": "ETV6",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029930100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44049,7 +44049,7 @@
     },
     {
       "item_name": "ETV6",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023071400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44076,7 +44076,7 @@
     },
     {
       "item_name": "ETV6",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023070100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44103,7 +44103,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029441400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44130,7 +44130,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029440100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44157,7 +44157,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022931400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44184,7 +44184,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022930100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44211,7 +44211,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068351400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44238,7 +44238,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068350100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44265,7 +44265,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0M4981400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44292,7 +44292,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0M4980100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44319,7 +44319,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029451400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44346,7 +44346,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029450100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44373,7 +44373,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022941400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44400,7 +44400,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022940100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44427,7 +44427,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068321400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44454,7 +44454,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068320100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44481,7 +44481,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022951400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44508,7 +44508,7 @@
     },
     {
       "item_name": "KMT2A",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022950100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44535,7 +44535,7 @@
     },
     {
       "item_name": "NUP98",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029941400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44562,7 +44562,7 @@
     },
     {
       "item_name": "NUP98",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029940100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44589,7 +44589,7 @@
     },
     {
       "item_name": "STIL",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068301400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44616,7 +44616,7 @@
     },
     {
       "item_name": "STIL",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/068300100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44643,7 +44643,7 @@
     },
     {
       "item_name": "DEK",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029921400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44670,7 +44670,7 @@
     },
     {
       "item_name": "DEK",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/029920100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44697,7 +44697,7 @@
     },
     {
       "item_name": "DEK",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060391400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -44724,7 +44724,7 @@
     },
     {
       "item_name": "DEK",
-      "jlac10": "::",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/060390100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -44777,26 +44777,26 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "JAK2 V617F遺伝子変異解析（2020年1月31日ご依頼分をもって受託中止）",
-      "jlac10": "8C4919951046862",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/024181400",
-      "material": "骨髄液",
-      "volume_ml": "1.0",
-      "container": "H00",
-      "cap_color": "H00",
+      "item_name": "MPL・CALR遺伝子変異解析（2020年3月31日ご依頼分をもって受託中止）",
+      "jlac10": "8C4950000019856",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/058800100",
+      "material": "血液(EDTA-2Na加)",
+      "volume_ml": "5.0",
+      "container": "PN5",
+      "cap_color": "PN5",
       "storage": {
         "condition": "冷蔵",
         "stability": ""
       },
-      "turnaround_days": "8～12",
+      "turnaround_days": "4～8",
       "fee": {
         "fee": "2100",
         "note": "※2",
         "包括": true
       },
       "method": {
-        "name": "PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
+        "name": "PCR",
+        "description": "PCR(Polymerase chain reaction)DNＡが加熱により2本鎖から1本鎖に解離し，冷却することで2本鎖に戻ることを利用し，1本鎖DNＡを鋳型として目的のプライマーを結合させ，DNＡポリメラーゼの転写反応によりDNＡ合成を行うことを繰り返し，目的とするDNＡ領域を指数関数的に増幅させる方法。"
       },
       "reference_value": "変異検出せず",
       "category_id": 109,
@@ -44831,26 +44831,26 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "MPL・CALR遺伝子変異解析（2020年3月31日ご依頼分をもって受託中止）",
-      "jlac10": "8C4950000019856",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/058800100",
-      "material": "血液(EDTA-2Na加)",
-      "volume_ml": "5.0",
-      "container": "PN5",
-      "cap_color": "PN5",
+      "item_name": "JAK2 V617F遺伝子変異解析（2020年1月31日ご依頼分をもって受託中止）",
+      "jlac10": "8C4919951046862",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/024181400",
+      "material": "骨髄液",
+      "volume_ml": "1.0",
+      "container": "H00",
+      "cap_color": "H00",
       "storage": {
         "condition": "冷蔵",
         "stability": ""
       },
-      "turnaround_days": "4～8",
+      "turnaround_days": "8～12",
       "fee": {
         "fee": "2100",
         "note": "※2",
         "包括": true
       },
       "method": {
-        "name": "PCR",
-        "description": "PCR(Polymerase chain reaction)DNＡが加熱により2本鎖から1本鎖に解離し，冷却することで2本鎖に戻ることを利用し，1本鎖DNＡを鋳型として目的のプライマーを結合させ，DNＡポリメラーゼの転写反応によりDNＡ合成を行うことを繰り返し，目的とするDNＡ領域を指数関数的に増幅させる方法。"
+        "name": "PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
       },
       "reference_value": "変異検出せず",
       "category_id": 109,
@@ -45426,7 +45426,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖J",
-      "jlac10": "H",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054330100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -45453,7 +45453,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖J",
-      "jlac10": "H",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054331400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -45480,7 +45480,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖J",
-      "jlac10": "H",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054339900",
       "material": "細胞",
       "volume_ml": "2×107cells",
@@ -45507,7 +45507,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖J",
-      "jlac10": "H",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054333700",
       "material": "組織",
       "volume_ml": "250mg",
@@ -45534,7 +45534,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖C",
-      "jlac10": "μ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023040100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -45561,7 +45561,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖C",
-      "jlac10": "μ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023041400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -45588,7 +45588,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖C",
-      "jlac10": "μ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023049900",
       "material": "細胞",
       "volume_ml": "2×107cells",
@@ -45615,7 +45615,7 @@
     },
     {
       "item_name": "免疫グロブリンH鎖C",
-      "jlac10": "μ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023043700",
       "material": "組織",
       "volume_ml": "250mg",
@@ -45642,7 +45642,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖J",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054340100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -45669,7 +45669,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖J",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054341400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -45696,7 +45696,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖J",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054349900",
       "material": "細胞",
       "volume_ml": "2×107cells",
@@ -45723,7 +45723,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖J",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/054343700",
       "material": "組織",
       "volume_ml": "250mg",
@@ -45750,7 +45750,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023050100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -45777,7 +45777,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023051400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -45804,7 +45804,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023059900",
       "material": "細胞",
       "volume_ml": "2×107cells",
@@ -45831,7 +45831,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "κ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023053700",
       "material": "組織",
       "volume_ml": "250mg",
@@ -45858,7 +45858,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "λ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023060100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "7.0",
@@ -45885,7 +45885,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "λ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023061400",
       "material": "骨髄液",
       "volume_ml": "1.0",
@@ -45912,7 +45912,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "λ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023069900",
       "material": "細胞",
       "volume_ml": "2×10",
@@ -45939,7 +45939,7 @@
     },
     {
       "item_name": "免疫グロブリンL鎖C",
-      "jlac10": "λ",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/023063700",
       "material": "組織",
       "volume_ml": "250mg",
@@ -45966,7 +45966,7 @@
     },
     {
       "item_name": "BRAF",
-      "jlac10": "V600 変異解析〔PCR〕",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065203700",
       "material": "未染標本スライド",
       "volume_ml": "5～10枚",
@@ -45993,7 +45993,7 @@
     },
     {
       "item_name": "BRAF",
-      "jlac10": "V600E遺伝子解析〔rSSO〕",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00U593700",
       "material": "未染標本スライド",
       "volume_ml": "5枚",
@@ -46020,7 +46020,7 @@
     },
     {
       "item_name": "FGFR",
-      "jlac10": "遺伝子解析(尿路上皮癌)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00X963700",
       "material": "未染標本スライド",
       "volume_ml": "5～10枚",
@@ -46047,7 +46047,7 @@
     },
     {
       "item_name": "EGFR",
-      "jlac10": "変異解析 v2.0",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065823700",
       "material": "未染標本スライド",
       "volume_ml": "5～10枚",
@@ -46074,7 +46074,7 @@
     },
     {
       "item_name": "EGFR",
-      "jlac10": "変異解析v2.0(血漿)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063500300",
       "material": "血漿",
       "volume_ml": "5.0",
@@ -46101,7 +46101,7 @@
     },
     {
       "item_name": "KRAS",
-      "jlac10": "G12C変異解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00G043700",
       "material": "未染標本スライド",
       "volume_ml": "5枚",
@@ -46155,7 +46155,7 @@
     },
     {
       "item_name": "IDH1/2",
-      "jlac10": "遺伝子解析(グリオーマ)(FFPE)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6173700",
       "material": "未染標本スライド",
       "volume_ml": "5～10枚",
@@ -46182,7 +46182,7 @@
     },
     {
       "item_name": "IDH1/2",
-      "jlac10": "遺伝子解析(グリオーマ)(FF)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6183700",
       "material": "組織",
       "volume_ml": "125mg",
@@ -46263,7 +46263,7 @@
     },
     {
       "item_name": "RAS",
-      "jlac10": "・",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/057553700",
       "material": "未染標本スライド",
       "volume_ml": "5枚",
@@ -46290,7 +46290,7 @@
     },
     {
       "item_name": "RAS",
-      "jlac10": "遺伝子変異解析〔BEAMing〕",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/004470100",
       "material": "血液（Streck Cell-Free DNA BCT）",
       "volume_ml": "10.0",
@@ -47369,96 +47369,15 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "ROS1融合遺伝子定性（FFPE)（2024年10月3日ご依頼分をもって受託中止）",
-      "jlac10": "8C0550000075875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069759900",
-      "material": "未染色パラフィン切片",
-      "volume_ml": "5枚",
+      "item_name": "オンコマインDxTTマルチ６遺伝子 研究用４６遺伝子（FF）（2024年7月12日ご依頼分をもって受託中止）",
+      "jlac10": "8D0029957070966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00T323700",
+      "material": "組織",
+      "volume_ml": "100mg",
       "container": "ARR",
       "cap_color": "",
       "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "4～8",
-      "fee": {
-        "fee": "2500",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "RT-PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
-      },
-      "reference_value": "陰性",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "ROS1融合遺伝子定性（FFPE)（2024年10月3日ご依頼分をもって受託中止）",
-      "jlac10": "8C0550000075875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069753700",
-      "material": "未染標本スライド",
-      "volume_ml": "5枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "4～8",
-      "fee": {
-        "fee": "2500",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "RT-PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
-      },
-      "reference_value": "陰性",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "AmoyDx肺癌マルチパネル IVD（12～24ヵ月）（2023年5月31日ご依頼分をもって受託中止）",
-      "jlac10": "8D1009957075862",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E833700",
-      "material": "未染標本スライド",
-      "volume_ml": "7～10枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "4～7",
-      "fee": {
-        "fee": "10000",
-        "note": "※2",
-        "包括": false
-      },
-      "method": {
-        "name": "PCR（リアルタイムPCR）およびRT-PCR（リアルタイムPCR）",
-        "description": ""
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマインDxTTマルチ６遺伝子 CDx（FFPE）（2024年7月12日ご依頼分をもって受託中止）",
-      "jlac10": "8D0029957075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00T293700",
-      "material": "未染標本スライド",
-      "volume_ml": "5～10枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
+        "condition": "凍結",
         "stability": ""
       },
       "turnaround_days": "6～9",
@@ -47477,26 +47396,53 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "AmoyDx肺癌マルチパネル 研究用（FF）（2023年5月31日ご依頼分をもって受託中止）",
-      "jlac10": "8D1009957070862",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00F723700",
-      "material": "組織",
-      "volume_ml": "100mg",
+      "item_name": "ROS1融合遺伝子定性（2024年10月3日ご依頼分をもって受託中止）",
+      "jlac10": "8C0550000091875",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069764800",
+      "material": "気管支擦過洗浄液沈渣物",
+      "volume_ml": "",
       "container": "ARR",
       "cap_color": "",
       "storage": {
         "condition": "凍結",
         "stability": ""
       },
-      "turnaround_days": "4～7",
+      "turnaround_days": "4～8",
       "fee": {
-        "fee": "10000",
+        "fee": "2500",
         "note": "※2",
-        "包括": false
+        "包括": true
       },
       "method": {
-        "name": "PCR（リアルタイムPCR）およびRT-PCR（リアルタイムPCR）",
-        "description": ""
+        "name": "RT-PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
+      },
+      "reference_value": "陰性",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "EGFR遺伝子 変異解析(Scorpion-ARMS法)（2024年7月4日ご依頼分をもって受託中止）",
+      "jlac10": "8C0519951075952",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064553700",
+      "material": "未染標本スライド",
+      "volume_ml": "5～10枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "4～7",
+      "fee": {
+        "fee": "2500",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
       },
       "reference_value": "",
       "category_id": 111,
@@ -47506,8 +47452,8 @@
     {
       "item_name": "EML4-ALK 融合遺伝子定性（2024年3月29日ご依頼分をもって受託中止）",
       "jlac10": "8C4969961091875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065184800",
-      "material": "気管支擦過洗浄液沈渣物",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065182500",
+      "material": "肺胞洗浄液沈渣物",
       "volume_ml": "",
       "container": "ARR",
       "cap_color": "",
@@ -47531,117 +47477,9 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "オンコマイン Dx Target Test CDxシステム (FFPE)（2021年2月27日ご依頼分をもって受託中止）",
-      "jlac10": "8C1559951075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/010953700",
-      "material": "未染標本スライド",
-      "volume_ml": "5～10枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "11～14",
-      "fee": {
-        "fee": "5000",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": ""
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "IDH1/2遺伝子解析（グリオーマ）（2019年10月31日ご依頼分をもって受託中止）",
-      "jlac10": "8C5700000070848",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/057503700",
-      "material": "組織",
-      "volume_ml": "250mg",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": ""
-      },
-      "turnaround_days": "12～16",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "ダイレクトシーケンス法",
-        "description": "ダイレクトシーケンス法PCR法で増幅したDNAを鋳型として直接塩基配列を決定する方法。"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "肺がんコンパクトパネル CDx（2024年3月29日ご依頼分をもって受託中止）",
-      "jlac10": "8D1009957076966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q677900",
-      "material": "細胞診材料",
-      "volume_ml": "1mg (1mm 角) 以上",
-      "container": "X90",
-      "cap_color": "",
-      "storage": {
-        "condition": "冷蔵",
-        "stability": "14日"
-      },
-      "turnaround_days": "8～15",
-      "fee": {
-        "fee": "11000",
-        "note": "※2",
-        "包括": false
-      },
-      "method": {
-        "name": "次世代シークエンス（NGS）法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "肺癌オンコマインDxTTマルチ7遺伝子 CDx FF（2026年1月16日ご依頼分をもって受託中止）",
-      "jlac10": "8D0029957070966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00W853700",
-      "material": "組織",
-      "volume_ml": "100mg",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": ""
-      },
-      "turnaround_days": "6～9",
-      "fee": {
-        "fee": "18000",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマインDxTTマルチCDx (甲状腺癌) FFPE（2024年6月14日ご依頼分をもって受託中止）",
+      "item_name": "オンコマインDxTTマルチ研究用 (甲状腺癌) FFPE（2024年6月14日ご依頼分をもって受託中止）",
       "jlac10": "8D0029957075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00L733700",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00L793700",
       "material": "未染標本スライド",
       "volume_ml": "5～10枚",
       "container": "Z10",
@@ -47666,107 +47504,53 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "肺がんコンパクトパネル 研究用（2024年3月29日ご依頼分をもって受託中止）",
-      "jlac10": "8D1009957075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q703700",
-      "material": "未染標本スライド",
-      "volume_ml": "厚さ5μm",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "8～15",
-      "fee": {
-        "fee": "11000",
-        "note": "※2",
-        "包括": false
-      },
-      "method": {
-        "name": "次世代シークエンス（NGS）法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "肺がんコンパクトパネル CDx（2024年3月29日ご依頼分をもって受託中止）",
-      "jlac10": "8D1009957075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q673700",
-      "material": "未染標本スライド",
-      "volume_ml": "厚さ5μm",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "8～15",
-      "fee": {
-        "fee": "11000",
-        "note": "※2",
-        "包括": false
-      },
-      "method": {
-        "name": "次世代シークエンス（NGS）法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "ROS1融合遺伝子定性（2024年10月3日ご依頼分をもって受託中止）",
-      "jlac10": "8C0550000042875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069760900",
+      "item_name": "EML4-ALK 融合遺伝子定性（2024年3月29日ご依頼分をもって受託中止）",
+      "jlac10": "8C4969961042875",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065180900",
       "material": "胸水沈渣物",
       "volume_ml": "",
       "container": "ARR",
       "cap_color": "",
       "storage": {
         "condition": "凍結",
-        "stability": ""
+        "stability": "3日"
       },
-      "turnaround_days": "4～8",
+      "turnaround_days": "7～11",
       "fee": {
-        "fee": "2500",
-        "note": "※2",
-        "包括": true
+        "fee": "",
+        "note": null,
+        "包括": false
       },
       "method": {
         "name": "RT-PCR(リアルタイムPCR)",
         "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
       },
-      "reference_value": "陰性",
+      "reference_value": "検出せず",
       "category_id": 111,
       "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "オンコマイン Dx Target Test マルチ CDx システム 4遺伝子解析 (FF)（2021年12月28日ご依頼分をもって受託中止）",
-      "jlac10": "8D0029957070966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6123700",
-      "material": "組織",
-      "volume_ml": "100mg",
-      "container": "ARR",
+      "item_name": "BRAF exon15 V600E(SEQ)（2024年10月3日ご依頼分をもって受託中止）",
+      "jlac10": "8C1559951075848",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0Y3313700",
+      "material": "未染標本スライド※下記参照",
+      "volume_ml": "",
+      "container": "Z10",
       "cap_color": "",
       "storage": {
-        "condition": "凍結",
+        "condition": "室温",
         "stability": ""
       },
-      "turnaround_days": "7～11",
+      "turnaround_days": "11～14",
       "fee": {
-        "fee": "5000+6000",
-        "note": "※2",
-        "包括": true
+        "fee": "",
+        "note": null,
+        "包括": false
       },
       "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": ""
+        "name": "ダイレクトシーケンス法",
+        "description": "ダイレクトシーケンス法PCR法で増幅したDNAを鋳型として直接塩基配列を決定する方法。"
       },
       "reference_value": "",
       "category_id": 111,
@@ -47774,9 +47558,36 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "AmoyDx肺癌マルチパネル IVD（3～12ヵ月）（2023年5月31日ご依頼分をもって受託中止）",
+      "item_name": "肺がんコンパクトパネル 研究用（2024年3月29日ご依頼分をもって受託中止）",
+      "jlac10": "8D1009957076966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q707900",
+      "material": "細胞診材料",
+      "volume_ml": "1mg (1mm 角) 以上",
+      "container": "X90",
+      "cap_color": "",
+      "storage": {
+        "condition": "冷蔵",
+        "stability": "14日"
+      },
+      "turnaround_days": "8～15",
+      "fee": {
+        "fee": "11000",
+        "note": "※2",
+        "包括": false
+      },
+      "method": {
+        "name": "次世代シークエンス（NGS）法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "AmoyDx肺癌マルチパネル 研究用（3ヵ月以下）（2023年5月31日ご依頼分をもって受託中止）",
       "jlac10": "8D1009957075862",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E703700",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E963700",
       "material": "未染標本スライド",
       "volume_ml": "7～10枚",
       "container": "Z10",
@@ -47828,9 +47639,9 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "AmoyDx肺癌マルチパネル 研究用（3ヵ月以下）（2023年5月31日ご依頼分をもって受託中止）",
+      "item_name": "AmoyDx肺癌マルチパネル IVD（3～12ヵ月）（2023年5月31日ご依頼分をもって受託中止）",
       "jlac10": "8D1009957075862",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E963700",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E703700",
       "material": "未染標本スライド",
       "volume_ml": "7～10枚",
       "container": "Z10",
@@ -47855,171 +47666,9 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "BRAF exon15 V600E(SEQ)（2024年10月3日ご依頼分をもって受託中止）",
-      "jlac10": "8C1559951075848",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0Y3313700",
-      "material": "未染標本スライド※下記参照",
-      "volume_ml": "",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "11～14",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "ダイレクトシーケンス法",
-        "description": "ダイレクトシーケンス法PCR法で増幅したDNAを鋳型として直接塩基配列を決定する方法。"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "EML4-ALK 融合遺伝子定性（2024年3月29日ご依頼分をもって受託中止）",
-      "jlac10": "8C4969961042875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065180900",
-      "material": "胸水沈渣物",
-      "volume_ml": "",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": "3日"
-      },
-      "turnaround_days": "7～11",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "RT-PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
-      },
-      "reference_value": "検出せず",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "EML4-ALK 融合遺伝子定性（2024年3月29日ご依頼分をもって受託中止）",
-      "jlac10": "8C4969961091875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065182500",
-      "material": "肺胞洗浄液沈渣物",
-      "volume_ml": "",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": "3日"
-      },
-      "turnaround_days": "7～11",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "RT-PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
-      },
-      "reference_value": "検出せず",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "EGFR遺伝子 変異解析(Scorpion-ARMS法)（2024年7月4日ご依頼分をもって受託中止）",
-      "jlac10": "8C0519951075952",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064553700",
-      "material": "未染標本スライド",
-      "volume_ml": "5～10枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "4～7",
-      "fee": {
-        "fee": "2500",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "ROS1融合遺伝子定性（2024年10月3日ご依頼分をもって受託中止）",
-      "jlac10": "8C0550000091875",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069764800",
-      "material": "気管支擦過洗浄液沈渣物",
-      "volume_ml": "",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": ""
-      },
-      "turnaround_days": "4～8",
-      "fee": {
-        "fee": "2500",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "RT-PCR(リアルタイムPCR)",
-        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
-      },
-      "reference_value": "陰性",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマイン Dx Target Test CDxシステム (FF)（2021年2月27日ご依頼分をもって受託中止）",
-      "jlac10": "8C1559951070966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/011923700",
-      "material": "組織",
-      "volume_ml": "100mg",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": ""
-      },
-      "turnaround_days": "11～14",
-      "fee": {
-        "fee": "5000",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": ""
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマイン Dx Target Test マルチ 研究用46 遺伝子解析 (FF)（2021年12月28日ご依頼分をもって受託中止）",
-      "jlac10": "",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6143700",
+      "item_name": "オンコマイン Dx Target Test マルチ CDx システム 4遺伝子解析 (FF)（2021年12月28日ご依頼分をもって受託中止）",
+      "jlac10": "8D0029957070966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6123700",
       "material": "組織",
       "volume_ml": "100mg",
       "container": "ARR",
@@ -48037,114 +47686,6 @@
       "method": {
         "name": "次世代シークエンス(NGS)法",
         "description": ""
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマインDx Target TestマルチCDx (FFPE)（2023年8月10日ご依頼分をもって受託中止）",
-      "jlac10": "8D0029957075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E543700",
-      "material": "未染標本スライド",
-      "volume_ml": "5～10枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "6～11",
-      "fee": {
-        "fee": "14000",
-        "note": "※2",
-        "包括": true
-      },
-      "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマインDxTTマルチ６遺伝子 研究用４６遺伝子（FF）（2024年7月12日ご依頼分をもって受託中止）",
-      "jlac10": "8D0029957070966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00T323700",
-      "material": "組織",
-      "volume_ml": "100mg",
-      "container": "ARR",
-      "cap_color": "",
-      "storage": {
-        "condition": "凍結",
-        "stability": ""
-      },
-      "turnaround_days": "6～9",
-      "fee": {
-        "fee": "12000",
-        "note": "+6000",
-        "包括": true
-      },
-      "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "オンコマインDxTTマルチ研究用 (甲状腺癌) FFPE（2024年6月14日ご依頼分をもって受託中止）",
-      "jlac10": "8D0029957075966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00L793700",
-      "material": "未染標本スライド",
-      "volume_ml": "5～10枚",
-      "container": "Z10",
-      "cap_color": "",
-      "storage": {
-        "condition": "室温",
-        "stability": ""
-      },
-      "turnaround_days": "6～11",
-      "fee": {
-        "fee": "5000",
-        "note": "又は5000",
-        "包括": true
-      },
-      "method": {
-        "name": "次世代シークエンス(NGS)法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
-      },
-      "reference_value": "",
-      "category_id": 111,
-      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "肺がんコンパクトパネル 研究用（2024年3月29日ご依頼分をもって受託中止）",
-      "jlac10": "8D1009957076966",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q707900",
-      "material": "細胞診材料",
-      "volume_ml": "1mg (1mm 角) 以上",
-      "container": "X90",
-      "cap_color": "",
-      "storage": {
-        "condition": "冷蔵",
-        "stability": "14日"
-      },
-      "turnaround_days": "8～15",
-      "fee": {
-        "fee": "11000",
-        "note": "※2",
-        "包括": false
-      },
-      "method": {
-        "name": "次世代シークエンス（NGS）法",
-        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
       },
       "reference_value": "",
       "category_id": 111,
@@ -48225,6 +47766,87 @@
       },
       "method": {
         "name": "次世代シークエンス(NGS)法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "ROS1融合遺伝子定性（2024年10月3日ご依頼分をもって受託中止）",
+      "jlac10": "8C0550000042875",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069760900",
+      "material": "胸水沈渣物",
+      "volume_ml": "",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": ""
+      },
+      "turnaround_days": "4～8",
+      "fee": {
+        "fee": "2500",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "RT-PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
+      },
+      "reference_value": "陰性",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "肺がんコンパクトパネル CDx（2024年3月29日ご依頼分をもって受託中止）",
+      "jlac10": "8D1009957075966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q673700",
+      "material": "未染標本スライド",
+      "volume_ml": "厚さ5μm",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "8～15",
+      "fee": {
+        "fee": "11000",
+        "note": "※2",
+        "包括": false
+      },
+      "method": {
+        "name": "次世代シークエンス（NGS）法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "肺がんコンパクトパネル 研究用（2024年3月29日ご依頼分をもって受託中止）",
+      "jlac10": "8D1009957075966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q703700",
+      "material": "未染標本スライド",
+      "volume_ml": "厚さ5μm",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "8～15",
+      "fee": {
+        "fee": "11000",
+        "note": "※2",
+        "包括": false
+      },
+      "method": {
+        "name": "次世代シークエンス（NGS）法",
         "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
       },
       "reference_value": "",
@@ -48422,6 +48044,33 @@
       "category_group": "遺伝子関連検査"
     },
     {
+      "item_name": "オンコマインDxTTマルチCDx (甲状腺癌) FFPE（2024年6月14日ご依頼分をもって受託中止）",
+      "jlac10": "8D0029957075966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00L733700",
+      "material": "未染標本スライド",
+      "volume_ml": "5～10枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "6～11",
+      "fee": {
+        "fee": "5000",
+        "note": "又は5000",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
       "item_name": "ArcherMETex14スキッピング （FFPE）（2023年6月13日ご依頼分をもって受託中止）",
       "jlac10": "8C0639957075966",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028743700",
@@ -48503,6 +48152,33 @@
       "category_group": "遺伝子関連検査"
     },
     {
+      "item_name": "肺癌オンコマインDxTTマルチ7遺伝子 CDx FF（2026年1月16日ご依頼分をもって受託中止）",
+      "jlac10": "8D0029957070966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00W853700",
+      "material": "組織",
+      "volume_ml": "100mg",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": ""
+      },
+      "turnaround_days": "6～9",
+      "fee": {
+        "fee": "18000",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
       "item_name": "肺がんコンパクトパネル CDx（2024年3月29日ご依頼分をもって受託中止）",
       "jlac10": "8D1009957070966",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q679900",
@@ -48557,6 +48233,87 @@
       "category_group": "遺伝子関連検査"
     },
     {
+      "item_name": "肺がんコンパクトパネル CDx（2024年3月29日ご依頼分をもって受託中止）",
+      "jlac10": "8D1009957076966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Q677900",
+      "material": "細胞診材料",
+      "volume_ml": "1mg (1mm 角) 以上",
+      "container": "X90",
+      "cap_color": "",
+      "storage": {
+        "condition": "冷蔵",
+        "stability": "14日"
+      },
+      "turnaround_days": "8～15",
+      "fee": {
+        "fee": "11000",
+        "note": "※2",
+        "包括": false
+      },
+      "method": {
+        "name": "次世代シークエンス（NGS）法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "IDH1/2遺伝子解析（グリオーマ）（2019年10月31日ご依頼分をもって受託中止）",
+      "jlac10": "8C5700000070848",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/057503700",
+      "material": "組織",
+      "volume_ml": "250mg",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": ""
+      },
+      "turnaround_days": "12～16",
+      "fee": {
+        "fee": "",
+        "note": null,
+        "包括": false
+      },
+      "method": {
+        "name": "ダイレクトシーケンス法",
+        "description": "ダイレクトシーケンス法PCR法で増幅したDNAを鋳型として直接塩基配列を決定する方法。"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "オンコマイン Dx Target Test CDxシステム (FFPE)（2021年2月27日ご依頼分をもって受託中止）",
+      "jlac10": "8C1559951075966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/010953700",
+      "material": "未染標本スライド",
+      "volume_ml": "5～10枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "11～14",
+      "fee": {
+        "fee": "5000",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": ""
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
       "item_name": "オンコマインDxTTマルチ６遺伝子 研究用４６遺伝子（FFPE）（2024年7月12日ご依頼分をもって受託中止）",
       "jlac10": "8D0029957075966",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00T263700",
@@ -48579,6 +48336,141 @@
         "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
       },
       "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "EML4-ALK 融合遺伝子定性（2024年3月29日ご依頼分をもって受託中止）",
+      "jlac10": "8C4969961091875",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/065184800",
+      "material": "気管支擦過洗浄液沈渣物",
+      "volume_ml": "",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": "3日"
+      },
+      "turnaround_days": "7～11",
+      "fee": {
+        "fee": "",
+        "note": null,
+        "包括": false
+      },
+      "method": {
+        "name": "RT-PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
+      },
+      "reference_value": "検出せず",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "AmoyDx肺癌マルチパネル 研究用（FF）（2023年5月31日ご依頼分をもって受託中止）",
+      "jlac10": "8D1009957070862",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00F723700",
+      "material": "組織",
+      "volume_ml": "100mg",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": ""
+      },
+      "turnaround_days": "4～7",
+      "fee": {
+        "fee": "10000",
+        "note": "※2",
+        "包括": false
+      },
+      "method": {
+        "name": "PCR（リアルタイムPCR）およびRT-PCR（リアルタイムPCR）",
+        "description": ""
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "オンコマインDxTTマルチ６遺伝子 CDx（FFPE）（2024年7月12日ご依頼分をもって受託中止）",
+      "jlac10": "8D0029957075966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00T293700",
+      "material": "未染標本スライド",
+      "volume_ml": "5～10枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "6～9",
+      "fee": {
+        "fee": "12000",
+        "note": "+6000",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "AmoyDx肺癌マルチパネル IVD（12～24ヵ月）（2023年5月31日ご依頼分をもって受託中止）",
+      "jlac10": "8D1009957075862",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E833700",
+      "material": "未染標本スライド",
+      "volume_ml": "7～10枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "4～7",
+      "fee": {
+        "fee": "10000",
+        "note": "※2",
+        "包括": false
+      },
+      "method": {
+        "name": "PCR（リアルタイムPCR）およびRT-PCR（リアルタイムPCR）",
+        "description": ""
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "ROS1融合遺伝子定性（FFPE)（2024年10月3日ご依頼分をもって受託中止）",
+      "jlac10": "8C0550000075875",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069753700",
+      "material": "未染標本スライド",
+      "volume_ml": "5枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "4～8",
+      "fee": {
+        "fee": "2500",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "RT-PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
+      },
+      "reference_value": "陰性",
       "category_id": 111,
       "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
       "category_group": "遺伝子関連検査"
@@ -48734,6 +48626,114 @@
       "fee": {
         "fee": "12000",
         "note": "+6000",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": "次世代シーケンサーを用いて､膨大な数のDNA断片の塩基配列の決定を､同時並行的に行う方法｡"
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "オンコマイン Dx Target Test CDxシステム (FF)（2021年2月27日ご依頼分をもって受託中止）",
+      "jlac10": "8C1559951070966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/011923700",
+      "material": "組織",
+      "volume_ml": "100mg",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": ""
+      },
+      "turnaround_days": "11～14",
+      "fee": {
+        "fee": "5000",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": ""
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "ROS1融合遺伝子定性（FFPE)（2024年10月3日ご依頼分をもって受託中止）",
+      "jlac10": "8C0550000075875",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069759900",
+      "material": "未染色パラフィン切片",
+      "volume_ml": "5枚",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "4～8",
+      "fee": {
+        "fee": "2500",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "RT-PCR(リアルタイムPCR)",
+        "description": "リアルタイムPCRPCR法を基本原理とする核酸増幅法の一種であり，分解により蛍光を発するオリゴヌクレオチドを利用することにより，PCRサイクルごとに蛍光シグナルを確認することでリアルタイムにターゲット核酸の定量が可能となる測定方法。"
+      },
+      "reference_value": "陰性",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "オンコマイン Dx Target Test マルチ 研究用46 遺伝子解析 (FF)（2021年12月28日ご依頼分をもって受託中止）",
+      "jlac10": "",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6143700",
+      "material": "組織",
+      "volume_ml": "100mg",
+      "container": "ARR",
+      "cap_color": "",
+      "storage": {
+        "condition": "凍結",
+        "stability": ""
+      },
+      "turnaround_days": "7～11",
+      "fee": {
+        "fee": "5000+6000",
+        "note": "※2",
+        "包括": true
+      },
+      "method": {
+        "name": "次世代シークエンス(NGS)法",
+        "description": ""
+      },
+      "reference_value": "",
+      "category_id": 111,
+      "category_name": "悪性腫瘍(固形腫瘍)遺伝子検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "オンコマインDx Target TestマルチCDx (FFPE)（2023年8月10日ご依頼分をもって受託中止）",
+      "jlac10": "8D0029957075966",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E543700",
+      "material": "未染標本スライド",
+      "volume_ml": "5～10枚",
+      "container": "Z10",
+      "cap_color": "",
+      "storage": {
+        "condition": "室温",
+        "stability": ""
+      },
+      "turnaround_days": "6～11",
+      "fee": {
+        "fee": "14000",
+        "note": "※2",
         "包括": true
       },
       "method": {
@@ -48936,7 +48936,7 @@
     },
     {
       "item_name": "RET",
-      "jlac10": "遺伝子解析(甲状腺髄様癌)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/059990100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -48963,7 +48963,7 @@
     },
     {
       "item_name": "RET",
-      "jlac10": "遺伝子シングルサイト解析(甲状腺髄様癌)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0R6160100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -48990,7 +48990,7 @@
     },
     {
       "item_name": "SNRPN",
-      "jlac10": "遺伝子解析〔メチレーションPCR〕(プラダー・ウィリ症候群 アンジェルマン症候群)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/069520100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49017,7 +49017,7 @@
     },
     {
       "item_name": "PRRT2",
-      "jlac10": "遺伝子解析(発作性運動誘発性舞踏アテトーゼ)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/058710100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49044,7 +49044,7 @@
     },
     {
       "item_name": "TTR",
-      "jlac10": "遺伝子解析(家族性アミロイドーシス)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00E360100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49071,7 +49071,7 @@
     },
     {
       "item_name": "MECP",
-      "jlac10": "2遺伝子解析(レット症候群)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0Y4430100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49098,7 +49098,7 @@
     },
     {
       "item_name": "ZEB2",
-      "jlac10": "遺伝子解析(モワット・ウィルソン症候群)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00R930100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "5.0",
@@ -49152,7 +49152,7 @@
     },
     {
       "item_name": "TACSTD2",
-      "jlac10": "遺伝子解析(角膜ジストロフィー)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00N960100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49287,7 +49287,7 @@
     },
     {
       "item_name": "MEFV",
-      "jlac10": "遺伝子解析(家族性地中海熱)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/0X7990100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49314,7 +49314,7 @@
     },
     {
       "item_name": "SOD1",
-      "jlac10": "遺伝子解析(筋萎縮性側索硬化症)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00N990100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49341,7 +49341,7 @@
     },
     {
       "item_name": "HTT",
-      "jlac10": "遺伝子CAGリピート解析(ハンチントン病)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00H340100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49448,62 +49448,8 @@
       "category_group": "遺伝子関連検査"
     },
     {
-      "item_name": "Y染色体微小欠失(AZF欠失)（2022年7月29日ご依頼分をもって受託中止）",
-      "jlac10": "8C8960000019898",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064940100",
-      "material": "血液(EDTA-2Na加)",
-      "volume_ml": "2.0",
-      "container": "PN2,PN5",
-      "cap_color": "PN2",
-      "storage": {
-        "condition": "冷蔵",
-        "stability": "3日"
-      },
-      "turnaround_days": "3～9",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "PCR-rSSO法",
-        "description": ""
-      },
-      "reference_value": "",
-      "category_id": 113,
-      "category_name": "遺伝学的検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
-      "item_name": "ミトコンドリアDNA 3243塩基点突然変異（2018年3月30日ご依頼分をもって受託中止）",
-      "jlac10": "8C8049951019899",
-      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022330100",
-      "material": "血液(EDTA-2Na加)",
-      "volume_ml": "2.0",
-      "container": "PN2,PN5",
-      "cap_color": "PN2",
-      "storage": {
-        "condition": "冷蔵",
-        "stability": ""
-      },
-      "turnaround_days": "12～16",
-      "fee": {
-        "fee": "",
-        "note": null,
-        "包括": false
-      },
-      "method": {
-        "name": "gFCS",
-        "description": "gFCS(Gene analysis by Fluorescence Correlation Spectroscopy)蛍光物質で標識したプライマーを用いてPCRを行い、プライマー分子の大きさの違いを蛍光強度の時間変化の差（蛍光ゆらぎ）として1分子蛍光分析システムで測定し、蛍光相関分光法（FCS）を用いて解析する遺伝子解析法。"
-      },
-      "reference_value": "変異を認めず",
-      "category_id": 113,
-      "category_name": "遺伝学的検査",
-      "category_group": "遺伝子関連検査"
-    },
-    {
       "item_name": "HTT",
-      "jlac10": "遺伝子CAG反復配列解析(ハンチントン病)（2026年3月31日ご依頼分をもって受託中止）",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064150100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49556,8 +49502,62 @@
       "category_group": "遺伝子関連検査"
     },
     {
+      "item_name": "ミトコンドリアDNA 3243塩基点突然変異（2018年3月30日ご依頼分をもって受託中止）",
+      "jlac10": "8C8049951019899",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/022330100",
+      "material": "血液(EDTA-2Na加)",
+      "volume_ml": "2.0",
+      "container": "PN2,PN5",
+      "cap_color": "PN2",
+      "storage": {
+        "condition": "冷蔵",
+        "stability": ""
+      },
+      "turnaround_days": "12～16",
+      "fee": {
+        "fee": "",
+        "note": null,
+        "包括": false
+      },
+      "method": {
+        "name": "gFCS",
+        "description": "gFCS(Gene analysis by Fluorescence Correlation Spectroscopy)蛍光物質で標識したプライマーを用いてPCRを行い、プライマー分子の大きさの違いを蛍光強度の時間変化の差（蛍光ゆらぎ）として1分子蛍光分析システムで測定し、蛍光相関分光法（FCS）を用いて解析する遺伝子解析法。"
+      },
+      "reference_value": "変異を認めず",
+      "category_id": 113,
+      "category_name": "遺伝学的検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
+      "item_name": "Y染色体微小欠失(AZF欠失)（2022年7月29日ご依頼分をもって受託中止）",
+      "jlac10": "8C8960000019898",
+      "detail_url": "https://test-directory.srl.info/akiruno/test/detail/064940100",
+      "material": "血液(EDTA-2Na加)",
+      "volume_ml": "2.0",
+      "container": "PN2,PN5",
+      "cap_color": "PN2",
+      "storage": {
+        "condition": "冷蔵",
+        "stability": "3日"
+      },
+      "turnaround_days": "3～9",
+      "fee": {
+        "fee": "",
+        "note": null,
+        "包括": false
+      },
+      "method": {
+        "name": "PCR-rSSO法",
+        "description": ""
+      },
+      "reference_value": "",
+      "category_id": 113,
+      "category_name": "遺伝学的検査",
+      "category_group": "遺伝子関連検査"
+    },
+    {
       "item_name": "UGT1A1",
-      "jlac10": "遺伝子多型解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/062640100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49584,7 +49584,7 @@
     },
     {
       "item_name": "NUDT15",
-      "jlac10": "遺伝子codon139多型解析",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/058810100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49746,7 +49746,7 @@
     },
     {
       "item_name": "薬物代謝酵素チトクロームP450 CYP3A4",
-      "jlac10": "*",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063650100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49800,7 +49800,7 @@
     },
     {
       "item_name": "薬物代謝酵素チトクロームP450 CYP3A5",
-      "jlac10": "*",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/063660100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -49827,7 +49827,7 @@
     },
     {
       "item_name": "UGT1A1",
-      "jlac10": "*",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/062650100",
       "material": "血液(EDTA-2Na加)",
       "volume_ml": "2.0",
@@ -52446,7 +52446,7 @@
     },
     {
       "item_name": "乳癌",
-      "jlac10": "HER2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00A283700",
       "material": "未染標本スライド",
       "volume_ml": "",
@@ -52527,7 +52527,7 @@
     },
     {
       "item_name": "胃癌",
-      "jlac10": "HER2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00Y663700",
       "material": "未染標本スライド",
       "volume_ml": "",
@@ -52689,7 +52689,7 @@
     },
     {
       "item_name": "大腸癌",
-      "jlac10": "HER2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00H283700",
       "material": "未染標本スライド",
       "volume_ml": "",
@@ -53121,7 +53121,7 @@
     },
     {
       "item_name": "FGFR2",
-      "jlac10": "融合遺伝子(FISH)",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00X543700",
       "material": "未染標本スライド",
       "volume_ml": "",
@@ -54903,7 +54903,7 @@
     },
     {
       "item_name": "悪性リンパ腫総合解析",
-      "jlac10": "「MLNET」v2",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/00N303700",
       "material": "組織(生)と",
       "volume_ml": "ホルマリン固定組織と",
@@ -54930,7 +54930,7 @@
     },
     {
       "item_name": "悪性リンパ腫 総合解析検査",
-      "jlac10": "「MLNET」（2024年11月29日ご依頼分をもって受託中止）",
+      "jlac10": "",
       "detail_url": "https://test-directory.srl.info/akiruno/test/detail/028983700",
       "material": "組織(生) と",
       "volume_ml": "ホルマリン固定組織と",

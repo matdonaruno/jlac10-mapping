@@ -94,6 +94,7 @@ label { display:block; font-size:11px; font-weight:600; text-transform:uppercase
 .jlac-part { color:var(--accent); }
 .jlac-sep { color:var(--text-secondary); margin:0 1px; }
 .jlac-missing { color:var(--danger); font-weight:700; animation:blink 1.5s infinite; }
+.jlac-invalid { color:var(--danger); font-size:13px; font-style:italic; }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 .analyte-code { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary);
   background:var(--bg-hover); padding:4px 8px; }
@@ -245,11 +246,34 @@ textarea:focus { border-color:var(--accent); }
 <div id="panel-error" class="hidden">
   <div class="card">
     <h2>SSMIX SN Error Analysis</h2>
-    <div class="grid-3 mb-12">
-      <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
-      <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
-      <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+
+    <!-- 入力方式切替 -->
+    <div class="flex-row mb-12">
+      <button onclick="toggleErrorInput('file')" class="btn btn-secondary" id="errToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
+      <button onclick="toggleErrorInput('paste')" class="btn btn-secondary" id="errTogglePaste">Paste Text</button>
     </div>
+
+    <!-- ファイル入力 -->
+    <div id="errorInputFile">
+      <div class="grid-3 mb-12">
+        <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
+        <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
+        <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+      </div>
+    </div>
+
+    <!-- テキストペースト入力 -->
+    <div id="errorInputPaste" class="hidden">
+      <div class="mb-12">
+        <label>SSMIX2 エラー出力をそのまま貼り付け（タブ区切り / カンマ区切り / 1行1項目）</label>
+        <textarea id="errorPasteText" rows="8" placeholder="項目コード&#9;項目名称&#10;12345&#9;総蛋白&#10;67890&#9;アルブミン&#10;&#10;または&#10;&#10;総蛋白&#10;アルブミン&#10;CRP"></textarea>
+      </div>
+      <div class="grid-2 mb-12">
+        <div><label>コード列 (0始まり, -1=なし)</label><input id="pasteColCode" type="text" value="0"></div>
+        <div><label>名称列 (0始まり)</label><input id="pasteColName" type="text" value="1"></div>
+      </div>
+    </div>
+
     <div class="grid-2 mb-12">
       <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
       <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
@@ -429,9 +453,16 @@ function colToIndex(col) {
   return idx - 1;
 }
 // JLAC10 を17桁表示にフォーマット（15桁の場合は ** を追加）
+function isValidJlac(code) {
+  return /^[0-9A-Za-z]{15,17}$/.test(code);
+}
 function formatJlac17(code) {
   if (!code) return "";
   code = code.replace(/-/g, "");
+  // 不正なJLAC10（日本語等を含む）はそのまま表示
+  if (!isValidJlac(code)) {
+    return '<span class="jlac-invalid">' + esc(code) + '</span>';
+  }
   if (code.length >= 17) {
     // 17桁: 5-4-3-3-2 でハイフン区切り
     return '<span class="jlac-part">' + esc(code.substring(0,5)) + '</span>'
@@ -630,36 +661,84 @@ function downloadBulkResult() {
 // =====================================================================
 // UI: SN Error
 // =====================================================================
+var errorInputMode = "file";
+function toggleErrorInput(mode) {
+  errorInputMode = mode;
+  document.getElementById("errorInputFile").classList.toggle("hidden", mode !== "file");
+  document.getElementById("errorInputPaste").classList.toggle("hidden", mode !== "paste");
+  document.getElementById("errToggleFile").style.borderBottom = mode === "file" ? "2px solid var(--accent)" : "none";
+  document.getElementById("errTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
+}
+
+function parseErrorRows(callback) {
+  if (errorInputMode === "paste") {
+    // テキストペースト入力
+    var text = document.getElementById("errorPasteText").value.trim();
+    if (!text) { showToast("テキストを貼り付けてください"); return; }
+    var ccIdx = parseInt(document.getElementById("pasteColCode").value);
+    var cnIdx = parseInt(document.getElementById("pasteColName").value);
+    if (isNaN(cnIdx)) cnIdx = 0;
+    if (isNaN(ccIdx)) ccIdx = -1;
+    var lines = text.split("\n");
+    var rows = [];
+    for (var line of lines) {
+      var parts = line.includes("\t") ? line.split("\t") : line.split(",");
+      if (parts.length === 1 && ccIdx < 0) {
+        // 1列のみ → 項目名として扱う
+        rows.push({ code: "", name: parts[0].trim() });
+      } else {
+        rows.push({
+          code: ccIdx >= 0 && parts[ccIdx] ? parts[ccIdx].trim() : "",
+          name: cnIdx >= 0 && parts[cnIdx] ? parts[cnIdx].trim() : ""
+        });
+      }
+    }
+    callback(rows);
+  } else {
+    // ファイル入力
+    var file = document.getElementById("errorFile").files[0];
+    if (!file) { showToast("ファイルを選択してください"); return; }
+    var cc = colToIndex(document.getElementById("errorColCode").value);
+    var cn = colToIndex(document.getElementById("errorColName").value);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var wb = XLSX.read(e.target.result, { type: "array" });
+      var xlRows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 });
+      var rows = [];
+      for (var i = 1; i < xlRows.length; i++) {
+        var row = xlRows[i]; if (!row) continue;
+        rows.push({
+          code: cc >= 0 ? String(row[cc] == null ? "" : row[cc]).trim() : "",
+          name: cn >= 0 ? String(row[cn] == null ? "" : row[cn]).trim() : ""
+        });
+      }
+      callback(rows);
+    };
+    reader.readAsArrayBuffer(file);
+  }
+}
+
 function analyzeErrors() {
-  var file=document.getElementById("errorFile").files[0];
-  if(!file){showToast("Select error list");return;}
-  var cc=colToIndex(document.getElementById("errorColCode").value), cn=colToIndex(document.getElementById("errorColName").value);
-  var reader=new FileReader();
-  reader.onload=function(e){
-    var wb=XLSX.read(e.target.result,{type:"array"});
-    var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1});
-    var results=[],ok=0,ng=0;
-    for(var i=1;i<rows.length;i++){
-      var row=rows[i];if(!row)continue;
-      var code=cc>=0?String(row[cc]==null?"":row[cc]).trim():"";
-      var name=cn>=0?String(row[cn]==null?"":row[cn]).trim():"";
-      if(!code&&!name)continue;
-      var matches=search(name||code,5); var status,best;
-      if(matches.length>0&&matches[0].score>=80){status="assignable";best=matches[0];ok++;}
-      else{status="inquiry";best=matches.length>0?matches[0]:null;ng++;}
-      results.push({row:i+1,code:code,name:name,status:status,matches:matches,bestMatch:best});
+  parseErrorRows(function(rows) {
+    var results = [], ok = 0, ng = 0;
+    for (var i = 0; i < rows.length; i++) {
+      var code = rows[i].code, name = rows[i].name;
+      if (!code && !name) continue;
+      var matches = search(name || code, 5); var status, best;
+      if (matches.length > 0 && matches[0].score >= 80) { status = "assignable"; best = matches[0]; ok++; }
+      else { status = "inquiry"; best = matches.length > 0 ? matches[0] : null; ng++; }
+      results.push({ row: i + 1, code: code, name: name, status: status, matches: matches, bestMatch: best });
     }
-    lastErrorResult=results;
-    document.getElementById("errorStatus").innerHTML="<b>"+results.length+"</b> errors | <span style='color:var(--success)'>Assignable: "+ok+"</span> | <span style='color:var(--danger)'>Inquiry: "+ng+"</span>";
-    document.getElementById("btnMail").disabled=(ng===0); document.getElementById("btnErrorDL").disabled=false;
-    var h='<table><tr><th></th><th>Code</th><th>Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
-    for(var r of results){
-      var cls=r.status==="assignable"?"row-ok":"row-ng";
-      h+='<tr class="'+cls+'"><td>'+(r.status==="assignable"?"OK":"??")+'</td><td>'+esc(r.code)+'</td><td>'+esc(r.name)+'</td><td><code>'+(r.bestMatch?esc(r.bestMatch.jlac10):"")+'</code></td><td>'+(r.bestMatch?esc(r.bestMatch.matchedName):"")+'</td><td>'+(r.bestMatch?r.bestMatch.score.toFixed(0):"-")+'</td></tr>';
+    lastErrorResult = results;
+    document.getElementById("errorStatus").innerHTML = "<b>" + results.length + "</b> errors | <span style='color:var(--success)'>Assignable: " + ok + "</span> | <span style='color:var(--danger)'>Inquiry: " + ng + "</span>";
+    document.getElementById("btnMail").disabled = (ng === 0); document.getElementById("btnErrorDL").disabled = false;
+    var h = '<table><tr><th></th><th>Code</th><th>Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
+    for (var r of results) {
+      var cls = r.status === "assignable" ? "row-ok" : "row-ng";
+      h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch && isValidJlac(r.bestMatch.jlac10) ? formatJlac17(r.bestMatch.jlac10) : esc((r.bestMatch || {}).jlac10 || "")) + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
     }
-    h+='</table>'; setHtml("errorResults",h);
-  };
-  reader.readAsArrayBuffer(file);
+    h += '</table>'; setHtml("errorResults", h);
+  });
 }
 
 function generateMail() {
