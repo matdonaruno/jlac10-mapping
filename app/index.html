@@ -89,8 +89,12 @@ label { display:block; font-size:11px; font-weight:600; text-transform:uppercase
 .result-score { font-family:'JetBrains Mono',monospace; font-size:12px; padding:2px 8px; background:var(--bg-hover); }
 /* JLAC10 big display row */
 .result-jlac-row { display:flex; align-items:center; gap:12px; margin:8px 0; flex-wrap:wrap; }
-.jlac-big { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--accent);
-  letter-spacing:1px; background:var(--bg-primary); padding:6px 14px; border:1px solid var(--accent); }
+.jlac-big { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700;
+  letter-spacing:1px; background:var(--bg-primary); padding:6px 14px; border:1px solid var(--accent); display:inline-flex; align-items:center; }
+.jlac-part { color:var(--accent); }
+.jlac-sep { color:var(--text-secondary); margin:0 1px; }
+.jlac-missing { color:var(--danger); font-weight:700; animation:blink 1.5s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 .analyte-code { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary);
   background:var(--bg-hover); padding:4px 8px; }
 
@@ -414,6 +418,30 @@ function colToIndex(col) {
   var idx = 0; for (var c of col) idx = idx * 26 + c.charCodeAt(0) - 64;
   return idx - 1;
 }
+// JLAC10 を17桁表示にフォーマット（15桁の場合は ** を追加）
+function formatJlac17(code) {
+  if (!code) return "";
+  code = code.replace(/-/g, "");
+  if (code.length >= 17) {
+    // 17桁: 5-4-3-3-2 でハイフン区切り
+    return '<span class="jlac-part">' + esc(code.substring(0,5)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(5,9)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(9,12)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(12,15)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(15,17)) + '</span>';
+  }
+  if (code.length === 15) {
+    // 15桁: 結果識別コードなし → ** で表示
+    return '<span class="jlac-part">' + esc(code.substring(0,5)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(5,9)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(9,12)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(12,15)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-missing">**</span>';
+  }
+  // その他の長さ
+  return '<span class="jlac-part">' + esc(code) + '</span>';
+}
+
 function downloadFile(name, content) {
   var blob = new Blob([content], { type: "application/json" });
   var a = document.createElement("a"); a.href = URL.createObjectURL(blob);
@@ -443,7 +471,7 @@ function doSearch() {
     html += '<span class="result-score">' + r.score.toFixed(0) + '</span></div>';
     // 2行目: JLAC10 大きく + 会社バッジ横並び
     html += '<div class="result-jlac-row">';
-    html += '<code class="jlac-big">' + esc(r.jlac10) + '</code>';
+    html += '<code class="jlac-big">' + formatJlac17(r.jlac10) + '</code>';
     html += '<span class="analyte-code">' + esc(r.analyte_code) + '</span>';
     html += '<span class="company-badges">' + srcBadges + '</span>';
     html += '</div>';
