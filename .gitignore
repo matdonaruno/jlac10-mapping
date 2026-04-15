@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# キャッシュ（再取得可能）
+data/.cache/
+
+# タイムスタンプ付きファイル（latestのみ残す）
+data/srl_tests_2*.json
+data/bml_tests_2*.json
+data/lsi_tests_2*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# エディタ
+*.swp
+*~
+
+# SOP サンプル（テスト用）
+data/sop_samples/
+
+# 一時ファイル
+/tmp/

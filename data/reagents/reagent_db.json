@@ -1,0 +1,357 @@
+{
+  "metadata": {
+    "built_at": "2026-04-14T12:17:11.090326+00:00",
+    "total_reagents": 36,
+    "total_pmda": 10,
+    "manufacturers": [
+      "kainos_biochem"
+    ],
+    "last_updated": "2026-04-14T12:24:07.297836+00:00"
+  },
+  "reagents": [
+    {
+      "reagent_name": "F-Carnitine試薬　カイノス",
+      "category": "カルニチン",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA4610.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "T-Carnitine試薬　カイノス",
+      "category": "カルニチン",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA4710.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　CRE-Ⅳ試薬",
+      "category": "含窒素化合物",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA7600.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　CRE-Ⅲ plus",
+      "category": "含窒素化合物",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA7500.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　UN-Ⅱ試薬",
+      "category": "含窒素化合物",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1910.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　UA-Ⅱ試薬",
+      "category": "含窒素化合物",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2670.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　CR試薬",
+      "category": "含窒素化合物",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA5360.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　TP-Ⅱ試薬",
+      "category": "蛋白",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1770.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　ALB試薬",
+      "category": "蛋白",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1850.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　Ca試薬",
+      "category": "生体内金属",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1440.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　IP-KⅡ試薬",
+      "category": "生体内金属",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1580.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　Mg-Ⅱ試薬",
+      "category": "生体内金属",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA4320.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　Fe試薬",
+      "category": "生体内金属",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA3560.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　UIBC試薬",
+      "category": "生体内金属",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA3570.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　GLU-Ⅱ試薬",
+      "category": "糖類及び関連物質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/10/TKA2470（第1B版）GLU-Ⅱ.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　GLU試薬",
+      "category": "糖類及び関連物質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2460.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　U-GL試薬",
+      "category": "糖類及び関連物質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2490.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "ラナ1,5AGオート　リキッド",
+      "category": "糖類及び関連物質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/NK6800.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　AST試薬",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1030.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　ALT試薬",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1040.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　ALP試薬(IFCC)",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1200.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　LD試薬(IFCC)",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1100.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "Lタイプワコー　CK",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/STF3180.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "Lタイプワコー　γ-GT･J",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/STF1690.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　CHE試薬",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2860.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　LAP試薬",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA1360.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "Lタイプワコー　AMY・IF",
+      "category": "酵素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/STF3270.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　T-CHO試薬",
+      "category": "脂質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2270.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　TG-Ⅱ試薬",
+      "category": "脂質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA4070.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "メタボリードHDL-C",
+      "category": "脂質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/メタボリードHDL-C（第7版）EB.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "メタボリードLDL-C",
+      "category": "脂質",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/メタボリードLDL-C（第6版）EB.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　T-BIL試薬",
+      "category": "色素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2560.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　D-BIL試薬",
+      "category": "色素",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA2570.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "3HB-L試薬　カイノス",
+      "category": "その他",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA5520.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "TKB-L試薬　カイノス",
+      "category": "その他",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA5620.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    },
+    {
+      "reagent_name": "アクアオート　カイノス　TBA試薬",
+      "category": "その他",
+      "manufacturer": "カイノス",
+      "pdf_url": "https://www.kainos.co.jp/wp-content/uploads/2024/08/TKA4560.pdf",
+      "source_url": "https://www.kainos.co.jp/products/biochem/"
+    }
+  ],
+  "pmda_details": [
+    {
+      "product_name": "アクアオート　カイノス　Mg-II試薬",
+      "general_code": "30190021",
+      "general_name": "血液・尿検査用マグネシウムキット",
+      "purpose": "血清、血漿又は尿中のマグネシウムの測定",
+      "principle": "1.原理\nICDHの活性は検体中のマグネシウム濃度に依存します。イソクエン酸、NADPの存在下で検体中のマグネシウムによって活性化したICDHを反応させ、このときに生成するニコチンアミドアデニンジヌクレオチドリン酸還元型 (NADPH) の吸光度の増加量を測定することによって、検体中のマグネシウム濃度を求めます。\n\n2. 特徴\n1) マグネシウムに特異性の高いイソクエン酸脱水素酵素を用いています。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13A2X00078000034_A_A1_05"
+    },
+    {
+      "product_name": "アクアオート　カイノス　シスタチンＣ試薬",
+      "general_code": "83002000",
+      "general_name": "シスタチンＣキット",
+      "purpose": "血清又は血漿中のシスタチンCの測定",
+      "principle": "1.原理\n本法は、ラテックス凝集比濁法を原理としています。検体中のシスタチンCは、ラテックス粒子に結合している抗ヒトシスタチンC抗体 (抗ヒトシスタチンCウサギポリクローナル抗体感作ラテックス) と反応し、凝集します。この凝集による濁度変化を吸光度として測定することにより、検体中のシスタチンC濃度を求めます。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_224AAAMX00114000_A_A1_05"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＡＬＢ試薬",
+      "general_code": "30155001",
+      "general_name": "血液検査用アルブミンキット",
+      "purpose": "血清又は血漿中のアルブミンの測定",
+      "principle": "本法は化学反応を利用した測定法です。\n検体中のアルブミンは、ブロムクレゾールパープル（BCP）と結合し、青色を呈します。この発色を比色定量することにより検体中のアルブミン濃度を求めます。\n本品は、アルブミンに対する特異性の高いBCP法に基づく液状試薬で、従来のBCP法で問題であった酸化型アルブミン（HNA）と還元型アルブミン（HMA）の反応差を解消したBCP改良法です。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13E1X80078000042_A_B1_01"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＡＬＢ試薬",
+      "general_code": "30155001",
+      "general_name": "血液検査用アルブミンキット",
+      "purpose": "血清又は血漿中のアルブミンの測定",
+      "principle": "1.原理\n本法は化学反応を利用した測定法 (BCP改良法) です。検体中のアルブミンは、BCPと結合し、青色を呈します。この発色を比色定量することにより検体中のアルブミン濃度を求めます。\n2.特徴\n1) アルブミンに対する反応特異性の高いブロムクレゾールパープル (BCP) 法に基づく試薬です。\n2) 酸化型アルブミン (HNA) と還元型アルブミン (HMA) の反応差を解消しています。\n3) グロブリン分画と反応しません。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13E1X80078000042_A_A1_03"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＡＬＰ試薬（ＩＦＣＣ）",
+      "general_code": "33165001",
+      "general_name": "血液検査用アルカリ性フォスファターゼキット",
+      "purpose": "血清又は血漿中のアルカリフォスファターゼ (ALP) の測定",
+      "principle": "1.原理\n検体中のALPは、2-アミノ-2-メチル-1-プロパノール (AMP) 緩衝液中で基質である4-NPPを加水分解し、4-ニトロフェノールを生成します。この4-ニトロフェノールの1分間あたりの増加量を測定することにより、ALP活性値を求めます。\n\n2.特徴\n1) 国際臨床化学連合 (IFCC) の基準測定操作法に準拠した試薬です1)。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13E1X80078000055_A_A1_03"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＡＬＴ試薬",
+      "general_code": "38556000",
+      "general_name": "アラニンアミノトランスフェラーゼキット",
+      "purpose": "血清又は血漿中のアラニンアミノトランスフェラーゼ (ALT) の測定",
+      "principle": "1.原理本法は酵素法に基づく測定法です。検体中のALTは、L-Ala及びα-KGを基質として、ピルビン酸 (Pyruvate) を生成します。このピルビン酸は、NADHの存在下でLDHにより乳酸 (L-Lactate) に還元されると同時に、等モルのNADHはβ-ニコチンアミドアデニンジヌクレオチド酸化型 (NAD+) に酸化されます。検体中のALT活性はNADHの減少速度に比例するので、340 nmの吸光度変化を測定することにより、ALTの活性値を求めます。2.特徴1) JSCC/JCCLS常用基準法との比例互換性が得られるJSCC標準化対応法の試薬です1), 2), 3)。2) 2000 U/Lまで測定可能です。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13A2X00078000036_A_A1_05"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＡＳＴ試薬",
+      "general_code": "38499000",
+      "general_name": "アスパラギン酸アミノトランスフェラーゼキット",
+      "purpose": "血清又は血漿中のアスパラギン酸アミノトランスフェラーゼ (AST) の測定",
+      "principle": "1.原理本法は酵素法に基づく測定法です。検体中のASTは、L-Asp及びα-KGを基質として、オキザロ酢酸 (Oxaloacetate) を生成します。このオキザロ酢酸は、NADHの存在下でMDHによりリンゴ酸 (L-Malate) に還元されると同時に、等モルのNADHはβ-ニコチンアミドアデニンジヌクレオチド酸化型 (NAD+) に酸化されます。検体中のAST活性はNADHの減少速度に比例するので、340 nmの吸光度変化を測定することにより、ASTの活性値を求めます。2. 特徴1) JSCC/JCCLS常用基準法との比例互換性が得られるJSCC標準化対応法の試薬です1), 2), 3)。2) 2000 U/Lまで測定可能です。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13A2X00078000035_A_A1_05"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＣＨＥ試薬",
+      "general_code": "38506000",
+      "general_name": "コリンエステラーゼキット",
+      "purpose": "血清中又は血漿中のコリンエステラーゼ (ChE) の測定",
+      "principle": "1.原理A. 本反応検体中のChEは、特異基質であるp-HBCに作用し、p-ヒドロキシ安息香酸とコリンを生成します。このp-ヒドロキシ安息香酸はNADPHの存在下で、p-OHBaseの作用により3,4-ジヒドロキシ安息香酸を生じます。このときNADPHは酸化されてNADP+に変化するので、NADPHの340 nmにおける吸光度の減少を測定することによりコリンエステラーゼ活性値を求めます。B. 後処理反応副反応によるNADPHの消費を防止するため、プロトカテキン酸-3，4-ジオキシゲナーゼ (PCO) を用いて、生成した3,4-ジヒドロキシ安息香酸を分解しています。2.特徴\n1) 基質として、pseudo cholinesteraseに特異的なp-ヒドロキシベンゾイルコリンを用いています。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_20400AMZ01254000_A_B9_05"
+    },
+    {
+      "product_name": "アクアオート カイノス ＣＲ試薬",
+      "general_code": "43378002",
+      "general_name": "クレアチンキット",
+      "purpose": "血清中、血漿中又は尿中クレアチンの測定",
+      "principle": "1.原理本法は酵素法に基づく測定法です。A.前処理反応検体中のザルコシンはSOXとカタラーゼによって前処理されるため、本反応には影響しません。B.本反応検体中のクレアチンはCRにより、ザルコシンと尿素に分解され、次いでSOXにより過酸化水素 (H2O2) を生成します。このH2O2はペルオキシダーゼ (POD)の存在下でHTIBと4-AAPを酸化的に縮合させ、赤色のキノン色素を生成するので、このキノン色素を比色定量することによりクレアチン濃度を求めます。2.特徴\n1) 特異性の高い酵素法を改良した液状試薬です。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_20400AMZ01254000_A_C7_06"
+    },
+    {
+      "product_name": "アクアオート　カイノス　ＣＲＥ-III　plus",
+      "general_code": "30161021",
+      "general_name": "血液・尿検査用クレアチニンキット",
+      "purpose": "血清、血漿又は尿中のクレアチニンの測定",
+      "principle": "1.原理本法は酵素法に基づく測定法です。A. 前処理反応検体中に存在するクレアチンはCR、SOX、カタラーゼの作用により水 (H2O) と酸素 (O2) に分解され、本反応には影響しません。B. 本反応検体中のクレアチニンはCRNの作用によりクレアチンとなり、次いでCRの作用によりザルコシンを生じ、さらにSOXの作用により過酸化水素 (H2O2) を生成します。このH2O2はペルオキシダーゼ (POD) の存在下で、TODBと4-AAPを酸化的に縮合させ、赤紫色のキノン色素を生成します。このキノン色素を比色定量することによりクレアチニン濃度を求めます。2.特徴\n1) 共存物質による影響をほとんど受けません。従来品に比べ、プロリンや二価フェノール類薬剤による影響が軽減されています1)。\n2) 熱安定性の良い酵素を利用した液状試薬で、操作性に優れています。",
+      "manufacturer": "株式会社カイノス",
+      "pmda_url": "https://www.pmda.go.jp/PmdaSearch/ivdDetail/200206_13E1X80078000051_A_A1_06"
+    }
+  ]
+}

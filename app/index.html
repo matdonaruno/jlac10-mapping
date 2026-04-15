@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLAC10 符番支援ツール</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<div id="app" class="max-w-6xl mx-auto p-4">
+
+  <!-- ヘッダー -->
+  <header class="bg-white rounded-lg shadow p-4 mb-4">
+    <h1 class="text-xl font-bold text-gray-800">JLAC10 符番支援ツール</h1>
+    <p class="text-sm text-gray-500" id="dbStatus">DB未読み込み</p>
+  </header>
+
+  <!-- タブ -->
+  <div class="flex gap-2 mb-4">
+    <button onclick="switchTab('search')" id="tab-search"
+      class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium">検索</button>
+    <button onclick="switchTab('import')" id="tab-import"
+      class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium">Excel JSON化+統合</button>
+    <button onclick="switchTab('bulk')" id="tab-bulk"
+      class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium">一括マッピング</button>
+    <button onclick="switchTab('error')" id="tab-error"
+      class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium">SNエラー対応</button>
+    <button onclick="switchTab('data')" id="tab-data"
+      class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium">DB管理</button>
+  </div>
+
+  <!-- 検索タブ -->
+  <div id="panel-search" class="bg-white rounded-lg shadow p-6">
+    <div class="flex gap-2 mb-4">
+      <input id="searchInput" type="text" placeholder="検査項目名・略称を入力（TP, アルブミン, CRP...）"
+        class="flex-1 border rounded-lg px-4 py-2 text-lg"
+        onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium">検索</button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+
+  <!-- Excel JSON化+統合タブ -->
+  <div id="panel-import" class="bg-white rounded-lg shadow p-6 hidden">
+    <h2 class="text-lg font-bold mb-4">過去マッピング Excel → JSON → DB統合</h2>
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">病院名</label>
+        <input id="hospitalName" type="text" placeholder="A病院" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Excel ファイル</label>
+        <input id="excelFile" type="file" accept=".xlsx,.xls,.csv" class="w-full border rounded px-3 py-2">
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">院内項目名の列</label>
+        <input id="colItemName" type="text" value="A" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">略称の列</label>
+        <input id="colAbbr" type="text" value="B" class="w-full border rounded px-3 py-2" placeholder="空欄可">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">JLAC10の列</label>
+        <input id="colJlac10" type="text" value="C" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">正式名称の列</label>
+        <input id="colStdName" type="text" value="D" class="w-full border rounded px-3 py-2" placeholder="空欄可">
+      </div>
+    </div>
+    <div class="flex gap-2 mb-4">
+      <button onclick="convertExcel()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-medium">JSON化</button>
+      <button onclick="mergeToDb()" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium" id="btnMerge" disabled>DBに統合</button>
+      <button onclick="downloadJson()" class="bg-gray-600 text-white px-6 py-2 rounded-lg font-medium" id="btnDownload" disabled>JSONダウンロード</button>
+    </div>
+    <div id="importStatus" class="text-sm text-gray-600 mb-2"></div>
+    <div id="importPreview"></div>
+  </div>
+
+  <!-- 一括マッピングタブ -->
+  <div id="panel-bulk" class="bg-white rounded-lg shadow p-6 hidden">
+    <h2 class="text-lg font-bold mb-4">一括マッピング（Excel → JLAC10 自動マッチ）</h2>
+    <div class="grid grid-cols-3 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">病院マスター Excel</label>
+        <input id="bulkFile" type="file" accept=".xlsx,.xls,.csv" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">項目名の列</label>
+        <input id="bulkColName" type="text" value="A" class="w-full border rounded px-3 py-2">
+      </div>
+      <div class="flex items-end">
+        <button onclick="doBulkMapping()" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium w-full">マッピング実行</button>
+      </div>
+    </div>
+    <div id="bulkStatus" class="text-sm text-gray-600 mb-2"></div>
+    <div id="bulkResults"></div>
+    <div class="mt-2">
+      <button onclick="downloadBulkResult()" class="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm" id="btnBulkDL" disabled>結果Excelダウンロード</button>
+    </div>
+  </div>
+
+  <!-- SNエラー対応タブ -->
+  <div id="panel-error" class="bg-white rounded-lg shadow p-6 hidden">
+    <h2 class="text-lg font-bold mb-4">SSMIX SN エラー対応</h2>
+
+    <div class="grid grid-cols-3 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">エラーリスト (Excel/CSV)</label>
+        <input id="errorFile" type="file" accept=".xlsx,.xls,.csv" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">項目コードの列</label>
+        <input id="errorColCode" type="text" value="A" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">項目名称の列</label>
+        <input id="errorColName" type="text" value="B" class="w-full border rounded px-3 py-2">
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">病院名</label>
+        <input id="errorHospital" type="text" placeholder="○○病院" class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">宛先部署</label>
+        <input id="errorDept" type="text" value="検査科" class="w-full border rounded px-3 py-2">
+      </div>
+    </div>
+
+    <div class="flex gap-2 mb-4">
+      <button onclick="analyzeErrors()" class="bg-red-600 text-white px-6 py-2 rounded-lg font-medium">エラー分析</button>
+      <button onclick="generateMail()" class="bg-purple-600 text-white px-6 py-2 rounded-lg font-medium" id="btnMail" disabled>問い合わせメール生成</button>
+      <button onclick="downloadErrorResult()" class="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm" id="btnErrorDL" disabled>結果Excelダウンロード</button>
+    </div>
+
+    <div id="errorStatus" class="text-sm text-gray-600 mb-2"></div>
+    <div id="errorResults"></div>
+
+    <!-- メール生成エリア -->
+    <div id="mailArea" class="hidden mt-4">
+      <h3 class="font-bold mb-2">問い合わせメール（コピーして送信）</h3>
+      <div class="mb-2">
+        <label class="block text-sm font-medium mb-1">件名</label>
+        <input id="mailSubject" type="text" class="w-full border rounded px-3 py-2 bg-gray-50" readonly>
+      </div>
+      <div class="mb-2">
+        <label class="block text-sm font-medium mb-1">本文</label>
+        <textarea id="mailBody" rows="20" class="w-full border rounded px-3 py-2 font-mono text-sm bg-gray-50" readonly></textarea>
+      </div>
+      <button onclick="copyMail()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">本文をコピー</button>
+    </div>
+  </div>
+
+  <!-- DB管理タブ -->
+  <div id="panel-data" class="bg-white rounded-lg shadow p-6 hidden">
+    <h2 class="text-lg font-bold mb-4">データベース管理</h2>
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">merged_jlac10.json を読み込み</label>
+      <input id="dbFile" type="file" accept=".json" class="border rounded px-3 py-2" onchange="loadDbFile(this)">
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">病院JSONを追加読み込み（複数可）</label>
+      <input id="hospitalFiles" type="file" accept=".json" multiple class="border rounded px-3 py-2" onchange="loadHospitalFiles(this)">
+    </div>
+    <div id="dbInfo" class="text-sm space-y-1"></div>
+    <div class="mt-4">
+      <button onclick="exportMergedDb()" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm" id="btnExportDb" disabled>統合DBをダウンロード</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// =====================================================================
+// グローバル状態
+// =====================================================================
+let DB = { items: [], metadata: {} };
+let lastConvertedJson = null;
+let lastBulkResult = null;
+let searchIndex = [];
+
+// =====================================================================
+// テキスト正規化 + スコアリング（Python search.py と同等）
+// =====================================================================
+function normalize(text) {
+  text = text.normalize("NFKC");
+  let r = "";
+  for (const ch of text) {
+    const cp = ch.codePointAt(0);
+    r += (cp >= 0x30A1 && cp <= 0x30F6) ? String.fromCodePoint(cp - 0x60) : ch;
+  }
+  return r.toLowerCase();
+}
+
+function calcScore(qN, tN, tR) {
+  if (!qN || !tN) return 0;
+  if (qN === tN) return 100;
+  if (tN.startsWith(qN)) return 80 + qN.length / tN.length * 10;
+  if (tN.includes(qN)) return 60 + qN.length / tN.length * 10;
+  const words = qN.split(/\s+/);
+  if (words.length > 1 && words.every(w => tN.includes(w))) return 50 + qN.length / tN.length * 10;
+  if (/^[a-z0-9]+$/i.test(qN) && qN.length <= 5) {
+    const raw = tR.toLowerCase();
+    for (const p of [`(${qN})`, `${qN}/`, `/${qN}`, ` ${qN} `, ` ${qN})`]) {
+      if (raw.includes(p)) return 75;
+    }
+  }
+  return 0;
+}
+
+// =====================================================================
+// 検索エンジン
+// =====================================================================
+function buildSearchIndex() {
+  const entries = [];
+  for (const item of DB.items) {
+    const names = new Set();
+    const dec = item.jlac10_decoded || {};
+    if (dec.valid) {
+      if (dec.analyte && dec.analyte.name) names.add(dec.analyte.name);
+      if (dec.analyte && dec.analyte.name_en) names.add(dec.analyte.name_en);
+    }
+    for (const src of Object.values(item.sources || {})) {
+      if (src.item_name) names.add(src.item_name);
+    }
+    for (const h of item.mapping_history || []) {
+      if (h.item_name) names.add(h.item_name);
+      if (h.abbreviation) names.add(h.abbreviation);
+      if (h.jlac10_standard_name) names.add(h.jlac10_standard_name);
+    }
+    const nameArr = [...names];
+    entries.push({
+      jlac10: item.jlac10, analyte_code: item.analyte_code,
+      decoded: dec, sources: item.sources || {},
+      mapping_history: item.mapping_history || [],
+      names: nameArr, namesNorm: nameArr.map(normalize),
+    });
+  }
+  return entries;
+}
+
+function search(query, maxResults) {
+  maxResults = maxResults || 20;
+  const qN = normalize(query);
+  if (!qN) return [];
+  const results = [];
+  for (const e of searchIndex) {
+    let best = 0, matched = "";
+    for (let i = 0; i < e.names.length; i++) {
+      const s = calcScore(qN, e.namesNorm[i], e.names[i]);
+      if (s > best) { best = s; matched = e.names[i]; }
+    }
+    if (best > 0) results.push(Object.assign({}, e, { score: best, matchedName: matched }));
+  }
+  results.sort(function(a, b) { return b.score - a.score || a.jlac10.localeCompare(b.jlac10); });
+  return results.slice(0, maxResults);
+}
+
+// =====================================================================
+// 安全なHTML生成ヘルパー
+// =====================================================================
+function esc(s) { return DOMPurify.sanitize(s || "", { ALLOWED_TAGS: [] }); }
+
+function safeHtml(html) { return DOMPurify.sanitize(html); }
+
+function setHtml(id, html) {
+  document.getElementById(id).innerHTML = DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ["table","tr","td","th","thead","tbody","div","span","p","b","code","br"],
+    ALLOWED_ATTR: ["class"],
+  });
+}
+
+// =====================================================================
+// UI: 検索
+// =====================================================================
+function doSearch() {
+  var query = document.getElementById("searchInput").value.trim();
+  if (!query) return;
+  var results = search(query);
+  if (results.length === 0) {
+    setHtml("searchResults", '<p class="text-gray-500">該当なし</p>');
+    return;
+  }
+  var html = "";
+  for (var i = 0; i < results.length; i++) {
+    var r = results[i];
+    var border = r.score >= 90 ? "border-green-300 bg-green-50" : r.score >= 50 ? "border-yellow-300 bg-yellow-50" : "border-gray-200";
+    html += '<div class="border rounded-lg p-3 mb-2 ' + border + '">';
+    html += '<div><b>[' + (i+1) + '] ' + esc(r.matchedName) + '</b>';
+    html += ' <span class="text-sm text-gray-500">スコア: ' + r.score.toFixed(0) + '</span>';
+    html += ' <code class="text-sm bg-gray-100 px-2 py-1 rounded">' + esc(r.jlac10) + '</code></div>';
+    html += '<div class="text-sm text-gray-600">分析物: ' + esc(r.analyte_code);
+    if (r.decoded && r.decoded.valid) {
+      html += ' | ' + esc((r.decoded.analyte||{}).name||"") + ' / ' + esc((r.decoded.material||{}).name||"") + ' / ' + esc((r.decoded.method||{}).name||"");
+    }
+    html += '</div>';
+    for (var k of Object.keys(r.sources)) {
+      var v = r.sources[k];
+      html += '<span class="inline-block bg-gray-100 rounded px-2 py-0.5 mr-1 mb-1 text-sm"><b>' + esc(k.toUpperCase()) + '</b>: ' + esc(v.item_name) + ' (' + esc(v.method) + ')</span>';
+    }
+    if (r.mapping_history.length > 0) {
+      html += '<div class="text-sm text-blue-600">';
+      for (var h of r.mapping_history) {
+        html += esc(h.hospital) + ':' + esc(h.item_name||"") + '/' + esc(h.abbreviation||"") + ' ';
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  setHtml("searchResults", html);
+}
+
+// =====================================================================
+// UI: Excel JSON化 + 統合
+// =====================================================================
+function colToIndex(col) {
+  if (!col || !col.trim()) return -1;
+  col = col.toUpperCase().trim();
+  if (/^\d+$/.test(col)) return parseInt(col) - 1;
+  var idx = 0;
+  for (var c of col) idx = idx * 26 + c.charCodeAt(0) - 64;
+  return idx - 1;
+}
+
+function convertExcel() {
+  var file = document.getElementById("excelFile").files[0];
+  if (!file) { alert("ファイルを選択してください"); return; }
+  var hospital = document.getElementById("hospitalName").value.trim() || "不明";
+  var ci = colToIndex(document.getElementById("colItemName").value);
+  var ca = colToIndex(document.getElementById("colAbbr").value);
+  var cj = colToIndex(document.getElementById("colJlac10").value);
+  var cs = colToIndex(document.getElementById("colStdName").value);
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var wb = XLSX.read(e.target.result, { type: "array" });
+    var ws = wb.Sheets[wb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
+    var items = [];
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      if (!row || row.length === 0) continue;
+      var itemName = ci >= 0 ? String(row[ci] == null ? "" : row[ci]).trim() : "";
+      var abbr = ca >= 0 ? String(row[ca] == null ? "" : row[ca]).trim() : "";
+      var rawJlac = cj >= 0 ? String(row[cj] == null ? "" : row[cj]).trim() : "";
+      var stdName = cs >= 0 ? String(row[cs] == null ? "" : row[cs]).trim() : "";
+      if (!itemName && !rawJlac) continue;
+      var jlac10 = rawJlac.replace(/-/g, "");
+      items.push({ hospital: hospital, item_name: itemName, abbreviation: abbr,
+        jlac10: jlac10, analyte_code: jlac10.length >= 5 ? jlac10.substring(0, 5) : "",
+        jlac10_standard_name: stdName });
+    }
+    lastConvertedJson = {
+      metadata: { hospital: hospital, exported_at: new Date().toISOString(), total_items: items.length },
+      items: items
+    };
+    document.getElementById("importStatus").textContent =
+      "JSON化完了: " + items.length + "件 (JLAC10あり: " + items.filter(function(x){return x.jlac10;}).length + "件)";
+    document.getElementById("btnMerge").disabled = false;
+    document.getElementById("btnDownload").disabled = false;
+    // プレビュー
+    var preview = items.slice(0, 10);
+    var h = '<table class="w-full text-sm border-collapse"><tr class="bg-gray-100"><th class="border p-1">項目名</th><th class="border p-1">略称</th><th class="border p-1">JLAC10</th><th class="border p-1">正式名称</th></tr>';
+    for (var p of preview) {
+      h += '<tr><td class="border p-1">' + esc(p.item_name) + '</td><td class="border p-1">' + esc(p.abbreviation) + '</td><td class="border p-1"><code>' + esc(p.jlac10) + '</code></td><td class="border p-1">' + esc(p.jlac10_standard_name) + '</td></tr>';
+    }
+    h += '</table>';
+    if (items.length > 10) h += '<p class="text-gray-500">...他 ' + (items.length - 10) + '件</p>';
+    setHtml("importPreview", h);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function mergeToDb() {
+  if (!lastConvertedJson) return;
+  var added = 0;
+  for (var item of lastConvertedJson.items) {
+    if (!item.jlac10) continue;
+    var existing = DB.items.find(function(e) { return e.jlac10 === item.jlac10; });
+    if (!existing) {
+      existing = { jlac10: item.jlac10, analyte_code: item.analyte_code,
+        jlac10_decoded: { raw: item.jlac10, valid: false }, sources: {}, mapping_history: [] };
+      DB.items.push(existing);
+    }
+    if (!existing.mapping_history) existing.mapping_history = [];
+    var dup = existing.mapping_history.some(function(h) {
+      return h.hospital === item.hospital && h.item_name === item.item_name; });
+    if (!dup) {
+      existing.mapping_history.push({ hospital: item.hospital, item_name: item.item_name,
+        abbreviation: item.abbreviation, jlac10_standard_name: item.jlac10_standard_name });
+      added++;
+    }
+  }
+  DB.metadata.total_unique_jlac10 = DB.items.length;
+  searchIndex = buildSearchIndex();
+  updateDbStatus();
+  document.getElementById("importStatus").textContent += " → DB統合完了 (" + added + "件追加)";
+  document.getElementById("btnExportDb").disabled = false;
+}
+
+function downloadJson() {
+  if (!lastConvertedJson) return;
+  downloadFile((lastConvertedJson.metadata.hospital || "hospital") + ".json",
+    JSON.stringify(lastConvertedJson, null, 2));
+}
+
+// =====================================================================
+// UI: 一括マッピング
+// =====================================================================
+function doBulkMapping() {
+  var file = document.getElementById("bulkFile").files[0];
+  if (!file) { alert("ファイルを選択してください"); return; }
+  var colIdx = colToIndex(document.getElementById("bulkColName").value);
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var wb = XLSX.read(e.target.result, { type: "array" });
+    var ws = wb.Sheets[wb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
+    var results = [], auto = 0, candidate = 0, manual = 0;
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      var itemName = colIdx >= 0 && row ? String(row[colIdx] == null ? "" : row[colIdx]).trim() : "";
+      if (!itemName) continue;
+      var matches = search(itemName, 5);
+      var status, bestMatch;
+      if (matches.length > 0 && matches[0].score >= 90) { status = "auto"; bestMatch = matches[0]; auto++; }
+      else if (matches.length > 0 && matches[0].score >= 50) { status = "candidate"; bestMatch = matches[0]; candidate++; }
+      else { status = "manual"; bestMatch = null; manual++; }
+      results.push({ row: i + 1, itemName: itemName, status: status, matches: matches, bestMatch: bestMatch });
+    }
+    lastBulkResult = results;
+    document.getElementById("bulkStatus").textContent =
+      "完了: " + results.length + "件 | 自動確定: " + auto + " | 要選択: " + candidate + " | 手動: " + manual;
+    document.getElementById("btnBulkDL").disabled = false;
+    var h = '<table class="w-full text-sm border-collapse"><tr class="bg-gray-100"><th class="border p-1">状態</th><th class="border p-1">項目名</th><th class="border p-1">JLAC10</th><th class="border p-1">マッチ名</th><th class="border p-1">スコア</th></tr>';
+    for (var r of results) {
+      var bg = r.status === "auto" ? "bg-green-50" : r.status === "candidate" ? "bg-yellow-50" : "bg-red-50";
+      var icon = r.status === "auto" ? "OK" : r.status === "candidate" ? "??" : "NG";
+      h += '<tr class="' + bg + '"><td class="border p-1 text-center">' + icon + '</td>';
+      h += '<td class="border p-1">' + esc(r.itemName) + '</td>';
+      h += '<td class="border p-1"><code>' + (r.bestMatch ? esc(r.bestMatch.jlac10) : "") + '</code></td>';
+      h += '<td class="border p-1">' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td>';
+      h += '<td class="border p-1 text-center">' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
+    }
+    h += '</table>';
+    setHtml("bulkResults", h);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function downloadBulkResult() {
+  if (!lastBulkResult) return;
+  var wsData = [["状態", "行", "院内項目名", "JLAC10", "マッチ名", "スコア", "分析物", "候補2", "候補3"]];
+  for (var r of lastBulkResult) {
+    wsData.push([
+      r.status === "auto" ? "確定" : r.status === "candidate" ? "要選択" : "手動",
+      r.row, r.itemName,
+      r.bestMatch ? r.bestMatch.jlac10 : "", r.bestMatch ? r.bestMatch.matchedName : "",
+      r.bestMatch ? r.bestMatch.score.toFixed(0) : "",
+      r.bestMatch ? r.bestMatch.analyte_code : "",
+      r.matches[1] ? r.matches[1].jlac10 : "", r.matches[2] ? r.matches[2].jlac10 : ""
+    ]);
+  }
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "マッピング結果");
+  XLSX.writeFile(wb, "mapping_result.xlsx");
+}
+
+// =====================================================================
+// UI: DB管理
+// =====================================================================
+function loadDbFile(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      DB = JSON.parse(e.target.result);
+      if (!DB.items) DB.items = [];
+      if (!DB.metadata) DB.metadata = {};
+      searchIndex = buildSearchIndex();
+      updateDbStatus();
+      document.getElementById("btnExportDb").disabled = false;
+    } catch (err) { alert("JSON パースエラー: " + err.message); }
+  };
+  reader.readAsText(file);
+}
+
+function loadHospitalFiles(input) {
+  var files = input.files;
+  var totalAdded = 0, processed = 0;
+  for (var fi = 0; fi < files.length; fi++) {
+    (function(f) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          var data = JSON.parse(e.target.result);
+          for (var item of (data.items || [])) {
+            if (!item.jlac10) continue;
+            var existing = DB.items.find(function(x) { return x.jlac10 === item.jlac10; });
+            if (!existing) {
+              existing = { jlac10: item.jlac10, analyte_code: item.analyte_code || "",
+                jlac10_decoded: { raw: item.jlac10, valid: false }, sources: {}, mapping_history: [] };
+              DB.items.push(existing);
+            }
+            if (!existing.mapping_history) existing.mapping_history = [];
+            var dup = existing.mapping_history.some(function(h) {
+              return h.hospital === item.hospital && h.item_name === item.item_name; });
+            if (!dup) {
+              existing.mapping_history.push({ hospital: item.hospital || (data.metadata||{}).hospital || "",
+                item_name: item.item_name || "", abbreviation: item.abbreviation || "",
+                jlac10_standard_name: item.jlac10_standard_name || "" });
+              totalAdded++;
+            }
+          }
+        } catch(err) { console.error(err); }
+        processed++;
+        if (processed === files.length) {
+          DB.metadata.total_unique_jlac10 = DB.items.length;
+          searchIndex = buildSearchIndex();
+          updateDbStatus();
+          document.getElementById("btnExportDb").disabled = false;
+          alert(files.length + "ファイル読み込み完了 (" + totalAdded + "件追加)");
+        }
+      };
+      reader.readAsText(f);
+    })(files[fi]);
+  }
+}
+
+function exportMergedDb() {
+  DB.metadata.exported_at = new Date().toISOString();
+  DB.metadata.total_unique_jlac10 = DB.items.length;
+  downloadFile("merged_jlac10.json", JSON.stringify(DB, null, 2));
+}
+
+function updateDbStatus() {
+  var hCount = 0, hospitals = new Set();
+  for (var it of DB.items) {
+    for (var h of (it.mapping_history || [])) { hCount++; if (h.hospital) hospitals.add(h.hospital); }
+  }
+  document.getElementById("dbStatus").textContent =
+    "DB: " + DB.items.length + " JLAC10 | 実績: " + hCount + "件 (" + hospitals.size + "病院)";
+  setHtml("dbInfo",
+    '<p>JLAC10 エントリ数: <b>' + DB.items.length + '</b></p>' +
+    '<p>マッピング実績: <b>' + hCount + '</b>件</p>' +
+    '<p>病院数: <b>' + hospitals.size + '</b> (' + esc([...hospitals].join(", ")) + ')</p>' +
+    '<p>SRL: ' + DB.items.filter(function(x){return x.sources && x.sources.srl;}).length +
+    ' | BML: ' + DB.items.filter(function(x){return x.sources && x.sources.bml;}).length +
+    ' | LSI: ' + DB.items.filter(function(x){return x.sources && x.sources.lsi;}).length + '</p>'
+  );
+}
+
+// =====================================================================
+// ユーティリティ
+// =====================================================================
+// =====================================================================
+// UI: SNエラー対応
+// =====================================================================
+var lastErrorResult = null;
+
+function analyzeErrors() {
+  var file = document.getElementById("errorFile").files[0];
+  if (!file) { alert("エラーリストファイルを選択してください"); return; }
+  var colCode = colToIndex(document.getElementById("errorColCode").value);
+  var colName = colToIndex(document.getElementById("errorColName").value);
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var wb = XLSX.read(e.target.result, { type: "array" });
+    var ws = wb.Sheets[wb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
+
+    var results = [], canAssign = 0, needInquiry = 0;
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      if (!row) continue;
+      var code = colCode >= 0 ? String(row[colCode] == null ? "" : row[colCode]).trim() : "";
+      var name = colName >= 0 ? String(row[colName] == null ? "" : row[colName]).trim() : "";
+      if (!code && !name) continue;
+
+      var matches = search(name || code, 5);
+      var status, bestMatch;
+      if (matches.length > 0 && matches[0].score >= 80) {
+        status = "assignable";
+        bestMatch = matches[0];
+        canAssign++;
+      } else {
+        status = "inquiry";
+        bestMatch = matches.length > 0 ? matches[0] : null;
+        needInquiry++;
+      }
+      results.push({ row: i + 1, code: code, name: name, status: status, matches: matches, bestMatch: bestMatch });
+    }
+
+    lastErrorResult = results;
+    document.getElementById("errorStatus").textContent =
+      "分析完了: " + results.length + "件 | 付番可能: " + canAssign + " | 要問い合わせ: " + needInquiry;
+    document.getElementById("btnMail").disabled = (needInquiry === 0);
+    document.getElementById("btnErrorDL").disabled = false;
+
+    var h = '<table class="w-full text-sm border-collapse">' +
+      '<tr class="bg-gray-100"><th class="border p-1">状態</th><th class="border p-1">項目コード</th>' +
+      '<th class="border p-1">項目名称</th><th class="border p-1">候補JLAC10</th>' +
+      '<th class="border p-1">マッチ名</th><th class="border p-1">スコア</th></tr>';
+    for (var r of results) {
+      var bg = r.status === "assignable" ? "bg-green-50" : "bg-red-50";
+      var icon = r.status === "assignable" ? "OK" : "??";
+      h += '<tr class="' + bg + '">';
+      h += '<td class="border p-1 text-center">' + icon + '</td>';
+      h += '<td class="border p-1">' + esc(r.code) + '</td>';
+      h += '<td class="border p-1">' + esc(r.name) + '</td>';
+      h += '<td class="border p-1"><code>' + (r.bestMatch ? esc(r.bestMatch.jlac10) : "") + '</code></td>';
+      h += '<td class="border p-1">' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td>';
+      h += '<td class="border p-1 text-center">' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td>';
+      h += '</tr>';
+    }
+    h += '</table>';
+    setHtml("errorResults", h);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function generateMail() {
+  if (!lastErrorResult) return;
+  var hospital = document.getElementById("errorHospital").value.trim() || "○○病院";
+  var dept = document.getElementById("errorDept").value.trim() || "検査科";
+  var inquiryItems = lastErrorResult.filter(function(r) { return r.status === "inquiry"; });
+
+  if (inquiryItems.length === 0) { alert("問い合わせ対象がありません"); return; }
+
+  var subject = "検査項目コード確認のお願い（JLAC10 未設定項目）";
+
+  var body = hospital + " " + dept + " 御中\n\n";
+  body += "お世話になっております。\n";
+  body += "SSMIX2 データにおいて、以下の検査項目に JLAC10 コードが設定されていないため、\n";
+  body += "付番に必要な情報のご確認をお願いいたします。\n\n";
+  body += "■ 対象項目（" + inquiryItems.length + "件）\n\n";
+  body += "| No | 項目コード | 項目名称 | 確認事項 |\n";
+  body += "|----|-----------|---------|----------|\n";
+  for (var i = 0; i < inquiryItems.length; i++) {
+    var it = inquiryItems[i];
+    body += "| " + (i+1) + " | " + it.code + " | " + it.name + " | 下記参照 |\n";
+  }
+  body += "\n■ 各項目について以下をご教示ください\n\n";
+  body += "1. 結果値の種類（数値 / 文字列 / コード値 / 定性）\n";
+  body += "2. 結果値の単位\n";
+  body += "3. 使用している測定法または試薬名\n";
+  body += "4. 検体の種類（血清 / 血漿 / 尿 / その他）\n";
+  body += "5. 親検査項目がある場合、その項目名\n";
+  body += "6. 外注の場合、外注先（SRL / BML / LSI / その他）\n";
+  body += "\nお忙しいところ恐れ入りますが、ご回答のほどよろしくお願いいたします。\n";
+
+  document.getElementById("mailSubject").value = subject;
+  document.getElementById("mailBody").value = body;
+  document.getElementById("mailArea").classList.remove("hidden");
+}
+
+function copyMail() {
+  var body = document.getElementById("mailBody");
+  body.select();
+  document.execCommand("copy");
+  alert("コピーしました");
+}
+
+function downloadErrorResult() {
+  if (!lastErrorResult) return;
+  var wsData = [["状態", "行", "項目コード", "項目名称", "候補JLAC10", "マッチ名", "スコア"]];
+  for (var r of lastErrorResult) {
+    wsData.push([
+      r.status === "assignable" ? "付番可能" : "要問い合わせ",
+      r.row, r.code, r.name,
+      r.bestMatch ? r.bestMatch.jlac10 : "",
+      r.bestMatch ? r.bestMatch.matchedName : "",
+      r.bestMatch ? r.bestMatch.score.toFixed(0) : ""
+    ]);
+  }
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(wsData), "エラー分析結果");
+  XLSX.writeFile(wb, "error_analysis.xlsx");
+}
+
+// =====================================================================
+// ユーティリティ
+// =====================================================================
+function switchTab(name) {
+  var tabs = ["search", "import", "bulk", "error", "data"];
+  for (var t of tabs) {
+    document.getElementById("panel-" + t).classList.toggle("hidden", t !== name);
+    var btn = document.getElementById("tab-" + t);
+    btn.className = t === name
+      ? "px-4 py-2 rounded-lg bg-blue-600 text-white font-medium"
+      : "px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium";
+  }
+}
+
+function downloadFile(name, content) {
+  var blob = new Blob([content], { type: "application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+</script>
+
+</body>
+</html>
