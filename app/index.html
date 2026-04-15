@@ -87,7 +87,32 @@ label { display:block; font-size:11px; font-weight:600; text-transform:uppercase
 .result-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
 .result-title { font-weight:600; font-size:15px; }
 .result-score { font-family:'JetBrains Mono',monospace; font-size:12px; padding:2px 8px; background:var(--bg-hover); }
-.result-jlac { font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent); }
+/* JLAC10 big display row */
+.result-jlac-row { display:flex; align-items:center; gap:12px; margin:8px 0; flex-wrap:wrap; }
+.jlac-big { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--accent);
+  letter-spacing:1px; background:var(--bg-primary); padding:6px 14px; border:1px solid var(--accent); }
+.analyte-code { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary);
+  background:var(--bg-hover); padding:4px 8px; }
+
+/* Company badges */
+.company-badges { display:flex; gap:4px; }
+.company-badge { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+  padding:4px 10px; letter-spacing:0.5px; }
+.company-srl { background:#1a3a5c; color:#6abeef; border:1px solid #2a5a8c; }
+.company-bml { background:#3a1a3a; color:#d48ae0; border:1px solid #5a2a5a; }
+.company-lsi { background:#1a3a2a; color:#6abe7a; border:1px solid #2a5a3a; }
+
+/* Source detail row (horizontal) */
+.source-detail-row { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+.source-detail { display:flex; align-items:center; gap:6px; background:var(--bg-secondary);
+  padding:6px 10px; border:1px solid var(--border); flex:1; min-width:200px; }
+.company-label { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;
+  padding:2px 8px; flex-shrink:0; }
+.source-item-name { font-size:13px; font-weight:500; color:var(--text-primary); }
+.source-method { font-size:11px; color:var(--text-secondary); margin-left:auto; white-space:nowrap; }
+
+/* History row */
+.history-row { display:flex; gap:4px; margin-top:6px; flex-wrap:wrap; }
 .result-meta { font-size:12px; color:var(--text-secondary); margin-top:4px; }
 .result-sources { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
 .source-tag { font-size:11px; padding:2px 8px; background:var(--bg-hover); border:1px solid var(--border); font-family:'JetBrains Mono',monospace; }
@@ -408,22 +433,44 @@ function doSearch() {
   for (var i = 0; i < results.length; i++) {
     var r = results[i];
     var cls = r.score >= 90 ? "high" : r.score >= 50 ? "mid" : "low";
+    // ソースキー一覧（SRL/BML/LSI）
+    var srcKeys = Object.keys(r.sources);
+    var srcBadges = srcKeys.map(function(k){return '<span class="company-badge company-'+k+'">'+esc(k.toUpperCase())+'</span>';}).join("");
+
     html += '<div class="result-item '+cls+'">';
+    // 1行目: 番号 + 名称 + スコア
     html += '<div class="result-header"><span class="result-title">[' + (i+1) + '] ' + esc(r.matchedName) + '</span>';
     html += '<span class="result-score">' + r.score.toFixed(0) + '</span></div>';
-    html += '<div class="result-jlac">' + esc(r.jlac10) + ' <span class="text-sm" style="color:var(--text-secondary)">(' + esc(r.analyte_code) + ')</span></div>';
+    // 2行目: JLAC10 大きく + 会社バッジ横並び
+    html += '<div class="result-jlac-row">';
+    html += '<code class="jlac-big">' + esc(r.jlac10) + '</code>';
+    html += '<span class="analyte-code">' + esc(r.analyte_code) + '</span>';
+    html += '<span class="company-badges">' + srcBadges + '</span>';
+    html += '</div>';
+    // 3行目: 標準名称
     if (r.decoded && r.decoded.valid) {
       html += '<div class="result-meta">' + esc((r.decoded.analyte||{}).name||"") + ' / ' + esc((r.decoded.material||{}).name||"") + ' / ' + esc((r.decoded.method||{}).name||"") + '</div>';
     }
-    html += '<div class="result-sources">';
-    for (var k of Object.keys(r.sources)) {
-      var v = r.sources[k];
-      html += '<span class="source-tag"><b>' + esc(k.toUpperCase()) + '</b> ' + esc(v.item_name) + ' (' + esc(v.method) + ')</span>';
+    // 4行目: 各社詳細（横並びテーブル）
+    if (srcKeys.length > 0) {
+      html += '<div class="source-detail-row">';
+      for (var k of srcKeys) {
+        var v = r.sources[k];
+        html += '<div class="source-detail"><span class="company-label company-'+k+'">'+esc(k.toUpperCase())+'</span>';
+        html += '<span class="source-item-name">'+esc(v.item_name)+'</span>';
+        html += '<span class="source-method">'+esc(v.method)+'</span></div>';
+      }
+      html += '</div>';
     }
-    for (var h of r.mapping_history) {
-      html += '<span class="history-tag">' + esc(h.hospital) + ': ' + esc(h.item_name||"") + '</span>';
+    // 5行目: マッピング実績
+    if (r.mapping_history.length > 0) {
+      html += '<div class="history-row">';
+      for (var h of r.mapping_history) {
+        html += '<span class="history-tag">' + esc(h.hospital) + ': ' + esc(h.item_name||"") + '</span>';
+      }
+      html += '</div>';
     }
-    html += '</div></div>';
+    html += '</div>';
   }
   setHtml("searchResults", html);
 }
