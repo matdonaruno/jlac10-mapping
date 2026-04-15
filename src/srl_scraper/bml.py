@@ -27,6 +27,7 @@ from .scraper import (
     _clean_text,
     _read_cache,
     _write_cache,
+    classify_jlac10,
 )
 
 logger = logging.getLogger(__name__)
@@ -146,8 +147,7 @@ def parse_detail(html: str, url: str) -> dict | None:
 
     jlac10_raw = data.get("統一コード", "")
     jlac10 = jlac10_raw.replace("-", "")
-    if not jlac10:
-        return None
+    jlac10_status = classify_jlac10(jlac10)
 
     # 検体必要量から材料を抽出
     material_raw = data.get("検体必要量(mL)容器 / 保存", "")
@@ -156,6 +156,7 @@ def parse_detail(html: str, url: str) -> dict | None:
 
     return {
         "jlac10": jlac10,
+        "jlac10_status": jlac10_status,
         "item_name": data.get("検査項目名称", ""),
         "material": material,
         "method": data.get("検査方法", ""),

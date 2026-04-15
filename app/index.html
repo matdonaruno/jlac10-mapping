@@ -95,6 +95,7 @@ label { display:block; font-size:11px; font-weight:600; text-transform:uppercase
 .jlac-sep { color:var(--text-secondary); margin:0 1px; }
 .jlac-missing { color:var(--danger); font-weight:700; animation:blink 1.5s infinite; }
 .jlac-invalid { color:var(--danger); font-size:13px; font-style:italic; }
+.jlac-empty { color:var(--text-secondary); font-size:13px; font-style:italic; background:var(--bg-hover); padding:4px 10px; border:1px dashed var(--border); }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 .analyte-code { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary);
   background:var(--bg-hover); padding:4px 8px; }
@@ -394,6 +395,7 @@ function calcScore(qN, tN, tR) {
 // =====================================================================
 function buildSearchIndex() {
   var entries = [];
+  // JLAC10あり項目
   for (var item of DB.items) {
     var names = new Set();
     var dec = item.jlac10_decoded || {};
@@ -408,9 +410,20 @@ function buildSearchIndex() {
       if (h.jlac10_standard_name) names.add(h.jlac10_standard_name);
     }
     var arr = []; names.forEach(function(n){ arr.push(n); });
-    entries.push({ jlac10:item.jlac10, analyte_code:item.analyte_code, decoded:dec,
+    entries.push({ jlac10:item.jlac10, jlac10_status:item.jlac10_status||"valid_15",
+      analyte_code:item.analyte_code, decoded:dec,
       sources:item.sources||{}, mapping_history:item.mapping_history||[],
       names:arr, namesNorm:arr.map(normalize) });
+  }
+  // JLAC10なし項目
+  for (var nj of (DB.items_no_jlac || [])) {
+    if (!nj.item_name) continue;
+    var njNames = [nj.item_name];
+    var njSrc = {}; njSrc[nj.source] = { item_name:nj.item_name, material:"", method:"", reference_value:"", detail_url:nj.detail_url||"" };
+    entries.push({ jlac10:nj.jlac10_raw||"", jlac10_status:nj.jlac10_status||"empty",
+      analyte_code:"", decoded:{},
+      sources:njSrc, mapping_history:[],
+      names:njNames, namesNorm:njNames.map(normalize) });
   }
   return entries;
 }
@@ -426,7 +439,7 @@ function search(query, maxResults) {
       var s = calcScore(qN, e.namesNorm[i], e.names[i]);
       if (s > best) { best = s; matched = e.names[i]; }
     }
-    if (best > 0) results.push(Object.assign({}, e, { score: best, matchedName: matched }));
+    if (best > 0) results.push(Object.assign({}, e, { score: best, matchedName: matched, jlac10_status: e.jlac10_status||"valid_15" }));
   }
   results.sort(function(a,b){ return b.score - a.score || a.jlac10.localeCompare(b.jlac10); });
   return results.slice(0, maxResults);
@@ -456,12 +469,14 @@ function colToIndex(col) {
 function isValidJlac(code) {
   return /^[0-9A-Za-z]{15,17}$/.test(code);
 }
-function formatJlac17(code) {
-  if (!code) return "";
+function formatJlac17(code, status) {
+  // status が明示されている場合はそれを使う
+  if (status === "empty" || (!code && !status)) return '<span class="jlac-empty">JLAC10\u672a\u8a2d\u5b9a</span>';
+  if (!code) return '<span class="jlac-empty">JLAC10\u672a\u8a2d\u5b9a</span>';
   code = code.replace(/-/g, "");
-  // 不正なJLAC10（日本語等を含む）はそのまま表示
-  if (!isValidJlac(code)) {
-    return '<span class="jlac-invalid">' + esc(code) + '</span>';
+  // 不正なJLAC10（日本語等を含む）は赤字で表示
+  if (status === "invalid" || !isValidJlac(code)) {
+    return '<span class="jlac-invalid">\u4e0d\u6b63: ' + esc(code) + '</span>';
   }
   if (code.length >= 17) {
     // 17桁: 5-4-3-3-2 でハイフン区切り
@@ -512,8 +527,8 @@ function doSearch() {
     html += '<span class="result-score">' + r.score.toFixed(0) + '</span></div>';
     // 2行目: JLAC10 大きく + 会社バッジ横並び
     html += '<div class="result-jlac-row">';
-    html += '<code class="jlac-big">' + formatJlac17(r.jlac10) + '</code>';
-    html += '<span class="analyte-code">' + esc(r.analyte_code) + '</span>';
+    html += '<code class="jlac-big">' + formatJlac17(r.jlac10, r.jlac10_status) + '</code>';
+    if (r.analyte_code) html += '<span class="analyte-code">' + esc(r.analyte_code) + '</span>';
     html += '<span class="company-badges">' + srcBadges + '</span>';
     html += '</div>';
     // 3行目: JLAC10 各パートの名称（5パート対応）
@@ -735,7 +750,7 @@ function analyzeErrors() {
     var h = '<table><tr><th></th><th>Code</th><th>Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
     for (var r of results) {
       var cls = r.status === "assignable" ? "row-ok" : "row-ng";
-      h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch && isValidJlac(r.bestMatch.jlac10) ? formatJlac17(r.bestMatch.jlac10) : esc((r.bestMatch || {}).jlac10 || "")) + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
+      h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch ? formatJlac17(r.bestMatch.jlac10, r.bestMatch.jlac10_status) : "") + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
     }
     h += '</table>'; setHtml("errorResults", h);
   });
@@ -808,9 +823,10 @@ function exportMergedDb() {
 function updateDbStatus() {
   var hc=0,hospitals=new Set();
   for(var it of DB.items) for(var h of(it.mapping_history||[])){hc++;if(h.hospital)hospitals.add(h.hospital);}
-  document.getElementById("dbStatus").textContent=DB.items.length+" JLAC10 | "+hc+" mappings | "+hospitals.size+" hospitals";
+  var noJlacCount = (DB.items_no_jlac || []).length;
+  document.getElementById("dbStatus").textContent=DB.items.length+" JLAC10 | "+noJlacCount+" no-JLAC | "+hc+" mappings | "+hospitals.size+" hospitals";
   setHtml("dbInfo",
-    '<b>'+DB.items.length+'</b> JLAC10 entries | <b>'+hc+'</b> mapping records | <b>'+hospitals.size+'</b> hospitals' +
+    '<b>'+DB.items.length+'</b> JLAC10 entries | <b>'+noJlacCount+'</b> JLAC10\u672a\u8a2d\u5b9a | <b>'+hc+'</b> mapping records | <b>'+hospitals.size+'</b> hospitals' +
     '<br>SRL: '+DB.items.filter(function(x){return x.sources&&x.sources.srl;}).length+
     ' | BML: '+DB.items.filter(function(x){return x.sources&&x.sources.bml;}).length+
     ' | LSI: '+DB.items.filter(function(x){return x.sources&&x.sources.lsi;}).length+

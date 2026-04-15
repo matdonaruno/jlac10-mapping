@@ -73,6 +73,21 @@ def _write_cache(cache_dir: Path | None, url: str, html: str) -> None:
 # HTMLパーサー
 # ---------------------------------------------------------------------------
 
+def classify_jlac10(code: str) -> str:
+    """JLAC10コードの状態を判定する。
+
+    Returns:
+        "valid_15" | "valid_17" | "empty" | "invalid"
+    """
+    if not code:
+        return "empty"
+    if re.match(r"^[0-9A-Za-z]{15}$", code):
+        return "valid_15"
+    if re.match(r"^[0-9A-Za-z]{16,17}$", code):
+        return "valid_17"
+    return "invalid"
+
+
 def _clean_text(text: str | None) -> str:
     """HTML要素からテキストを抽出し、空白を正規化する"""
     if not text:
@@ -144,9 +159,7 @@ def parse_test_row(tr: Tag) -> dict | None:
     item_name = lines[0] if lines else ""
     jlac10_raw = lines[1] if len(lines) > 1 else ""
     jlac10 = jlac10_raw.replace("-", "")
-    # JLAC10 バリデーション: 英数字15〜17桁のみ有効
-    if jlac10 and not re.match(r"^[0-9A-Za-z]{15,17}$", jlac10):
-        jlac10 = ""
+    jlac10_status = classify_jlac10(jlac10)
 
     tds = tr.find_all("td")
     if len(tds) < 8:
@@ -171,6 +184,7 @@ def parse_test_row(tr: Tag) -> dict | None:
     return {
         "item_name": item_name,
         "jlac10": jlac10,
+        "jlac10_status": jlac10_status,
         "detail_url": detail_url,
         "material": material,
         "volume_ml": volume_ml,

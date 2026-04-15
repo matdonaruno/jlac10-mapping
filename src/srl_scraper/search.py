@@ -139,6 +139,7 @@ class SearchIndex:
 
             entry = {
                 "jlac10": jlac10,
+                "jlac10_status": item.get("jlac10_status", "valid_15"),
                 "analyte_code": analyte_code,
                 "names": unique_names,
                 "names_normalized": normalized,
@@ -152,6 +153,33 @@ class SearchIndex:
             if analyte_code not in self._analyte_map:
                 self._analyte_map[analyte_code] = []
             self._analyte_map[analyte_code].append(idx)
+
+        # JLAC10なし項目もインデックスに追加（検索可能にする）
+        for item in merged.get("items_no_jlac", []):
+            item_name = item.get("item_name", "")
+            if not item_name:
+                continue
+
+            names = [item_name]
+            normalized = [_normalize(item_name)]
+
+            entry = {
+                "jlac10": item.get("jlac10_raw", ""),
+                "jlac10_status": item.get("jlac10_status", "empty"),
+                "analyte_code": "",
+                "names": names,
+                "names_normalized": normalized,
+                "decoded": {},
+                "sources": {item["source"]: {
+                    "item_name": item_name,
+                    "material": "",
+                    "method": "",
+                    "reference_value": "",
+                    "detail_url": item.get("detail_url", ""),
+                }},
+            }
+
+            self.entries.append(entry)
 
     def search(self, query: str, max_results: int = 20) -> list[dict]:
         """あいまい検索を実行
@@ -182,6 +210,7 @@ class SearchIndex:
                     "score": best_score,
                     "matched_name": matched_name,
                     "jlac10": entry["jlac10"],
+                    "jlac10_status": entry.get("jlac10_status", "valid_15"),
                     "analyte_code": entry["analyte_code"],
                     "all_names": entry["names"],
                     "decoded": entry["decoded"],
@@ -206,7 +235,13 @@ def format_results(results: list[dict]) -> str:
     for i, r in enumerate(results, 1):
         lines.append(f"\n{'─' * 60}")
         lines.append(f"  [{i}] {r['matched_name']}  (スコア: {r['score']:.0f})")
-        lines.append(f"      JLAC10: {r['jlac10']}")
+        jlac10_status = r.get("jlac10_status", "valid_15")
+        if jlac10_status in ("valid_15", "valid_17"):
+            lines.append(f"      JLAC10: {r['jlac10']}")
+        elif jlac10_status == "empty":
+            lines.append("      JLAC10: (未設定)")
+        else:
+            lines.append(f"      JLAC10: [不正] {r['jlac10']}")
         lines.append(f"      分析物: {r['analyte_code']}")
 
         dec = r.get("decoded", {})

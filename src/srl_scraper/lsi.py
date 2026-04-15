@@ -27,6 +27,7 @@ from .scraper import (
     _clean_text,
     _read_cache,
     _write_cache,
+    classify_jlac10,
 )
 
 logger = logging.getLogger(__name__)
@@ -201,14 +202,18 @@ def scrape_list_page(
     return items
 
 
-def fetch_jlac10(url: str, session: requests.Session, cache_dir: Path | None, cache_hours: float) -> tuple[str, bool]:
-    """詳細ページから JLAC10 を取得"""
+def fetch_jlac10(url: str, session: requests.Session, cache_dir: Path | None, cache_hours: float) -> tuple[str, str, bool]:
+    """詳細ページから JLAC10 を取得
+
+    Returns: (jlac10, jlac10_status, from_cache)
+    """
     html, from_cache = _fetch(url, session, cache_dir, cache_hours)
     soup = BeautifulSoup(html, "lxml")
     p = soup.find("p", class_="text-jlac10")
     jlac10_raw = p.get_text(strip=True) if p else ""
     jlac10 = jlac10_raw.replace("-", "")
-    return jlac10, from_cache
+    jlac10_status = classify_jlac10(jlac10)
+    return jlac10, jlac10_status, from_cache
 
 
 def scrape_all(
@@ -256,14 +261,14 @@ def scrape_all(
     detail_urls = {item["detail_url"] for item in all_items_raw if item["detail_url"]}
     logger.info("LSI: 詳細ページ %d件からJLAC10を取得開始", len(detail_urls))
 
-    jlac10_map: dict[str, str] = {}
+    jlac10_map: dict[str, tuple[str, str]] = {}  # url -> (jlac10, jlac10_status)
     errors = []
     stats = {"fetched": 0, "cached": 0}
 
     for i, url in enumerate(sorted(detail_urls)):
         try:
-            jlac10, from_cache = fetch_jlac10(url, session, cache_dir, cache_max_age_hours)
-            jlac10_map[url] = jlac10
+            jlac10, jlac10_status, from_cache = fetch_jlac10(url, session, cache_dir, cache_max_age_hours)
+            jlac10_map[url] = (jlac10, jlac10_status)
             if from_cache:
                 stats["cached"] += 1
             else:
@@ -280,11 +285,14 @@ def scrape_all(
     # JLAC10をマージ
     all_items = []
     for item in all_items_raw:
-        jlac10 = jlac10_map.get(item["detail_url"], "")
-        if not jlac10:
-            continue
+        jlac10_entry = jlac10_map.get(item["detail_url"])
+        if jlac10_entry is None:
+            jlac10, jlac10_status = "", "empty"
+        else:
+            jlac10, jlac10_status = jlac10_entry
         all_items.append({
             "jlac10": jlac10,
+            "jlac10_status": jlac10_status,
             "item_name": item["item_name"],
             "material": item["material"],
             "method": item["method"],

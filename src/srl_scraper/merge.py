@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -41,15 +42,38 @@ def merge_all(output_dir: Path | None = None) -> dict:
 
     lookup = load_jlac10_lookup(output_dir)
 
-    # JLAC10をキーに統合
+    # JLAC10をキーに統合（valid_15 / valid_17 のみ）
     merged: dict[str, dict] = {}
+    # JLAC10なし項目（empty / invalid）
+    items_no_jlac: list[dict] = []
 
     for source_key, data in sources.items():
         if data is None:
             continue
         for item in data["items"]:
             jlac10 = item.get("jlac10", "")
-            if not jlac10:
+            jlac10_status = item.get("jlac10_status", "")
+
+            # jlac10_status が未設定の場合（後方互換）、コードから判定
+            if not jlac10_status:
+                if not jlac10:
+                    jlac10_status = "empty"
+                elif re.match(r"^[0-9A-Za-z]{15}$", jlac10):
+                    jlac10_status = "valid_15"
+                elif re.match(r"^[0-9A-Za-z]{16,17}$", jlac10):
+                    jlac10_status = "valid_17"
+                else:
+                    jlac10_status = "invalid"
+
+            # empty / invalid → JLAC10なしリストへ
+            if jlac10_status in ("empty", "invalid"):
+                items_no_jlac.append({
+                    "item_name": item.get("item_name", ""),
+                    "source": source_key,
+                    "detail_url": item.get("detail_url", ""),
+                    "jlac10_raw": jlac10,
+                    "jlac10_status": jlac10_status,
+                })
                 continue
 
             if jlac10 not in merged:
@@ -59,6 +83,7 @@ def merge_all(output_dir: Path | None = None) -> dict:
 
                 merged[jlac10] = {
                     "jlac10": jlac10,
+                    "jlac10_status": jlac10_status,
                     "analyte_code": analyte_code,
                     "jlac10_decoded": decoded,
                     "sources": {},
@@ -81,6 +106,11 @@ def merge_all(output_dir: Path | None = None) -> dict:
             "merged_at": now.isoformat(),
             "sources_available": available,
             "total_unique_jlac10": len(merged),
+            "total_items_no_jlac": len(items_no_jlac),
+            "items_no_jlac_by_status": {
+                "empty": sum(1 for i in items_no_jlac if i["jlac10_status"] == "empty"),
+                "invalid": sum(1 for i in items_no_jlac if i["jlac10_status"] == "invalid"),
+            },
             "jlac10_master_available": bool(lookup),
             "by_source_count": {
                 "srl_only": sum(1 for v in merged.values() if set(v["sources"]) == {"srl"}),
@@ -91,6 +121,7 @@ def merge_all(output_dir: Path | None = None) -> dict:
             },
         },
         "items": sorted(merged.values(), key=lambda x: x["jlac10"]),
+        "items_no_jlac": items_no_jlac,
     }
 
     filepath = output_dir / "merged_jlac10.json"
