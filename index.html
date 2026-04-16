@@ -923,27 +923,78 @@ function toggleErrorInput(mode) {
   document.getElementById("errTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
 }
 
+// HL7v2 OBX セグメントからコード+名称を抽出
+function parseHL7Segments(text) {
+  var rows = [];
+  var lines = text.split("\n");
+  for (var line of lines) {
+    line = line.trim();
+    if (!line) continue;
+    // OBX|1|NM|12345^TP^JC10||7.2|g/dL|...
+    if (line.startsWith("OBX|")) {
+      var fields = line.split("|");
+      if (fields.length >= 4) {
+        var obx3 = fields[3] || "";
+        var components = obx3.split("^");
+        var code = components[0] || "";
+        var name = components[1] || "";
+        var value = fields.length >= 6 ? fields[5] : "";
+        var unit = fields.length >= 7 ? fields[6] : "";
+        if (code || name) {
+          rows.push({ code: code, name: name, value: value, unit: unit });
+        }
+      }
+    }
+    // OBR|1||12345^検査名^... → オーダー情報（参考）
+    // MSH は無視
+  }
+  return rows;
+}
+
+// フォーマット自動検知
+function detectErrorFormat(text) {
+  var lines = text.split("\n");
+  for (var line of lines) {
+    if (line.trim().startsWith("MSH|") || line.trim().startsWith("OBX|") || line.trim().startsWith("OBR|")) {
+      return "hl7";
+    }
+  }
+  if (lines[0] && lines[0].includes("\t")) return "tsv";
+  if (lines[0] && lines[0].includes(",") && lines[0].split(",").length >= 3) return "csv";
+  return "simple";
+}
+
 function parseErrorRows(callback) {
   if (errorInputMode === "paste") {
-    // テキストペースト入力
     var text = document.getElementById("errorPasteText").value.trim();
     if (!text) { showToast("テキストを貼り付けてください"); return; }
-    var ccIdx = parseInt(document.getElementById("pasteColCode").value);
-    var cnIdx = parseInt(document.getElementById("pasteColName").value);
-    if (isNaN(cnIdx)) cnIdx = 0;
-    if (isNaN(ccIdx)) ccIdx = -1;
-    var lines = text.split("\n");
+
+    var format = detectErrorFormat(text);
     var rows = [];
-    for (var line of lines) {
-      var parts = line.includes("\t") ? line.split("\t") : line.split(",");
-      if (parts.length === 1 && ccIdx < 0) {
-        // 1列のみ → 項目名として扱う
-        rows.push({ code: "", name: parts[0].trim() });
-      } else {
-        rows.push({
-          code: ccIdx >= 0 && parts[ccIdx] ? parts[ccIdx].trim() : "",
-          name: cnIdx >= 0 && parts[cnIdx] ? parts[cnIdx].trim() : ""
-        });
+
+    if (format === "hl7") {
+      // HL7v2 OBXセグメント解析
+      rows = parseHL7Segments(text);
+      showToast("HL7v2 format detected: " + rows.length + " OBX segments");
+    } else {
+      // TSV / CSV / 単一列
+      var ccIdx = parseInt(document.getElementById("pasteColCode").value);
+      var cnIdx = parseInt(document.getElementById("pasteColName").value);
+      if (isNaN(cnIdx)) cnIdx = 0;
+      if (isNaN(ccIdx)) ccIdx = -1;
+      var lines = text.split("\n");
+      for (var line of lines) {
+        line = line.trim();
+        if (!line) continue;
+        var parts = format === "tsv" ? line.split("\t") : format === "csv" ? line.split(",") : [line];
+        if (parts.length === 1 && ccIdx < 0) {
+          rows.push({ code: "", name: parts[0].trim() });
+        } else {
+          rows.push({
+            code: ccIdx >= 0 && parts[ccIdx] ? parts[ccIdx].trim() : "",
+            name: cnIdx >= 0 && parts[cnIdx] ? parts[cnIdx].trim() : ""
+          });
+        }
       }
     }
     callback(rows);

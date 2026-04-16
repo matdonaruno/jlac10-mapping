@@ -129,3 +129,93 @@ def merge_all(output_dir: Path | None = None) -> dict:
     logger.info("統合完了: %s (%d件)", filepath, len(merged))
 
     return result
+
+
+def apply_mapping_results(
+    merged_path: Path,
+    mapping_items: list[dict],
+    hospital: str = "",
+    confirmed_only: bool = True,
+) -> dict:
+    """確定済みマッピング結果をmerged_jlac10.jsonに追加
+
+    Args:
+        merged_path: merged_jlac10.json のパス
+        mapping_items: マッピング結果リスト。各要素に
+            item_name, jlac10, status(auto/confirmed/candidate/manual),
+            matched_name 等を含む
+        hospital: 病院名（匿名化推奨）
+        confirmed_only: Trueの場合 auto + confirmed のみ適用
+
+    Returns:
+        {"added": N, "skipped": M, "new_entries": K}
+    """
+    data = json.loads(merged_path.read_text(encoding="utf-8"))
+    items_by_jlac = {it["jlac10"]: it for it in data.get("items", [])}
+
+    lookup_path = merged_path.parent / "jlac10_lookup.json"
+    lookup = {}
+    if lookup_path.exists():
+        lookup = json.loads(lookup_path.read_text(encoding="utf-8"))
+
+    added = 0
+    skipped = 0
+    new_entries = 0
+
+    for item in mapping_items:
+        status = item.get("status", "")
+        if confirmed_only and status not in ("auto", "confirmed"):
+            skipped += 1
+            continue
+
+        jlac10 = item.get("jlac10", "").replace("-", "")
+        item_name = item.get("item_name", "")
+        matched_name = item.get("matched_name", "")
+
+        if not jlac10 or not re.match(r"^[0-9A-Za-z]{15,17}$", jlac10):
+            skipped += 1
+            continue
+
+        if jlac10 in items_by_jlac:
+            entry = items_by_jlac[jlac10]
+        else:
+            decoded = decode_jlac10(jlac10, lookup) if lookup else {"raw": jlac10, "valid": False}
+            entry = {
+                "jlac10": jlac10,
+                "jlac10_status": "valid_15" if len(jlac10) == 15 else "valid_17",
+                "analyte_code": jlac10[:5],
+                "jlac10_decoded": decoded,
+                "sources": {},
+                "mapping_history": [],
+            }
+            items_by_jlac[jlac10] = entry
+            data["items"].append(entry)
+            new_entries += 1
+
+        if "mapping_history" not in entry:
+            entry["mapping_history"] = []
+
+        dup = any(
+            h.get("hospital") == hospital and h.get("item_name") == item_name
+            for h in entry["mapping_history"]
+        )
+        if not dup:
+            entry["mapping_history"].append({
+                "hospital": hospital,
+                "item_name": item_name,
+                "abbreviation": item.get("abbreviation", ""),
+                "jlac10_standard_name": matched_name,
+            })
+            added += 1
+        else:
+            skipped += 1
+
+    data["items"].sort(key=lambda x: x.get("jlac10", ""))
+    data["metadata"]["total_unique_jlac10"] = len(items_by_jlac)
+    data["metadata"]["last_applied"] = datetime.now(timezone.utc).isoformat()
+
+    merged_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    result = {"added": added, "skipped": skipped, "new_entries": new_entries}
+    logger.info("DB還元完了: 追加%d件, スキップ%d件, 新規エントリ%d件", added, skipped, new_entries)
+    return result

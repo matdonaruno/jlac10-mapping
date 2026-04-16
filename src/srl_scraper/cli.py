@@ -18,6 +18,9 @@ from .search import build_index, format_results
 from .reagent import build_reagent_db, add_pmda_to_db
 from .sop_parser import parse_sop, parse_sop_directory
 from .converter import convert_tabular
+from .mapper import bulk_map, export_mapping_excel, export_mapping_json
+from .merge import apply_mapping_results
+from .ncda_checker import batch_check as ncda_batch_check, export_check_excel
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -243,6 +246,216 @@ def cmd_convert(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
+# Map (院内項目 → JLAC10 マッピング)
+# ---------------------------------------------------------------------------
+
+def cmd_map(args: argparse.Namespace) -> int:
+    filepath = Path(args.input)
+
+    # converter の convert_tabular で入力を読む（item_name列のみ必須）
+    column_map: dict[str, str] = {"item_name": args.col_name}
+    # jlac10列は任意（ダミー列としてitem_nameと同じにしておく）
+    if args.col_jlac10:
+        column_map["jlac10"] = args.col_jlac10
+    else:
+        column_map["jlac10"] = args.col_name  # ダミー: convert_tabularの必須要件を満たす
+
+    try:
+        converted = convert_tabular(
+            filepath=filepath,
+            column_map=column_map,
+            hospital=args.hospital,
+            sheet_name=args.sheet,
+            skip_rows=args.skip_rows,
+            output_path=filepath.with_suffix(".tmp.json"),
+        )
+    except (FileNotFoundError, ValueError) as e:
+        print(f"エラー: {e}", file=sys.stderr)
+        return 1
+    finally:
+        # 一時JSONを削除
+        tmp = filepath.with_suffix(".tmp.json")
+        if tmp.exists():
+            tmp.unlink()
+
+    items = converted["items"]
+    if not items:
+        print("エラー: 入力データが空です", file=sys.stderr)
+        return 1
+
+    # 検索インデックス構築
+    data_dir = Path(args.data_dir)
+    try:
+        index = build_index(data_dir)
+    except FileNotFoundError as e:
+        print(f"エラー: {e}", file=sys.stderr)
+        return 1
+
+    print(f"インデックス構築完了: {len(index.entries)}件")
+    print(f"入力項目数: {len(items)}件")
+
+    # 一括マッピング実行
+    results = bulk_map(
+        items=items,
+        index=index,
+        auto_threshold=args.threshold_auto,
+        candidate_threshold=args.threshold_candidate,
+        max_candidates=args.max_candidates,
+    )
+
+    # Excel出力
+    output_path = Path(args.output)
+    export_mapping_excel(results, output_path)
+
+    # JSON出力
+    json_path = output_path.with_suffix(".json")
+    export_mapping_json(results, json_path)
+
+    meta = results["metadata"]
+    print(f"\nマッピング完了: {meta['total']}件")
+    print(f"  自動マッピング (auto):     {meta['auto']}件")
+    print(f"  候補あり (candidate):      {meta['candidate']}件")
+    print(f"  手動確認必要 (manual):     {meta['manual']}件")
+    print(f"  Excel出力: {output_path}")
+    print(f"  JSON出力:  {json_path}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# DB還元
+# ---------------------------------------------------------------------------
+
+def cmd_apply_mapping(args: argparse.Namespace) -> int:
+    """確定済みマッピング結果をDBに還元"""
+    input_path = Path(args.input)
+    data_dir = Path(args.data_dir)
+    merged_path = data_dir / "merged_jlac10.json"
+    hospital = args.hospital or "Unknown"
+
+    if not merged_path.exists():
+        print(f"merged_jlac10.json が見つかりません: {merged_path}", file=sys.stderr)
+        return 1
+
+    # 入力がJSON
+    if input_path.suffix.lower() == ".json":
+        data = json.loads(input_path.read_text(encoding="utf-8"))
+        items = data.get("results", data.get("items", []))
+    # 入力がExcel（マッピング結果Excel）
+    else:
+        import openpyxl
+        wb = openpyxl.load_workbook(str(input_path), read_only=True)
+        ws = wb[wb.sheetnames[0]]
+        items = []
+        headers = None
+        for row in ws.iter_rows(values_only=True):
+            if headers is None:
+                headers = [str(c or "").lower() for c in row]
+                continue
+            row_dict = dict(zip(headers, row))
+            status = str(row_dict.get("status", "")).lower()
+            if status in ("auto", "confirmed", "ok"):
+                items.append({
+                    "status": "confirmed",
+                    "item_name": str(row_dict.get("item name", row_dict.get("item_name", ""))),
+                    "jlac10": str(row_dict.get("jlac10", row_dict.get("matched jlac10", ""))),
+                    "matched_name": str(row_dict.get("matched name", row_dict.get("matched_name", ""))),
+                })
+        wb.close()
+
+    result = apply_mapping_results(
+        merged_path=merged_path,
+        mapping_items=items,
+        hospital=hospital,
+        confirmed_only=args.confirmed_only,
+    )
+
+    print(f"\nDB還元完了:")
+    print(f"  追加: {result['added']}件")
+    print(f"  スキップ: {result['skipped']}件")
+    print(f"  新規エントリ: {result['new_entries']}件")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# NCDA差異チェック
+# ---------------------------------------------------------------------------
+
+def cmd_check_ncda(args: argparse.Namespace) -> int:
+    """外注先JLAC10 vs NCDA 差異チェック"""
+    from .converter import _read_xlsx, _read_csv, _resolve_column_index
+    from .merge import load_jlac10_lookup
+
+    filepath = Path(args.input)
+    if not filepath.exists():
+        print(f"ファイルが見つかりません: {filepath}", file=sys.stderr)
+        return 1
+
+    # データ読み込み
+    suffix = filepath.suffix.lower()
+    if suffix == ".xlsx":
+        data_rows, header_row = _read_xlsx(filepath, args.sheet, args.skip_rows)
+    elif suffix == ".csv":
+        data_rows, header_row = _read_csv(filepath, args.skip_rows)
+    else:
+        print(f"未対応のファイル形式: {suffix} (.xlsx / .csv)", file=sys.stderr)
+        return 1
+
+    # 列指定を解決
+    outsource_col = _resolve_column_index(args.outsource_col, header_row)
+    ncda_col = _resolve_column_index(args.ncda_col, header_row)
+    name_col = _resolve_column_index(args.name_col, header_row) if args.name_col else None
+
+    # lookup 読み込み
+    data_dir = Path(args.data_dir)
+    lookup = load_jlac10_lookup(data_dir)
+    if not lookup:
+        print(
+            "警告: jlac10_lookup.json が見つかりません。"
+            "コード名称は表示されません。",
+            file=sys.stderr,
+        )
+
+    # チェック用データ構築
+    items: list[dict] = []
+    for row in data_rows:
+        if not row or all(cell.strip() == "" for cell in row):
+            continue
+        outsource = row[outsource_col].strip() if outsource_col < len(row) else ""
+        ncda = row[ncda_col].strip() if ncda_col < len(row) else ""
+        item_name = ""
+        if name_col is not None and name_col < len(row):
+            item_name = row[name_col].strip()
+
+        if not outsource and not ncda:
+            continue
+
+        items.append({
+            "outsource_jlac10": outsource,
+            "ncda_jlac10": ncda,
+            "item_name": item_name,
+        })
+
+    if not items:
+        print("エラー: チェック対象データが空です", file=sys.stderr)
+        return 1
+
+    # 一括チェック実行
+    results = ncda_batch_check(items, lookup)
+    meta = results["metadata"]
+
+    # Excel出力
+    output_path = Path(args.output)
+    export_check_excel(results, output_path)
+
+    print(f"\nNCDA差異チェック完了: {meta['total']}件")
+    print(f"  OK:      {meta['ok']}件")
+    print(f"  Warning: {meta['warnings']}件")
+    print(f"  Error:   {meta['errors']}件")
+    print(f"  出力: {output_path}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # 統合・差分・チェック・一覧
 # ---------------------------------------------------------------------------
 
@@ -408,6 +621,14 @@ def main() -> None:
     p_search.add_argument("-o", "--output", default="data", help="データディレクトリ")
     p_search.add_argument("-n", "--max", type=int, default=10, help="最大結果数 (default: 10)")
 
+    # apply-mapping
+    p_apply = sub.add_parser("apply-mapping", help="マッピング結果をDBに還元")
+    p_apply.add_argument("input", help="マッピング結果 (.json / .xlsx)")
+    p_apply.add_argument("-d", "--data-dir", default="data", help="データディレクトリ")
+    p_apply.add_argument("--hospital", default="", help="病院名")
+    p_apply.add_argument("--confirmed-only", action="store_true", default=True, help="確定分のみ適用（デフォルト）")
+    p_apply.add_argument("--all", dest="confirmed_only", action="store_false", help="全項目を適用")
+
     # merge
     p_merge = sub.add_parser("merge", help="3社のデータをJLAC10で統合")
     p_merge.add_argument("-o", "--output", default="data", help="出力ディレクトリ")
@@ -434,6 +655,31 @@ def main() -> None:
     p_convert.add_argument("--sheet", default=None, help="Excelシート名 (省略で最初のシート)")
     p_convert.add_argument("--skip-rows", type=int, default=1, help="スキップするヘッダ行数 (default: 1)")
 
+    # map
+    p_map = sub.add_parser("map", help="院内検査項目をJLAC10にマッピング")
+    p_map.add_argument("input", help="入力ファイル (.xlsx / .csv)")
+    p_map.add_argument("--col-name", required=True, help="検査項目名の列 (A, 1, またはヘッダ名)")
+    p_map.add_argument("--col-jlac10", default=None, help="既存JLAC10の列 (参考用)")
+    p_map.add_argument("-o", "--output", default="mapping_result.xlsx", help="出力Excelパス (default: mapping_result.xlsx)")
+    p_map.add_argument("-d", "--data-dir", default="data", help="データディレクトリ (default: data)")
+    p_map.add_argument("--hospital", default="", help="病院名")
+    p_map.add_argument("--sheet", default=None, help="Excelシート名 (省略で最初のシート)")
+    p_map.add_argument("--skip-rows", type=int, default=1, help="スキップするヘッダ行数 (default: 1)")
+    p_map.add_argument("--threshold-auto", type=float, default=90.0, help="自動マッピング閾値 (default: 90)")
+    p_map.add_argument("--threshold-candidate", type=float, default=50.0, help="候補閾値 (default: 50)")
+    p_map.add_argument("--max-candidates", type=int, default=5, help="候補最大件数 (default: 5)")
+
+    # check-ncda
+    p_ncda = sub.add_parser("check-ncda", help="外注先JLAC10 vs NCDA 差異チェック")
+    p_ncda.add_argument("input", help="入力ファイル (.xlsx / .csv)")
+    p_ncda.add_argument("--outsource-col", required=True, help="外注先JLAC10の列 (A, 1, またはヘッダ名)")
+    p_ncda.add_argument("--ncda-col", required=True, help="NCDA JLAC10の列 (A, 1, またはヘッダ名)")
+    p_ncda.add_argument("--name-col", default=None, help="検査項目名の列 (A, 1, またはヘッダ名)")
+    p_ncda.add_argument("-o", "--output", default="ncda_report.xlsx", help="出力Excelパス (default: ncda_report.xlsx)")
+    p_ncda.add_argument("-d", "--data-dir", default="data", help="データディレクトリ (default: data)")
+    p_ncda.add_argument("--sheet", default=None, help="Excelシート名 (省略で最初のシート)")
+    p_ncda.add_argument("--skip-rows", type=int, default=1, help="スキップするヘッダ行数 (default: 1)")
+
     # list
     sub.add_parser("list", help="SRLカテゴリ一覧")
 
@@ -452,10 +698,13 @@ def main() -> None:
         "reagent": cmd_reagent,
         "sop": cmd_sop,
         "search": cmd_search,
+        "apply-mapping": cmd_apply_mapping,
         "merge": cmd_merge,
         "check": cmd_check,
         "diff": cmd_diff,
         "convert": cmd_convert,
+        "map": cmd_map,
+        "check-ncda": cmd_check_ncda,
         "list": cmd_list,
     }
     sys.exit(commands[args.command](args))
