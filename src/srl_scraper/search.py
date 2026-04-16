@@ -11,9 +11,12 @@
 """
 
 import json
+import logging
 import re
 import unicodedata
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 def _normalize(text: str) -> str:
@@ -154,7 +157,14 @@ class SearchIndex:
                 self._analyte_map[analyte_code] = []
             self._analyte_map[analyte_code].append(idx)
 
+        total_names = sum(len(e["names"]) for e in self.entries)
+        logger.debug(
+            "インデックス構築(merged items): エントリ数=%d, 名称総数=%d",
+            len(self.entries), total_names,
+        )
+
         # JLAC10なし項目もインデックスに追加（検索可能にする）
+        no_jlac_count = 0
         for item in merged.get("items_no_jlac", []):
             item_name = item.get("item_name", "")
             if not item_name:
@@ -180,6 +190,14 @@ class SearchIndex:
             }
 
             self.entries.append(entry)
+            no_jlac_count += 1
+
+        logger.debug("items_no_jlac からの追加: %d 件", no_jlac_count)
+        total_names_final = sum(len(e["names"]) for e in self.entries)
+        logger.debug(
+            "インデックス構築完了: 総エントリ数=%d, 名称総数=%d",
+            len(self.entries), total_names_final,
+        )
 
     def search(self, query: str, max_results: int = 20) -> list[dict]:
         """あいまい検索を実行
@@ -218,7 +236,16 @@ class SearchIndex:
                 })
 
         results.sort(key=lambda x: (-x["score"], x["jlac10"]))
-        return results[:max_results]
+        truncated = results[:max_results]
+        if truncated:
+            top = truncated[0]
+            logger.debug(
+                "Search '%s' → %d hits (top: score=%.1f, jlac10=%s)",
+                query, len(results), top["score"], top["jlac10"],
+            )
+        else:
+            logger.debug("Search '%s' → 0 hits", query)
+        return truncated
 
     def search_by_analyte(self, analyte_code: str) -> list[dict]:
         """分析物コード(5桁)で検索"""

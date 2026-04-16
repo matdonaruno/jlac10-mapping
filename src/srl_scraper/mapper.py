@@ -31,8 +31,10 @@ def enrich_with_sop(
     一致した SOP の method_summary, reagent を項目に追加。
     """
     if not sop_data:
+        logger.debug("SOP情報なし: スキップ")
         return items
 
+    logger.debug("SOP情報付加開始: %d項目 x %d SOP", len(items), len(sop_data))
     # SOP をインデックス化（正規化済み名称）
     sop_index = []
     for sop in sop_data:
@@ -70,6 +72,8 @@ def enrich_with_sop(
             item["_sop_reagent"] = best_sop["reagent"]
             item["_sop_score"] = best_score
 
+    sop_matched = sum(1 for it in items if "_sop_method" in it)
+    logger.debug("SOP情報付加完了: %d/%d 件にSOP情報付加", sop_matched, len(items))
     return items
 
 
@@ -87,6 +91,7 @@ def adjust_scores_with_method(
         return candidates
 
     sop_norm = _normalize(sop_method)
+    logger.debug("SOPスコア補正開始: sop_method='%s', 候補数=%d", sop_method, len(candidates))
 
     for cand in candidates:
         jlac10 = cand.get("jlac10", "")
@@ -102,9 +107,14 @@ def adjust_scores_with_method(
                 matched = True
                 break
 
+        old_score = cand["score"]
         if matched:
             cand["score"] = min(cand["score"] + 15, 100)
             cand["_method_boost"] = True
+            logger.debug(
+                "  SOPスコア補正: jlac10=%s method_code=%s matched_kw='%s' score=%.1f→%.1f",
+                jlac10, method_code, kw, old_score, cand["score"],
+            )
         else:
             cand["score"] = max(cand["score"] - 5, 0)
 
@@ -150,14 +160,24 @@ def bulk_map(
             }]
         }
     """
+    logger.debug(
+        "マッピング開始: 入力%d件, auto_threshold=%.1f, candidate_threshold=%.1f",
+        len(items), auto_threshold, candidate_threshold,
+    )
+
     # SOP 情報があれば items に付加
     if sop_data:
         items = enrich_with_sop(items, sop_data)
 
     results: list[dict] = []
     counts = {"auto": 0, "candidate": 0, "manual": 0}
+    total = len(items)
 
-    for item in items:
+    # 答え合わせ用カウンタ
+    _verify_total = 0
+    _verify_ok = 0
+
+    for idx, item in enumerate(items, start=1):
         item_name = item.get("item_name", "").strip()
         if not item_name:
             results.append({
@@ -212,21 +232,49 @@ def bulk_map(
 
         counts[status] += 1
 
+        mapped_jlac10 = best_match["jlac10"] if best_match else ""
+        mapped_name = best_match["matched_name"] if best_match else ""
+        mapped_score = best_match["score"] if best_match else 0.0
+
+        logger.debug(
+            "Map[%d/%d] '%s' → status=%s, score=%.1f, jlac10=%s, matched='%s'",
+            idx, total, item_name, status, mapped_score, mapped_jlac10, mapped_name,
+        )
+
+        # 答え合わせ: 入力に jlac10 フィールド（正解）がある場合
+        original_jlac10 = item.get("jlac10", "")
+        if original_jlac10:
+            _verify_total += 1
+            match_ok = original_jlac10 == mapped_jlac10
+            if match_ok:
+                _verify_ok += 1
+            logger.debug(
+                "  VERIFY: original=%s, mapped=%s, match=%s",
+                original_jlac10, mapped_jlac10, "OK" if match_ok else "MISMATCH",
+            )
+
         results.append({
             "item_name": item_name,
             "hospital": item.get("hospital", ""),
             "abbreviation": item.get("abbreviation", ""),
-            "original_jlac10": item.get("jlac10", ""),
+            "original_jlac10": original_jlac10,
             "status": status,
             "best_match": best_match,
             "candidates": candidates,
         })
-
     total = len(results)
     logger.info(
         "マッピング完了: %d件 (auto=%d, candidate=%d, manual=%d)",
         total, counts["auto"], counts["candidate"], counts["manual"],
     )
+    if _verify_total > 0:
+        accuracy = _verify_ok / _verify_total * 100
+        logger.debug(
+            "答え合わせ: %d/%d 正解 (正解率=%.1f%%)",
+            _verify_ok, _verify_total, accuracy,
+        )
+    else:
+        logger.debug("答え合わせ: 正解データなし (入力itemsにjlac10フィールドがない)")
 
     return {
         "metadata": {

@@ -201,6 +201,10 @@ def batch_check(
         diffs: list[dict] = []
         result_id_check: dict = {}
 
+        logger.debug(
+            "チェック: '%s' outsource=%s(%s) ncda=%s(%s)",
+            item_name, outsource, outsource_status, ncda, ncda_status,
+        )
         if outsource_status in ("valid_15", "valid_17") and ncda_status in ("valid_15", "valid_17"):
             diffs = check_outsource_vs_ncda(outsource, ncda, lookup)
             if ncda_status == "valid_17":
@@ -241,6 +245,12 @@ def batch_check(
             status = "ok"
             counts["ok"] += 1
 
+        if diffs:
+            diff_fields = [d["field"] for d in diffs]
+            logger.debug("  差異あり: %s → fields=%s", item_name, diff_fields)
+        else:
+            logger.debug("  差異なし: %s", item_name)
+
         results.append({
             "item_name": item_name,
             "outsource": outsource,
@@ -251,6 +261,11 @@ def batch_check(
             "result_id_check": result_id_check,
             "status": status,
         })
+
+    logger.debug(
+        "バッチチェック完了: total=%d, ok=%d, warning=%d, error=%d",
+        len(results), counts["ok"], counts["warnings"], counts["errors"],
+    )
 
     return {
         "metadata": {

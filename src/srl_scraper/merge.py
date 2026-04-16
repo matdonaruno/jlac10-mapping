@@ -150,8 +150,13 @@ def apply_mapping_results(
     Returns:
         {"added": N, "skipped": M, "new_entries": K}
     """
+    logger.debug(
+        "apply_mapping_results開始: merged_path=%s, 入力%d件, confirmed_only=%s",
+        merged_path.name, len(mapping_items), confirmed_only,
+    )
     data = json.loads(merged_path.read_text(encoding="utf-8"))
     items_by_jlac = {it["jlac10"]: it for it in data.get("items", [])}
+    logger.debug("既存エントリ数: %d", len(items_by_jlac))
 
     lookup_path = merged_path.parent / "jlac10_lookup.json"
     lookup = {}
@@ -165,6 +170,7 @@ def apply_mapping_results(
     for item in mapping_items:
         status = item.get("status", "")
         if confirmed_only and status not in ("auto", "confirmed"):
+            logger.debug("スキップ (status=%s): '%s'", status, item.get("item_name", ""))
             skipped += 1
             continue
 
@@ -173,10 +179,12 @@ def apply_mapping_results(
         matched_name = item.get("matched_name", "")
 
         if not jlac10 or not re.match(r"^[0-9A-Za-z]{15,17}$", jlac10):
+            logger.debug("スキップ (JLAC10不正='%s'): '%s'", jlac10, item_name)
             skipped += 1
             continue
 
         if jlac10 in items_by_jlac:
+            logger.debug("既存エントリに追加: jlac10=%s, item='%s'", jlac10, item_name)
             entry = items_by_jlac[jlac10]
         else:
             decoded = decode_jlac10(jlac10, lookup) if lookup else {"raw": jlac10, "valid": False}
@@ -191,6 +199,7 @@ def apply_mapping_results(
             items_by_jlac[jlac10] = entry
             data["items"].append(entry)
             new_entries += 1
+            logger.debug("新規エントリ作成: jlac10=%s, item='%s'", jlac10, item_name)
 
         if "mapping_history" not in entry:
             entry["mapping_history"] = []
@@ -200,6 +209,7 @@ def apply_mapping_results(
             for h in entry["mapping_history"]
         )
         if not dup:
+            logger.debug("マッピング履歴追加: jlac10=%s, item='%s'", jlac10, item_name)
             entry["mapping_history"].append({
                 "hospital": hospital,
                 "item_name": item_name,
@@ -208,6 +218,7 @@ def apply_mapping_results(
             })
             added += 1
         else:
+            logger.debug("重複スキップ: jlac10=%s, item='%s', hospital='%s'", jlac10, item_name, hospital)
             skipped += 1
 
     data["items"].sort(key=lambda x: x.get("jlac10", ""))

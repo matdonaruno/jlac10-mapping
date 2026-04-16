@@ -143,6 +143,7 @@ def _read_csv(
             with filepath.open("r", encoding=encoding, newline="") as f:
                 reader = csv.reader(f)
                 all_rows = [row for row in reader]
+            logger.debug("CSVエンコーディング検出: %s (%d行)", encoding, len(all_rows))
             break
         except UnicodeDecodeError:
             continue
@@ -195,6 +196,7 @@ def convert_tabular(
         raise FileNotFoundError(f"ファイルが見つかりません: {filepath}")
 
     suffix = filepath.suffix.lower()
+    logger.debug("ファイル読み込み開始: %s (形式: %s)", filepath.name, suffix)
     if suffix == ".xlsx":
         data_rows, header_row = _read_xlsx(filepath, sheet_name, skip_rows)
     elif suffix == ".csv":
@@ -203,6 +205,11 @@ def convert_tabular(
         raise ValueError(
             f"未対応のファイル形式: {suffix} (.xlsx または .csv に対応)"
         )
+    logger.debug(
+        "ファイル読み込み完了: %s (データ行数: %d, ヘッダ: %s)",
+        filepath.name, len(data_rows),
+        header_row[:5] if header_row else None,
+    )
 
     # 列指定を解決
     required_fields = {"item_name", "jlac10"}
@@ -219,6 +226,7 @@ def convert_tabular(
             logger.warning("不明なフィールド '%s' は無視します", field)
             continue
         resolved[field] = _resolve_column_index(spec, header_row)
+        logger.debug("列解決: %s = 列%d (指定: '%s')", field, resolved[field], spec)
 
     # データ変換
     items: list[dict] = []
@@ -227,12 +235,14 @@ def convert_tabular(
     for row_num, row in enumerate(data_rows, start=skip_rows + 1):
         # 空行スキップ
         if not row or all(cell.strip() == "" for cell in row):
+            logger.debug("空行スキップ: 行%d", row_num)
             skipped += 1
             continue
 
         # item_name が空なら空行扱い
         item_col = resolved["item_name"]
         if item_col >= len(row) or row[item_col].strip() == "":
+            logger.debug("空行スキップ (item_name空): 行%d", row_num)
             skipped += 1
             continue
 
@@ -242,6 +252,8 @@ def convert_tabular(
         jlac10_col = resolved["jlac10"]
         raw_jlac10 = row[jlac10_col].strip() if jlac10_col < len(row) else ""
         jlac10 = raw_jlac10.replace("-", "")
+        if raw_jlac10 != jlac10:
+            logger.debug("JLAC10正規化: 行%d '%s' → '%s'", row_num, raw_jlac10, jlac10)
         jlac10_status = classify_jlac10(jlac10)
 
         # analyte_code: JLAC10の先頭5桁
@@ -258,6 +270,11 @@ def convert_tabular(
             col = resolved["jlac10_standard_name"]
             jlac10_standard_name = row[col].strip() if col < len(row) else ""
 
+        logger.debug(
+            "Row %d: item_name='%s' jlac10='%s' status=%s",
+            row_num, item_name, jlac10, jlac10_status,
+        )
+
         items.append({
             "hospital": hospital,
             "item_name": item_name,
@@ -267,6 +284,16 @@ def convert_tabular(
             "analyte_code": analyte_code,
             "jlac10_standard_name": jlac10_standard_name,
         })
+
+    # JLAC10ステータス内訳
+    _status_counts: dict[str, int] = {}
+    for it in items:
+        s = it["jlac10_status"]
+        _status_counts[s] = _status_counts.get(s, 0) + 1
+    logger.debug(
+        "変換サマリー: %s",
+        ", ".join(f"{k}={v}" for k, v in sorted(_status_counts.items())),
+    )
 
     logger.info(
         "変換完了: %d件 (空行スキップ: %d件, ソース: %s)",

@@ -68,6 +68,11 @@ def build_method_keyword_map(lookup_path: Path) -> dict[str, dict]:
             "keywords": list(keywords),
         }
 
+    total_keywords = sum(len(v["keywords"]) for v in keyword_map.values())
+    logger.debug(
+        "キーワード辞書構築: %dコード, キーワード総数=%d",
+        len(keyword_map), total_keywords,
+    )
     logger.info("測定法キーワード辞書: %d コード", len(keyword_map))
     return keyword_map
 
@@ -102,8 +107,10 @@ def match_method_code(
         スコア順の候補リスト [{code, name, score, matched_keyword}, ...]
     """
     if not text or not keyword_map:
+        logger.debug("match_method_code: 入力テキストまたはkeyword_mapが空")
         return []
 
+    logger.debug("match_method_code: 入力='%s'", text[:50])
     text_lower = text.lower()
     text_norm = re.sub(r"\s+", "", text_lower)
 
@@ -138,6 +145,14 @@ def match_method_code(
             })
 
     results.sort(key=lambda x: -x["score"])
+    if results:
+        for r in results:
+            logger.debug(
+                "  マッチ: code=%s name='%s' score=%.1f keyword='%s'",
+                r["code"], r["name"], r["score"], r["matched_keyword"],
+            )
+    else:
+        logger.debug("  マッチなし: '%s'", text[:50])
     return results
 
 
