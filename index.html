@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLAC10 MAPPER</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/*
+  BROOKLYN INDUSTRIAL COLOR PALETTE
+  --bg-primary:    #1a1a1a   (Charcoal Black)
+  --bg-secondary:  #242424   (Dark Concrete)
+  --bg-card:       #2d2d2d   (Warm Gray)
+  --bg-hover:      #383838   (Steel)
+  --accent:        #d4a853   (Brass/Amber)
+  --accent-hover:  #e8be6a   (Warm Gold)
+  --text-primary:  #e8e4de   (Off White)
+  --text-secondary:#9a9590   (Concrete Gray)
+  --success:       #7ab87a   (Sage Green)
+  --warning:       #d4a853   (Amber)
+  --danger:        #c75c5c   (Brick Red)
+  --info:          #6a9ec7   (Slate Blue)
+  --border:        #404040   (Iron)
+*/
+:root {
+  --bg-primary:#1a1a1a; --bg-secondary:#242424; --bg-card:#2d2d2d;
+  --bg-hover:#383838; --accent:#d4a853; --accent-hover:#e8be6a;
+  --text-primary:#e8e4de; --text-secondary:#9a9590;
+  --success:#7ab87a; --warning:#d4a853; --danger:#c75c5c;
+  --info:#6a9ec7; --border:#404040;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg-primary); color:var(--text-primary); font-family:'Inter',sans-serif; min-height:100vh; }
+code, .mono { font-family:'JetBrains Mono',monospace; }
+
+.container { max-width:1200px; margin:0 auto; padding:16px; }
+
+/* Header */
+header { border-bottom:2px solid var(--accent); padding:20px 0 16px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:baseline; }
+header h1 { font-family:'JetBrains Mono',monospace; font-size:24px; font-weight:700; letter-spacing:2px; color:var(--accent); }
+header .status { font-size:12px; color:var(--text-secondary); font-family:'JetBrains Mono',monospace; }
+
+/* Tabs */
+.tabs { display:flex; gap:2px; margin-bottom:20px; border-bottom:1px solid var(--border); }
+.tab { padding:10px 20px; font-size:13px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  background:transparent; border:none; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
+.tab:hover { color:var(--text-primary); background:var(--bg-hover); }
+.tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+/* Cards */
+.card { background:var(--bg-card); border:1px solid var(--border); padding:24px; margin-bottom:16px; }
+.card h2 { font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase; color:var(--accent); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+
+/* Inputs */
+input[type="text"], input[type="file"] { background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:10px 14px; font-size:14px; width:100%; font-family:'Inter',sans-serif; outline:none; transition:border 0.2s; }
+input[type="text"]:focus { border-color:var(--accent); }
+input[type="file"] { font-size:12px; padding:8px; }
+input::placeholder { color:var(--text-secondary); }
+label { display:block; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); margin-bottom:4px; }
+
+/* Buttons */
+.btn { padding:10px 24px; font-size:13px; font-weight:600; letter-spacing:0.5px; border:none; cursor:pointer; text-transform:uppercase; transition:all 0.2s; }
+.btn-primary { background:var(--accent); color:#1a1a1a; }
+.btn-primary:hover { background:var(--accent-hover); }
+.btn-secondary { background:var(--bg-hover); color:var(--text-primary); border:1px solid var(--border); }
+.btn-secondary:hover { background:#444; }
+.btn-danger { background:var(--danger); color:white; }
+.btn-danger:hover { background:#d46b6b; }
+.btn:disabled { opacity:0.3; cursor:not-allowed; }
+
+/* Grid */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.grid-4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; }
+.flex-row { display:flex; gap:8px; align-items:end; }
+
+/* Results */
+.result-item { background:var(--bg-secondary); border:1px solid var(--border); padding:14px; margin-bottom:8px; transition:border 0.2s; }
+.result-item:hover { border-color:var(--accent); }
+.result-item.high { border-left:3px solid var(--success); }
+.result-item.mid { border-left:3px solid var(--warning); }
+.result-item.low { border-left:3px solid var(--danger); }
+.result-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.result-title { font-weight:600; font-size:15px; }
+.result-score { font-family:'JetBrains Mono',monospace; font-size:12px; padding:2px 8px; background:var(--bg-hover); }
+/* JLAC10 big display row */
+.result-jlac-row { display:flex; align-items:center; gap:12px; margin:8px 0; flex-wrap:wrap; }
+.jlac-big { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700;
+  letter-spacing:1px; background:var(--bg-primary); padding:6px 14px; border:1px solid var(--accent); display:inline-flex; align-items:center; }
+.jlac-part { color:var(--accent); }
+.jlac-sep { color:var(--text-secondary); margin:0 1px; }
+.jlac-missing { color:var(--danger); font-weight:700; animation:blink 1.5s infinite; }
+.jlac-invalid { color:var(--danger); font-size:13px; font-style:italic; }
+.jlac-empty { color:var(--text-secondary); font-size:13px; font-style:italic; background:var(--bg-hover); padding:4px 10px; border:1px dashed var(--border); }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+.analyte-code { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary);
+  background:var(--bg-hover); padding:4px 8px; }
+
+/* Company badges */
+.company-badges { display:flex; gap:4px; }
+.company-badge { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+  padding:4px 10px; letter-spacing:0.5px; }
+.company-srl { background:#1a3a5c; color:#6abeef; border:1px solid #2a5a8c; }
+.company-bml { background:#3a1a3a; color:#d48ae0; border:1px solid #5a2a5a; }
+.company-lsi { background:#1a3a2a; color:#6abe7a; border:1px solid #2a5a3a; }
+
+/* Source detail row (horizontal) */
+.source-detail-row { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+.source-detail { display:flex; align-items:center; gap:6px; background:var(--bg-secondary);
+  padding:6px 10px; border:1px solid var(--border); flex:1; min-width:200px; }
+.company-label { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;
+  padding:2px 8px; flex-shrink:0; }
+.source-item-name { font-size:13px; font-weight:500; color:var(--text-primary); }
+.source-method { font-size:11px; color:var(--text-secondary); margin-left:auto; white-space:nowrap; }
+
+/* History row */
+.history-row { display:flex; gap:4px; margin-top:6px; flex-wrap:wrap; }
+.result-meta { font-size:12px; color:var(--text-secondary); margin-top:4px; }
+/* JLAC10 decode row */
+.jlac-decode-row { display:flex; align-items:center; gap:4px; margin:6px 0; flex-wrap:wrap;
+  background:var(--bg-primary); padding:8px 12px; border:1px solid var(--border); }
+.decode-part { display:inline-flex; flex-direction:column; align-items:center; }
+.decode-label { font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;
+  color:var(--text-secondary); font-family:'JetBrains Mono',monospace; }
+.decode-part > :last-child { font-size:13px; color:var(--text-primary); }
+.decode-sep { color:var(--border); font-size:16px; margin:0 2px; }
+.decode-empty { color:var(--text-secondary); }
+.decode-missing { color:var(--danger); font-weight:700; }
+.result-sources { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.source-tag { font-size:11px; padding:2px 8px; background:var(--bg-hover); border:1px solid var(--border); font-family:'JetBrains Mono',monospace; }
+.history-tag { font-size:11px; padding:2px 8px; background:#2a3a2a; border:1px solid #3a5a3a; color:var(--success); }
+
+/* Table */
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { background:var(--bg-secondary); text-align:left; padding:8px 10px; font-size:11px; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); border-bottom:2px solid var(--border); }
+td { padding:8px 10px; border-bottom:1px solid var(--border); }
+tr:hover td { background:var(--bg-hover); }
+tr.row-ok td { border-left:3px solid var(--success); }
+tr.row-warn td:first-child { border-left:3px solid var(--warning); }
+tr.row-ng td:first-child { border-left:3px solid var(--danger); }
+
+/* Status bar */
+.status-bar { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary); padding:8px 0; }
+.status-bar b { color:var(--text-primary); }
+
+/* Mail area */
+textarea { background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:12px; font-family:'JetBrains Mono',monospace; font-size:12px; width:100%; resize:vertical; outline:none; }
+textarea:focus { border-color:var(--accent); }
+
+/* Toast */
+.toast { position:fixed; top:20px; right:20px; background:var(--accent); color:#1a1a1a; padding:12px 24px;
+  font-weight:600; font-size:13px; z-index:999; opacity:0; transition:opacity 0.3s; }
+.toast.show { opacity:1; }
+
+.hidden { display:none; }
+.mb-12 { margin-bottom:12px; }
+.mb-16 { margin-bottom:16px; }
+.mt-12 { margin-top:12px; }
+.text-sm { font-size:12px; }
+.overflow-auto { overflow:auto; max-height:600px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>JLAC10 MAPPER</h1>
+  <div class="status" id="dbStatus">LOADING...</div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('search')" id="tab-search">Search</button>
+  <button class="tab" onclick="switchTab('import')" id="tab-import">Import</button>
+  <button class="tab" onclick="switchTab('bulk')" id="tab-bulk">Bulk Map</button>
+  <button class="tab" onclick="switchTab('error')" id="tab-error">SN Error</button>
+  <button class="tab" onclick="switchTab('data')" id="tab-data">Database</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- SEARCH -->
+<!-- ============================================================ -->
+<div id="panel-search">
+  <div class="card">
+    <div class="flex-row mb-16">
+      <input id="searchInput" type="text" placeholder="TP / albumin / CRP / HbA1c ..."
+        style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()" class="btn btn-primary" style="white-space:nowrap">SEARCH</button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- IMPORT -->
+<!-- ============================================================ -->
+<div id="panel-import" class="hidden">
+  <div class="card">
+    <h2>Excel to JSON + DB Merge</h2>
+    <div class="grid-2 mb-12">
+      <div><label>Hospital Name</label><input id="hospitalName" type="text" placeholder="A Hospital"></div>
+      <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv"></div>
+    </div>
+    <div class="grid-4 mb-12">
+      <div><label>Item Name Col</label><input id="colItemName" type="text" value="A"></div>
+      <div><label>Abbreviation Col</label><input id="colAbbr" type="text" value="B" placeholder="optional"></div>
+      <div><label>JLAC10 Col</label><input id="colJlac10" type="text" value="C"></div>
+      <div><label>Standard Name Col</label><input id="colStdName" type="text" value="D" placeholder="optional"></div>
+    </div>
+    <div class="flex-row mb-12">
+      <button onclick="convertExcel()" class="btn btn-primary">Convert</button>
+      <button onclick="mergeToDb()" class="btn btn-secondary" id="btnMerge" disabled>Merge to DB</button>
+      <button onclick="downloadJson()" class="btn btn-secondary" id="btnDownload" disabled>Download JSON</button>
+    </div>
+    <div class="status-bar" id="importStatus"></div>
+    <div id="importPreview" class="overflow-auto"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- BULK MAP -->
+<!-- ============================================================ -->
+<div id="panel-bulk" class="hidden">
+  <div class="card">
+    <h2>Bulk JLAC10 Mapping</h2>
+    <div class="grid-3 mb-12">
+      <div><label>Hospital Master (Excel)</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
+      <div><label>Item Name Col</label><input id="bulkColName" type="text" value="A"></div>
+      <div style="display:flex;align-items:end"><button onclick="doBulkMapping()" class="btn btn-primary" style="width:100%">Map All</button></div>
+    </div>
+    <div class="status-bar" id="bulkStatus"></div>
+    <div id="bulkResults" class="overflow-auto"></div>
+    <div class="mt-12">
+      <button onclick="downloadBulkResult()" class="btn btn-secondary" id="btnBulkDL" disabled>Download Result Excel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SN ERROR -->
+<!-- ============================================================ -->
+<div id="panel-error" class="hidden">
+  <div class="card">
+    <h2>SSMIX SN Error Analysis</h2>
+
+    <!-- 入力方式切替 -->
+    <div class="flex-row mb-12">
+      <button onclick="toggleErrorInput('file')" class="btn btn-secondary" id="errToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
+      <button onclick="toggleErrorInput('paste')" class="btn btn-secondary" id="errTogglePaste">Paste Text</button>
+    </div>
+
+    <!-- ファイル入力 -->
+    <div id="errorInputFile">
+      <div class="grid-3 mb-12">
+        <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
+        <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
+        <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+      </div>
+    </div>
+
+    <!-- テキストペースト入力 -->
+    <div id="errorInputPaste" class="hidden">
+      <div class="mb-12">
+        <label>SSMIX2 エラー出力をそのまま貼り付け（タブ区切り / カンマ区切り / 1行1項目）</label>
+        <textarea id="errorPasteText" rows="8" placeholder="項目コード&#9;項目名称&#10;12345&#9;総蛋白&#10;67890&#9;アルブミン&#10;&#10;または&#10;&#10;総蛋白&#10;アルブミン&#10;CRP"></textarea>
+      </div>
+      <div class="grid-2 mb-12">
+        <div><label>コード列 (0始まり, -1=なし)</label><input id="pasteColCode" type="text" value="0"></div>
+        <div><label>名称列 (0始まり)</label><input id="pasteColName" type="text" value="1"></div>
+      </div>
+    </div>
+
+    <div class="grid-2 mb-12">
+      <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
+      <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
+    </div>
+    <div class="flex-row mb-12">
+      <button onclick="analyzeErrors()" class="btn btn-danger">Analyze</button>
+      <button onclick="generateMail()" class="btn btn-secondary" id="btnMail" disabled>Generate Mail</button>
+      <button onclick="downloadErrorResult()" class="btn btn-secondary" id="btnErrorDL" disabled>Download Excel</button>
+    </div>
+    <div class="status-bar" id="errorStatus"></div>
+    <div id="errorResults" class="overflow-auto"></div>
+    <div id="mailArea" class="hidden mt-12">
+      <h2 style="color:var(--info)">Inquiry Mail</h2>
+      <div class="mb-12"><label>Subject</label><input id="mailSubject" type="text" readonly></div>
+      <div class="mb-12"><label>Body</label><textarea id="mailBody" rows="18" readonly></textarea></div>
+      <button onclick="copyMail()" class="btn btn-primary">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- DATABASE -->
+<!-- ============================================================ -->
+<div id="panel-data" class="hidden">
+  <div class="card">
+    <h2>Database Management</h2>
+    <div class="status-bar mb-16" id="dbInfo"></div>
+    <div class="mb-12">
+      <label>Load merged_jlac10.json (override)</label>
+      <input id="dbFile" type="file" accept=".json" onchange="loadDbFile(this)">
+    </div>
+    <div class="mb-12">
+      <label>Add Hospital JSON (multiple OK)</label>
+      <input id="hospitalFiles" type="file" accept=".json" multiple onchange="loadHospitalFiles(this)">
+    </div>
+    <div class="flex-row">
+      <button onclick="exportMergedDb()" class="btn btn-primary" id="btnExportDb">Export Merged DB</button>
+      <button onclick="reloadFromRepo()" class="btn btn-secondary">Reload from Repo</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// =====================================================================
+// Global State
+// =====================================================================
+var DB = { items: [], metadata: {} };
+var lastConvertedJson = null;
+var lastBulkResult = null;
+var lastErrorResult = null;
+var searchIndex = [];
+
+// DB auto-load from repository
+var DB_URL = "./data/merged_jlac10.json";
+
+window.addEventListener("DOMContentLoaded", function() { reloadFromRepo(); });
+
+function reloadFromRepo() {
+  document.getElementById("dbStatus").textContent = "LOADING...";
+  fetch(DB_URL).then(function(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }).then(function(data) {
+    DB = data;
+    if (!DB.items) DB.items = [];
+    if (!DB.metadata) DB.metadata = {};
+    searchIndex = buildSearchIndex();
+    updateDbStatus();
+    showToast("DB loaded: " + DB.items.length + " entries");
+  }).catch(function(err) {
+    document.getElementById("dbStatus").textContent = "DB LOAD FAILED - use Database tab to load manually";
+    console.error(err);
+  });
+}
+
+// =====================================================================
+// Normalize + Score (same logic as Python search.py)
+// =====================================================================
+function normalize(text) {
+  text = text.normalize("NFKC");
+  var r = "";
+  for (var ch of text) {
+    var cp = ch.codePointAt(0);
+    r += (cp >= 0x30A1 && cp <= 0x30F6) ? String.fromCodePoint(cp - 0x60) : ch;
+  }
+  return r.toLowerCase();
+}
+
+function calcScore(qN, tN, tR) {
+  if (!qN || !tN) return 0;
+  if (qN === tN) return 100;
+  // 略称マッチ（括弧内）を先に判定 — 「TP」→「総蛋白(TP)」でスコア95
+  if (/^[a-z0-9\-]+$/i.test(qN) && qN.length <= 6) {
+    var raw = tR.toLowerCase();
+    // 括弧内の完全一致は最高スコア
+    if (raw.includes("("+qN+")") || tN.includes("("+qN+")")) return 95;
+    // 全角括弧
+    if (raw.includes("\uff08"+qN+"\uff09") || tN.includes("\uff08"+qN+"\uff09")) return 95;
+    // 区切り文字付き
+    for (var p of [qN+"/", "/"+qN, " "+qN+" ", " "+qN+")", qN+"_", "_"+qN]) {
+      if (raw.includes(p)) return 85;
+    }
+  }
+  if (tN.startsWith(qN)) return 80 + qN.length / tN.length * 10;
+  if (tN.includes(qN)) return 60 + qN.length / tN.length * 10;
+  var words = qN.split(/\s+/);
+  if (words.length > 1 && words.every(function(w){return tN.includes(w);})) return 50 + qN.length / tN.length * 10;
+  return 0;
+}
+
+// =====================================================================
+// Search Engine
+// =====================================================================
+function buildSearchIndex() {
+  var entries = [];
+  // JLAC10あり項目
+  for (var item of DB.items) {
+    var names = new Set();
+    var dec = item.jlac10_decoded || {};
+    if (dec.valid) {
+      if (dec.analyte && dec.analyte.name) names.add(dec.analyte.name);
+      if (dec.analyte && dec.analyte.name_en) names.add(dec.analyte.name_en);
+    }
+    for (var src of Object.values(item.sources || {})) { if (src.item_name) names.add(src.item_name); }
+    for (var h of (item.mapping_history || [])) {
+      if (h.item_name) names.add(h.item_name);
+      if (h.abbreviation) names.add(h.abbreviation);
+      if (h.jlac10_standard_name) names.add(h.jlac10_standard_name);
+    }
+    var arr = []; names.forEach(function(n){ arr.push(n); });
+    entries.push({ jlac10:item.jlac10, jlac10_status:item.jlac10_status||"valid_15",
+      analyte_code:item.analyte_code, decoded:dec,
+      sources:item.sources||{}, mapping_history:item.mapping_history||[],
+      names:arr, namesNorm:arr.map(normalize) });
+  }
+  // JLAC10なし項目
+  for (var nj of (DB.items_no_jlac || [])) {
+    if (!nj.item_name) continue;
+    var njNames = [nj.item_name];
+    var njSrc = {}; njSrc[nj.source] = { item_name:nj.item_name, material:"", method:"", reference_value:"", detail_url:nj.detail_url||"" };
+    entries.push({ jlac10:nj.jlac10_raw||"", jlac10_status:nj.jlac10_status||"empty",
+      analyte_code:"", decoded:{},
+      sources:njSrc, mapping_history:[],
+      names:njNames, namesNorm:njNames.map(normalize) });
+  }
+  return entries;
+}
+
+function search(query, maxResults) {
+  maxResults = maxResults || 20;
+  var qN = normalize(query);
+  if (!qN) return [];
+  var results = [];
+  for (var e of searchIndex) {
+    var best = 0, matched = "";
+    for (var i = 0; i < e.names.length; i++) {
+      var s = calcScore(qN, e.namesNorm[i], e.names[i]);
+      if (s > best) { best = s; matched = e.names[i]; }
+    }
+    if (best > 0) results.push(Object.assign({}, e, { score: best, matchedName: matched, jlac10_status: e.jlac10_status||"valid_15" }));
+  }
+  results.sort(function(a,b){ return b.score - a.score || a.jlac10.localeCompare(b.jlac10); });
+  return results.slice(0, maxResults);
+}
+
+// =====================================================================
+// Helpers
+// =====================================================================
+function esc(s) { return DOMPurify.sanitize(s || "", { ALLOWED_TAGS: [] }); }
+function setHtml(id, html) {
+  document.getElementById(id).innerHTML = DOMPurify.sanitize(html, {
+    ALLOWED_TAGS:["table","tr","td","th","thead","tbody","div","span","p","b","code","br","textarea","input"],
+    ALLOWED_ATTR:["class","style","readonly","rows"] });
+}
+function showToast(msg) {
+  var t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, 2500);
+}
+function colToIndex(col) {
+  if (!col || !col.trim()) return -1;
+  col = col.toUpperCase().trim();
+  if (/^\d+$/.test(col)) return parseInt(col) - 1;
+  var idx = 0; for (var c of col) idx = idx * 26 + c.charCodeAt(0) - 64;
+  return idx - 1;
+}
+// JLAC10 を17桁表示にフォーマット（15桁の場合は ** を追加）
+function isValidJlac(code) {
+  return /^[0-9A-Za-z]{15,17}$/.test(code);
+}
+function formatJlac17(code, status) {
+  // status が明示されている場合はそれを使う
+  if (status === "empty" || (!code && !status)) return '<span class="jlac-empty">JLAC10\u672a\u8a2d\u5b9a</span>';
+  if (!code) return '<span class="jlac-empty">JLAC10\u672a\u8a2d\u5b9a</span>';
+  code = code.replace(/-/g, "");
+  // 不正なJLAC10（日本語等を含む）は赤字で表示
+  if (status === "invalid" || !isValidJlac(code)) {
+    return '<span class="jlac-invalid">\u4e0d\u6b63: ' + esc(code) + '</span>';
+  }
+  if (code.length >= 17) {
+    // 17桁: 5-4-3-3-2 でハイフン区切り
+    return '<span class="jlac-part">' + esc(code.substring(0,5)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(5,9)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(9,12)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(12,15)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(15,17)) + '</span>';
+  }
+  if (code.length === 15) {
+    // 15桁: 結果識別コードなし → ** で表示
+    return '<span class="jlac-part">' + esc(code.substring(0,5)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(5,9)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(9,12)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-part">' + esc(code.substring(12,15)) + '</span>'
+      + '<span class="jlac-sep">-</span><span class="jlac-missing">**</span>';
+  }
+  // その他の長さ
+  return '<span class="jlac-part">' + esc(code) + '</span>';
+}
+
+function downloadFile(name, content) {
+  var blob = new Blob([content], { type: "application/json" });
+  var a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = name; a.click(); URL.revokeObjectURL(a.href);
+}
+
+// =====================================================================
+// UI: Search
+// =====================================================================
+function doSearch() {
+  var query = document.getElementById("searchInput").value.trim();
+  if (!query) return;
+  var results = search(query);
+  var div = document.getElementById("searchResults");
+  if (results.length === 0) { setHtml("searchResults",'<div class="status-bar">No results found.</div>'); return; }
+  var html = "";
+  for (var i = 0; i < results.length; i++) {
+    var r = results[i];
+    var cls = r.score >= 90 ? "high" : r.score >= 50 ? "mid" : "low";
+    // ソースキー一覧（SRL/BML/LSI）
+    var srcKeys = Object.keys(r.sources);
+    var srcBadges = srcKeys.map(function(k){return '<span class="company-badge company-'+k+'">'+esc(k.toUpperCase())+'</span>';}).join("");
+
+    html += '<div class="result-item '+cls+'">';
+    // 1行目: 番号 + 名称 + スコア
+    html += '<div class="result-header"><span class="result-title">[' + (i+1) + '] ' + esc(r.matchedName) + '</span>';
+    html += '<span class="result-score">' + r.score.toFixed(0) + '</span></div>';
+    // 2行目: JLAC10 大きく + 会社バッジ横並び
+    html += '<div class="result-jlac-row">';
+    html += '<code class="jlac-big">' + formatJlac17(r.jlac10, r.jlac10_status) + '</code>';
+    if (r.analyte_code) html += '<span class="analyte-code">' + esc(r.analyte_code) + '</span>';
+    html += '<span class="company-badges">' + srcBadges + '</span>';
+    html += '</div>';
+    // 3行目: JLAC10 各パートの名称（5パート対応）
+    if (r.decoded && r.decoded.valid) {
+      var d = r.decoded;
+      var analyteName = (d.analyte||{}).name || "";
+      var identName = (d.identification||{}).name || "";
+      var materialName = (d.material||{}).name || "";
+      var methodName = (d.method||{}).name || "";
+      var resultName = r.jlac10.length >= 17 ? esc(r.jlac10.substring(15,17)) : "**";
+      html += '<div class="jlac-decode-row">';
+      html += '<span class="decode-part"><span class="decode-label">分析物</span>' + esc(analyteName || "-") + '</span>';
+      html += '<span class="decode-sep">/</span>';
+      html += '<span class="decode-part"><span class="decode-label">識別</span>' + (identName ? esc(identName) : '<span class="decode-empty">-</span>') + '</span>';
+      html += '<span class="decode-sep">/</span>';
+      html += '<span class="decode-part"><span class="decode-label">材料</span>' + esc(materialName || "-") + '</span>';
+      html += '<span class="decode-sep">/</span>';
+      html += '<span class="decode-part"><span class="decode-label">測定法</span>' + esc(methodName || "-") + '</span>';
+      html += '<span class="decode-sep">/</span>';
+      html += '<span class="decode-part"><span class="decode-label">結果識別</span>' + (r.jlac10.length >= 17 ? esc(r.jlac10.substring(15,17)) : '<span class="decode-missing">**</span>') + '</span>';
+      html += '</div>';
+    }
+    // 4行目: 各社詳細（横並びテーブル）
+    if (srcKeys.length > 0) {
+      html += '<div class="source-detail-row">';
+      for (var k of srcKeys) {
+        var v = r.sources[k];
+        html += '<div class="source-detail"><span class="company-label company-'+k+'">'+esc(k.toUpperCase())+'</span>';
+        html += '<span class="source-item-name">'+esc(v.item_name)+'</span>';
+        html += '<span class="source-method">'+esc(v.method)+'</span></div>';
+      }
+      html += '</div>';
+    }
+    // 5行目: マッピング実績
+    if (r.mapping_history.length > 0) {
+      html += '<div class="history-row">';
+      for (var h of r.mapping_history) {
+        html += '<span class="history-tag">' + esc(h.hospital) + ': ' + esc(h.item_name||"") + '</span>';
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  setHtml("searchResults", html);
+}
+
+// =====================================================================
+// UI: Import
+// =====================================================================
+function convertExcel() {
+  var file = document.getElementById("excelFile").files[0];
+  if (!file) { showToast("Select a file"); return; }
+  var hospital = document.getElementById("hospitalName").value.trim() || "Unknown";
+  var ci=colToIndex(document.getElementById("colItemName").value), ca=colToIndex(document.getElementById("colAbbr").value);
+  var cj=colToIndex(document.getElementById("colJlac10").value), cs=colToIndex(document.getElementById("colStdName").value);
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var wb = XLSX.read(e.target.result, {type:"array"});
+    var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1});
+    var items = [];
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i]; if (!row||row.length===0) continue;
+      var itemName = ci>=0 ? String(row[ci]==null?"":row[ci]).trim() : "";
+      var abbr = ca>=0 ? String(row[ca]==null?"":row[ca]).trim() : "";
+      var rawJlac = cj>=0 ? String(row[cj]==null?"":row[cj]).trim() : "";
+      var stdName = cs>=0 ? String(row[cs]==null?"":row[cs]).trim() : "";
+      if (!itemName && !rawJlac) continue;
+      var jlac10 = rawJlac.replace(/-/g,"");
+      items.push({hospital:hospital,item_name:itemName,abbreviation:abbr,jlac10:jlac10,
+        analyte_code:jlac10.length>=5?jlac10.substring(0,5):"",jlac10_standard_name:stdName});
+    }
+    lastConvertedJson = {metadata:{hospital:hospital,exported_at:new Date().toISOString(),total_items:items.length},items:items};
+    document.getElementById("importStatus").textContent = "Converted: "+items.length+" items (JLAC10: "+items.filter(function(x){return x.jlac10;}).length+")";
+    document.getElementById("btnMerge").disabled=false; document.getElementById("btnDownload").disabled=false;
+    var h='<table><tr><th>Item Name</th><th>Abbr</th><th>JLAC10</th><th>Standard Name</th></tr>';
+    for (var p of items.slice(0,10)) h+='<tr><td>'+esc(p.item_name)+'</td><td>'+esc(p.abbreviation)+'</td><td><code>'+esc(p.jlac10)+'</code></td><td>'+esc(p.jlac10_standard_name)+'</td></tr>';
+    h+='</table>'; if(items.length>10) h+='<div class="status-bar">...and '+(items.length-10)+' more</div>';
+    setHtml("importPreview",h);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function mergeToDb() {
+  if (!lastConvertedJson) return;
+  var added = 0;
+  for (var item of lastConvertedJson.items) {
+    if (!item.jlac10) continue;
+    var existing = DB.items.find(function(e){return e.jlac10===item.jlac10;});
+    if (!existing) { existing={jlac10:item.jlac10,analyte_code:item.analyte_code,jlac10_decoded:{raw:item.jlac10,valid:false},sources:{},mapping_history:[]}; DB.items.push(existing); }
+    if (!existing.mapping_history) existing.mapping_history=[];
+    var dup = existing.mapping_history.some(function(h){return h.hospital===item.hospital&&h.item_name===item.item_name;});
+    if (!dup) { existing.mapping_history.push({hospital:item.hospital,item_name:item.item_name,abbreviation:item.abbreviation,jlac10_standard_name:item.jlac10_standard_name}); added++; }
+  }
+  DB.metadata.total_unique_jlac10=DB.items.length; searchIndex=buildSearchIndex(); updateDbStatus();
+  showToast("Merged: "+added+" entries added");
+}
+
+function downloadJson() {
+  if (!lastConvertedJson) return;
+  downloadFile((lastConvertedJson.metadata.hospital||"hospital")+".json",JSON.stringify(lastConvertedJson,null,2));
+}
+
+// =====================================================================
+// UI: Bulk Mapping
+// =====================================================================
+function doBulkMapping() {
+  var file = document.getElementById("bulkFile").files[0];
+  if (!file) { showToast("Select a file"); return; }
+  var colIdx = colToIndex(document.getElementById("bulkColName").value);
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var wb = XLSX.read(e.target.result,{type:"array"});
+    var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1});
+    var results=[], auto=0, cand=0, manual=0;
+    for (var i=1;i<rows.length;i++) {
+      var row=rows[i]; var name=colIdx>=0&&row?String(row[colIdx]==null?"":row[colIdx]).trim():"";
+      if(!name)continue;
+      var matches=search(name,5); var status,best;
+      if(matches.length>0&&matches[0].score>=90){status="auto";best=matches[0];auto++;}
+      else if(matches.length>0&&matches[0].score>=50){status="candidate";best=matches[0];cand++;}
+      else{status="manual";best=null;manual++;}
+      results.push({row:i+1,itemName:name,status:status,matches:matches,bestMatch:best});
+    }
+    lastBulkResult=results;
+    document.getElementById("bulkStatus").innerHTML="Done: <b>"+results.length+"</b> | <span style='color:var(--success)'>Auto: "+auto+"</span> | <span style='color:var(--warning)'>Review: "+cand+"</span> | <span style='color:var(--danger)'>Manual: "+manual+"</span>";
+    document.getElementById("btnBulkDL").disabled=false;
+    var h='<table><tr><th></th><th>Item Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
+    for(var r of results){
+      var cls=r.status==="auto"?"row-ok":r.status==="candidate"?"row-warn":"row-ng";
+      var icon=r.status==="auto"?"OK":r.status==="candidate"?"??":"--";
+      h+='<tr class="'+cls+'"><td>'+icon+'</td><td>'+esc(r.itemName)+'</td><td><code>'+(r.bestMatch?esc(r.bestMatch.jlac10):"")+'</code></td><td>'+(r.bestMatch?esc(r.bestMatch.matchedName):"")+'</td><td>'+(r.bestMatch?r.bestMatch.score.toFixed(0):"-")+'</td></tr>';
+    }
+    h+='</table>'; setHtml("bulkResults",h);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function downloadBulkResult() {
+  if(!lastBulkResult)return;
+  var d=[["Status","Row","Item Name","JLAC10","Matched","Score","Analyte","Alt1","Alt2"]];
+  for(var r of lastBulkResult) d.push([r.status==="auto"?"OK":r.status==="candidate"?"Review":"Manual",r.row,r.itemName,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):"",r.bestMatch?r.bestMatch.analyte_code:"",r.matches[1]?r.matches[1].jlac10:"",r.matches[2]?r.matches[2].jlac10:""]);
+  var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Mapping"); XLSX.writeFile(wb,"mapping_result.xlsx");
+}
+
+// =====================================================================
+// UI: SN Error
+// =====================================================================
+var errorInputMode = "file";
+function toggleErrorInput(mode) {
+  errorInputMode = mode;
+  document.getElementById("errorInputFile").classList.toggle("hidden", mode !== "file");
+  document.getElementById("errorInputPaste").classList.toggle("hidden", mode !== "paste");
+  document.getElementById("errToggleFile").style.borderBottom = mode === "file" ? "2px solid var(--accent)" : "none";
+  document.getElementById("errTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
+}
+
+function parseErrorRows(callback) {
+  if (errorInputMode === "paste") {
+    // テキストペースト入力
+    var text = document.getElementById("errorPasteText").value.trim();
+    if (!text) { showToast("テキストを貼り付けてください"); return; }
+    var ccIdx = parseInt(document.getElementById("pasteColCode").value);
+    var cnIdx = parseInt(document.getElementById("pasteColName").value);
+    if (isNaN(cnIdx)) cnIdx = 0;
+    if (isNaN(ccIdx)) ccIdx = -1;
+    var lines = text.split("\n");
+    var rows = [];
+    for (var line of lines) {
+      var parts = line.includes("\t") ? line.split("\t") : line.split(",");
+      if (parts.length === 1 && ccIdx < 0) {
+        // 1列のみ → 項目名として扱う
+        rows.push({ code: "", name: parts[0].trim() });
+      } else {
+        rows.push({
+          code: ccIdx >= 0 && parts[ccIdx] ? parts[ccIdx].trim() : "",
+          name: cnIdx >= 0 && parts[cnIdx] ? parts[cnIdx].trim() : ""
+        });
+      }
+    }
+    callback(rows);
+  } else {
+    // ファイル入力
+    var file = document.getElementById("errorFile").files[0];
+    if (!file) { showToast("ファイルを選択してください"); return; }
+    var cc = colToIndex(document.getElementById("errorColCode").value);
+    var cn = colToIndex(document.getElementById("errorColName").value);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var wb = XLSX.read(e.target.result, { type: "array" });
+      var xlRows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 });
+      var rows = [];
+      for (var i = 1; i < xlRows.length; i++) {
+        var row = xlRows[i]; if (!row) continue;
+        rows.push({
+          code: cc >= 0 ? String(row[cc] == null ? "" : row[cc]).trim() : "",
+          name: cn >= 0 ? String(row[cn] == null ? "" : row[cn]).trim() : ""
+        });
+      }
+      callback(rows);
+    };
+    reader.readAsArrayBuffer(file);
+  }
+}
+
+function analyzeErrors() {
+  parseErrorRows(function(rows) {
+    var results = [], ok = 0, ng = 0;
+    for (var i = 0; i < rows.length; i++) {
+      var code = rows[i].code, name = rows[i].name;
+      if (!code && !name) continue;
+      var matches = search(name || code, 5); var status, best;
+      if (matches.length > 0 && matches[0].score >= 80) { status = "assignable"; best = matches[0]; ok++; }
+      else { status = "inquiry"; best = matches.length > 0 ? matches[0] : null; ng++; }
+      results.push({ row: i + 1, code: code, name: name, status: status, matches: matches, bestMatch: best });
+    }
+    lastErrorResult = results;
+    document.getElementById("errorStatus").innerHTML = "<b>" + results.length + "</b> errors | <span style='color:var(--success)'>Assignable: " + ok + "</span> | <span style='color:var(--danger)'>Inquiry: " + ng + "</span>";
+    document.getElementById("btnMail").disabled = (ng === 0); document.getElementById("btnErrorDL").disabled = false;
+    var h = '<table><tr><th></th><th>Code</th><th>Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
+    for (var r of results) {
+      var cls = r.status === "assignable" ? "row-ok" : "row-ng";
+      h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch ? formatJlac17(r.bestMatch.jlac10, r.bestMatch.jlac10_status) : "") + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
+    }
+    h += '</table>'; setHtml("errorResults", h);
+  });
+}
+
+function generateMail() {
+  if(!lastErrorResult)return;
+  var hospital=document.getElementById("errorHospital").value.trim()||"Hospital";
+  var dept=document.getElementById("errorDept").value.trim()||"検査科";
+  var items=lastErrorResult.filter(function(r){return r.status==="inquiry";});
+  if(items.length===0){showToast("No inquiry items");return;}
+  document.getElementById("mailSubject").value="検査項目コード確認のお願い（JLAC10未設定項目）";
+  var b=hospital+" "+dept+" 御中\n\nお世話になっております。\nSSMIX2データにおいて、以下の検査項目にJLAC10コードが設定されていないため、\n付番に必要な情報のご確認をお願いいたします。\n\n";
+  b+="■ 対象項目（"+items.length+"件）\n\n";
+  for(var i=0;i<items.length;i++) b+=(i+1)+". ["+items[i].code+"] "+items[i].name+"\n";
+  b+="\n■ 各項目について以下をご教示ください\n\n";
+  b+="1. 結果値の種類（数値/文字列/コード値/定性）\n2. 結果値の単位\n3. 使用している測定法または試薬名\n4. 検体の種類（血清/血漿/尿/その他）\n5. 親検査項目がある場合、その項目名\n6. 外注の場合、外注先（SRL/BML/LSI/その他）\n\nお忙しいところ恐れ入りますが、ご回答のほどよろしくお願いいたします。\n";
+  document.getElementById("mailBody").value=b;
+  document.getElementById("mailArea").classList.remove("hidden");
+}
+
+function copyMail() {
+  navigator.clipboard.writeText(document.getElementById("mailBody").value).then(function(){showToast("Copied!");});
+}
+
+function downloadErrorResult() {
+  if(!lastErrorResult)return;
+  var d=[["Status","Row","Code","Name","JLAC10","Matched","Score"]];
+  for(var r of lastErrorResult) d.push([r.status==="assignable"?"Assignable":"Inquiry",r.row,r.code,r.name,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):""]);
+  var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Error Analysis"); XLSX.writeFile(wb,"error_analysis.xlsx");
+}
+
+// =====================================================================
+// UI: Database
+// =====================================================================
+function loadDbFile(input) {
+  var file=input.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{DB=JSON.parse(e.target.result);if(!DB.items)DB.items=[];if(!DB.metadata)DB.metadata={};
+      searchIndex=buildSearchIndex();updateDbStatus();showToast("DB loaded: "+DB.items.length);}
+    catch(err){showToast("JSON parse error");}
+  };
+  reader.readAsText(file);
+}
+
+function loadHospitalFiles(input) {
+  var files=input.files,total=0,done=0;
+  for(var fi=0;fi<files.length;fi++){(function(f){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      try{var data=JSON.parse(e.target.result);
+        for(var item of(data.items||[])){if(!item.jlac10)continue;
+          var ex=DB.items.find(function(x){return x.jlac10===item.jlac10;});
+          if(!ex){ex={jlac10:item.jlac10,analyte_code:item.analyte_code||"",jlac10_decoded:{raw:item.jlac10,valid:false},sources:{},mapping_history:[]};DB.items.push(ex);}
+          if(!ex.mapping_history)ex.mapping_history=[];
+          if(!ex.mapping_history.some(function(h){return h.hospital===item.hospital&&h.item_name===item.item_name;})){
+            ex.mapping_history.push({hospital:item.hospital||(data.metadata||{}).hospital||"",item_name:item.item_name||"",abbreviation:item.abbreviation||"",jlac10_standard_name:item.jlac10_standard_name||""});total++;}
+        }}catch(err){console.error(err);}
+      done++;if(done===files.length){DB.metadata.total_unique_jlac10=DB.items.length;searchIndex=buildSearchIndex();updateDbStatus();showToast(files.length+" files, "+total+" entries added");}
+    };reader.readAsText(f);
+  })(files[fi]);}
+}
+
+function exportMergedDb() {
+  DB.metadata.exported_at=new Date().toISOString(); DB.metadata.total_unique_jlac10=DB.items.length;
+  downloadFile("merged_jlac10.json",JSON.stringify(DB,null,2));
+}
+
+function updateDbStatus() {
+  var hc=0,hospitals=new Set();
+  for(var it of DB.items) for(var h of(it.mapping_history||[])){hc++;if(h.hospital)hospitals.add(h.hospital);}
+  var noJlacCount = (DB.items_no_jlac || []).length;
+  document.getElementById("dbStatus").textContent=DB.items.length+" JLAC10 | "+noJlacCount+" no-JLAC | "+hc+" mappings | "+hospitals.size+" hospitals";
+  setHtml("dbInfo",
+    '<b>'+DB.items.length+'</b> JLAC10 entries | <b>'+noJlacCount+'</b> JLAC10\u672a\u8a2d\u5b9a | <b>'+hc+'</b> mapping records | <b>'+hospitals.size+'</b> hospitals' +
+    '<br>SRL: '+DB.items.filter(function(x){return x.sources&&x.sources.srl;}).length+
+    ' | BML: '+DB.items.filter(function(x){return x.sources&&x.sources.bml;}).length+
+    ' | LSI: '+DB.items.filter(function(x){return x.sources&&x.sources.lsi;}).length+
+    (hospitals.size>0?'<br>Hospitals: '+esc([...hospitals].join(", ")):""));
+}
+
+// =====================================================================
+// Tab Switch
+// =====================================================================
+function switchTab(name) {
+  var tabs=["search","import","bulk","error","data"];
+  for(var t of tabs){
+    document.getElementById("panel-"+t).classList.toggle("hidden",t!==name);
+    var btn=document.getElementById("tab-"+t);
+    btn.className=t===name?"tab active":"tab";
+  }
+}
+</script>
+</body>
+</html>
