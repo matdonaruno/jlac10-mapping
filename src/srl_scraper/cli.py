@@ -17,6 +17,7 @@ from .jslm import scrape_all as jslm_scrape_all, check_jslm_update_needed
 from .search import build_index, format_results
 from .reagent import build_reagent_db, add_pmda_to_db
 from .sop_parser import parse_sop, parse_sop_directory
+from .converter import convert_tabular
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -189,6 +190,55 @@ def cmd_sop(args: argparse.Namespace) -> int:
     else:
         print(f"ファイル/ディレクトリが見つかりません: {target}", file=sys.stderr)
         return 1
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# Convert (Excel/CSV → JSON)
+# ---------------------------------------------------------------------------
+
+def cmd_convert(args: argparse.Namespace) -> int:
+    filepath = Path(args.input)
+
+    # column_map を構築
+    column_map: dict[str, str] = {}
+    if args.col_item:
+        column_map["item_name"] = args.col_item
+    if args.col_jlac10:
+        column_map["jlac10"] = args.col_jlac10
+    if args.col_abbr:
+        column_map["abbreviation"] = args.col_abbr
+    if args.col_std_name:
+        column_map["jlac10_standard_name"] = args.col_std_name
+
+    if "item_name" not in column_map or "jlac10" not in column_map:
+        print(
+            "エラー: --col-item と --col-jlac10 は必須です",
+            file=sys.stderr,
+        )
+        return 1
+
+    output_path = Path(args.output_file) if args.output_file else None
+
+    try:
+        result = convert_tabular(
+            filepath=filepath,
+            column_map=column_map,
+            hospital=args.hospital,
+            sheet_name=args.sheet,
+            skip_rows=args.skip_rows,
+            output_path=output_path,
+        )
+    except (FileNotFoundError, ValueError) as e:
+        print(f"エラー: {e}", file=sys.stderr)
+        return 1
+
+    meta = result["metadata"]
+    out = output_path or filepath.with_suffix(".json")
+    print(f"\n変換完了: {meta['total_items']}件")
+    print(f"  病院: {meta['hospital'] or '(未指定)'}")
+    print(f"  ソース: {meta['source_file']}")
+    print(f"  出力: {out}")
     return 0
 
 
@@ -372,6 +422,18 @@ def main() -> None:
     p_diff.add_argument("new", help="新しいJSON")
     p_diff.add_argument("-o", "--output-report", help="差分レポート出力先")
 
+    # convert
+    p_convert = sub.add_parser("convert", help="院内検査マスタ(Excel/CSV)をJSONに変換")
+    p_convert.add_argument("input", help="入力ファイル (.xlsx / .csv)")
+    p_convert.add_argument("-o", "--output-file", default=None, help="出力JSONパス (省略で {入力ファイル名}.json)")
+    p_convert.add_argument("--hospital", default="", help="病院名")
+    p_convert.add_argument("--col-item", required=True, help="検査項目名の列 (A, 1, またはヘッダ名)")
+    p_convert.add_argument("--col-jlac10", required=True, help="JLAC10の列 (A, 1, またはヘッダ名)")
+    p_convert.add_argument("--col-abbr", default=None, help="略称の列 (A, 1, またはヘッダ名)")
+    p_convert.add_argument("--col-std-name", default=None, help="JLAC10標準名称の列 (A, 1, またはヘッダ名)")
+    p_convert.add_argument("--sheet", default=None, help="Excelシート名 (省略で最初のシート)")
+    p_convert.add_argument("--skip-rows", type=int, default=1, help="スキップするヘッダ行数 (default: 1)")
+
     # list
     sub.add_parser("list", help="SRLカテゴリ一覧")
 
@@ -393,6 +455,7 @@ def main() -> None:
         "merge": cmd_merge,
         "check": cmd_check,
         "diff": cmd_diff,
+        "convert": cmd_convert,
         "list": cmd_list,
     }
     sys.exit(commands[args.command](args))

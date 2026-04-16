@@ -158,6 +158,14 @@ textarea:focus { border-color:var(--accent); }
   font-weight:600; font-size:13px; z-index:999; opacity:0; transition:opacity 0.3s; }
 .toast.show { opacity:1; }
 
+/* Bulk Map candidate select */
+select.candidate-select { background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:4px 8px; font-size:12px; font-family:'JetBrains Mono',monospace; max-width:300px; }
+select.candidate-select:focus { border-color:var(--accent); outline:none; }
+tr.row-confirmed td { background:var(--bg-hover); }
+tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
+.btn-xs { padding:4px 10px; font-size:11px; }
+
 .hidden { display:none; }
 .mb-12 { margin-bottom:12px; }
 .mb-16 { margin-bottom:16px; }
@@ -180,6 +188,7 @@ textarea:focus { border-color:var(--accent); }
   <button class="tab" onclick="switchTab('bulk')" id="tab-bulk">Bulk Map</button>
   <button class="tab" onclick="switchTab('error')" id="tab-error">SN Error</button>
   <button class="tab" onclick="switchTab('data')" id="tab-data">Database</button>
+  <button class="tab" onclick="switchTab('help')" id="tab-help">Help</button>
 </div>
 
 <!-- ============================================================ -->
@@ -228,14 +237,17 @@ textarea:focus { border-color:var(--accent); }
 <div id="panel-bulk" class="hidden">
   <div class="card">
     <h2>Bulk JLAC10 Mapping</h2>
-    <div class="grid-3 mb-12">
+    <div class="grid-4 mb-12">
       <div><label>Hospital Master (Excel)</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
       <div><label>Item Name Col</label><input id="bulkColName" type="text" value="A"></div>
+      <div><label>Hospital Name</label><input id="bulkHospital" type="text" placeholder="H001"></div>
       <div style="display:flex;align-items:end"><button onclick="doBulkMapping()" class="btn btn-primary" style="width:100%">Map All</button></div>
     </div>
     <div class="status-bar" id="bulkStatus"></div>
     <div id="bulkResults" class="overflow-auto"></div>
-    <div class="mt-12">
+    <div class="flex-row mt-12">
+      <button onclick="confirmAllAuto()" class="btn btn-primary" id="btnConfirmAuto" disabled>Confirm All Auto</button>
+      <button onclick="mergeBulkToDb()" class="btn btn-secondary" id="btnBulkMerge" disabled>Merge Confirmed to DB</button>
       <button onclick="downloadBulkResult()" class="btn btn-secondary" id="btnBulkDL" disabled>Download Result Excel</button>
     </div>
   </div>
@@ -313,6 +325,83 @@ textarea:focus { border-color:var(--accent); }
     <div class="flex-row">
       <button onclick="exportMergedDb()" class="btn btn-primary" id="btnExportDb">Export Merged DB</button>
       <button onclick="reloadFromRepo()" class="btn btn-secondary">Reload from Repo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- HELP -->
+<!-- ============================================================ -->
+<div id="panel-help" class="hidden">
+  <div class="card">
+    <h2>User Guide</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <h3 style="color:var(--accent);font-size:13px;margin-bottom:8px">SEARCH</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        検査項目名、略称、英名であいまい検索します。<br>
+        例: TP, ALB, CRP, HbA1c, アルブミン, albumin<br>
+        結果は SRL/BML/LSI 3社の情報付きで表示。<br>
+        スコア: 100=完全一致, 95=略称, 80+=先頭一致, 60+=部分一致
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">IMPORT</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        過去マッピング結果の Excel を JSON に変換し DB に統合。<br>
+        1. 病院名を入力<br>
+        2. Excel ファイルを選択<br>
+        3. 列番号を設定（A=項目名, B=略称, C=JLAC10, D=正式名称）<br>
+        4. Convert → Merge to DB → Export Merged DB
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">BULK MAP</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        病院マスター Excel を一括でJLAC10 にマッピング。<br>
+        1. Excel ファイルと項目名列を指定<br>
+        2. Map All で全件自動検索<br>
+        3. OK=自動確定(90+), ??=候補あり(50+), --=手動<br>
+        4. ??の行はプルダウンで候補を選択<br>
+        5. Confirm → Merge to DB で蓄積<br>
+        6. Download Result Excel で結果保存
+      </p>
+    </div>
+    <div>
+      <h3 style="color:var(--accent);font-size:13px;margin-bottom:8px">SN ERROR</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        SSMIX2 の SN エラー項目を分析。<br>
+        Excel ファイルまたはテキスト貼り付けで入力。<br>
+        付番可能な項目と要問い合わせ項目を自動分類。<br>
+        問い合わせメールを自動生成 → コピーして送信。
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">DATABASE</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        DB はページ読み込み時にリポジトリから自動ロード。<br>
+        手動で別の JSON をロードすることも可能。<br>
+        病院 JSON を追加で読み込んでマージ可能。<br>
+        Export Merged DB でダウンロード → git push で共有。
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">JLAC10 CODE STRUCTURE</h3>
+      <div style="background:var(--bg-primary);padding:12px;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2">
+        <span style="color:var(--accent)">3A010</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--accent)">0000</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--accent)">023</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--accent)">271</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--danger)">**</span><br>
+        <span style="color:var(--text-secondary)">
+        5桁:分析物 | 4桁:識別 | 3桁:材料 | 3桁:測定法 | 2桁:結果識別<br>
+        外注(SRL/BML/LSI) = 15桁（結果識別なし → **）<br>
+        院内(NCDA) = 17桁（結果識別あり）
+        </span>
+      </div>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">WORKFLOW</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        1. DB は定期更新済み（SRL/BML/LSI/JSLM）<br>
+        2. Search で単発検索 or Bulk Map で一括処理<br>
+        3. 確定したマッピングを DB に蓄積<br>
+        4. 蓄積するほど次回の精度が上がる<br>
+        5. Export → git push で全員に共有
+      </p>
+    </div>
     </div>
   </div>
 </div>
@@ -650,26 +739,175 @@ function doBulkMapping() {
       if(matches.length>0&&matches[0].score>=90){status="auto";best=matches[0];auto++;}
       else if(matches.length>0&&matches[0].score>=50){status="candidate";best=matches[0];cand++;}
       else{status="manual";best=null;manual++;}
-      results.push({row:i+1,itemName:name,status:status,matches:matches,bestMatch:best});
+      results.push({row:i+1,itemName:name,status:status,matches:matches,bestMatch:best,
+        confirmed:false,selectedIdx:0});
     }
     lastBulkResult=results;
-    document.getElementById("bulkStatus").innerHTML="Done: <b>"+results.length+"</b> | <span style='color:var(--success)'>Auto: "+auto+"</span> | <span style='color:var(--warning)'>Review: "+cand+"</span> | <span style='color:var(--danger)'>Manual: "+manual+"</span>";
+    document.getElementById("bulkStatus").textContent =
+      "Done: "+results.length+" | Auto: "+auto+" | Review: "+cand+" | Manual: "+manual;
     document.getElementById("btnBulkDL").disabled=false;
-    var h='<table><tr><th></th><th>Item Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
-    for(var r of results){
-      var cls=r.status==="auto"?"row-ok":r.status==="candidate"?"row-warn":"row-ng";
-      var icon=r.status==="auto"?"OK":r.status==="candidate"?"??":"--";
-      h+='<tr class="'+cls+'"><td>'+icon+'</td><td>'+esc(r.itemName)+'</td><td><code>'+(r.bestMatch?esc(r.bestMatch.jlac10):"")+'</code></td><td>'+(r.bestMatch?esc(r.bestMatch.matchedName):"")+'</td><td>'+(r.bestMatch?r.bestMatch.score.toFixed(0):"-")+'</td></tr>';
-    }
-    h+='</table>'; setHtml("bulkResults",h);
+    document.getElementById("btnConfirmAuto").disabled=false;
+    renderBulkTable();
   };
   reader.readAsArrayBuffer(file);
+}
+
+function renderBulkTable() {
+  if (!lastBulkResult) return;
+  var container = document.getElementById("bulkResults");
+  // Clear and build DOM safely
+  while(container.firstChild) container.removeChild(container.firstChild);
+
+  var table = document.createElement("table");
+  // Header
+  var thead = document.createElement("tr");
+  ["","Item Name","JLAC10 Candidate","Score","Action"].forEach(function(t){
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+
+  for (var i=0; i<lastBulkResult.length; i++) {
+    (function(idx){
+      var r = lastBulkResult[idx];
+      var tr = document.createElement("tr");
+      var cls = r.confirmed ? "row-confirmed" : r.status==="auto" ? "row-ok" : r.status==="candidate" ? "row-warn" : "row-ng";
+      tr.className = cls;
+      tr.setAttribute("data-idx", idx);
+
+      // Col 1: Status icon
+      var td0 = document.createElement("td");
+      td0.textContent = r.confirmed ? "OK" : r.status==="auto" ? "OK" : r.status==="candidate" ? "??" : "--";
+      tr.appendChild(td0);
+
+      // Col 2: Item name
+      var td1 = document.createElement("td");
+      td1.textContent = r.itemName;
+      tr.appendChild(td1);
+
+      // Col 3: JLAC10 candidate (select for candidate/manual, text for auto/confirmed)
+      var td2 = document.createElement("td");
+      if (r.confirmed || r.status === "auto") {
+        var code = document.createElement("code");
+        code.textContent = r.bestMatch ? r.bestMatch.jlac10 + " " + r.bestMatch.matchedName : "";
+        td2.appendChild(code);
+      } else if (r.matches.length > 0) {
+        var sel = document.createElement("select");
+        sel.className = "candidate-select";
+        for (var j=0; j<r.matches.length; j++) {
+          var opt = document.createElement("option");
+          opt.value = j;
+          opt.textContent = r.matches[j].jlac10 + " | " + r.matches[j].matchedName + " (" + r.matches[j].score.toFixed(0) + ")";
+          if (j === r.selectedIdx) opt.selected = true;
+          sel.appendChild(opt);
+        }
+        sel.addEventListener("change", function(ev) {
+          lastBulkResult[idx].selectedIdx = parseInt(ev.target.value);
+          lastBulkResult[idx].bestMatch = lastBulkResult[idx].matches[lastBulkResult[idx].selectedIdx];
+        });
+        td2.appendChild(sel);
+      } else {
+        td2.textContent = "(no match)";
+      }
+      tr.appendChild(td2);
+
+      // Col 4: Score
+      var td3 = document.createElement("td");
+      td3.textContent = r.bestMatch ? r.bestMatch.score.toFixed(0) : "-";
+      tr.appendChild(td3);
+
+      // Col 5: Action button
+      var td4 = document.createElement("td");
+      if (!r.confirmed && r.matches.length > 0) {
+        var btn = document.createElement("button");
+        btn.className = "btn btn-primary btn-xs";
+        btn.textContent = "Confirm";
+        btn.addEventListener("click", function() { confirmBulkRow(idx); });
+        td4.appendChild(btn);
+      } else if (r.confirmed) {
+        td4.textContent = "Confirmed";
+        td4.style.color = "var(--success)";
+      }
+      tr.appendChild(td4);
+
+      table.appendChild(tr);
+    })(i);
+  }
+  container.appendChild(table);
+}
+
+function confirmBulkRow(idx) {
+  var r = lastBulkResult[idx];
+  r.bestMatch = r.matches[r.selectedIdx];
+  r.confirmed = true;
+  r.status = "confirmed";
+  renderBulkTable();
+  updateBulkSummary();
+}
+
+function confirmAllAuto() {
+  for (var i=0;i<lastBulkResult.length;i++) {
+    var r = lastBulkResult[i];
+    if (r.status === "auto" && !r.confirmed) {
+      r.confirmed = true;
+      r.status = "confirmed";
+    }
+  }
+  renderBulkTable();
+  updateBulkSummary();
+  showToast("Auto items confirmed");
+}
+
+function updateBulkSummary() {
+  var confirmed=0, review=0, manual=0;
+  for (var r of lastBulkResult) {
+    if (r.confirmed) confirmed++;
+    else if (r.status==="candidate") review++;
+    else if (r.status==="manual") manual++;
+  }
+  document.getElementById("bulkStatus").textContent =
+    "Total: "+lastBulkResult.length+" | Confirmed: "+confirmed+" | Review: "+review+" | Manual: "+manual;
+  document.getElementById("btnBulkMerge").disabled = (confirmed === 0);
+}
+
+function mergeBulkToDb() {
+  var hospital = document.getElementById("bulkHospital").value.trim() || "Unknown";
+  var added = 0;
+  for (var r of lastBulkResult) {
+    if (!r.confirmed || !r.bestMatch) continue;
+    var jlac10 = r.bestMatch.jlac10;
+    if (!jlac10 || !isValidJlac(jlac10)) continue;
+    var existing = DB.items.find(function(e){return e.jlac10===jlac10;});
+    if (!existing) {
+      existing={jlac10:jlac10,analyte_code:jlac10.substring(0,5),
+        jlac10_decoded:{raw:jlac10,valid:false},sources:{},mapping_history:[]};
+      DB.items.push(existing);
+    }
+    if (!existing.mapping_history) existing.mapping_history=[];
+    var dup = existing.mapping_history.some(function(h){
+      return h.hospital===hospital&&h.item_name===r.itemName;});
+    if (!dup) {
+      existing.mapping_history.push({hospital:hospital,item_name:r.itemName,
+        abbreviation:"",jlac10_standard_name:r.bestMatch.matchedName});
+      added++;
+    }
+  }
+  DB.metadata.total_unique_jlac10=DB.items.length;
+  searchIndex=buildSearchIndex();
+  updateDbStatus();
+  showToast("Merged "+added+" entries to DB");
+  document.getElementById("btnExportDb").disabled=false;
 }
 
 function downloadBulkResult() {
   if(!lastBulkResult)return;
   var d=[["Status","Row","Item Name","JLAC10","Matched","Score","Analyte","Alt1","Alt2"]];
-  for(var r of lastBulkResult) d.push([r.status==="auto"?"OK":r.status==="candidate"?"Review":"Manual",r.row,r.itemName,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):"",r.bestMatch?r.bestMatch.analyte_code:"",r.matches[1]?r.matches[1].jlac10:"",r.matches[2]?r.matches[2].jlac10:""]);
+  for(var r of lastBulkResult) {
+    var st = r.confirmed ? "Confirmed" : r.status==="auto" ? "Auto" : r.status==="candidate" ? "Review" : "Manual";
+    d.push([st,r.row,r.itemName,r.bestMatch?r.bestMatch.jlac10:"",
+      r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):"",
+      r.bestMatch?r.bestMatch.analyte_code:"",
+      r.matches[1]?r.matches[1].jlac10:"",r.matches[2]?r.matches[2].jlac10:""]);
+  }
   var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Mapping"); XLSX.writeFile(wb,"mapping_result.xlsx");
 }
 
@@ -837,7 +1075,7 @@ function updateDbStatus() {
 // Tab Switch
 // =====================================================================
 function switchTab(name) {
-  var tabs=["search","import","bulk","error","data"];
+  var tabs=["search","import","bulk","error","data","help"];
   for(var t of tabs){
     document.getElementById("panel-"+t).classList.toggle("hidden",t!==name);
     var btn=document.getElementById("tab-"+t);
