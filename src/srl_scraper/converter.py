@@ -332,6 +332,39 @@ def convert_tabular(
 
 
 # ---------------------------------------------------------------------------
+# usage 判定（依頼 / 結果 / 依頼,結果）
+# ---------------------------------------------------------------------------
+
+def _detect_usage(sheet_name: str | None, vendor_type: str | None) -> str:
+    """シート名からJLAC10の用途を判定
+
+    Args:
+        sheet_name: シート名
+        vendor_type: "separate"（依頼/結果別）or "unified"（一体型）
+
+    Returns:
+        "依頼" / "結果" / "依頼,結果"
+    """
+    if vendor_type == "unified":
+        return "依頼,結果"
+
+    if not sheet_name:
+        return "依頼,結果"
+
+    s = sheet_name.lower()
+    has_request = "依頼" in sheet_name or "request" in s or "order" in s
+    has_result = "結果" in sheet_name or "result" in s
+
+    if has_request and has_result:
+        return "依頼,結果"
+    if has_request:
+        return "依頼"
+    if has_result:
+        return "結果"
+    return "依頼,結果"
+
+
+# ---------------------------------------------------------------------------
 # ベンダー対応自動変換
 # ---------------------------------------------------------------------------
 
@@ -415,7 +448,14 @@ def convert_auto(
         # 存在しない列番号を指定（全て空になる）
         column_map["jlac10"] = str(len(header_row) + 1)
 
-    return convert_tabular(
+    # usage 判定（依頼 / 結果 / 依頼,結果）
+    from .vendor_profiles import get_vendor_info
+    vendor_info = get_vendor_info(vendor) if vendor else None
+    vendor_type = vendor_info.get("type") if vendor_info else None
+    usage = _detect_usage(sheet_name, vendor_type)
+    logger.info("用途判定: sheet='%s', vendor_type=%s → usage='%s'", sheet_name, vendor_type, usage)
+
+    result = convert_tabular(
         filepath=filepath,
         column_map=column_map,
         hospital=hospital,
@@ -423,6 +463,22 @@ def convert_auto(
         skip_rows=skip_rows,
         output_path=output_path,
     )
+
+    # usage を metadata と各 item に追加
+    result["metadata"]["usage"] = usage
+    result["metadata"]["source_sheet"] = sheet_name or ""
+    result["metadata"]["vendor"] = vendor or ""
+    for item in result["items"]:
+        item["usage"] = usage
+        item["source_sheet"] = sheet_name or ""
+
+    # output_path に再書き込み（usage追加分）
+    out = output_path or Path(filepath).with_suffix(".json")
+    Path(out).write_text(
+        json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+    return result
 
 
 def write_jlac10_to_excel(
