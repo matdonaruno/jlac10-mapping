@@ -246,14 +246,24 @@ def convert_tabular(
             skipped += 1
             continue
 
-        # item_name が空なら空行扱い
+        # item_name と abbreviation の両方が空ならスキップ
         item_col = resolved["item_name"]
-        if item_col >= len(row) or row[item_col].strip() == "":
-            logger.debug("空行スキップ (item_name空): 行%d", row_num)
+        item_name = row[item_col].strip() if item_col < len(row) else ""
+
+        abbreviation = ""
+        if "abbreviation" in resolved:
+            abbr_col = resolved["abbreviation"]
+            abbreviation = row[abbr_col].strip() if abbr_col < len(row) else ""
+
+        if not item_name and not abbreviation:
+            logger.debug("空行スキップ (item_name・略称ともに空): 行%d", row_num)
             skipped += 1
             continue
 
-        item_name = row[item_col].strip()
+        # item_name が空なら略称で代用
+        if not item_name and abbreviation:
+            item_name = abbreviation
+            logger.debug("item_name空 → 略称で代用: 行%d '%s'", row_num, abbreviation)
 
         # JLAC10 取得・正規化
         jlac10_col = resolved["jlac10"]
@@ -266,11 +276,7 @@ def convert_tabular(
         # analyte_code: JLAC10の先頭5桁
         analyte_code = jlac10[:5] if len(jlac10) >= 5 else ""
 
-        # 任意フィールド
-        abbreviation = ""
-        if "abbreviation" in resolved:
-            col = resolved["abbreviation"]
-            abbreviation = row[col].strip() if col < len(row) else ""
+        # abbreviation は上で既に取得済み
 
         jlac10_standard_name = ""
         if "jlac10_standard_name" in resolved:
@@ -324,7 +330,7 @@ def convert_tabular(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
         json.dumps(result, ensure_ascii=False, indent=2),
-        encoding="utf-8",
+        encoding="utf-8-sig",
     )
     logger.info("JSON出力: %s", output_path)
 

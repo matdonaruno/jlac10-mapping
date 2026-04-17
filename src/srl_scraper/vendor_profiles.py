@@ -188,16 +188,31 @@ def detect_columns(
         field_clean = field.replace("col_", "")
         found_idx = None
 
+        # まず完全一致を試行
         for kw in kw_list:
             kw_norm = _normalize_header(kw)
             for i, h in enumerate(headers_norm):
-                if kw_norm == h or kw_norm in h:
+                if kw_norm == h:
                     found_idx = i
-                    logger.debug("  列検出: %s → %d列目 (keyword='%s', header='%s')",
+                    logger.debug("  列検出(完全一致): %s → %d列目 (keyword='%s', header='%s')",
                                  field_clean, i, kw, headers[i])
                     break
             if found_idx is not None:
                 break
+
+        # 完全一致がなければ部分一致（長いキーワード優先）
+        if found_idx is None:
+            kw_sorted = sorted(kw_list, key=lambda k: len(k), reverse=True)
+            for kw in kw_sorted:
+                kw_norm = _normalize_header(kw)
+                for i, h in enumerate(headers_norm):
+                    if kw_norm in h and len(kw_norm) >= 4:
+                        found_idx = i
+                        logger.debug("  列検出(部分一致): %s → %d列目 (keyword='%s', header='%s')",
+                                     field_clean, i, kw, headers[i])
+                        break
+                if found_idx is not None:
+                    break
 
         result[field_clean] = found_idx
 
