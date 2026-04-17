@@ -246,6 +246,34 @@ def cmd_convert(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_convert_auto(args: argparse.Namespace) -> int:
+    """ベンダー自動検出でExcel→JSON変換（蓄積用）"""
+    result = convert_auto(
+        filepath=Path(args.input),
+        vendor=args.vendor,
+        hospital=args.hospital or "",
+        sheet_name=args.sheet,
+        skip_rows=args.skip_rows,
+        output_path=Path(args.output) if args.output else None,
+    )
+
+    meta = result["metadata"]
+    items = result["items"]
+
+    # JLAC10 内訳
+    status_counts = {}
+    for it in items:
+        s = it.get("jlac10_status", "empty")
+        status_counts[s] = status_counts.get(s, 0) + 1
+
+    print(f"\n変換完了: {meta['total_items']}件")
+    print(f"  病院: {meta['hospital'] or '(未指定)'}")
+    print(f"  ソース: {meta['source_file']}")
+    for s, c in sorted(status_counts.items()):
+        print(f"  {s}: {c}件")
+    return 0
+
+
 # ---------------------------------------------------------------------------
 # Map (院内項目 → JLAC10 マッピング)
 # ---------------------------------------------------------------------------
@@ -708,6 +736,15 @@ def main() -> None:
     p_convert.add_argument("--sheet", default=None, help="Excelシート名 (省略で最初のシート)")
     p_convert.add_argument("--skip-rows", type=int, default=1, help="スキップするヘッダ行数 (default: 1)")
 
+    # convert-auto
+    p_cauto = sub.add_parser("convert-auto", help="ベンダー自動検出でExcel→JSON変換（蓄積用）")
+    p_cauto.add_argument("input", help="入力ファイル (.xlsx / .csv)")
+    p_cauto.add_argument("--vendor", default=None, help="ベンダー名 (NEC/Fujitsu/IBM/SSI/SBS/KHI/CSI/NAIS)")
+    p_cauto.add_argument("-o", "--output", default=None, help="出力先 (省略で {入力}.json)")
+    p_cauto.add_argument("--hospital", default="", help="病院名")
+    p_cauto.add_argument("--sheet", default=None, help="シート名")
+    p_cauto.add_argument("--skip-rows", type=int, default=1, help="ヘッダ行数")
+
     # map
     p_map = sub.add_parser("map", help="院内検査項目をJLAC10にマッピング")
     p_map.add_argument("input", help="入力ファイル (.xlsx / .csv)")
@@ -771,6 +808,7 @@ def main() -> None:
         "check": cmd_check,
         "diff": cmd_diff,
         "convert": cmd_convert,
+        "convert-auto": cmd_convert_auto,
         "map": cmd_map,
         "map-auto": cmd_map_auto,
         "vendors": lambda args: (print("\n".join(list_vendors())), 0)[1],
