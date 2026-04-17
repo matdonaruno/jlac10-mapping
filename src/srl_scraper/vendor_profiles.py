@@ -26,17 +26,23 @@ VENDOR_PROFILES: dict[str, dict] = {
                 "col_item_name": ["TESTITEMNAME", "検査項目名", "項目名称"],
                 "col_short_name": ["TESTITEM SHORTNAME", "SHORTNAME", "略称", "短縮名"],
                 "col_item_code": ["TESTITEM CODE", "TESTITEMCODE", "項目コード"],
-                "col_jlac10": ["LACS CODE", "LACSCODE", "JLAC10", "JLAC", "最終的JLAC10"],
+                # 最終的JLAC10 > JLAC10 CODE > JLAC10 の順で優先
+                "col_jlac10": ["最終的JLAC10", "JLAC10 CODE", "JLAC10CODE", "JLAC10", "日立エラー修正後JLAC10"],
+                "col_jlac10_name": ["JLAC10 NAME", "JLAC10NAME", "JLAC10標準名称", "JLAC10名称"],
                 "col_unit": ["UNIT", "単位"],
                 "col_category": ["TEST CATEGORY", "TESTCATEGORY", "検査区分"],
                 "col_hospital_code": ["HOSPITAL CODE", "HOSPITALCODE", "施設コード"],
+                # LACS CODE は院内コードなので jlac10 には使わない
+                "col_lacs_code": ["LACS CODE", "LACSCODE"],
             },
             "結果": {
                 "col_item_name": ["TESTITEMNAME", "検査項目名", "項目名称", "結果項目名"],
                 "col_short_name": ["TESTITEM SHORTNAME", "SHORTNAME", "略称"],
                 "col_item_code": ["TESTITEM CODE", "TESTITEMCODE", "項目コード"],
-                "col_jlac10": ["LACS CODE", "LACSCODE", "JLAC10", "JLAC", "最終的JLAC10"],
+                "col_jlac10": ["最終的JLAC10", "JLAC10 CODE", "JLAC10CODE", "JLAC10"],
+                "col_jlac10_name": ["JLAC10 NAME", "JLAC10NAME", "JLAC10標準名称"],
                 "col_unit": ["UNIT", "単位"],
+                "col_lacs_code": ["LACS CODE", "LACSCODE"],
             },
         },
     },
@@ -240,8 +246,11 @@ def _get_keywords(vendor: str | None, sheet_name: str | None) -> dict[str, list[
             "依頼コード", "結果コード", "ITEM CODE", "TEST CODE",
         ],
         "col_jlac10": [
-            "最終的JLAC10", "JLAC10", "JLAC", "JLACコード", "LACS CODE",
-            "LACSCODE", "標準コード", "JLAC10コード",
+            "最終的JLAC10", "JLAC10 CODE", "JLAC10CODE", "JLAC10コード",
+            "JLAC10", "JLACコード", "標準コード",
+        ],
+        "col_lacs_code": [
+            "LACS CODE", "LACSCODE",
         ],
         "col_jlac10_name": [
             "JLAC10標準名称", "JLAC10名称", "標準名称", "JLAC名称",
