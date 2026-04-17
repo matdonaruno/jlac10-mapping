@@ -212,11 +212,34 @@ tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
   <div class="card">
     <h2>Excel to JSON + DB Merge</h2>
 
-    <!-- 共通: ファイル + 病院名 -->
-    <div class="grid-3 mb-12">
-      <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv" onchange="onImportFileLoad(this)"></div>
-      <div><label>Hospital Name</label><input id="hospitalName" type="text" placeholder="H001"></div>
-      <div><label>Sheet (optional)</label><input id="importSheet" type="text" placeholder="依頼"></div>
+    <!-- ファイルソース切替 -->
+    <div class="flex-row mb-12">
+      <button onclick="toggleFileSource('repo')" class="btn btn-secondary" id="fileSrcRepo" style="border-bottom:2px solid var(--accent)">Repository</button>
+      <button onclick="toggleFileSource('local')" class="btn btn-secondary" id="fileSrcLocal">Local File</button>
+    </div>
+
+    <!-- リポジトリから選択 -->
+    <div id="fileSourceRepo">
+      <div class="grid-3 mb-12">
+        <div>
+          <label>Hospital</label>
+          <select id="repoFileSelect" class="candidate-select" style="width:100%;padding:10px" onchange="onRepoFileSelect()">
+            <option value="">Loading...</option>
+          </select>
+        </div>
+        <div><label>Hospital Name</label><input id="hospitalName" type="text" placeholder="H001"></div>
+        <div><label>Sheet (optional)</label><input id="importSheet" type="text" placeholder="依頼"></div>
+      </div>
+      <div class="status-bar mb-12" id="repoFileStatus"></div>
+    </div>
+
+    <!-- ローカルファイル -->
+    <div id="fileSourceLocal" class="hidden">
+      <div class="grid-3 mb-12">
+        <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv" onchange="onImportFileLoad(this)"></div>
+        <div><label>Hospital Name</label><input id="hospitalNameLocal" type="text" placeholder="H001"></div>
+        <div><label>Sheet (optional)</label><input id="importSheetLocal" type="text" placeholder="依頼"></div>
+      </div>
     </div>
 
     <!-- モード切替 -->
@@ -718,8 +741,98 @@ function doSearch() {
 // =====================================================================
 // Import: mode toggle
 var importMode = "auto";
-var importWb = null;   // 読み込んだワークブック
-var importHeaders = []; // ヘッダー行
+var fileSource = "repo";
+var importWb = null;
+var importHeaders = [];
+var repoIndex = null;  // index.json の内容
+
+// リポジトリ index.json を読み込み
+var REPO_INDEX_URL = "./excel/hospitals/index.json";
+
+function loadRepoIndex() {
+  fetch(REPO_INDEX_URL).then(function(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }).then(function(data) {
+    repoIndex = data;
+    var sel = document.getElementById("repoFileSelect");
+    while (sel.firstChild) sel.removeChild(sel.firstChild);
+    var optNone = document.createElement("option");
+    optNone.value = ""; optNone.textContent = "-- Select Hospital --";
+    sel.appendChild(optNone);
+    var files = data.file || data.files || [];
+    for (var f of files) {
+      var opt = document.createElement("option");
+      opt.value = f.file;
+      opt.setAttribute("data-hospital", f.hospital_name || "");
+      opt.setAttribute("data-vendor", f.vender || f.vendor || "");
+      opt.textContent = f.hospital_id + " | " + (f.hospital_name||"") + " | " + (f.vender||f.vendor||"");
+      sel.appendChild(opt);
+    }
+    document.getElementById("repoFileStatus").textContent = files.length + " hospitals loaded";
+  }).catch(function(err) {
+    document.getElementById("repoFileStatus").textContent = "index.json load failed: " + err.message;
+    // ローカルモードにフォールバック
+    toggleFileSource("local");
+  });
+}
+
+function onRepoFileSelect() {
+  var sel = document.getElementById("repoFileSelect");
+  var filename = sel.value;
+  if (!filename) return;
+  var opt = sel.options[sel.selectedIndex];
+  var hospitalName = opt.getAttribute("data-hospital") || "";
+  var vendor = opt.getAttribute("data-vendor") || "";
+
+  // 病院名とベンダーを自動設定
+  document.getElementById("hospitalName").value = hospitalName;
+  if (vendor) {
+    var vendorSel = document.getElementById("importVendor");
+    if (vendorSel) {
+      for (var i = 0; i < vendorSel.options.length; i++) {
+        if (vendorSel.options[i].value.toUpperCase() === vendor.toUpperCase()) {
+          vendorSel.selectedIndex = i; break;
+        }
+      }
+    }
+  }
+
+  document.getElementById("repoFileStatus").textContent = "Loading: " + filename + "...";
+
+  // リポジトリからExcelをfetch
+  var url = "./excel/hospitals/" + encodeURIComponent(filename);
+  fetch(url).then(function(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.arrayBuffer();
+  }).then(function(buf) {
+    importWb = XLSX.read(new Uint8Array(buf), {type:"array"});
+    var sheetInput = document.getElementById("importSheet").value.trim();
+    var sheetName = sheetInput || importWb.SheetNames[0];
+    var ws = importWb.Sheets[sheetName] || importWb.Sheets[importWb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ws, {header:1});
+    importHeaders = rows.length > 0 ? rows[0].map(function(h){ return String(h||"").replace(/\n/g," ").trim(); }) : [];
+
+    populateHeaderSelects(importHeaders);
+    runAutoDetect(importHeaders);
+    document.getElementById("repoFileStatus").textContent =
+      "Loaded: " + filename + " (" + (rows.length-1) + " rows, " + importHeaders.length + " cols, sheet: " + sheetName + ")";
+    showToast("Loaded: " + filename);
+  }).catch(function(err) {
+    document.getElementById("repoFileStatus").textContent = "Load failed: " + err.message;
+  });
+}
+
+function toggleFileSource(src) {
+  fileSource = src;
+  document.getElementById("fileSourceRepo").classList.toggle("hidden", src !== "repo");
+  document.getElementById("fileSourceLocal").classList.toggle("hidden", src !== "local");
+  document.getElementById("fileSrcRepo").style.borderBottom = src === "repo" ? "2px solid var(--accent)" : "none";
+  document.getElementById("fileSrcLocal").style.borderBottom = src === "local" ? "2px solid var(--accent)" : "none";
+}
+
+// ページロード時にindex.jsonを読む
+window.addEventListener("DOMContentLoaded", function() { loadRepoIndex(); });
 
 function toggleImportMode(mode) {
   importMode = mode;
@@ -866,75 +979,86 @@ function getImportColumns() {
 }
 
 function convertExcel() {
+  var hospital, sheetInput;
+  if (fileSource === "repo") {
+    hospital = document.getElementById("hospitalName").value.trim() || "Unknown";
+    sheetInput = document.getElementById("importSheet").value.trim();
+    // リポジトリモード: importWb が既にロード済み
+    if (!importWb) { showToast("Hospital を選択してください"); return; }
+    doConvertFromWb(importWb, hospital, sheetInput);
+    return;
+  }
+  // ローカルモード
   var file = document.getElementById("excelFile").files[0];
   if (!file) { showToast("Select a file"); return; }
-  var hospital = document.getElementById("hospitalName").value.trim() || "Unknown";
-  var cols = getImportColumns();
-  var ci = cols.ci, ca = cols.ca, cj = cols.cj, cs = cols.cs;
-
-  var sheetInput = document.getElementById("importSheet").value.trim();
+  hospital = document.getElementById("hospitalNameLocal").value.trim() || document.getElementById("hospitalName").value.trim() || "Unknown";
+  sheetInput = document.getElementById("importSheetLocal").value.trim() || document.getElementById("importSheet").value.trim();
 
   var reader = new FileReader();
   reader.onload = function(e) {
     var wb = XLSX.read(e.target.result, {type:"array"});
-    var sheetName = sheetInput || wb.SheetNames[0];
-    var ws = wb.Sheets[sheetName] || wb.Sheets[wb.SheetNames[0]];
-    var rows = XLSX.utils.sheet_to_json(ws, {header:1});
-
-    // usage 判定
-    var usage = "依頼,結果";
-    if (sheetName) {
-      if (sheetName.indexOf("依頼") >= 0) usage = "依頼";
-      else if (sheetName.indexOf("結果") >= 0) usage = "結果";
-    }
-
-    var items = [];
-    for (var i = 1; i < rows.length; i++) {
-      var row = rows[i]; if (!row||row.length===0) continue;
-      var itemName = ci>=0 ? String(row[ci]==null?"":row[ci]).trim() : "";
-      var abbr = ca>=0 ? String(row[ca]==null?"":row[ca]).trim() : "";
-      if (!itemName && !abbr) continue;
-      if (!itemName) itemName = abbr;
-      var rawJlac = cj>=0 ? String(row[cj]==null?"":row[cj]).trim() : "";
-      var stdName = cs>=0 ? String(row[cs]==null?"":row[cs]).trim() : "";
-      var jlac10 = rawJlac.replace(/-/g,"");
-      items.push({hospital:hospital,item_name:itemName,abbreviation:abbr,jlac10:jlac10,
-        analyte_code:jlac10.length>=5?jlac10.substring(0,5):"",jlac10_standard_name:stdName,
-        usage:usage,source_sheet:sheetName});
-    }
-    lastConvertedJson = {metadata:{hospital:hospital,exported_at:new Date().toISOString(),
-      total_items:items.length,usage:usage,source_sheet:sheetName},items:items};
-
-    var validCount = items.filter(function(x){return isValidJlac(x.jlac10);}).length;
-    document.getElementById("importStatus").textContent =
-      "Converted: "+items.length+" items | JLAC10 valid: "+validCount+" | Usage: "+usage;
-    document.getElementById("btnMerge").disabled=false; document.getElementById("btnDownload").disabled=false;
-
-    // プレビュー
-    var container = document.getElementById("importPreview");
-    while(container.firstChild) container.removeChild(container.firstChild);
-    var table = document.createElement("table");
-    var thead = document.createElement("tr");
-    ["Item Name","Abbr","JLAC10","Standard Name","Usage"].forEach(function(t){
-      var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
-    });
-    table.appendChild(thead);
-    for (var p of items.slice(0,10)) {
-      var tr = document.createElement("tr");
-      [p.item_name, p.abbreviation, p.jlac10, p.jlac10_standard_name, p.usage].forEach(function(v){
-        var td = document.createElement("td"); td.textContent = v||""; tr.appendChild(td);
-      });
-      table.appendChild(tr);
-    }
-    container.appendChild(table);
-    if (items.length > 10) {
-      var more = document.createElement("div");
-      more.className = "status-bar";
-      more.textContent = "...and " + (items.length - 10) + " more";
-      container.appendChild(more);
-    }
+    doConvertFromWb(wb, hospital, sheetInput);
   };
   reader.readAsArrayBuffer(file);
+}
+
+function doConvertFromWb(wb, hospital, sheetInput) {
+  var cols = getImportColumns();
+  var ci = cols.ci, ca = cols.ca, cj = cols.cj, cs = cols.cs;
+  var sheetName = sheetInput || wb.SheetNames[0];
+  var ws = wb.Sheets[sheetName] || wb.Sheets[wb.SheetNames[0]];
+  var rows = XLSX.utils.sheet_to_json(ws, {header:1});
+
+  var usage = "依頼,結果";
+  if (sheetName) {
+    if (sheetName.indexOf("依頼") >= 0) usage = "依頼";
+    else if (sheetName.indexOf("結果") >= 0) usage = "結果";
+  }
+
+  var items = [];
+  for (var i = 1; i < rows.length; i++) {
+    var row = rows[i]; if (!row||row.length===0) continue;
+    var itemName = ci>=0 ? String(row[ci]==null?"":row[ci]).trim() : "";
+    var abbr = ca>=0 ? String(row[ca]==null?"":row[ca]).trim() : "";
+    if (!itemName && !abbr) continue;
+    if (!itemName) itemName = abbr;
+    var rawJlac = cj>=0 ? String(row[cj]==null?"":row[cj]).trim() : "";
+    var stdName = cs>=0 ? String(row[cs]==null?"":row[cs]).trim() : "";
+    var jlac10 = rawJlac.replace(/-/g,"");
+    items.push({hospital:hospital,item_name:itemName,abbreviation:abbr,jlac10:jlac10,
+      analyte_code:jlac10.length>=5?jlac10.substring(0,5):"",jlac10_standard_name:stdName,
+      usage:usage,source_sheet:sheetName});
+  }
+  lastConvertedJson = {metadata:{hospital:hospital,exported_at:new Date().toISOString(),
+    total_items:items.length,usage:usage,source_sheet:sheetName},items:items};
+
+  var validCount = items.filter(function(x){return isValidJlac(x.jlac10);}).length;
+  document.getElementById("importStatus").textContent =
+    "Converted: "+items.length+" items | JLAC10 valid: "+validCount+" | Usage: "+usage;
+  document.getElementById("btnMerge").disabled=false; document.getElementById("btnDownload").disabled=false;
+
+  var container = document.getElementById("importPreview");
+  while(container.firstChild) container.removeChild(container.firstChild);
+  var table = document.createElement("table");
+  var thead = document.createElement("tr");
+  ["Item Name","Abbr","JLAC10","Standard Name","Usage"].forEach(function(t){
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+  for (var p of items.slice(0,10)) {
+    var tr = document.createElement("tr");
+    [p.item_name, p.abbreviation, p.jlac10, p.jlac10_standard_name, p.usage].forEach(function(v){
+      var td = document.createElement("td"); td.textContent = v||""; tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  }
+  container.appendChild(table);
+  if (items.length > 10) {
+    var more = document.createElement("div");
+    more.className = "status-bar";
+    more.textContent = "...and " + (items.length - 10) + " more";
+    container.appendChild(more);
+  }
 }
 
 function mergeToDb() {
