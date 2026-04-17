@@ -451,8 +451,25 @@ def convert_auto(
     # jlac10 がない場合はダミー（空列）
     if "jlac10" not in column_map:
         logger.warning("JLAC10列が検出されませんでした。空として処理します。")
-        # 存在しない列番号を指定（全て空になる）
         column_map["jlac10"] = str(len(header_row) + 1)
+
+    # jlac10_standard_name が未検出の場合、JLAC10列の右隣を使う
+    if "jlac10_standard_name" not in column_map and "jlac10" in column_map:
+        jlac10_col_idx = int(column_map["jlac10"]) - 1  # 0-based
+        right_col = jlac10_col_idx + 1
+        if right_col < len(header_row):
+            right_header = header_row[right_col].strip() if header_row[right_col] else ""
+            # 右隣のヘッダーが空、または名称っぽいキーワードを含む場合
+            is_name_col = (
+                not right_header
+                or "名称" in right_header
+                or "NAME" in right_header.upper()
+                or "名前" in right_header
+            )
+            if is_name_col:
+                column_map["jlac10_standard_name"] = str(right_col + 1)  # 1-based
+                logger.info("JLAC10正式名称: JLAC10列(%d)の右隣(%d)を使用 (header='%s')",
+                            jlac10_col_idx, right_col, right_header or "(空)")
 
     # usage 判定（依頼 / 結果 / 依頼,結果）
     from .vendor_profiles import get_vendor_info
