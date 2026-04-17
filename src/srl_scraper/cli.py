@@ -17,7 +17,8 @@ from .jslm import scrape_all as jslm_scrape_all, check_jslm_update_needed
 from .search import build_index, format_results
 from .reagent import build_reagent_db, add_pmda_to_db
 from .sop_parser import parse_sop, parse_sop_directory
-from .converter import convert_tabular
+from .converter import convert_tabular, convert_auto, write_jlac10_to_excel
+from .vendor_profiles import list_vendors
 from .mapper import bulk_map, export_mapping_excel, export_mapping_json
 from .merge import apply_mapping_results
 from .ncda_checker import batch_check as ncda_batch_check, export_check_excel
@@ -318,6 +319,58 @@ def cmd_map(args: argparse.Namespace) -> int:
     print(f"  手動確認必要 (manual):     {meta['manual']}件")
     print(f"  Excel出力: {output_path}")
     print(f"  JSON出力:  {json_path}")
+    return 0
+
+
+def cmd_map_auto(args: argparse.Namespace) -> int:
+    """ベンダー自動検出で一括マッピング + 元Excel追記"""
+    input_path = Path(args.input)
+    data_dir = Path(args.data_dir)
+    vendor = args.vendor
+    hospital = args.hospital or ""
+    sheet = args.sheet
+
+    # 1. 自動変換
+    logger.info("自動変換: vendor=%s, sheet=%s", vendor, sheet)
+    converted = convert_auto(
+        filepath=input_path,
+        vendor=vendor,
+        hospital=hospital,
+        sheet_name=sheet,
+        skip_rows=args.skip_rows,
+    )
+    items = converted["items"]
+    print(f"\n変換完了: {len(items)}件")
+
+    # 2. マッピング
+    index = build_index(data_dir)
+    results = bulk_map(
+        items=items,
+        index=index,
+        auto_threshold=args.threshold_auto,
+        candidate_threshold=args.threshold_candidate,
+    )
+    meta = results["metadata"]
+    print(f"マッピング: auto={meta['auto']} / candidate={meta['candidate']} / manual={meta['manual']}")
+
+    # 3. 元Excelに追記
+    output_path = Path(args.output) if args.output else input_path.with_name(
+        input_path.stem + "_mapped" + input_path.suffix
+    )
+    write_jlac10_to_excel(
+        source_path=input_path,
+        mapping_results=results["results"],
+        output_path=output_path,
+        sheet_name=sheet,
+        skip_rows=args.skip_rows,
+    )
+    print(f"出力: {output_path}")
+
+    # 4. JSON も出力
+    json_path = output_path.with_suffix(".json")
+    from .mapper import export_mapping_json
+    export_mapping_json(results, json_path)
+
     return 0
 
 
@@ -669,6 +722,21 @@ def main() -> None:
     p_map.add_argument("--threshold-candidate", type=float, default=50.0, help="候補閾値 (default: 50)")
     p_map.add_argument("--max-candidates", type=int, default=5, help="候補最大件数 (default: 5)")
 
+    # map-auto
+    p_mauto = sub.add_parser("map-auto", help="ベンダー自動検出で一括マッピング + 元Excel追記")
+    p_mauto.add_argument("input", help="入力ファイル (.xlsx)")
+    p_mauto.add_argument("--vendor", default=None, help="ベンダー名 (NEC/Fujitsu/IBM/SSI/SBS/KHI/CSI/NAIS)")
+    p_mauto.add_argument("-o", "--output", default=None, help="出力先 (省略で {入力}_mapped.xlsx)")
+    p_mauto.add_argument("-d", "--data-dir", default="data", help="データディレクトリ")
+    p_mauto.add_argument("--hospital", default="", help="病院名")
+    p_mauto.add_argument("--sheet", default=None, help="シート名")
+    p_mauto.add_argument("--skip-rows", type=int, default=1, help="ヘッダ行数")
+    p_mauto.add_argument("--threshold-auto", type=float, default=90.0, help="自動マッピング閾値")
+    p_mauto.add_argument("--threshold-candidate", type=float, default=50.0, help="候補閾値")
+
+    # vendors
+    sub.add_parser("vendors", help="登録済みベンダー一覧")
+
     # check-ncda
     p_ncda = sub.add_parser("check-ncda", help="外注先JLAC10 vs NCDA 差異チェック")
     p_ncda.add_argument("input", help="入力ファイル (.xlsx / .csv)")
@@ -704,6 +772,8 @@ def main() -> None:
         "diff": cmd_diff,
         "convert": cmd_convert,
         "map": cmd_map,
+        "map-auto": cmd_map_auto,
+        "vendors": lambda args: (print("\n".join(list_vendors())), 0)[1],
         "check-ncda": cmd_check_ncda,
         "list": cmd_list,
     }

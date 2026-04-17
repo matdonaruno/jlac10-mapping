@@ -1,4 +1,10 @@
-"""院内検査マスタ（Excel/CSV）を統一JSONフォーマットに変換するモジュール"""
+"""院内検査マスタ（Excel/CSV）を統一JSONフォーマットに変換するモジュール
+
+ベンダー別のヘッダー構造に対応:
+  - ベンダー名指定で自動列検出
+  - ベンダー不明でも汎用キーワードで推定
+  - 手動列指定も引き続きサポート
+"""
 
 import csv
 import json
@@ -8,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .scraper import classify_jlac10
+from .vendor_profiles import detect_columns
 
 logger = logging.getLogger(__name__)
 
@@ -322,3 +329,173 @@ def convert_tabular(
     logger.info("JSON出力: %s", output_path)
 
     return result
+
+
+# ---------------------------------------------------------------------------
+# ベンダー対応自動変換
+# ---------------------------------------------------------------------------
+
+def convert_auto(
+    filepath: Path,
+    vendor: str | None = None,
+    hospital: str = "",
+    sheet_name: str | None = None,
+    skip_rows: int = 1,
+    output_path: Path | None = None,
+) -> dict:
+    """ヘッダー自動検出で Excel/CSV を変換する。
+
+    ベンダー名を指定すればそのプロファイルで列検出、
+    未指定なら汎用キーワードで推定。
+
+    Args:
+        filepath: 入力ファイル
+        vendor: ベンダー名 (NEC/Fujitsu/IBM/SSI/SBS/KHI/CSI/NAIS)
+        hospital: 病院名
+        sheet_name: シート名（省略で最初のシート）
+        skip_rows: ヘッダー行数
+        output_path: 出力先
+
+    Returns:
+        convert_tabular と同じ形式の dict
+    """
+    filepath = Path(filepath)
+    suffix = filepath.suffix.lower()
+
+    if suffix == ".xlsx":
+        data_rows, header_row = _read_xlsx(filepath, sheet_name, skip_rows)
+    elif suffix == ".csv":
+        data_rows, header_row = _read_csv(filepath, skip_rows)
+    else:
+        raise ValueError(f"未対応の形式: {suffix}")
+
+    if not header_row:
+        raise ValueError("ヘッダー行が見つかりません")
+
+    logger.info("ヘッダー自動検出: vendor=%s, sheet=%s", vendor, sheet_name)
+    logger.debug("ヘッダー: %s", header_row)
+
+    cols = detect_columns(header_row, vendor=vendor, sheet_name=sheet_name)
+
+    logger.info("検出結果: %s",
+                {k: f"{v}列目({header_row[v]})" if v is not None else "未検出"
+                 for k, v in cols.items()})
+
+    # 必須列チェック
+    if cols.get("item_name") is None:
+        raise ValueError(
+            f"項目名列が検出できません。ヘッダー: {header_row}\n"
+            f"--col-item で手動指定してください。"
+        )
+
+    # convert_tabular 用の column_map に変換
+    column_map = {}
+    field_mapping = {
+        "item_name": "item_name",
+        "jlac10": "jlac10",
+        "short_name": "abbreviation",
+        "jlac10_name": "jlac10_standard_name",
+    }
+
+    for detected_key, col_idx in cols.items():
+        if col_idx is None:
+            continue
+        cm_key = field_mapping.get(detected_key)
+        if cm_key:
+            # 列番号をアルファベットに変換して convert_tabular に渡す
+            column_map[cm_key] = str(col_idx + 1)  # 1-based 数値文字列
+
+    # item_name は必須
+    if "item_name" not in column_map:
+        raise ValueError("項目名列が検出できません")
+
+    # jlac10 がない場合はダミー（空列）
+    if "jlac10" not in column_map:
+        logger.warning("JLAC10列が検出されませんでした。空として処理します。")
+        # 存在しない列番号を指定（全て空になる）
+        column_map["jlac10"] = str(len(header_row) + 1)
+
+    return convert_tabular(
+        filepath=filepath,
+        column_map=column_map,
+        hospital=hospital,
+        sheet_name=sheet_name,
+        skip_rows=skip_rows,
+        output_path=output_path,
+    )
+
+
+def write_jlac10_to_excel(
+    source_path: Path,
+    mapping_results: list[dict],
+    output_path: Path,
+    sheet_name: str | None = None,
+    skip_rows: int = 1,
+) -> Path:
+    """元の Excel に JLAC10 コードと標準名称を追記して保存
+
+    元ファイルの最終列の後ろに2列追加:
+      - JLAC10（マッピング結果）
+      - JLAC10標準名称
+
+    Args:
+        source_path: 元の Excel ファイル
+        mapping_results: mapper.bulk_map() の results リスト
+        output_path: 出力先
+        sheet_name: 対象シート名
+        skip_rows: ヘッダー行数
+    """
+    import openpyxl
+    from openpyxl.styles import Font, PatternFill
+
+    wb = openpyxl.load_workbook(str(source_path))
+    if sheet_name:
+        ws = wb[sheet_name]
+    else:
+        ws = wb.active
+
+    # 最終列を取得
+    max_col = ws.max_column
+    jlac10_col = max_col + 1
+    name_col = max_col + 2
+    status_col = max_col + 3
+
+    # ヘッダー追加
+    header_font = Font(bold=True)
+    ws.cell(row=skip_rows, column=jlac10_col, value="JLAC10").font = header_font
+    ws.cell(row=skip_rows, column=name_col, value="JLAC10標準名称").font = header_font
+    ws.cell(row=skip_rows, column=status_col, value="Status").font = header_font
+
+    # 色定義
+    fill_auto = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+    fill_candidate = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
+    fill_manual = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+
+    # データ書き込み
+    for i, item in enumerate(mapping_results):
+        row_num = skip_rows + 1 + i
+        best = item.get("best_match")
+        status = item.get("status", "manual")
+
+        jlac10_val = best["jlac10"] if best else ""
+        name_val = best["matched_name"] if best else ""
+
+        ws.cell(row=row_num, column=jlac10_col, value=jlac10_val)
+        ws.cell(row=row_num, column=name_col, value=name_val)
+        ws.cell(row=row_num, column=status_col, value=status)
+
+        fill = fill_auto if status == "auto" else fill_candidate if status == "candidate" else fill_manual
+        for col in (jlac10_col, name_col, status_col):
+            ws.cell(row=row_num, column=col).fill = fill
+
+    # 列幅
+    ws.column_dimensions[openpyxl.utils.get_column_letter(jlac10_col)].width = 20
+    ws.column_dimensions[openpyxl.utils.get_column_letter(name_col)].width = 35
+    ws.column_dimensions[openpyxl.utils.get_column_letter(status_col)].width = 12
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    wb.save(str(output_path))
+    logger.info("Excel追記完了: %s (JLAC10=%d列, 名称=%d列, Status=%d列)",
+                output_path, jlac10_col, name_col, status_col)
+    return output_path
