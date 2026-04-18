@@ -172,6 +172,88 @@ tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
 .mt-12 { margin-top:12px; }
 .text-sm { font-size:12px; }
 .overflow-auto { overflow:auto; max-height:600px; }
+
+/* SN Dashboard */
+.sn-filter-bar { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:16px; }
+.sn-filter-btn { padding:6px 14px; font-size:12px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; transition:all 0.2s; }
+.sn-filter-btn:hover { color:var(--text-primary); background:var(--bg-hover); }
+.sn-filter-btn.active { color:var(--accent); border-color:var(--accent); }
+.sn-filter-btn .sn-count { font-family:'JetBrains Mono',monospace; font-size:10px; margin-left:4px; opacity:0.7; }
+
+.sn-case-list { max-height:300px; overflow-y:auto; }
+.sn-case-row { display:grid; grid-template-columns:80px 1fr 100px 60px 80px 40px; gap:8px; align-items:center;
+  padding:10px 12px; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.15s; font-size:13px; }
+.sn-case-row:hover { background:var(--bg-hover); }
+.sn-case-row.selected { background:var(--bg-hover); border-left:3px solid var(--accent); }
+.sn-case-issue { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); }
+.sn-case-hospital { font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sn-case-date { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); }
+.sn-case-count { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); text-align:center; }
+.sn-case-del { background:none; border:none; color:var(--danger); cursor:pointer; font-size:14px; opacity:0.5; transition:opacity 0.2s; padding:4px; }
+.sn-case-del:hover { opacity:1; }
+
+.sn-status { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; padding:3px 10px;
+  text-transform:uppercase; letter-spacing:0.5px; display:inline-block; text-align:center; }
+.sn-status-open { background:rgba(199,92,92,0.15); color:var(--danger); border:1px solid var(--danger); }
+.sn-status-mapping { background:rgba(212,168,83,0.15); color:var(--warning); border:1px solid var(--warning); }
+.sn-status-waiting { background:rgba(106,158,199,0.15); color:var(--info); border:1px solid var(--info); }
+.sn-status-verifying { background:rgba(212,168,83,0.2); color:var(--accent); border:1px solid var(--accent); }
+.sn-status-closed { background:rgba(122,184,122,0.15); color:var(--success); border:1px solid var(--success); }
+
+.sn-detail { margin-top:16px; }
+.sn-detail-header { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:12px; align-items:end; margin-bottom:16px; }
+.sn-detail-header label { display:block; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); margin-bottom:4px; }
+.sn-detail-header input, .sn-detail-header select { background:var(--bg-secondary); border:1px solid var(--border);
+  color:var(--text-primary); padding:8px 10px; font-size:13px; width:100%; font-family:'Inter',sans-serif; outline:none; }
+.sn-detail-header select { font-family:'JetBrains Mono',monospace; cursor:pointer; }
+.sn-detail-header input:focus, .sn-detail-header select:focus { border-color:var(--accent); }
+
+.sn-subtabs { display:flex; gap:2px; margin-bottom:16px; border-bottom:1px solid var(--border); }
+.sn-subtab { padding:8px 16px; font-size:12px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  background:transparent; border:none; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
+.sn-subtab:hover { color:var(--text-primary); }
+.sn-subtab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+.sn-timeline { padding-left:20px; border-left:2px solid var(--border); }
+.sn-timeline-item { position:relative; padding:8px 0 16px 16px; }
+.sn-timeline-item::before { content:''; position:absolute; left:-25px; top:12px; width:10px; height:10px;
+  background:var(--bg-card); border:2px solid var(--accent); border-radius:50%; }
+.sn-timeline-date { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); }
+.sn-timeline-action { font-size:12px; font-weight:600; text-transform:uppercase; margin:2px 0; }
+.sn-timeline-note { font-size:13px; color:var(--text-primary); }
+
+.sn-action-badge { font-size:10px; font-weight:700; padding:2px 6px; letter-spacing:0.3px; text-transform:uppercase; }
+.sn-action-created { background:rgba(106,158,199,0.2); color:var(--info); }
+.sn-action-analyzed { background:rgba(212,168,83,0.2); color:var(--warning); }
+.sn-action-mail_sent { background:rgba(122,184,122,0.2); color:var(--success); }
+.sn-action-inquiry_sent { background:rgba(212,168,83,0.2); color:var(--accent); }
+.sn-action-reply_received { background:rgba(106,158,199,0.2); color:var(--info); }
+.sn-action-verified { background:rgba(122,184,122,0.2); color:var(--success); }
+.sn-action-closed { background:rgba(122,184,122,0.3); color:var(--success); }
+.sn-action-note { background:rgba(154,149,144,0.2); color:var(--text-secondary); }
+.sn-action-status_changed { background:rgba(212,168,83,0.2); color:var(--accent); }
+
+.sn-new-case-form { display:grid; grid-template-columns:120px 1fr 1fr auto; gap:8px; align-items:end; margin-bottom:16px;
+  padding:12px; background:var(--bg-secondary); border:1px solid var(--border); }
+.sn-new-case-form label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); margin-bottom:4px; display:block; }
+.sn-new-case-form input { background:var(--bg-primary); border:1px solid var(--border); color:var(--text-primary);
+  padding:8px 10px; font-size:13px; width:100%; outline:none; }
+.sn-new-case-form input:focus { border-color:var(--accent); }
+
+.sn-error-item-status { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; padding:2px 6px; }
+.sn-errst-assignable { color:var(--success); background:rgba(122,184,122,0.15); }
+.sn-errst-inquiry { color:var(--danger); background:rgba(199,92,92,0.15); }
+
+.sn-note-form { display:flex; gap:8px; margin-top:12px; }
+.sn-note-form input { flex:1; background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:8px 10px; font-size:13px; outline:none; }
+.sn-note-form input:focus { border-color:var(--accent); }
+
+select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
+  text-transform:uppercase; cursor:pointer; }
+.sn-export-bar { display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
+
 </style>
 </head>
 <body>
@@ -329,105 +411,178 @@ tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
 <!-- SN ERROR -->
 <!-- ============================================================ -->
 <div id="panel-error" class="hidden">
+  <!-- Case List -->
   <div class="card">
-    <h2>SSMIX SN Error Analysis</h2>
+    <h2>SN Error Dashboard</h2>
 
-    <!-- 入力方式切替 -->
+    <!-- New Case Form (hidden by default) -->
+    <div id="snNewCaseForm" class="sn-new-case-form hidden">
+      <div>
+        <label>Issue #</label>
+        <input id="snNewIssue" type="text" placeholder="4123">
+      </div>
+      <div>
+        <label>Hospital Name</label>
+        <input id="snNewHospital" type="text" placeholder="Hospital Name">
+      </div>
+      <div>
+        <label>Contact</label>
+        <input id="snNewContact" type="text" placeholder="Contact">
+      </div>
+      <div style="display:flex;gap:4px;align-items:end">
+        <button onclick="snDoCreateCase()" class="btn btn-primary btn-xs">Create</button>
+        <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary btn-xs">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
     <div class="flex-row mb-12">
-      <button onclick="toggleErrorInput('file')" class="btn btn-secondary" id="errToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
-      <button onclick="toggleErrorInput('paste')" class="btn btn-secondary" id="errTogglePaste">Paste Text</button>
-    </div>
-
-    <!-- ファイル入力 -->
-    <div id="errorInputFile">
-      <div class="grid-3 mb-12">
-        <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
-        <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
-        <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+      <button onclick="document.getElementById('snNewCaseForm').classList.toggle('hidden')" class="btn btn-primary btn-xs">+ New Case</button>
+      <div style="margin-left:auto">
+        <button onclick="snExportCases()" class="btn btn-secondary btn-xs">Export JSON</button>
+        <button onclick="document.getElementById('snImportFile').click()" class="btn btn-secondary btn-xs">Import JSON</button>
+        <input id="snImportFile" type="file" accept=".json" style="display:none" onchange="snImportCases(this)">
       </div>
     </div>
 
-    <!-- テキストペースト入力 -->
-    <div id="errorInputPaste" class="hidden">
-      <div class="mb-12">
-        <label>SSMIX2 エラー出力をそのまま貼り付け（タブ区切り / カンマ区切り / 1行1項目）</label>
-        <textarea id="errorPasteText" rows="8" placeholder="項目コード&#9;項目名称&#10;12345&#9;総蛋白&#10;67890&#9;アルブミン&#10;&#10;または&#10;&#10;総蛋白&#10;アルブミン&#10;CRP"></textarea>
+    <!-- Filter Bar -->
+    <div class="sn-filter-bar" id="snFilterBar"></div>
+
+    <!-- Case List -->
+    <div class="sn-case-list" id="snCaseList"></div>
+  </div>
+
+  <!-- Case Detail (shown when a case is selected) -->
+  <div id="snCaseDetail" class="card hidden">
+    <div class="flex-row mb-12" style="justify-content:space-between;align-items:center">
+      <h2 id="snDetailTitle" style="margin-bottom:0;padding-bottom:0;border-bottom:none">Case Detail</h2>
+      <button onclick="snCloseDetail()" class="btn btn-secondary btn-xs">Close</button>
+    </div>
+
+    <!-- Basic Info -->
+    <div class="sn-detail-header mb-12">
+      <div>
+        <label>Hospital</label>
+        <input id="snDetHospital" type="text" onchange="snUpdateField('hospital_name',this.value)">
       </div>
+      <div>
+        <label>Contact</label>
+        <input id="snDetContact" type="text" onchange="snUpdateField('contact',this.value)">
+      </div>
+      <div>
+        <label>Issue #</label>
+        <input id="snDetIssue" type="text" readonly style="opacity:0.7">
+      </div>
+      <div>
+        <label>Status</label>
+        <select id="snDetStatus" class="sn-status-select" onchange="snChangeStatus(this.value)">
+          <option value="open">OPEN</option>
+          <option value="mapping">MAPPING</option>
+          <option value="waiting">WAITING</option>
+          <option value="verifying">VERIFYING</option>
+          <option value="closed">CLOSED</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Sub Tabs -->
+    <div class="sn-subtabs">
+      <button class="sn-subtab active" onclick="snSwitchSubtab('items')" id="snSubItems">Error Items</button>
+      <button class="sn-subtab" onclick="snSwitchSubtab('actions')" id="snSubActions">Actions</button>
+      <button class="sn-subtab" onclick="snSwitchSubtab('history')" id="snSubHistory">History</button>
+    </div>
+
+    <!-- Sub Panel: Error Items -->
+    <div id="snPanelItems">
+      <!-- Import controls -->
+      <div class="flex-row mb-12">
+        <button onclick="snToggleImportMode('file')" class="btn btn-secondary btn-xs" id="snErrToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
+        <button onclick="snToggleImportMode('paste')" class="btn btn-secondary btn-xs" id="snErrTogglePaste">Paste Text</button>
+      </div>
+
+      <div id="snErrorInputFile">
+        <div class="grid-3 mb-12">
+          <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
+          <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
+          <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+        </div>
+      </div>
+
+      <div id="snErrorInputPaste" class="hidden">
+        <div class="mb-12">
+          <label>SSMIX2 error output (tab/comma/single line)</label>
+          <textarea id="errorPasteText" rows="6" placeholder="code&#9;name&#10;12345&#9;TP&#10;67890&#9;ALB"></textarea>
+        </div>
+        <div class="grid-2 mb-12">
+          <div><label>Code col (0-based, -1=none)</label><input id="pasteColCode" type="text" value="0"></div>
+          <div><label>Name col (0-based)</label><input id="pasteColName" type="text" value="1"></div>
+        </div>
+      </div>
+
       <div class="grid-2 mb-12">
-        <div><label>コード列 (0始まり, -1=なし)</label><input id="pasteColCode" type="text" value="0"></div>
-        <div><label>名称列 (0始まり)</label><input id="pasteColName" type="text" value="1"></div>
-      </div>
-    </div>
-
-    <div class="grid-2 mb-12">
-      <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
-      <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
-    </div>
-    <div class="flex-row mb-12">
-      <button onclick="analyzeErrors()" class="btn btn-danger">Analyze</button>
-      <button onclick="generateMail()" class="btn btn-secondary" id="btnMail" disabled>Generate Mail</button>
-      <button onclick="downloadErrorResult()" class="btn btn-secondary" id="btnErrorDL" disabled>Download Excel</button>
-    </div>
-    <div class="status-bar" id="errorStatus"></div>
-    <div id="errorResults" class="overflow-auto"></div>
-    <div id="mailArea" class="hidden mt-12">
-      <h2 style="color:var(--info)">Inquiry Mail</h2>
-      <div class="mb-12"><label>Subject</label><input id="mailSubject" type="text" readonly></div>
-      <div class="mb-12"><label>Body</label><textarea id="mailBody" rows="18" readonly></textarea></div>
-      <button onclick="copyMail()" class="btn btn-primary">Copy to Clipboard</button>
-    </div>
-
-    <!-- Workflow Package（マッピング完了後の一括生成） -->
-    <div id="workflowArea" class="hidden mt-12">
-      <h2 style="color:var(--accent)">Workflow Package</h2>
-      <p class="text-sm mb-12" style="color:var(--text-secondary)">マッピング完了後、メール・GHEコメント・Rocket.Chatメッセージを一括生成</p>
-
-      <div class="grid-3 mb-12">
-        <div><label>Hospital Name</label><input id="wfHospital" type="text" placeholder="○○病院"></div>
-        <div><label>Contact Person</label><input id="wfContact" type="text" placeholder="○○様"></div>
-        <div><label>CC</label><input id="wfCc" type="text" placeholder="○○様"></div>
-      </div>
-      <div class="grid-3 mb-12">
-        <div><label>Issue # (GHE)</label><input id="wfIssueNum" type="text" placeholder="42"></div>
-        <div><label>Rocket.Chat Mention</label><input id="wfMention" type="text" placeholder="@username"></div>
-        <div><label>Occurred Date</label><input id="wfDate" type="date"></div>
+        <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
+        <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
       </div>
 
       <div class="flex-row mb-12">
-        <button onclick="generateWorkflowPackage()" class="btn btn-primary">Generate All</button>
+        <button onclick="snImportErrors()" class="btn btn-danger btn-xs">Import Errors</button>
+        <button onclick="snDownloadErrorExcel()" class="btn btn-secondary btn-xs" id="btnErrorDL" disabled>Download Excel</button>
+      </div>
+      <div class="status-bar" id="errorStatus"></div>
+
+      <!-- Error Items Table -->
+      <div id="snErrorItemsTable" class="overflow-auto"></div>
+    </div>
+
+    <!-- Sub Panel: Actions -->
+    <div id="snPanelActions" class="hidden">
+      <div class="grid-3 mb-12">
+        <div><label>Contact Person</label><input id="wfContact" type="text" placeholder="Contact" onchange="snUpdateField('contact',this.value)"></div>
+        <div><label>CC</label><input id="wfCc" type="text" placeholder="CC"></div>
+        <div><label>Rocket.Chat Mention</label><input id="wfMention" type="text" placeholder="@username"></div>
       </div>
 
-      <div id="wfOutputs" class="hidden">
-        <!-- Email -->
-        <div class="mb-12" style="border:1px solid var(--border);padding:12px">
-          <div class="flex-row mb-12" style="justify-content:space-between">
-            <h3 style="color:var(--info);font-size:13px;font-weight:700">EMAIL (Outlook)</h3>
-            <button onclick="copyToClipboard('wfEmailSubject','wfEmailBody')" class="btn btn-primary btn-xs">Copy Email</button>
-          </div>
-          <div class="mb-12"><label>Subject</label><input id="wfEmailSubject" type="text" readonly></div>
-          <div><label>Body</label><textarea id="wfEmailBody" rows="12" readonly></textarea></div>
-        </div>
+      <div class="flex-row mb-12">
+        <button onclick="snGenerateEmail()" class="btn btn-primary btn-xs">Generate Email</button>
+        <button onclick="snGenerateGheComment()" class="btn btn-primary btn-xs">Generate GHE Comment</button>
+        <button onclick="snGenerateChatMsg()" class="btn btn-primary btn-xs">Generate Chat Message</button>
+      </div>
 
-        <!-- GHE Comment -->
-        <div class="mb-12" style="border:1px solid var(--border);padding:12px">
-          <div class="flex-row mb-12" style="justify-content:space-between">
-            <h3 style="color:var(--success);font-size:13px;font-weight:700">GHE ISSUE COMMENT</h3>
-            <button onclick="copyField('wfGheComment')" class="btn btn-primary btn-xs">Copy</button>
-          </div>
-          <textarea id="wfGheComment" rows="6" readonly></textarea>
+      <!-- Email Output -->
+      <div id="snEmailOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
+        <div class="flex-row mb-12" style="justify-content:space-between">
+          <h3 style="color:var(--info);font-size:13px;font-weight:700">EMAIL (Outlook)</h3>
+          <button onclick="snCopyEmail()" class="btn btn-primary btn-xs">Copy Email</button>
         </div>
+        <div class="mb-12"><label>Subject</label><input id="snEmailSubject" type="text" readonly></div>
+        <div><label>Body</label><textarea id="snEmailBody" rows="12" readonly></textarea></div>
+      </div>
 
-        <!-- Rocket.Chat -->
-        <div class="mb-12" style="border:1px solid var(--border);padding:12px">
-          <div class="flex-row mb-12" style="justify-content:space-between">
-            <h3 style="color:var(--warning);font-size:13px;font-weight:700">ROCKET.CHAT MESSAGE</h3>
-            <button onclick="copyField('wfChatMsg')" class="btn btn-primary btn-xs">Copy</button>
-          </div>
-          <textarea id="wfChatMsg" rows="6" readonly></textarea>
+      <!-- GHE Output -->
+      <div id="snGheOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
+        <div class="flex-row mb-12" style="justify-content:space-between">
+          <h3 style="color:var(--success);font-size:13px;font-weight:700">GHE ISSUE COMMENT</h3>
+          <button onclick="copyField('snGheComment')" class="btn btn-primary btn-xs">Copy</button>
         </div>
+        <textarea id="snGheComment" rows="6" readonly></textarea>
+      </div>
 
-        <!-- JSON Download -->
-        <button onclick="downloadWorkflowJson()" class="btn btn-secondary">Download Workflow JSON</button>
+      <!-- Chat Output -->
+      <div id="snChatOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
+        <div class="flex-row mb-12" style="justify-content:space-between">
+          <h3 style="color:var(--warning);font-size:13px;font-weight:700">ROCKET.CHAT MESSAGE</h3>
+          <button onclick="copyField('snChatMsg')" class="btn btn-primary btn-xs">Copy</button>
+        </div>
+        <textarea id="snChatMsg" rows="6" readonly></textarea>
+      </div>
+    </div>
+
+    <!-- Sub Panel: History -->
+    <div id="snPanelHistory" class="hidden">
+      <div id="snHistoryTimeline"></div>
+      <div class="sn-note-form">
+        <input id="snNoteInput" type="text" placeholder="Add a note...">
+        <button onclick="snAddNote()" class="btn btn-primary btn-xs">Add Note</button>
       </div>
     </div>
   </div>
@@ -1327,16 +1482,287 @@ function downloadBulkResult() {
 }
 
 // =====================================================================
-// UI: SN Error
+// UI: SN Error Dashboard
 // =====================================================================
+var snCases = {};
+var snSelectedCase = null;
+var snCurrentFilter = "all";
+var snCurrentSubtab = "items";
 var errorInputMode = "file";
-function toggleErrorInput(mode) {
-  errorInputMode = mode;
-  document.getElementById("errorInputFile").classList.toggle("hidden", mode !== "file");
-  document.getElementById("errorInputPaste").classList.toggle("hidden", mode !== "paste");
-  document.getElementById("errToggleFile").style.borderBottom = mode === "file" ? "2px solid var(--accent)" : "none";
-  document.getElementById("errTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
+
+// --- LocalStorage ---
+function snLoadCases() {
+  try {
+    var raw = localStorage.getItem("sn_dashboard_cases");
+    if (raw) snCases = JSON.parse(raw);
+    else snCases = {};
+  } catch(e) { snCases = {}; }
 }
+function snSaveCases() {
+  localStorage.setItem("sn_dashboard_cases", JSON.stringify(snCases));
+}
+
+// --- CRUD ---
+function snCreateCase(issueNumber, hospitalName, contact) {
+  var key = "#" + issueNumber;
+  if (snCases[key]) { showToast("Case " + key + " already exists"); return null; }
+  var now = new Date().toISOString();
+  snCases[key] = {
+    issue_number: parseInt(issueNumber),
+    hospital_name: hospitalName || "",
+    hospital_id: "",
+    contact: contact || "",
+    cc: "",
+    created_at: now,
+    updated_at: now,
+    status: "open",
+    error_items: [],
+    history: [
+      { date: now, action: "created", note: "Case created" }
+    ],
+    workflow: {}
+  };
+  snSaveCases();
+  return snCases[key];
+}
+function snUpdateCase(issueNumber, updates) {
+  var key = "#" + issueNumber;
+  if (!snCases[key]) return null;
+  for (var k in updates) {
+    if (updates.hasOwnProperty(k)) snCases[key][k] = updates[k];
+  }
+  snCases[key].updated_at = new Date().toISOString();
+  snSaveCases();
+  return snCases[key];
+}
+function snDeleteCase(issueNumber) {
+  var key = "#" + issueNumber;
+  if (!snCases[key]) return;
+  delete snCases[key];
+  if (snSelectedCase === key) { snSelectedCase = null; document.getElementById("snCaseDetail").classList.add("hidden"); }
+  snSaveCases();
+  snRenderCaseList(snCurrentFilter);
+}
+function snGetCase(issueNumber) {
+  return snCases["#" + issueNumber] || null;
+}
+
+// --- History ---
+function snAddHistory(issueNumber, action, note) {
+  var key = "#" + issueNumber;
+  if (!snCases[key]) return;
+  snCases[key].history.push({
+    date: new Date().toISOString(),
+    action: action,
+    note: note || ""
+  });
+  snCases[key].updated_at = new Date().toISOString();
+  snSaveCases();
+}
+
+// --- UI: New Case ---
+function snDoCreateCase() {
+  var issue = document.getElementById("snNewIssue").value.trim();
+  var hospital = document.getElementById("snNewHospital").value.trim();
+  var contact = document.getElementById("snNewContact").value.trim();
+  if (!issue) { showToast("Issue # is required"); return; }
+  var c = snCreateCase(issue, hospital, contact);
+  if (c) {
+    document.getElementById("snNewCaseForm").classList.add("hidden");
+    document.getElementById("snNewIssue").value = "";
+    document.getElementById("snNewHospital").value = "";
+    document.getElementById("snNewContact").value = "";
+    snRenderCaseList(snCurrentFilter);
+    snSelectCase("#" + issue);
+    showToast("Case #" + issue + " created");
+  }
+}
+
+// --- UI: Filter Bar ---
+function snRenderFilterBar() {
+  var bar = document.getElementById("snFilterBar");
+  while (bar.firstChild) bar.removeChild(bar.firstChild);
+  var statuses = ["all","open","mapping","waiting","verifying","closed"];
+  var labels = { all:"All", open:"Open", mapping:"Mapping", waiting:"Waiting", verifying:"Verifying", closed:"Closed" };
+  var counts = { all:0, open:0, mapping:0, waiting:0, verifying:0, closed:0 };
+  for (var k in snCases) { counts.all++; counts[snCases[k].status] = (counts[snCases[k].status]||0) + 1; }
+  for (var s of statuses) {
+    var btn = document.createElement("button");
+    btn.className = "sn-filter-btn" + (snCurrentFilter === s ? " active" : "");
+    btn.setAttribute("data-filter", s);
+    var txt = document.createTextNode(labels[s]);
+    btn.appendChild(txt);
+    var cnt = document.createElement("span");
+    cnt.className = "sn-count";
+    cnt.textContent = "(" + (counts[s]||0) + ")";
+    btn.appendChild(cnt);
+    btn.addEventListener("click", function(ev) {
+      var f = ev.currentTarget.getAttribute("data-filter");
+      snCurrentFilter = f;
+      snRenderCaseList(f);
+      snRenderFilterBar();
+    });
+    bar.appendChild(btn);
+  }
+}
+
+// --- UI: Case List ---
+function snRenderCaseList(filter) {
+  filter = filter || "all";
+  var container = document.getElementById("snCaseList");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  var keys = Object.keys(snCases).sort(function(a,b) {
+    return (snCases[b].updated_at || "").localeCompare(snCases[a].updated_at || "");
+  });
+
+  var shown = 0;
+  for (var key of keys) {
+    var c = snCases[key];
+    if (filter !== "all" && c.status !== filter) continue;
+    shown++;
+
+    var row = document.createElement("div");
+    row.className = "sn-case-row" + (snSelectedCase === key ? " selected" : "");
+    row.setAttribute("data-key", key);
+
+    var issueEl = document.createElement("span");
+    issueEl.className = "sn-case-issue";
+    issueEl.textContent = key;
+    row.appendChild(issueEl);
+
+    var hospEl = document.createElement("span");
+    hospEl.className = "sn-case-hospital";
+    hospEl.textContent = c.hospital_name || "-";
+    row.appendChild(hospEl);
+
+    var statusEl = document.createElement("span");
+    statusEl.className = "sn-status sn-status-" + c.status;
+    statusEl.textContent = c.status;
+    row.appendChild(statusEl);
+
+    var countEl = document.createElement("span");
+    countEl.className = "sn-case-count";
+    countEl.textContent = (c.error_items || []).length + " items";
+    row.appendChild(countEl);
+
+    var dateEl = document.createElement("span");
+    dateEl.className = "sn-case-date";
+    var d = c.updated_at ? new Date(c.updated_at) : new Date(c.created_at);
+    dateEl.textContent = (d.getMonth()+1) + "/" + d.getDate();
+    row.appendChild(dateEl);
+
+    var delBtn = document.createElement("button");
+    delBtn.className = "sn-case-del";
+    delBtn.textContent = "x";
+    delBtn.setAttribute("data-issue", String(c.issue_number));
+    delBtn.addEventListener("click", function(ev) {
+      ev.stopPropagation();
+      var iss = ev.currentTarget.getAttribute("data-issue");
+      if (confirm("Delete case #" + iss + "?")) {
+        snDeleteCase(iss);
+      }
+    });
+    row.appendChild(delBtn);
+
+    row.addEventListener("click", function(ev) {
+      var k = ev.currentTarget.getAttribute("data-key");
+      snSelectCase(k);
+    });
+
+    container.appendChild(row);
+  }
+
+  if (shown === 0) {
+    var empty = document.createElement("div");
+    empty.className = "status-bar";
+    empty.textContent = "No cases found. Click [+ New Case] to create one.";
+    container.appendChild(empty);
+  }
+
+  snRenderFilterBar();
+}
+
+// --- UI: Select Case ---
+function snSelectCase(key) {
+  snSelectedCase = key;
+  var c = snCases[key];
+  if (!c) return;
+
+  document.getElementById("snCaseDetail").classList.remove("hidden");
+  document.getElementById("snDetailTitle").textContent = "Case " + key;
+  document.getElementById("snDetHospital").value = c.hospital_name || "";
+  document.getElementById("snDetContact").value = c.contact || "";
+  document.getElementById("snDetIssue").value = key;
+  document.getElementById("snDetStatus").value = c.status;
+
+  // Sync fields for workflow
+  document.getElementById("errorHospital").value = c.hospital_name || "";
+  if (document.getElementById("wfContact")) document.getElementById("wfContact").value = c.contact || "";
+
+  snRenderErrorItems();
+  snRenderHistory(c.issue_number);
+  snSwitchSubtab(snCurrentSubtab);
+
+  // Re-render list to show selection
+  var rows = document.querySelectorAll(".sn-case-row");
+  for (var r of rows) {
+    r.classList.toggle("selected", r.getAttribute("data-key") === key);
+  }
+}
+
+function snCloseDetail() {
+  snSelectedCase = null;
+  document.getElementById("snCaseDetail").classList.add("hidden");
+  var rows = document.querySelectorAll(".sn-case-row");
+  for (var r of rows) r.classList.remove("selected");
+}
+
+// --- UI: Update Field ---
+function snUpdateField(field, value) {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var upd = {};
+  upd[field] = value;
+  snUpdateCase(snCases[snSelectedCase].issue_number, upd);
+  snRenderCaseList(snCurrentFilter);
+}
+
+// --- UI: Status Change ---
+function snChangeStatus(newStatus) {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var c = snCases[snSelectedCase];
+  var oldStatus = c.status;
+  if (oldStatus === newStatus) return;
+  snUpdateCase(c.issue_number, { status: newStatus });
+  snAddHistory(c.issue_number, "status_changed", oldStatus + " -> " + newStatus);
+  snRenderCaseList(snCurrentFilter);
+  snRenderHistory(c.issue_number);
+  showToast("Status: " + newStatus);
+}
+
+// --- UI: Sub Tabs ---
+function snSwitchSubtab(name) {
+  snCurrentSubtab = name;
+  var panels = ["items","actions","history"];
+  for (var p of panels) {
+    var el = document.getElementById("snPanel" + p.charAt(0).toUpperCase() + p.slice(1));
+    if (el) el.classList.toggle("hidden", p !== name);
+    var btn = document.getElementById("snSub" + p.charAt(0).toUpperCase() + p.slice(1));
+    if (btn) btn.className = p === name ? "sn-subtab active" : "sn-subtab";
+  }
+}
+
+// --- UI: Import Mode Toggle ---
+function snToggleImportMode(mode) {
+  errorInputMode = mode;
+  document.getElementById("snErrorInputFile").classList.toggle("hidden", mode !== "file");
+  document.getElementById("snErrorInputPaste").classList.toggle("hidden", mode !== "paste");
+  document.getElementById("snErrToggleFile").style.borderBottom = mode === "file" ? "2px solid var(--accent)" : "none";
+  document.getElementById("snErrTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
+}
+
+// Keep old toggleErrorInput as alias
+function toggleErrorInput(mode) { snToggleImportMode(mode); }
 
 // HL7v2 OBX セグメントからコード+名称を抽出
 function parseHL7Segments(text) {
@@ -1437,7 +1863,7 @@ function parseErrorRows(callback) {
   }
 }
 
-function analyzeErrors() {
+function analyzeErrors(callback) {
   parseErrorRows(function(rows) {
     var results = [], ok = 0, ng = 0;
     for (var i = 0; i < rows.length; i++) {
@@ -1449,69 +1875,143 @@ function analyzeErrors() {
       results.push({ row: i + 1, code: code, name: name, status: status, matches: matches, bestMatch: best });
     }
     lastErrorResult = results;
-    document.getElementById("errorStatus").innerHTML = "<b>" + results.length + "</b> errors | <span style='color:var(--success)'>Assignable: " + ok + "</span> | <span style='color:var(--danger)'>Inquiry: " + ng + "</span>";
-    document.getElementById("btnMail").disabled = (ng === 0); document.getElementById("btnErrorDL").disabled = false;
-    var h = '<table><tr><th></th><th>Code</th><th>Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
-    for (var r of results) {
-      var cls = r.status === "assignable" ? "row-ok" : "row-ng";
-      h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch ? formatJlac17(r.bestMatch.jlac10, r.bestMatch.jlac10_status) : "") + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
-    }
-    h += '</table>'; setHtml("errorResults", h);
-    showWorkflowButton();
+    document.getElementById("errorStatus").textContent =
+      results.length + " errors | Assignable: " + ok + " | Inquiry: " + ng;
+    document.getElementById("btnErrorDL").disabled = false;
+    if (callback) callback(results);
   });
 }
 
-function generateMail() {
-  if(!lastErrorResult)return;
-  var hospital=document.getElementById("errorHospital").value.trim()||"Hospital";
-  var dept=document.getElementById("errorDept").value.trim()||"検査科";
-  var items=lastErrorResult.filter(function(r){return r.status==="inquiry";});
-  if(items.length===0){showToast("No inquiry items");return;}
-  document.getElementById("mailSubject").value="検査項目コード確認のお願い（JLAC10未設定項目）";
-  var b=hospital+" "+dept+" 御中\n\nお世話になっております。\nSSMIX2データにおいて、以下の検査項目にJLAC10コードが設定されていないため、\n付番に必要な情報のご確認をお願いいたします。\n\n";
-  b+="■ 対象項目（"+items.length+"件）\n\n";
-  for(var i=0;i<items.length;i++) b+=(i+1)+". ["+items[i].code+"] "+items[i].name+"\n";
-  b+="\n■ 各項目について以下をご教示ください\n\n";
-  b+="1. 結果値の種類（数値/文字列/コード値/定性）\n2. 結果値の単位\n3. 使用している測定法または試薬名\n4. 検体の種類（血清/血漿/尿/その他）\n5. 親検査項目がある場合、その項目名\n6. 外注の場合、外注先（SRL/BML/LSI/その他）\n\nお忙しいところ恐れ入りますが、ご回答のほどよろしくお願いいたします。\n";
-  document.getElementById("mailBody").value=b;
-  document.getElementById("mailArea").classList.remove("hidden");
+// --- Dashboard: Import Errors into selected case ---
+function snImportErrors() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) {
+    showToast("Select or create a case first");
+    return;
+  }
+  analyzeErrors(function(results) {
+    var c = snCases[snSelectedCase];
+    // Convert analysis results to case error_items
+    var items = [];
+    for (var r of results) {
+      items.push({
+        code: r.code,
+        name: r.name,
+        status: r.status,
+        jlac10: r.bestMatch ? r.bestMatch.jlac10 : "",
+        matched_name: r.bestMatch ? r.bestMatch.matchedName : "",
+        score: r.bestMatch ? r.bestMatch.score : 0
+      });
+    }
+    snUpdateCase(c.issue_number, { error_items: items });
+    // Also keep lastErrorResult for workflow generation
+    lastErrorResult = results;
+
+    var ok = items.filter(function(x){return x.status==="assignable";}).length;
+    var ng = items.filter(function(x){return x.status==="inquiry";}).length;
+    snAddHistory(c.issue_number, "analyzed", items.length + " items (" + ok + " assignable, " + ng + " inquiry)");
+
+    snRenderErrorItems();
+    snRenderCaseList(snCurrentFilter);
+    snRenderHistory(c.issue_number);
+    showToast("Imported " + items.length + " error items");
+  });
 }
 
-function copyMail() {
-  navigator.clipboard.writeText(document.getElementById("mailBody").value).then(function(){showToast("Copied!");});
+// --- UI: Render Error Items Table ---
+function snRenderErrorItems() {
+  var container = document.getElementById("snErrorItemsTable");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var items = snCases[snSelectedCase].error_items || [];
+  if (items.length === 0) {
+    var empty = document.createElement("div");
+    empty.className = "status-bar";
+    empty.textContent = "No error items. Use [Import Errors] to analyze and import.";
+    container.appendChild(empty);
+    return;
+  }
+
+  var table = document.createElement("table");
+  var thead = document.createElement("tr");
+  ["","Code","Name","JLAC10","Matched","Score"].forEach(function(t){
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+
+  for (var item of items) {
+    var tr = document.createElement("tr");
+    tr.className = item.status === "assignable" ? "row-ok" : "row-ng";
+
+    var td0 = document.createElement("td");
+    var badge = document.createElement("span");
+    badge.className = "sn-error-item-status sn-errst-" + item.status;
+    badge.textContent = item.status === "assignable" ? "OK" : "??";
+    td0.appendChild(badge);
+    tr.appendChild(td0);
+
+    var td1 = document.createElement("td"); td1.textContent = item.code; tr.appendChild(td1);
+    var td2 = document.createElement("td"); td2.textContent = item.name; tr.appendChild(td2);
+
+    var td3 = document.createElement("td");
+    if (item.jlac10) {
+      var codeEl = document.createElement("code");
+      codeEl.className = "mono";
+      codeEl.textContent = item.jlac10;
+      td3.appendChild(codeEl);
+    }
+    tr.appendChild(td3);
+
+    var td4 = document.createElement("td"); td4.textContent = item.matched_name || ""; tr.appendChild(td4);
+    var td5 = document.createElement("td"); td5.textContent = item.score ? item.score.toFixed(0) : "-"; tr.appendChild(td5);
+
+    table.appendChild(tr);
+  }
+  container.appendChild(table);
 }
 
-function downloadErrorResult() {
-  if(!lastErrorResult)return;
-  var d=[["Status","Row","Code","Name","JLAC10","Matched","Score"]];
-  for(var r of lastErrorResult) d.push([r.status==="assignable"?"Assignable":"Inquiry",r.row,r.code,r.name,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):""]);
-  var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Error Analysis"); XLSX.writeFile(wb,"error_analysis.xlsx");
+// --- UI: Download Error Excel ---
+function snDownloadErrorExcel() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var items = snCases[snSelectedCase].error_items || [];
+  if (items.length === 0) { showToast("No error items"); return; }
+  var d = [["Status","Code","Name","JLAC10","Matched","Score"]];
+  for (var r of items) {
+    d.push([r.status==="assignable"?"Assignable":"Inquiry", r.code, r.name, r.jlac10, r.matched_name, r.score ? r.score.toFixed(0) : ""]);
+  }
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(d), "Error Analysis");
+  XLSX.writeFile(wb, "error_analysis_" + snCases[snSelectedCase].issue_number + ".xlsx");
 }
 
-// =====================================================================
-// UI: Workflow Package Generation (Step 1)
-// =====================================================================
-var lastWorkflowJson = null;
+// --- Workflow: get case error data as lastErrorResult format ---
+function snGetErrorResultFromCase() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return null;
+  var items = snCases[snSelectedCase].error_items || [];
+  if (items.length === 0) return null;
+  return items.map(function(item) {
+    return {
+      code: item.code, name: item.name, status: item.status,
+      bestMatch: item.jlac10 ? { jlac10: item.jlac10, matchedName: item.matched_name, score: item.score } : null
+    };
+  });
+}
 
-function generateWorkflowPackage() {
-  if (!lastErrorResult) { showToast("先にエラー分析を実行してください"); return; }
-
-  var hospital = document.getElementById("wfHospital").value.trim() || "○○病院";
-  var contact = document.getElementById("wfContact").value.trim() || "○○様";
+// --- Workflow: Generate Email ---
+function snGenerateEmail() {
+  var errorData = snGetErrorResultFromCase();
+  if (!errorData) { showToast("No error items. Import errors first."); return; }
+  var c = snCases[snSelectedCase];
+  var hospital = c.hospital_name || "Hospital";
+  var contact = (document.getElementById("wfContact").value.trim()) || c.contact || "Contact";
   var cc = document.getElementById("wfCc").value.trim();
-  var issueNum = document.getElementById("wfIssueNum").value.trim() || "??";
-  var mention = document.getElementById("wfMention").value.trim() || "@担当者";
-  var dateInput = document.getElementById("wfDate").value;
-  var dateStr = dateInput || new Date().toISOString().split("T")[0];
+  var issueNum = c.issue_number;
+  var dateStr = new Date().toISOString().split("T")[0];
 
-  // 付番可能な項目のみ抽出
-  var assignable = lastErrorResult.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
-  var inquiry = lastErrorResult.filter(function(r) { return r.status === "inquiry"; });
+  var assignable = errorData.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = errorData.filter(function(r) { return r.status === "inquiry"; });
 
-  // メール件名
   var subject = hospital + "_" + dateStr + "_#" + issueNum;
-
-  // メール本文
   var body = hospital + " " + contact + "\n";
   if (cc) body += "CC: " + cc + "\n";
   body += "\nお世話になっております。\n\n";
@@ -1544,7 +2044,32 @@ function generateWorkflowPackage() {
   body += "ご不明な点がございましたら、お気軽にお問い合わせください。\n";
   body += "よろしくお願いいたします。\n";
 
-  // GHE コメント
+  document.getElementById("snEmailSubject").value = subject;
+  document.getElementById("snEmailBody").value = body;
+  document.getElementById("snEmailOutput").classList.remove("hidden");
+
+  snAddHistory(c.issue_number, "mail_sent", "Email generated: " + assignable.length + " assignable, " + inquiry.length + " inquiry");
+  snUpdateCase(c.issue_number, { workflow: Object.assign(c.workflow || {}, { mail_subject: subject, mail_sent_at: new Date().toISOString() }) });
+  snRenderHistory(c.issue_number);
+  showToast("Email generated");
+}
+
+function snCopyEmail() {
+  var subject = document.getElementById("snEmailSubject").value;
+  var body = document.getElementById("snEmailBody").value;
+  navigator.clipboard.writeText("Subject: " + subject + "\n\n" + body).then(function() { showToast("Email copied"); });
+}
+
+// --- Workflow: Generate GHE Comment ---
+function snGenerateGheComment() {
+  var errorData = snGetErrorResultFromCase();
+  if (!errorData) { showToast("No error items. Import errors first."); return; }
+  var c = snCases[snSelectedCase];
+  var dateStr = new Date().toISOString().split("T")[0];
+
+  var assignable = errorData.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = errorData.filter(function(r) { return r.status === "inquiry"; });
+
   var gheComment = "## マッピング完了・病院へ設定依頼済み\n\n";
   gheComment += "- 日時: " + dateStr + "\n";
   gheComment += "- 付番完了: " + assignable.length + "件\n";
@@ -1559,7 +2084,27 @@ function generateWorkflowPackage() {
     }
   }
 
-  // Rocket.Chat メッセージ
+  document.getElementById("snGheComment").value = gheComment;
+  document.getElementById("snGheOutput").classList.remove("hidden");
+
+  snAddHistory(c.issue_number, "inquiry_sent", "GHE comment generated");
+  snUpdateCase(c.issue_number, { workflow: Object.assign(c.workflow || {}, { ghe_comment_posted: true }) });
+  snRenderHistory(c.issue_number);
+  showToast("GHE comment generated");
+}
+
+// --- Workflow: Generate Chat Message ---
+function snGenerateChatMsg() {
+  var errorData = snGetErrorResultFromCase();
+  if (!errorData) { showToast("No error items. Import errors first."); return; }
+  var c = snCases[snSelectedCase];
+  var hospital = c.hospital_name || "Hospital";
+  var mention = document.getElementById("wfMention").value.trim() || "@user";
+  var issueNum = c.issue_number;
+
+  var assignable = errorData.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = errorData.filter(function(r) { return r.status === "inquiry"; });
+
   var chatMsg = mention + " SSMIX2 エラー対応完了\n";
   chatMsg += "病院: " + hospital + "\n";
   chatMsg += "イシュー: #" + issueNum + "\n";
@@ -1567,36 +2112,22 @@ function generateWorkflowPackage() {
   chatMsg += "病院へ設定依頼メール送信済み\n";
   chatMsg += "GHE: （イシューコメントのリンクをここに貼り付け）";
 
-  // 表示
-  document.getElementById("wfEmailSubject").value = subject;
-  document.getElementById("wfEmailBody").value = body;
-  document.getElementById("wfGheComment").value = gheComment;
-  document.getElementById("wfChatMsg").value = chatMsg;
-  document.getElementById("wfOutputs").classList.remove("hidden");
-  document.getElementById("workflowArea").classList.remove("hidden");
+  document.getElementById("snChatMsg").value = chatMsg;
+  document.getElementById("snChatOutput").classList.remove("hidden");
 
-  // JSON 保存用
-  lastWorkflowJson = {
-    hospital_name: hospital,
-    hospital_id: document.getElementById("errorHospital").value.trim(),
-    issue_number: parseInt(issueNum) || 0,
-    occurred_at: dateStr,
-    to: "",
-    cc: cc ? [cc] : [],
-    subject: subject,
-    mapping_results: assignable.map(function(a) {
-      return { item_code: a.code, item_name: a.name, jlac10: a.bestMatch.jlac10, standard_name: a.bestMatch.matchedName };
-    }),
-    inquiry_items: inquiry.map(function(q) {
-      return { item_code: q.code, item_name: q.name };
-    }),
-    status: "pending",
-    mail_body: body,
-    ghe_comment: gheComment,
-    rocketchat_message: chatMsg
-  };
+  snUpdateCase(c.issue_number, { workflow: Object.assign(c.workflow || {}, { rocketchat_posted: true }) });
+  showToast("Chat message generated");
+}
 
-  showToast("Workflow Package generated");
+// --- Keep legacy functions working ---
+function generateWorkflowPackage() {
+  if (snSelectedCase) {
+    snGenerateEmail();
+    snGenerateGheComment();
+    snGenerateChatMsg();
+  } else {
+    showToast("Select a case first");
+  }
 }
 
 function copyToClipboard(subjectId, bodyId) {
@@ -1606,33 +2137,111 @@ function copyToClipboard(subjectId, bodyId) {
 }
 
 function copyField(id) {
-  navigator.clipboard.writeText(document.getElementById(id).value).then(function() { showToast("Copied!"); });
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.value).then(function() { showToast("Copied!"); });
 }
 
-function downloadWorkflowJson() {
-  if (!lastWorkflowJson) return;
-  var name = (lastWorkflowJson.hospital_name || "workflow") + "_" + lastWorkflowJson.occurred_at + "_#" + lastWorkflowJson.issue_number + ".json";
-  downloadFile(name, JSON.stringify(lastWorkflowJson, null, 2));
-}
+// --- UI: History ---
+function snRenderHistory(issueNumber) {
+  var container = document.getElementById("snHistoryTimeline");
+  while (container.firstChild) container.removeChild(container.firstChild);
 
-// analyzeErrors 完了後に Workflow Area を表示
-var _origAnalyzeErrors = analyzeErrors;
+  var c = snGetCase(issueNumber);
+  if (!c) return;
 
-// エラー分析後に Generate Workflow ボタンを有効化
-function showWorkflowButton() {
-  if (lastErrorResult && lastErrorResult.some(function(r){return r.status==="assignable";})) {
-    document.getElementById("workflowArea").classList.remove("hidden");
-    // 日付をデフォルト設定
-    if (!document.getElementById("wfDate").value) {
-      document.getElementById("wfDate").value = new Date().toISOString().split("T")[0];
-    }
-    // 病院名を引き継ぎ
-    var h = document.getElementById("errorHospital").value.trim();
-    if (h && !document.getElementById("wfHospital").value) {
-      document.getElementById("wfHospital").value = h;
-    }
+  var history = (c.history || []).slice().reverse();
+  if (history.length === 0) {
+    var empty = document.createElement("div");
+    empty.className = "status-bar";
+    empty.textContent = "No history entries.";
+    container.appendChild(empty);
+    return;
   }
+
+  var timeline = document.createElement("div");
+  timeline.className = "sn-timeline";
+
+  for (var h of history) {
+    var item = document.createElement("div");
+    item.className = "sn-timeline-item";
+
+    var dateEl = document.createElement("div");
+    dateEl.className = "sn-timeline-date";
+    var dt = new Date(h.date);
+    dateEl.textContent = dt.getFullYear() + "-" + String(dt.getMonth()+1).padStart(2,"0") + "-" + String(dt.getDate()).padStart(2,"0") + " " + String(dt.getHours()).padStart(2,"0") + ":" + String(dt.getMinutes()).padStart(2,"0");
+    item.appendChild(dateEl);
+
+    var actionEl = document.createElement("div");
+    actionEl.className = "sn-timeline-action";
+    var badge = document.createElement("span");
+    badge.className = "sn-action-badge sn-action-" + (h.action || "note");
+    badge.textContent = h.action || "note";
+    actionEl.appendChild(badge);
+    item.appendChild(actionEl);
+
+    if (h.note) {
+      var noteEl = document.createElement("div");
+      noteEl.className = "sn-timeline-note";
+      noteEl.textContent = h.note;
+      item.appendChild(noteEl);
+    }
+
+    timeline.appendChild(item);
+  }
+
+  container.appendChild(timeline);
 }
+
+// --- UI: Add Note ---
+function snAddNote() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var input = document.getElementById("snNoteInput");
+  var note = input.value.trim();
+  if (!note) { showToast("Enter a note"); return; }
+  snAddHistory(snCases[snSelectedCase].issue_number, "note", note);
+  input.value = "";
+  snRenderHistory(snCases[snSelectedCase].issue_number);
+  showToast("Note added");
+}
+
+// --- Export / Import ---
+function snExportCases() {
+  var data = { exported_at: new Date().toISOString(), cases: snCases };
+  downloadFile("sn_dashboard_" + new Date().toISOString().split("T")[0] + ".json", JSON.stringify(data, null, 2));
+  showToast("Cases exported");
+}
+
+function snImportCases(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      var imported = data.cases || data;
+      var count = 0;
+      for (var k in imported) {
+        if (imported.hasOwnProperty(k) && imported[k].issue_number) {
+          snCases[k] = imported[k];
+          count++;
+        }
+      }
+      snSaveCases();
+      snRenderCaseList(snCurrentFilter);
+      showToast("Imported " + count + " cases");
+    } catch(err) {
+      showToast("Import failed: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+  input.value = "";
+}
+
+// Keep old generateMail for backward compatibility
+function generateMail() { snGenerateEmail(); }
+function copyMail() { snCopyEmail(); }
+function downloadErrorResult() { snDownloadErrorExcel(); }
 
 // =====================================================================
 // UI: Database
@@ -1694,7 +2303,22 @@ function switchTab(name) {
     var btn=document.getElementById("tab-"+t);
     btn.className=t===name?"tab active":"tab";
   }
+  // When switching to error tab, refresh the dashboard
+  if (name === "error") {
+    snRenderCaseList(snCurrentFilter);
+    if (snSelectedCase && snCases[snSelectedCase]) {
+      snSelectCase(snSelectedCase);
+    }
+  }
 }
+
+// =====================================================================
+// SN Dashboard Init
+// =====================================================================
+window.addEventListener("DOMContentLoaded", function() {
+  snLoadCases();
+  snRenderCaseList("all");
+});
 </script>
 </body>
 </html>
