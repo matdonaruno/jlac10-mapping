@@ -305,6 +305,8 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 #panel-import .btn-primary { background: #6a9ec7; }
 #panel-import .btn-primary:hover { background: #7dbee0; }
 #panel-import .guide { border-left-color: #6a9ec7; }
+#panel-import .btn-secondary[style*="border-bottom: 2px"] { border-bottom-color: #6a9ec7 !important; color: #6a9ec7; }
+#panel-import .sub-toggle-active { border-bottom: 2px solid #6a9ec7 !important; color: #6a9ec7 !important; }
 
 #panel-bulk .card { border-left: 3px solid #7ab87a; background: #2d302d; }
 #panel-bulk input[type="text"]:focus, #panel-bulk select:focus,
@@ -1107,14 +1109,23 @@ function doSearch() {
       html += '<span class="decode-part"><span class="decode-label">結果識別</span>' + (r.jlac10.length >= 17 ? esc(r.jlac10.substring(15,17)) : '<span class="decode-missing">**</span>') + '</span>';
       html += '</div>';
     }
-    // 4行目: 各社詳細（横並びテーブル）
+    // 4行目: 各社詳細（横並び、JLAC10+項目名+測定法+材料+リンク）
     if (srcKeys.length > 0) {
       html += '<div class="source-detail-row">';
       for (var k of srcKeys) {
         var v = r.sources[k];
-        html += '<div class="source-detail"><span class="company-label company-'+k+'">'+esc(k.toUpperCase())+'</span>';
-        html += '<span class="source-item-name">'+esc(v.item_name)+'</span>';
-        html += '<span class="source-method">'+esc(v.method)+'</span></div>';
+        html += '<div class="source-detail">';
+        html += '<span class="company-label company-'+k+'">'+esc(k.toUpperCase())+'</span>';
+        html += '<div style="flex:1">';
+        html += '<div class="source-item-name">'+esc(v.item_name)+'</div>';
+        html += '<div style="font-size:11px;color:var(--text-secondary)">';
+        html += '材料: '+esc(v.material||"-")+' / 方法: '+esc(v.method||"-");
+        if (v.reference_value) html += ' / 基準値: '+esc(v.reference_value);
+        html += '</div>';
+        if (v.detail_url) {
+          html += '<div style="font-size:10px;margin-top:2px"><a href="'+esc(v.detail_url)+'" target="_blank" style="color:var(--info);text-decoration:underline">詳細ページ</a></div>';
+        }
+        html += '</div></div>';
       }
       html += '</div>';
     }
