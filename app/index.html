@@ -261,6 +261,43 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 .step-num { display:inline-block; width:18px; height:18px; line-height:18px; text-align:center;
   background:var(--accent); color:#1a1a1a; font-size:10px; font-weight:700; margin-right:6px; }
 
+/* Error Detail Panel (match candidate expansion) */
+.error-detail-panel { background:var(--bg-primary); border:1px solid var(--border);
+  padding:12px; margin:4px 0 8px; display:none; }
+.error-detail-panel.open { display:block; }
+.error-candidate { padding:8px; border-bottom:1px solid var(--border); cursor:pointer; display:flex; align-items:center; gap:8px; }
+.error-candidate:hover { background:var(--bg-hover); }
+.error-candidate .candidate-rank { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+  color:var(--accent); min-width:20px; }
+.error-candidate .candidate-jlac { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-primary); }
+.error-candidate .candidate-name { font-size:12px; color:var(--text-primary); }
+.error-candidate .candidate-score { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary);
+  margin-left:auto; }
+.error-candidate .source-info { font-size:11px; color:var(--text-secondary); padding-left:28px; }
+.error-candidate-btn { padding:3px 8px; font-size:10px; font-weight:600; background:var(--accent); color:#1a1a1a;
+  border:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.3px; }
+.error-candidate-btn:hover { background:var(--accent-hover); }
+.knowledge-hint { border-left:2px solid var(--success); padding:6px 10px;
+  margin-top:8px; font-size:11px; color:var(--success); background:var(--bg-secondary); }
+.error-row-clickable { cursor:pointer; }
+.error-row-clickable:hover td { background:var(--bg-hover); }
+
+/* Knowledge Registration Modal */
+.knowledge-modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6);
+  z-index:998; display:none; align-items:center; justify-content:center; }
+.knowledge-modal-overlay.open { display:flex; }
+.knowledge-modal { background:var(--bg-card); border:1px solid var(--border); padding:24px;
+  max-width:500px; width:90%; max-height:80vh; overflow-y:auto; }
+.knowledge-modal h3 { font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;
+  color:var(--accent); margin-bottom:16px; text-transform:uppercase; letter-spacing:0.5px; }
+.knowledge-modal label { display:block; font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:0.5px; color:var(--text-secondary); margin-bottom:4px; margin-top:12px; }
+.knowledge-modal input, .knowledge-modal textarea, .knowledge-modal select {
+  background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:8px 10px; font-size:13px; width:100%; font-family:'Inter',sans-serif; outline:none; }
+.knowledge-modal input:focus, .knowledge-modal textarea:focus, .knowledge-modal select:focus { border-color:var(--accent); }
+.knowledge-modal .km-actions { display:flex; gap:8px; margin-top:16px; justify-content:flex-end; }
+
 </style>
 </head>
 <body>
@@ -750,6 +787,42 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   </div>
 </div>
 
+</div>
+
+<!-- Knowledge Registration Modal -->
+<div class="knowledge-modal-overlay" id="knowledgeModalOverlay">
+  <div class="knowledge-modal">
+    <h3>Knowledge Registration</h3>
+    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">
+      この案件のエラー対応経験をナレッジに登録します。今後の類似エラー発生時にヒントとして表示されます。
+    </p>
+    <label>エラー種別</label>
+    <select id="kmErrorType">
+      <option value="jlac10_missing">JLAC10未設定</option>
+      <option value="jlac10_invalid">JLAC10形式不正</option>
+      <option value="value_mismatch">結果値不正</option>
+      <option value="name_missing">項目名未設定</option>
+      <option value="other">その他</option>
+    </select>
+    <label>項目名</label>
+    <input id="kmItemName" type="text" placeholder="総蛋白">
+    <label>症状（どのようなエラーだったか）</label>
+    <input id="kmSymptom" type="text" placeholder="OBX-3が空でDB取り込みエラー">
+    <label>原因</label>
+    <input id="kmCause" type="text" placeholder="電子カルテの検査マスターにJLAC10が未登録">
+    <label>解決方法</label>
+    <input id="kmResolution" type="text" placeholder="3A010000002327101 を設定">
+    <label>JLAC10コード</label>
+    <input id="kmJlac10" type="text" placeholder="3A010000002327101">
+    <label>メモ</label>
+    <textarea id="kmNotes" rows="3" placeholder="補足情報"></textarea>
+    <label>タグ（カンマ区切り）</label>
+    <input id="kmTags" type="text" placeholder="生化学, NEC, JLAC10未設定">
+    <div class="km-actions">
+      <button onclick="knowledgeModalCancel()" class="btn btn-secondary btn-xs">スキップ</button>
+      <button onclick="knowledgeModalSave()" class="btn btn-primary btn-xs">ナレッジ登録</button>
+    </div>
+  </div>
 </div>
 
 <!-- Toast -->
@@ -1809,6 +1882,14 @@ function snChangeStatus(newStatus) {
   snRenderCaseList(snCurrentFilter);
   snRenderHistory(c.issue_number);
   showToast("Status: " + newStatus);
+
+  // Prompt knowledge registration on case close
+  if (newStatus === "closed") {
+    var doRegister = confirm("\u30a8\u30e9\u30fc\u7d4c\u9a13\u3092\u30ca\u30ec\u30c3\u30b8\u306b\u767b\u9332\u3057\u307e\u3059\u304b\uff1f\n\u4eca\u5f8c\u306e\u985e\u4f3c\u30a8\u30e9\u30fc\u5bfe\u5fdc\u306b\u5f79\u7acb\u3061\u307e\u3059\u3002");
+    if (doRegister) {
+      knowledgeModalShow();
+    }
+  }
 }
 
 // --- UI: Sub Tabs ---
@@ -1879,6 +1960,101 @@ function parseHL7Segments(text) {
     // MSH は無視
   }
   return rows;
+}
+
+// =====================================================================
+// SSMIX2 Parser (enhanced OBX parser - coexists with parseHL7Segments)
+// =====================================================================
+
+// Error type definitions (extension point - add new types here)
+var ERROR_TYPES = {
+  "jlac10_missing": { label: "JLAC10\u672a\u8a2d\u5b9a", severity: "error", color: "var(--danger)" },
+  "jlac10_invalid": { label: "JLAC10\u5f62\u5f0f\u4e0d\u6b63", severity: "error", color: "var(--danger)" },
+  "value_mismatch": { label: "\u7d50\u679c\u5024\u4e0d\u6b63", severity: "warning", color: "var(--warning)" },
+  "name_missing":   { label: "\u9805\u76ee\u540d\u672a\u8a2d\u5b9a", severity: "warning", color: "var(--warning)" },
+  "other":          { label: "\u305d\u306e\u4ed6", severity: "info", color: "var(--info)" }
+};
+
+// Error detection rules (extension point - add rules in this function)
+function detectErrors(segment) {
+  var errors = [];
+  // Rule: JLAC10 missing
+  if (!segment.jlac10 || segment.jlac10.trim() === "") {
+    errors.push({ type: "jlac10_missing", message: "JLAC10\u30b3\u30fc\u30c9\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u307e\u305b\u3093" });
+  }
+  // Rule: JLAC10 format invalid
+  else if (!/^[0-9A-Za-z]{15,17}$/.test(segment.jlac10.replace(/-/g, ""))) {
+    errors.push({ type: "jlac10_invalid", message: "JLAC10\u5f62\u5f0f\u4e0d\u6b63: " + segment.jlac10 });
+  }
+  // Rule: Item name missing
+  if (!segment.item_name || segment.item_name.trim() === "") {
+    errors.push({ type: "name_missing", message: "\u9805\u76ee\u540d\u304c\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u307e\u305b\u3093" });
+  }
+  // Extension point: add more rules below
+  // Example rules (activate with real data):
+  // if (segment.data_type === "NM" && segment.value && isNaN(Number(segment.value))) {
+  //   errors.push({ type: "value_mismatch", message: "数値型なのに非数値: " + segment.value });
+  // }
+  // if (segment.item_name === "未設定項目") {
+  //   errors.push({ type: "name_missing", message: "項目名がデフォルト値です" });
+  // }
+  return errors;
+}
+
+// Full SSMIX2 OBX parser
+// Parses: OBX|seq|data_type|code^item_code^item_name^code_system|sub_id|value|unit|ref_range|abnormal_flag|...
+function parseSsmix2Data(text) {
+  var segments = [];
+  var errors = [];
+  var summary = { total: 0, error_count: 0, by_type: {} };
+  var lines = text.split("\n");
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line) continue;
+    if (!line.startsWith("OBX|")) continue;
+
+    var fields = line.split("|");
+    // OBX-3: Observation Identifier (field index 3)
+    var obx3 = (fields[3] || "").split("^");
+    var segment = {
+      line_number: i + 1,
+      raw: line,
+      sequence: fields[1] || "",
+      data_type: fields[2] || "",
+      jlac10: obx3[0] || "",
+      item_code: obx3[1] || "",
+      item_name: obx3[2] || "",
+      code_system: obx3[3] || "",
+      sub_id: fields[4] || "",
+      value: fields[5] || "",
+      unit: fields[6] || "",
+      ref_range: fields[7] || "",
+      abnormal_flag: fields[8] || ""
+    };
+
+    // Run error detection
+    var segErrors = detectErrors(segment);
+    segment.errors = segErrors;
+
+    segments.push(segment);
+    summary.total++;
+
+    if (segErrors.length > 0) {
+      summary.error_count++;
+      for (var e of segErrors) {
+        errors.push({
+          line: i + 1,
+          segment_index: segments.length - 1,
+          type: e.type,
+          message: e.message
+        });
+        summary.by_type[e.type] = (summary.by_type[e.type] || 0) + 1;
+      }
+    }
+  }
+
+  return { segments: segments, errors: errors, summary: summary };
 }
 
 // フォーマット自動検知
@@ -2016,47 +2192,219 @@ function snRenderErrorItems() {
   if (items.length === 0) {
     var empty = document.createElement("div");
     empty.className = "status-bar";
-    empty.textContent = "エラー項目がありません。「エラー取込」で分析してください。";
+    empty.textContent = "\u30a8\u30e9\u30fc\u9805\u76ee\u304c\u3042\u308a\u307e\u305b\u3093\u3002\u300c\u30a8\u30e9\u30fc\u53d6\u8fbc\u300d\u3067\u5206\u6790\u3057\u3066\u304f\u3060\u3055\u3044\u3002";
     container.appendChild(empty);
     return;
   }
 
   var table = document.createElement("table");
   var thead = document.createElement("tr");
-  ["","Code","Name","JLAC10","Matched","Score"].forEach(function(t){
+  ["\u2003","Code","Name","JLAC10","Matched","Score"].forEach(function(t){
     var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
   });
   table.appendChild(thead);
 
-  for (var item of items) {
-    var tr = document.createElement("tr");
-    tr.className = item.status === "assignable" ? "row-ok" : "row-ng";
+  for (var idx = 0; idx < items.length; idx++) {
+    (function(itemIdx) {
+      var item = items[itemIdx];
+      var tr = document.createElement("tr");
+      tr.className = (item.status === "assignable" ? "row-ok" : "row-ng") + " error-row-clickable";
+      tr.setAttribute("data-error-idx", itemIdx);
+      tr.setAttribute("role", "button");
+      tr.setAttribute("tabindex", "0");
+      tr.setAttribute("aria-expanded", "false");
+      tr.setAttribute("aria-label", (item.name || item.code) + " \u306e\u8a73\u7d30\u3092\u5c55\u958b");
 
-    var td0 = document.createElement("td");
-    var badge = document.createElement("span");
-    badge.className = "sn-error-item-status sn-errst-" + item.status;
-    badge.textContent = item.status === "assignable" ? "OK" : "??";
-    td0.appendChild(badge);
-    tr.appendChild(td0);
+      var td0 = document.createElement("td");
+      var badge = document.createElement("span");
+      badge.className = "sn-error-item-status sn-errst-" + item.status;
+      badge.textContent = item.status === "assignable" ? "OK" : "??";
+      td0.appendChild(badge);
+      tr.appendChild(td0);
 
-    var td1 = document.createElement("td"); td1.textContent = item.code; tr.appendChild(td1);
-    var td2 = document.createElement("td"); td2.textContent = item.name; tr.appendChild(td2);
+      var td1 = document.createElement("td"); td1.textContent = item.code; tr.appendChild(td1);
+      var td2 = document.createElement("td"); td2.textContent = item.name; tr.appendChild(td2);
 
-    var td3 = document.createElement("td");
-    if (item.jlac10) {
-      var codeEl = document.createElement("code");
-      codeEl.className = "mono";
-      codeEl.textContent = item.jlac10;
-      td3.appendChild(codeEl);
-    }
-    tr.appendChild(td3);
+      var td3 = document.createElement("td");
+      if (item.jlac10) {
+        var codeEl = document.createElement("code");
+        codeEl.className = "mono";
+        codeEl.textContent = item.jlac10;
+        td3.appendChild(codeEl);
+      }
+      tr.appendChild(td3);
 
-    var td4 = document.createElement("td"); td4.textContent = item.matched_name || ""; tr.appendChild(td4);
-    var td5 = document.createElement("td"); td5.textContent = item.score ? item.score.toFixed(0) : "-"; tr.appendChild(td5);
+      var td4 = document.createElement("td"); td4.textContent = item.matched_name || ""; tr.appendChild(td4);
+      var td5 = document.createElement("td"); td5.textContent = item.score ? item.score.toFixed(0) : "-"; tr.appendChild(td5);
 
-    table.appendChild(tr);
+      table.appendChild(tr);
+
+      // Detail panel row (hidden by default)
+      var detailTr = document.createElement("tr");
+      detailTr.className = "error-detail-row";
+      detailTr.style.display = "none";
+      var detailTd = document.createElement("td");
+      detailTd.setAttribute("colspan", "6");
+      var detailPanel = document.createElement("div");
+      detailPanel.className = "error-detail-panel";
+      detailPanel.setAttribute("id", "errorDetail-" + itemIdx);
+      detailTd.appendChild(detailPanel);
+      detailTr.appendChild(detailTd);
+      table.appendChild(detailTr);
+
+      // Click handler to toggle detail panel
+      function toggleDetail() {
+        var panel = document.getElementById("errorDetail-" + itemIdx);
+        var isOpen = panel.classList.contains("open");
+        // Close all other panels first
+        var allPanels = container.querySelectorAll(".error-detail-panel.open");
+        for (var p = 0; p < allPanels.length; p++) {
+          allPanels[p].classList.remove("open");
+          allPanels[p].parentElement.parentElement.style.display = "none";
+          // Update aria on corresponding row
+          var prevIdx = allPanels[p].getAttribute("id").replace("errorDetail-", "");
+          var prevRow = container.querySelector('tr[data-error-idx="' + prevIdx + '"]');
+          if (prevRow) prevRow.setAttribute("aria-expanded", "false");
+        }
+        if (!isOpen) {
+          snBuildErrorDetailPanel(panel, item, itemIdx);
+          panel.classList.add("open");
+          detailTr.style.display = "";
+          tr.setAttribute("aria-expanded", "true");
+        } else {
+          tr.setAttribute("aria-expanded", "false");
+        }
+      }
+
+      tr.addEventListener("click", toggleDetail);
+      tr.addEventListener("keydown", function(ev) {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          toggleDetail();
+        }
+      });
+    })(idx);
   }
   container.appendChild(table);
+}
+
+// --- Build Error Detail Panel Content (DOM-safe, no innerHTML) ---
+function snBuildErrorDetailPanel(panel, item, itemIdx) {
+  // Clear previous content
+  while (panel.firstChild) panel.removeChild(panel.firstChild);
+
+  var searchQuery = item.name || item.code || "";
+
+  // Title
+  var title = document.createElement("div");
+  title.style.cssText = "font-weight:600;font-size:13px;margin-bottom:8px;color:var(--accent)";
+  title.textContent = searchQuery + " \u306e\u5019\u88dc\u8a73\u7d30";
+  panel.appendChild(title);
+
+  // Search for candidates
+  var candidates = search(searchQuery, 5);
+
+  if (candidates.length === 0) {
+    var noResult = document.createElement("div");
+    noResult.className = "status-bar";
+    noResult.textContent = "\u5019\u88dc\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f\u3002";
+    panel.appendChild(noResult);
+  } else {
+    for (var ci = 0; ci < candidates.length; ci++) {
+      (function(candIdx) {
+        var cand = candidates[candIdx];
+        var candDiv = document.createElement("div");
+        candDiv.className = "error-candidate";
+
+        // Rank number
+        var rank = document.createElement("span");
+        rank.className = "candidate-rank";
+        rank.textContent = "\u2460\u2461\u2462\u2463\u2464"[candIdx] || String(candIdx + 1);
+        candDiv.appendChild(rank);
+
+        // JLAC10 code
+        var jlacSpan = document.createElement("code");
+        jlacSpan.className = "candidate-jlac mono";
+        jlacSpan.textContent = cand.jlac10 || "-";
+        candDiv.appendChild(jlacSpan);
+
+        // Matched name
+        var nameSpan = document.createElement("span");
+        nameSpan.className = "candidate-name";
+        nameSpan.textContent = cand.matchedName || "";
+        candDiv.appendChild(nameSpan);
+
+        // Score
+        var scoreSpan = document.createElement("span");
+        scoreSpan.className = "candidate-score";
+        scoreSpan.textContent = "\u30b9\u30b3\u30a2:" + cand.score.toFixed(0);
+        candDiv.appendChild(scoreSpan);
+
+        // Confirm button
+        var confirmBtn = document.createElement("button");
+        confirmBtn.className = "error-candidate-btn";
+        confirmBtn.textContent = "\u78ba\u5b9a";
+        confirmBtn.setAttribute("aria-label", cand.jlac10 + " \u3067\u78ba\u5b9a");
+        confirmBtn.addEventListener("click", function(ev) {
+          ev.stopPropagation();
+          snConfirmErrorCandidate(itemIdx, cand);
+        });
+        candDiv.appendChild(confirmBtn);
+
+        panel.appendChild(candDiv);
+
+        // Source info for this candidate (SRL/BML/LSI)
+        var srcKeys = Object.keys(cand.sources || {});
+        if (srcKeys.length > 0) {
+          for (var sk of srcKeys) {
+            var src = cand.sources[sk];
+            var srcDiv = document.createElement("div");
+            srcDiv.className = "source-info";
+            srcDiv.textContent = sk.toUpperCase() + ": " + (src.item_name || "") + (src.method ? " " + src.method : "");
+            panel.appendChild(srcDiv);
+          }
+        }
+      })(ci);
+    }
+  }
+
+  // Knowledge hints
+  var kResults = knowledgeSearch(searchQuery);
+  if (kResults.length > 0) {
+    var hintTitle = document.createElement("div");
+    hintTitle.style.cssText = "font-size:11px;font-weight:600;color:var(--text-secondary);margin-top:12px;margin-bottom:4px";
+    hintTitle.textContent = "\u985e\u4f3c\u30a8\u30e9\u30fc\u7d4c\u9a13:";
+    panel.appendChild(hintTitle);
+
+    for (var ki = 0; ki < kResults.length; ki++) {
+      var ke = kResults[ki].entry;
+      var hintDiv = document.createElement("div");
+      hintDiv.className = "knowledge-hint";
+      var hintText = (ke.hospital || "") + ": " + (ke.symptom || "\u540c\u69d8\u306e\u30a8\u30e9\u30fc");
+      if (ke.resolution) hintText += " \u2192 " + ke.resolution;
+      if (ke.jlac10) hintText += " [" + ke.jlac10 + "]";
+      hintDiv.textContent = hintText;
+      panel.appendChild(hintDiv);
+    }
+  }
+}
+
+// --- Confirm a candidate for an error item ---
+function snConfirmErrorCandidate(itemIdx, candidate) {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var c = snCases[snSelectedCase];
+  var items = c.error_items || [];
+  if (itemIdx < 0 || itemIdx >= items.length) return;
+
+  items[itemIdx].jlac10 = candidate.jlac10;
+  items[itemIdx].matched_name = candidate.matchedName;
+  items[itemIdx].score = candidate.score;
+  items[itemIdx].status = "assignable";
+
+  snUpdateCase(c.issue_number, { error_items: items });
+  snRenderErrorItems();
+  snRenderCaseList(snCurrentFilter);
+  showToast("\u78ba\u5b9a: " + candidate.jlac10 + " " + candidate.matchedName);
 }
 
 // --- UI: Download Error Excel ---
@@ -2380,6 +2728,135 @@ function updateDbStatus() {
     ' | BML: '+DB.items.filter(function(x){return x.sources&&x.sources.bml;}).length+
     ' | LSI: '+DB.items.filter(function(x){return x.sources&&x.sources.lsi;}).length+
     (hospitals.size>0?'<br>Hospitals: '+esc([...hospitals].join(", ")):""));
+}
+
+// =====================================================================
+// Error Knowledge Base (LocalStorage)
+// =====================================================================
+var KNOWLEDGE_KEY = "sn_error_knowledge";
+
+function knowledgeLoad() {
+  try {
+    return JSON.parse(localStorage.getItem(KNOWLEDGE_KEY) || '{"entries":[]}');
+  } catch (e) {
+    return { entries: [] };
+  }
+}
+
+function knowledgeSave(kb) {
+  localStorage.setItem(KNOWLEDGE_KEY, JSON.stringify(kb));
+}
+
+function knowledgeAdd(entry) {
+  var kb = knowledgeLoad();
+  entry.id = "K" + String(kb.entries.length + 1).padStart(4, "0");
+  entry.created_at = new Date().toISOString();
+  kb.entries.push(entry);
+  knowledgeSave(kb);
+  return entry;
+}
+
+function knowledgeSearch(query) {
+  var kb = knowledgeLoad();
+  var results = [];
+  var qN = normalize(query);
+  if (!qN) return results;
+  for (var i = 0; i < kb.entries.length; i++) {
+    var e = kb.entries[i];
+    var names = [e.item_name || "", e.symptom || "", e.resolution || ""];
+    var best = 0;
+    for (var n of names) {
+      if (!n) continue;
+      var s = calcScore(qN, normalize(n), n);
+      if (s > best) best = s;
+    }
+    // Also check tags
+    if (e.tags && Array.isArray(e.tags)) {
+      for (var tag of e.tags) {
+        var ts = calcScore(qN, normalize(tag), tag);
+        if (ts > best) best = ts;
+      }
+    }
+    if (best > 30) results.push({ entry: e, score: best });
+  }
+  results.sort(function(a, b) { return b.score - a.score; });
+  return results.slice(0, 5);
+}
+
+function knowledgeExport() {
+  return JSON.stringify(knowledgeLoad(), null, 2);
+}
+
+function knowledgeImport(json) {
+  knowledgeSave(JSON.parse(json));
+}
+
+// --- Knowledge Modal Logic ---
+function knowledgeModalShow() {
+  // Pre-fill from current case if available
+  if (snSelectedCase && snCases[snSelectedCase]) {
+    var c = snCases[snSelectedCase];
+    var items = c.error_items || [];
+    // Auto-fill first error item info if available
+    if (items.length > 0) {
+      var first = items[0];
+      document.getElementById("kmItemName").value = first.name || "";
+      document.getElementById("kmJlac10").value = first.jlac10 || "";
+    }
+    // Auto-suggest tags from case data
+    var autoTags = [];
+    if (c.hospital_name) autoTags.push(c.hospital_name);
+    // Extension point: add vendor detection, error category from items
+    document.getElementById("kmTags").value = autoTags.join(", ");
+  }
+  document.getElementById("knowledgeModalOverlay").classList.add("open");
+}
+
+function knowledgeModalCancel() {
+  document.getElementById("knowledgeModalOverlay").classList.remove("open");
+  knowledgeModalClear();
+}
+
+function knowledgeModalClear() {
+  document.getElementById("kmErrorType").value = "jlac10_missing";
+  document.getElementById("kmItemName").value = "";
+  document.getElementById("kmSymptom").value = "";
+  document.getElementById("kmCause").value = "";
+  document.getElementById("kmResolution").value = "";
+  document.getElementById("kmJlac10").value = "";
+  document.getElementById("kmNotes").value = "";
+  document.getElementById("kmTags").value = "";
+}
+
+function knowledgeModalSave() {
+  var tagsRaw = document.getElementById("kmTags").value.trim();
+  var tags = tagsRaw ? tagsRaw.split(",").map(function(t) { return t.trim(); }).filter(function(t) { return t; }) : [];
+
+  var entry = {
+    error_type: document.getElementById("kmErrorType").value,
+    item_name: document.getElementById("kmItemName").value.trim(),
+    item_code: "",
+    hospital: (snSelectedCase && snCases[snSelectedCase]) ? snCases[snSelectedCase].hospital_name || "" : "",
+    vendor: "",
+    symptom: document.getElementById("kmSymptom").value.trim(),
+    cause: document.getElementById("kmCause").value.trim(),
+    resolution: document.getElementById("kmResolution").value.trim(),
+    jlac10: document.getElementById("kmJlac10").value.trim(),
+    notes: document.getElementById("kmNotes").value.trim(),
+    tags: tags,
+    issue_number: (snSelectedCase && snCases[snSelectedCase]) ? snCases[snSelectedCase].issue_number : null
+  };
+
+  var saved = knowledgeAdd(entry);
+  document.getElementById("knowledgeModalOverlay").classList.remove("open");
+  knowledgeModalClear();
+  showToast("Knowledge " + saved.id + " registered");
+
+  // Add history entry to case
+  if (snSelectedCase && snCases[snSelectedCase]) {
+    snAddHistory(snCases[snSelectedCase].issue_number, "note", "Knowledge registered: " + saved.id + " - " + entry.item_name);
+    snRenderHistory(snCases[snSelectedCase].issue_number);
+  }
 }
 
 // =====================================================================
