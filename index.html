@@ -482,9 +482,18 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
     <!-- New Case Form (hidden by default) -->
     <div id="snNewCaseForm" class="sn-new-case-form hidden">
+      <div style="grid-column:1/-1">
+        <label>イシュー URL を貼り付け（または番号を直接入力）</label>
+        <div class="guide" style="margin-bottom:4px">GHE のイシュー URL を貼り付けると番号を自動抽出します。例: https://ghe.../issues/4123</div>
+        <input id="snNewIssueUrl" type="text" placeholder="https://ghe.ncda.hospital.local/org/repo/issues/4123 または 4123" oninput="snParseIssueUrl()">
+      </div>
       <div>
         <label>イシュー番号</label>
-        <input id="snNewIssue" type="text" placeholder="4123">
+        <input id="snNewIssue" type="text" placeholder="自動入力" readonly style="background:var(--bg-primary)">
+      </div>
+      <div>
+        <label>リポジトリ</label>
+        <input id="snNewRepo" type="text" placeholder="自動検出" readonly style="background:var(--bg-primary)">
       </div>
       <div>
         <label>病院名</label>
@@ -520,7 +529,10 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <!-- Case Detail (shown when a case is selected) -->
   <div id="snCaseDetail" class="card hidden">
     <div class="flex-row mb-12" style="justify-content:space-between;align-items:center">
-      <h2 id="snDetailTitle" style="margin-bottom:0;padding-bottom:0;border-bottom:none">Case Detail</h2>
+      <div>
+        <h2 id="snDetailTitle" style="margin-bottom:0;padding-bottom:0;border-bottom:none">案件詳細</h2>
+        <a id="snIssueLink" href="#" target="_blank" style="display:none;font-size:12px;color:var(--info);font-family:'JetBrains Mono',monospace;text-decoration:underline">Issue Link</a>
+      </div>
       <button onclick="snCloseDetail()" class="btn btn-secondary btn-xs">閉じる</button>
     </div>
 
@@ -1703,21 +1715,52 @@ function snAddHistory(issueNumber, action, note) {
   snSaveCases();
 }
 
-// --- UI: New Case ---
+// --- UI: New Case (URL連携) ---
+function snParseIssueUrl() {
+  var input = document.getElementById("snNewIssueUrl").value.trim();
+  var issueField = document.getElementById("snNewIssue");
+  var repoField = document.getElementById("snNewRepo");
+
+  // URL パターン: https://ghe.../org/repo/issues/4123
+  var urlMatch = input.match(/\/([^\/]+\/[^\/]+)\/issues\/(\d+)/);
+  if (urlMatch) {
+    repoField.value = urlMatch[1];
+    issueField.value = urlMatch[2];
+    return;
+  }
+  // 数字のみ
+  var numMatch = input.match(/^#?(\d+)$/);
+  if (numMatch) {
+    issueField.value = numMatch[1];
+    repoField.value = "";
+    return;
+  }
+  issueField.value = "";
+  repoField.value = "";
+}
+
 function snDoCreateCase() {
   var issue = document.getElementById("snNewIssue").value.trim();
   var hospital = document.getElementById("snNewHospital").value.trim();
   var contact = document.getElementById("snNewContact").value.trim();
-  if (!issue) { showToast("Issue # is required"); return; }
+  var issueUrl = document.getElementById("snNewIssueUrl").value.trim();
+  var repo = document.getElementById("snNewRepo").value.trim();
+  if (!issue) { showToast("イシュー URL または番号を入力してください"); return; }
   var c = snCreateCase(issue, hospital, contact);
   if (c) {
+    // URL とリポジトリ情報を保存
+    c.issue_url = issueUrl;
+    c.repository = repo;
+    snSaveCases();
     document.getElementById("snNewCaseForm").classList.add("hidden");
+    document.getElementById("snNewIssueUrl").value = "";
     document.getElementById("snNewIssue").value = "";
+    document.getElementById("snNewRepo").value = "";
     document.getElementById("snNewHospital").value = "";
     document.getElementById("snNewContact").value = "";
     snRenderCaseList(snCurrentFilter);
     snSelectCase("#" + issue);
-    showToast("Case #" + issue + " created");
+    showToast("案件 #" + issue + " を作成しました");
   }
 }
 
@@ -1834,11 +1877,23 @@ function snSelectCase(key) {
   if (!c) return;
 
   document.getElementById("snCaseDetail").classList.remove("hidden");
-  document.getElementById("snDetailTitle").textContent = "Case " + key;
+  document.getElementById("snDetailTitle").textContent = "案件 " + key;
   document.getElementById("snDetHospital").value = c.hospital_name || "";
   document.getElementById("snDetContact").value = c.contact || "";
   document.getElementById("snDetIssue").value = key;
   document.getElementById("snDetStatus").value = c.status;
+
+  // イシューリンク表示
+  var linkEl = document.getElementById("snIssueLink");
+  if (linkEl) {
+    if (c.issue_url) {
+      linkEl.href = c.issue_url;
+      linkEl.textContent = c.repository ? c.repository + " #" + c.issue_number : "Issue #" + c.issue_number;
+      linkEl.style.display = "inline";
+    } else {
+      linkEl.style.display = "none";
+    }
+  }
 
   // Sync fields for workflow
   document.getElementById("errorHospital").value = c.hospital_name || "";
