@@ -1127,6 +1127,9 @@ function doSearch() {
         html += '材料: '+esc(v.material||"-")+' / 方法: '+esc(v.method||"-");
         if (v.reference_value) html += ' / 基準値: '+esc(v.reference_value);
         html += '</div>';
+        if (v.detail_url && v.detail_url.startsWith('http')) {
+          html += '<div style="font-size:10px;margin-top:2px"><a href="'+esc(v.detail_url)+'" target="_blank" style="color:var(--info);text-decoration:underline">詳細ページ →</a></div>';
+        }
         html += '</div></div>';
       }
       html += '</div>';
