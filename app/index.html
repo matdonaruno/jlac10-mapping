@@ -86,7 +86,11 @@ label { display:block; font-size:11px; font-weight:600; text-transform:uppercase
 .result-item.low { border-left:3px solid var(--danger); }
 .result-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
 .result-title { font-weight:600; font-size:15px; }
-.result-score { font-family:'JetBrains Mono',monospace; font-size:12px; padding:2px 8px; background:var(--bg-hover); }
+.result-score { font-family:'JetBrains Mono',monospace; font-size:16px; font-weight:700;
+  padding:4px 12px; min-width:50px; text-align:center; }
+.score-high { background:#1a3a2a; color:var(--success); border:1px solid var(--success); }
+.score-mid { background:#3a3a1a; color:var(--warning); border:1px solid var(--warning); }
+.score-low { background:#3a1a1a; color:var(--danger); border:1px solid var(--danger); }
 /* JLAC10 big display row */
 .result-jlac-row { display:flex; align-items:center; gap:12px; margin:8px 0; flex-wrap:wrap; }
 .jlac-big { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700;
@@ -1082,7 +1086,8 @@ function doSearch() {
     html += '<div class="result-item '+cls+'">';
     // 1行目: 番号 + 名称 + スコア
     html += '<div class="result-header"><span class="result-title">[' + (i+1) + '] ' + esc(r.matchedName) + '</span>';
-    html += '<span class="result-score">' + r.score.toFixed(0) + '</span></div>';
+    var scoreCls = r.score >= 90 ? "score-high" : r.score >= 50 ? "score-mid" : "score-low";
+    html += '<span class="result-score ' + scoreCls + '">' + r.score.toFixed(0) + '</span></div>';
     // 2行目: JLAC10 大きく + 会社バッジ横並び
     html += '<div class="result-jlac-row">';
     html += '<code class="jlac-big">' + formatJlac17(r.jlac10, r.jlac10_status) + '</code>';
@@ -1122,9 +1127,6 @@ function doSearch() {
         html += '材料: '+esc(v.material||"-")+' / 方法: '+esc(v.method||"-");
         if (v.reference_value) html += ' / 基準値: '+esc(v.reference_value);
         html += '</div>';
-        if (v.detail_url) {
-          html += '<div style="font-size:10px;margin-top:2px"><a href="'+esc(v.detail_url)+'" target="_blank" style="color:var(--info);text-decoration:underline">詳細ページ</a></div>';
-        }
         html += '</div></div>';
       }
       html += '</div>';
