@@ -376,6 +376,60 @@ tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
       <div class="mb-12"><label>Body</label><textarea id="mailBody" rows="18" readonly></textarea></div>
       <button onclick="copyMail()" class="btn btn-primary">Copy to Clipboard</button>
     </div>
+
+    <!-- Workflow Package（マッピング完了後の一括生成） -->
+    <div id="workflowArea" class="hidden mt-12">
+      <h2 style="color:var(--accent)">Workflow Package</h2>
+      <p class="text-sm mb-12" style="color:var(--text-secondary)">マッピング完了後、メール・GHEコメント・Rocket.Chatメッセージを一括生成</p>
+
+      <div class="grid-3 mb-12">
+        <div><label>Hospital Name</label><input id="wfHospital" type="text" placeholder="○○病院"></div>
+        <div><label>Contact Person</label><input id="wfContact" type="text" placeholder="○○様"></div>
+        <div><label>CC</label><input id="wfCc" type="text" placeholder="○○様"></div>
+      </div>
+      <div class="grid-3 mb-12">
+        <div><label>Issue # (GHE)</label><input id="wfIssueNum" type="text" placeholder="42"></div>
+        <div><label>Rocket.Chat Mention</label><input id="wfMention" type="text" placeholder="@username"></div>
+        <div><label>Occurred Date</label><input id="wfDate" type="date"></div>
+      </div>
+
+      <div class="flex-row mb-12">
+        <button onclick="generateWorkflowPackage()" class="btn btn-primary">Generate All</button>
+      </div>
+
+      <div id="wfOutputs" class="hidden">
+        <!-- Email -->
+        <div class="mb-12" style="border:1px solid var(--border);padding:12px">
+          <div class="flex-row mb-12" style="justify-content:space-between">
+            <h3 style="color:var(--info);font-size:13px;font-weight:700">EMAIL (Outlook)</h3>
+            <button onclick="copyToClipboard('wfEmailSubject','wfEmailBody')" class="btn btn-primary btn-xs">Copy Email</button>
+          </div>
+          <div class="mb-12"><label>Subject</label><input id="wfEmailSubject" type="text" readonly></div>
+          <div><label>Body</label><textarea id="wfEmailBody" rows="12" readonly></textarea></div>
+        </div>
+
+        <!-- GHE Comment -->
+        <div class="mb-12" style="border:1px solid var(--border);padding:12px">
+          <div class="flex-row mb-12" style="justify-content:space-between">
+            <h3 style="color:var(--success);font-size:13px;font-weight:700">GHE ISSUE COMMENT</h3>
+            <button onclick="copyField('wfGheComment')" class="btn btn-primary btn-xs">Copy</button>
+          </div>
+          <textarea id="wfGheComment" rows="6" readonly></textarea>
+        </div>
+
+        <!-- Rocket.Chat -->
+        <div class="mb-12" style="border:1px solid var(--border);padding:12px">
+          <div class="flex-row mb-12" style="justify-content:space-between">
+            <h3 style="color:var(--warning);font-size:13px;font-weight:700">ROCKET.CHAT MESSAGE</h3>
+            <button onclick="copyField('wfChatMsg')" class="btn btn-primary btn-xs">Copy</button>
+          </div>
+          <textarea id="wfChatMsg" rows="6" readonly></textarea>
+        </div>
+
+        <!-- JSON Download -->
+        <button onclick="downloadWorkflowJson()" class="btn btn-secondary">Download Workflow JSON</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1403,6 +1457,7 @@ function analyzeErrors() {
       h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch ? formatJlac17(r.bestMatch.jlac10, r.bestMatch.jlac10_status) : "") + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
     }
     h += '</table>'; setHtml("errorResults", h);
+    showWorkflowButton();
   });
 }
 
@@ -1431,6 +1486,152 @@ function downloadErrorResult() {
   var d=[["Status","Row","Code","Name","JLAC10","Matched","Score"]];
   for(var r of lastErrorResult) d.push([r.status==="assignable"?"Assignable":"Inquiry",r.row,r.code,r.name,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):""]);
   var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Error Analysis"); XLSX.writeFile(wb,"error_analysis.xlsx");
+}
+
+// =====================================================================
+// UI: Workflow Package Generation (Step 1)
+// =====================================================================
+var lastWorkflowJson = null;
+
+function generateWorkflowPackage() {
+  if (!lastErrorResult) { showToast("先にエラー分析を実行してください"); return; }
+
+  var hospital = document.getElementById("wfHospital").value.trim() || "○○病院";
+  var contact = document.getElementById("wfContact").value.trim() || "○○様";
+  var cc = document.getElementById("wfCc").value.trim();
+  var issueNum = document.getElementById("wfIssueNum").value.trim() || "??";
+  var mention = document.getElementById("wfMention").value.trim() || "@担当者";
+  var dateInput = document.getElementById("wfDate").value;
+  var dateStr = dateInput || new Date().toISOString().split("T")[0];
+
+  // 付番可能な項目のみ抽出
+  var assignable = lastErrorResult.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = lastErrorResult.filter(function(r) { return r.status === "inquiry"; });
+
+  // メール件名
+  var subject = hospital + "_" + dateStr + "_#" + issueNum;
+
+  // メール本文
+  var body = hospital + " " + contact + "\n";
+  if (cc) body += "CC: " + cc + "\n";
+  body += "\nお世話になっております。\n\n";
+  body += "SSMIX2 データ出力におきまして、JLAC10 コードに関するエラーが発生いたしました。\n";
+  body += "下記のマッピング結果に基づき、電子カルテの検査マスターへの設定をお願いいたします。\n\n";
+
+  if (assignable.length > 0) {
+    body += "■ 設定いただくマッピング結果（" + assignable.length + "件）\n\n";
+    body += "| 項目コード | 項目名称 | JLAC10 | JLAC10標準名称 |\n";
+    body += "|-----------|---------|--------|---------------|\n";
+    for (var a of assignable) {
+      body += "| " + a.code + " | " + a.name + " | " + a.bestMatch.jlac10 + " | " + a.bestMatch.matchedName + " |\n";
+    }
+    body += "\n";
+  }
+
+  if (inquiry.length > 0) {
+    body += "■ 確認が必要な項目（" + inquiry.length + "件）\n";
+    body += "以下の項目は自動マッピングできませんでした。\n";
+    body += "結果値の種類、測定法、検体の種類等をご教示ください。\n\n";
+    for (var i = 0; i < inquiry.length; i++) {
+      body += (i+1) + ". [" + inquiry[i].code + "] " + inquiry[i].name + "\n";
+    }
+    body += "\n";
+  }
+
+  body += "■ 設定依頼\n";
+  body += "上記マッピング結果のJLAC10コードを、電子カルテの検査マスターに設定をお願いいたします。\n";
+  body += "設定完了後、SSMIX2 データの再出力をお願いいたします。\n\n";
+  body += "ご不明な点がございましたら、お気軽にお問い合わせください。\n";
+  body += "よろしくお願いいたします。\n";
+
+  // GHE コメント
+  var gheComment = "## マッピング完了・病院へ設定依頼済み\n\n";
+  gheComment += "- 日時: " + dateStr + "\n";
+  gheComment += "- 付番完了: " + assignable.length + "件\n";
+  gheComment += "- 要確認: " + inquiry.length + "件\n";
+  gheComment += "- 病院へメール送信済み\n\n";
+  if (assignable.length > 0) {
+    gheComment += "### マッピング結果\n";
+    gheComment += "| 項目コード | 項目名称 | JLAC10 |\n";
+    gheComment += "|-----------|---------|--------|\n";
+    for (var g of assignable) {
+      gheComment += "| " + g.code + " | " + g.name + " | `" + g.bestMatch.jlac10 + "` |\n";
+    }
+  }
+
+  // Rocket.Chat メッセージ
+  var chatMsg = mention + " SSMIX2 エラー対応完了\n";
+  chatMsg += "病院: " + hospital + "\n";
+  chatMsg += "イシュー: #" + issueNum + "\n";
+  chatMsg += "付番: " + assignable.length + "件 / 要確認: " + inquiry.length + "件\n";
+  chatMsg += "病院へ設定依頼メール送信済み\n";
+  chatMsg += "GHE: （イシューコメントのリンクをここに貼り付け）";
+
+  // 表示
+  document.getElementById("wfEmailSubject").value = subject;
+  document.getElementById("wfEmailBody").value = body;
+  document.getElementById("wfGheComment").value = gheComment;
+  document.getElementById("wfChatMsg").value = chatMsg;
+  document.getElementById("wfOutputs").classList.remove("hidden");
+  document.getElementById("workflowArea").classList.remove("hidden");
+
+  // JSON 保存用
+  lastWorkflowJson = {
+    hospital_name: hospital,
+    hospital_id: document.getElementById("errorHospital").value.trim(),
+    issue_number: parseInt(issueNum) || 0,
+    occurred_at: dateStr,
+    to: "",
+    cc: cc ? [cc] : [],
+    subject: subject,
+    mapping_results: assignable.map(function(a) {
+      return { item_code: a.code, item_name: a.name, jlac10: a.bestMatch.jlac10, standard_name: a.bestMatch.matchedName };
+    }),
+    inquiry_items: inquiry.map(function(q) {
+      return { item_code: q.code, item_name: q.name };
+    }),
+    status: "pending",
+    mail_body: body,
+    ghe_comment: gheComment,
+    rocketchat_message: chatMsg
+  };
+
+  showToast("Workflow Package generated");
+}
+
+function copyToClipboard(subjectId, bodyId) {
+  var subject = document.getElementById(subjectId).value;
+  var body = document.getElementById(bodyId).value;
+  navigator.clipboard.writeText("Subject: " + subject + "\n\n" + body).then(function() { showToast("Email copied"); });
+}
+
+function copyField(id) {
+  navigator.clipboard.writeText(document.getElementById(id).value).then(function() { showToast("Copied!"); });
+}
+
+function downloadWorkflowJson() {
+  if (!lastWorkflowJson) return;
+  var name = (lastWorkflowJson.hospital_name || "workflow") + "_" + lastWorkflowJson.occurred_at + "_#" + lastWorkflowJson.issue_number + ".json";
+  downloadFile(name, JSON.stringify(lastWorkflowJson, null, 2));
+}
+
+// analyzeErrors 完了後に Workflow Area を表示
+var _origAnalyzeErrors = analyzeErrors;
+
+// エラー分析後に Generate Workflow ボタンを有効化
+function showWorkflowButton() {
+  if (lastErrorResult && lastErrorResult.some(function(r){return r.status==="assignable";})) {
+    document.getElementById("workflowArea").classList.remove("hidden");
+    // 日付をデフォルト設定
+    if (!document.getElementById("wfDate").value) {
+      document.getElementById("wfDate").value = new Date().toISOString().split("T")[0];
+    }
+    // 病院名を引き継ぎ
+    var h = document.getElementById("errorHospital").value.trim();
+    if (h && !document.getElementById("wfHospital").value) {
+      document.getElementById("wfHospital").value = h;
+    }
+  }
 }
 
 // =====================================================================
