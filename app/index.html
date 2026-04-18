@@ -158,12 +158,102 @@ textarea:focus { border-color:var(--accent); }
   font-weight:600; font-size:13px; z-index:999; opacity:0; transition:opacity 0.3s; }
 .toast.show { opacity:1; }
 
+/* Bulk Map candidate select */
+select.candidate-select { background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:4px 8px; font-size:12px; font-family:'JetBrains Mono',monospace; max-width:300px; }
+select.candidate-select:focus { border-color:var(--accent); outline:none; }
+tr.row-confirmed td { background:var(--bg-hover); }
+tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
+.btn-xs { padding:4px 10px; font-size:11px; }
+
 .hidden { display:none; }
 .mb-12 { margin-bottom:12px; }
 .mb-16 { margin-bottom:16px; }
 .mt-12 { margin-top:12px; }
 .text-sm { font-size:12px; }
 .overflow-auto { overflow:auto; max-height:600px; }
+
+/* SN Dashboard */
+.sn-filter-bar { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:16px; }
+.sn-filter-btn { padding:6px 14px; font-size:12px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-secondary); cursor:pointer; transition:all 0.2s; }
+.sn-filter-btn:hover { color:var(--text-primary); background:var(--bg-hover); }
+.sn-filter-btn.active { color:var(--accent); border-color:var(--accent); }
+.sn-filter-btn .sn-count { font-family:'JetBrains Mono',monospace; font-size:10px; margin-left:4px; opacity:0.7; }
+
+.sn-case-list { max-height:300px; overflow-y:auto; }
+.sn-case-row { display:grid; grid-template-columns:80px 1fr 100px 60px 80px 40px; gap:8px; align-items:center;
+  padding:10px 12px; border-bottom:1px solid var(--border); cursor:pointer; transition:background 0.15s; font-size:13px; }
+.sn-case-row:hover { background:var(--bg-hover); }
+.sn-case-row.selected { background:var(--bg-hover); border-left:3px solid var(--accent); }
+.sn-case-issue { font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--accent); }
+.sn-case-hospital { font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sn-case-date { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); }
+.sn-case-count { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); text-align:center; }
+.sn-case-del { background:none; border:none; color:var(--danger); cursor:pointer; font-size:14px; opacity:0.5; transition:opacity 0.2s; padding:4px; }
+.sn-case-del:hover { opacity:1; }
+
+.sn-status { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; padding:3px 10px;
+  text-transform:uppercase; letter-spacing:0.5px; display:inline-block; text-align:center; }
+.sn-status-open { background:rgba(199,92,92,0.15); color:var(--danger); border:1px solid var(--danger); }
+.sn-status-mapping { background:rgba(212,168,83,0.15); color:var(--warning); border:1px solid var(--warning); }
+.sn-status-waiting { background:rgba(106,158,199,0.15); color:var(--info); border:1px solid var(--info); }
+.sn-status-verifying { background:rgba(212,168,83,0.2); color:var(--accent); border:1px solid var(--accent); }
+.sn-status-closed { background:rgba(122,184,122,0.15); color:var(--success); border:1px solid var(--success); }
+
+.sn-detail { margin-top:16px; }
+.sn-detail-header { display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:12px; align-items:end; margin-bottom:16px; }
+.sn-detail-header label { display:block; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); margin-bottom:4px; }
+.sn-detail-header input, .sn-detail-header select { background:var(--bg-secondary); border:1px solid var(--border);
+  color:var(--text-primary); padding:8px 10px; font-size:13px; width:100%; font-family:'Inter',sans-serif; outline:none; }
+.sn-detail-header select { font-family:'JetBrains Mono',monospace; cursor:pointer; }
+.sn-detail-header input:focus, .sn-detail-header select:focus { border-color:var(--accent); }
+
+.sn-subtabs { display:flex; gap:2px; margin-bottom:16px; border-bottom:1px solid var(--border); }
+.sn-subtab { padding:8px 16px; font-size:12px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  background:transparent; border:none; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
+.sn-subtab:hover { color:var(--text-primary); }
+.sn-subtab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+.sn-timeline { padding-left:20px; border-left:2px solid var(--border); }
+.sn-timeline-item { position:relative; padding:8px 0 16px 16px; }
+.sn-timeline-item::before { content:''; position:absolute; left:-25px; top:12px; width:10px; height:10px;
+  background:var(--bg-card); border:2px solid var(--accent); border-radius:50%; }
+.sn-timeline-date { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-secondary); }
+.sn-timeline-action { font-size:12px; font-weight:600; text-transform:uppercase; margin:2px 0; }
+.sn-timeline-note { font-size:13px; color:var(--text-primary); }
+
+.sn-action-badge { font-size:10px; font-weight:700; padding:2px 6px; letter-spacing:0.3px; text-transform:uppercase; }
+.sn-action-created { background:rgba(106,158,199,0.2); color:var(--info); }
+.sn-action-analyzed { background:rgba(212,168,83,0.2); color:var(--warning); }
+.sn-action-mail_sent { background:rgba(122,184,122,0.2); color:var(--success); }
+.sn-action-inquiry_sent { background:rgba(212,168,83,0.2); color:var(--accent); }
+.sn-action-reply_received { background:rgba(106,158,199,0.2); color:var(--info); }
+.sn-action-verified { background:rgba(122,184,122,0.2); color:var(--success); }
+.sn-action-closed { background:rgba(122,184,122,0.3); color:var(--success); }
+.sn-action-note { background:rgba(154,149,144,0.2); color:var(--text-secondary); }
+.sn-action-status_changed { background:rgba(212,168,83,0.2); color:var(--accent); }
+
+.sn-new-case-form { display:grid; grid-template-columns:120px 1fr 1fr auto; gap:8px; align-items:end; margin-bottom:16px;
+  padding:12px; background:var(--bg-secondary); border:1px solid var(--border); }
+.sn-new-case-form label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-secondary); margin-bottom:4px; display:block; }
+.sn-new-case-form input { background:var(--bg-primary); border:1px solid var(--border); color:var(--text-primary);
+  padding:8px 10px; font-size:13px; width:100%; outline:none; }
+.sn-new-case-form input:focus { border-color:var(--accent); }
+
+.sn-error-item-status { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; padding:2px 6px; }
+.sn-errst-assignable { color:var(--success); background:rgba(122,184,122,0.15); }
+.sn-errst-inquiry { color:var(--danger); background:rgba(199,92,92,0.15); }
+
+.sn-note-form { display:flex; gap:8px; margin-top:12px; }
+.sn-note-form input { flex:1; background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:8px 10px; font-size:13px; outline:none; }
+.sn-note-form input:focus { border-color:var(--accent); }
+
+select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;
+  text-transform:uppercase; cursor:pointer; }
+.sn-export-bar { display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
+
 </style>
 </head>
 <body>
@@ -180,6 +270,7 @@ textarea:focus { border-color:var(--accent); }
   <button class="tab" onclick="switchTab('bulk')" id="tab-bulk">Bulk Map</button>
   <button class="tab" onclick="switchTab('error')" id="tab-error">SN Error</button>
   <button class="tab" onclick="switchTab('data')" id="tab-data">Database</button>
+  <button class="tab" onclick="switchTab('help')" id="tab-help">Help</button>
 </div>
 
 <!-- ============================================================ -->
@@ -202,16 +293,88 @@ textarea:focus { border-color:var(--accent); }
 <div id="panel-import" class="hidden">
   <div class="card">
     <h2>Excel to JSON + DB Merge</h2>
-    <div class="grid-2 mb-12">
-      <div><label>Hospital Name</label><input id="hospitalName" type="text" placeholder="A Hospital"></div>
-      <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv"></div>
+
+    <!-- ファイルソース切替 -->
+    <div class="flex-row mb-12">
+      <button onclick="toggleFileSource('repo')" class="btn btn-secondary" id="fileSrcRepo" style="border-bottom:2px solid var(--accent)">Repository</button>
+      <button onclick="toggleFileSource('local')" class="btn btn-secondary" id="fileSrcLocal">Local File</button>
     </div>
-    <div class="grid-4 mb-12">
-      <div><label>Item Name Col</label><input id="colItemName" type="text" value="A"></div>
-      <div><label>Abbreviation Col</label><input id="colAbbr" type="text" value="B" placeholder="optional"></div>
-      <div><label>JLAC10 Col</label><input id="colJlac10" type="text" value="C"></div>
-      <div><label>Standard Name Col</label><input id="colStdName" type="text" value="D" placeholder="optional"></div>
+
+    <!-- リポジトリから選択 -->
+    <div id="fileSourceRepo">
+      <div class="grid-3 mb-12">
+        <div>
+          <label>Hospital</label>
+          <select id="repoFileSelect" class="candidate-select" style="width:100%;padding:10px" onchange="onRepoFileSelect()">
+            <option value="">Loading...</option>
+          </select>
+        </div>
+        <div><label>Hospital Name</label><input id="hospitalName" type="text" placeholder="H001"></div>
+        <div><label>Sheet (optional)</label><input id="importSheet" type="text" placeholder="依頼"></div>
+      </div>
+      <div class="status-bar mb-12" id="repoFileStatus"></div>
     </div>
+
+    <!-- ローカルファイル -->
+    <div id="fileSourceLocal" class="hidden">
+      <div class="grid-3 mb-12">
+        <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv" onchange="onImportFileLoad(this)"></div>
+        <div><label>Hospital Name</label><input id="hospitalNameLocal" type="text" placeholder="H001"></div>
+        <div><label>Sheet (optional)</label><input id="importSheetLocal" type="text" placeholder="依頼"></div>
+      </div>
+    </div>
+
+    <!-- モード切替 -->
+    <div class="flex-row mb-12">
+      <button onclick="toggleImportMode('auto')" class="btn btn-secondary" id="impModeAuto" style="border-bottom:2px solid var(--accent)">Auto Detect</button>
+      <button onclick="toggleImportMode('header')" class="btn btn-secondary" id="impModeHeader">Header Select</button>
+      <button onclick="toggleImportMode('manual')" class="btn btn-secondary" id="impModeManual">Manual</button>
+    </div>
+
+    <!-- Auto Detect モード -->
+    <div id="importAuto">
+      <div class="grid-2 mb-12">
+        <div>
+          <label>Vendor (optional)</label>
+          <select id="importVendor" class="candidate-select" style="width:100%;padding:10px">
+            <option value="">(auto detect)</option>
+            <option value="NEC">NEC</option>
+            <option value="Fujitsu">Fujitsu</option>
+            <option value="IBM">IBM</option>
+            <option value="SSI">SSI</option>
+            <option value="SBS">SBS</option>
+            <option value="KHI">KHI</option>
+            <option value="CSI">CSI</option>
+            <option value="NAIS">NAIS</option>
+          </select>
+        </div>
+        <div>
+          <label>Detection Result</label>
+          <div id="autoDetectResult" class="status-bar" style="min-height:36px;padding:8px;background:var(--bg-secondary);border:1px solid var(--border)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Select モード -->
+    <div id="importHeader" class="hidden">
+      <div class="grid-4 mb-12">
+        <div><label>Item Name</label><select id="hdrItemName" class="candidate-select" style="width:100%"></select></div>
+        <div><label>Abbreviation</label><select id="hdrAbbr" class="candidate-select" style="width:100%"></select></div>
+        <div><label>JLAC10</label><select id="hdrJlac10" class="candidate-select" style="width:100%"></select></div>
+        <div><label>JLAC10 Standard Name</label><select id="hdrStdName" class="candidate-select" style="width:100%"></select></div>
+      </div>
+    </div>
+
+    <!-- Manual モード -->
+    <div id="importManual" class="hidden">
+      <div class="grid-4 mb-12">
+        <div><label>Item Name Col</label><input id="colItemName" type="text" value="A"></div>
+        <div><label>Abbreviation Col</label><input id="colAbbr" type="text" value="B" placeholder="optional"></div>
+        <div><label>JLAC10 Col</label><input id="colJlac10" type="text" value="C"></div>
+        <div><label>Standard Name Col</label><input id="colStdName" type="text" value="D" placeholder="optional"></div>
+      </div>
+    </div>
+
     <div class="flex-row mb-12">
       <button onclick="convertExcel()" class="btn btn-primary">Convert</button>
       <button onclick="mergeToDb()" class="btn btn-secondary" id="btnMerge" disabled>Merge to DB</button>
@@ -228,14 +391,17 @@ textarea:focus { border-color:var(--accent); }
 <div id="panel-bulk" class="hidden">
   <div class="card">
     <h2>Bulk JLAC10 Mapping</h2>
-    <div class="grid-3 mb-12">
+    <div class="grid-4 mb-12">
       <div><label>Hospital Master (Excel)</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
       <div><label>Item Name Col</label><input id="bulkColName" type="text" value="A"></div>
+      <div><label>Hospital Name</label><input id="bulkHospital" type="text" placeholder="H001"></div>
       <div style="display:flex;align-items:end"><button onclick="doBulkMapping()" class="btn btn-primary" style="width:100%">Map All</button></div>
     </div>
     <div class="status-bar" id="bulkStatus"></div>
     <div id="bulkResults" class="overflow-auto"></div>
-    <div class="mt-12">
+    <div class="flex-row mt-12">
+      <button onclick="confirmAllAuto()" class="btn btn-primary" id="btnConfirmAuto" disabled>Confirm All Auto</button>
+      <button onclick="mergeBulkToDb()" class="btn btn-secondary" id="btnBulkMerge" disabled>Merge Confirmed to DB</button>
       <button onclick="downloadBulkResult()" class="btn btn-secondary" id="btnBulkDL" disabled>Download Result Excel</button>
     </div>
   </div>
@@ -245,52 +411,179 @@ textarea:focus { border-color:var(--accent); }
 <!-- SN ERROR -->
 <!-- ============================================================ -->
 <div id="panel-error" class="hidden">
+  <!-- Case List -->
   <div class="card">
-    <h2>SSMIX SN Error Analysis</h2>
+    <h2>SN Error Dashboard</h2>
 
-    <!-- 入力方式切替 -->
+    <!-- New Case Form (hidden by default) -->
+    <div id="snNewCaseForm" class="sn-new-case-form hidden">
+      <div>
+        <label>Issue #</label>
+        <input id="snNewIssue" type="text" placeholder="4123">
+      </div>
+      <div>
+        <label>Hospital Name</label>
+        <input id="snNewHospital" type="text" placeholder="Hospital Name">
+      </div>
+      <div>
+        <label>Contact</label>
+        <input id="snNewContact" type="text" placeholder="Contact">
+      </div>
+      <div style="display:flex;gap:4px;align-items:end">
+        <button onclick="snDoCreateCase()" class="btn btn-primary btn-xs">Create</button>
+        <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary btn-xs">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
     <div class="flex-row mb-12">
-      <button onclick="toggleErrorInput('file')" class="btn btn-secondary" id="errToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
-      <button onclick="toggleErrorInput('paste')" class="btn btn-secondary" id="errTogglePaste">Paste Text</button>
-    </div>
-
-    <!-- ファイル入力 -->
-    <div id="errorInputFile">
-      <div class="grid-3 mb-12">
-        <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
-        <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
-        <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+      <button onclick="document.getElementById('snNewCaseForm').classList.toggle('hidden')" class="btn btn-primary btn-xs">+ New Case</button>
+      <div style="margin-left:auto">
+        <button onclick="snExportCases()" class="btn btn-secondary btn-xs">Export JSON</button>
+        <button onclick="document.getElementById('snImportFile').click()" class="btn btn-secondary btn-xs">Import JSON</button>
+        <input id="snImportFile" type="file" accept=".json" style="display:none" onchange="snImportCases(this)">
       </div>
     </div>
 
-    <!-- テキストペースト入力 -->
-    <div id="errorInputPaste" class="hidden">
-      <div class="mb-12">
-        <label>SSMIX2 エラー出力をそのまま貼り付け（タブ区切り / カンマ区切り / 1行1項目）</label>
-        <textarea id="errorPasteText" rows="8" placeholder="項目コード&#9;項目名称&#10;12345&#9;総蛋白&#10;67890&#9;アルブミン&#10;&#10;または&#10;&#10;総蛋白&#10;アルブミン&#10;CRP"></textarea>
+    <!-- Filter Bar -->
+    <div class="sn-filter-bar" id="snFilterBar"></div>
+
+    <!-- Case List -->
+    <div class="sn-case-list" id="snCaseList"></div>
+  </div>
+
+  <!-- Case Detail (shown when a case is selected) -->
+  <div id="snCaseDetail" class="card hidden">
+    <div class="flex-row mb-12" style="justify-content:space-between;align-items:center">
+      <h2 id="snDetailTitle" style="margin-bottom:0;padding-bottom:0;border-bottom:none">Case Detail</h2>
+      <button onclick="snCloseDetail()" class="btn btn-secondary btn-xs">Close</button>
+    </div>
+
+    <!-- Basic Info -->
+    <div class="sn-detail-header mb-12">
+      <div>
+        <label>Hospital</label>
+        <input id="snDetHospital" type="text" onchange="snUpdateField('hospital_name',this.value)">
       </div>
+      <div>
+        <label>Contact</label>
+        <input id="snDetContact" type="text" onchange="snUpdateField('contact',this.value)">
+      </div>
+      <div>
+        <label>Issue #</label>
+        <input id="snDetIssue" type="text" readonly style="opacity:0.7">
+      </div>
+      <div>
+        <label>Status</label>
+        <select id="snDetStatus" class="sn-status-select" onchange="snChangeStatus(this.value)">
+          <option value="open">OPEN</option>
+          <option value="mapping">MAPPING</option>
+          <option value="waiting">WAITING</option>
+          <option value="verifying">VERIFYING</option>
+          <option value="closed">CLOSED</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Sub Tabs -->
+    <div class="sn-subtabs">
+      <button class="sn-subtab active" onclick="snSwitchSubtab('items')" id="snSubItems">Error Items</button>
+      <button class="sn-subtab" onclick="snSwitchSubtab('actions')" id="snSubActions">Actions</button>
+      <button class="sn-subtab" onclick="snSwitchSubtab('history')" id="snSubHistory">History</button>
+    </div>
+
+    <!-- Sub Panel: Error Items -->
+    <div id="snPanelItems">
+      <!-- Import controls -->
+      <div class="flex-row mb-12">
+        <button onclick="snToggleImportMode('file')" class="btn btn-secondary btn-xs" id="snErrToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
+        <button onclick="snToggleImportMode('paste')" class="btn btn-secondary btn-xs" id="snErrTogglePaste">Paste Text</button>
+      </div>
+
+      <div id="snErrorInputFile">
+        <div class="grid-3 mb-12">
+          <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
+          <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
+          <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+        </div>
+      </div>
+
+      <div id="snErrorInputPaste" class="hidden">
+        <div class="mb-12">
+          <label>SSMIX2 error output (tab/comma/single line)</label>
+          <textarea id="errorPasteText" rows="6" placeholder="code&#9;name&#10;12345&#9;TP&#10;67890&#9;ALB"></textarea>
+        </div>
+        <div class="grid-2 mb-12">
+          <div><label>Code col (0-based, -1=none)</label><input id="pasteColCode" type="text" value="0"></div>
+          <div><label>Name col (0-based)</label><input id="pasteColName" type="text" value="1"></div>
+        </div>
+      </div>
+
       <div class="grid-2 mb-12">
-        <div><label>コード列 (0始まり, -1=なし)</label><input id="pasteColCode" type="text" value="0"></div>
-        <div><label>名称列 (0始まり)</label><input id="pasteColName" type="text" value="1"></div>
+        <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
+        <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
+      </div>
+
+      <div class="flex-row mb-12">
+        <button onclick="snImportErrors()" class="btn btn-danger btn-xs">Import Errors</button>
+        <button onclick="snDownloadErrorExcel()" class="btn btn-secondary btn-xs" id="btnErrorDL" disabled>Download Excel</button>
+      </div>
+      <div class="status-bar" id="errorStatus"></div>
+
+      <!-- Error Items Table -->
+      <div id="snErrorItemsTable" class="overflow-auto"></div>
+    </div>
+
+    <!-- Sub Panel: Actions -->
+    <div id="snPanelActions" class="hidden">
+      <div class="grid-3 mb-12">
+        <div><label>Contact Person</label><input id="wfContact" type="text" placeholder="Contact" onchange="snUpdateField('contact',this.value)"></div>
+        <div><label>CC</label><input id="wfCc" type="text" placeholder="CC"></div>
+        <div><label>Rocket.Chat Mention</label><input id="wfMention" type="text" placeholder="@username"></div>
+      </div>
+
+      <div class="flex-row mb-12">
+        <button onclick="snGenerateEmail()" class="btn btn-primary btn-xs">Generate Email</button>
+        <button onclick="snGenerateGheComment()" class="btn btn-primary btn-xs">Generate GHE Comment</button>
+        <button onclick="snGenerateChatMsg()" class="btn btn-primary btn-xs">Generate Chat Message</button>
+      </div>
+
+      <!-- Email Output -->
+      <div id="snEmailOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
+        <div class="flex-row mb-12" style="justify-content:space-between">
+          <h3 style="color:var(--info);font-size:13px;font-weight:700">EMAIL (Outlook)</h3>
+          <button onclick="snCopyEmail()" class="btn btn-primary btn-xs">Copy Email</button>
+        </div>
+        <div class="mb-12"><label>Subject</label><input id="snEmailSubject" type="text" readonly></div>
+        <div><label>Body</label><textarea id="snEmailBody" rows="12" readonly></textarea></div>
+      </div>
+
+      <!-- GHE Output -->
+      <div id="snGheOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
+        <div class="flex-row mb-12" style="justify-content:space-between">
+          <h3 style="color:var(--success);font-size:13px;font-weight:700">GHE ISSUE COMMENT</h3>
+          <button onclick="copyField('snGheComment')" class="btn btn-primary btn-xs">Copy</button>
+        </div>
+        <textarea id="snGheComment" rows="6" readonly></textarea>
+      </div>
+
+      <!-- Chat Output -->
+      <div id="snChatOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
+        <div class="flex-row mb-12" style="justify-content:space-between">
+          <h3 style="color:var(--warning);font-size:13px;font-weight:700">ROCKET.CHAT MESSAGE</h3>
+          <button onclick="copyField('snChatMsg')" class="btn btn-primary btn-xs">Copy</button>
+        </div>
+        <textarea id="snChatMsg" rows="6" readonly></textarea>
       </div>
     </div>
 
-    <div class="grid-2 mb-12">
-      <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
-      <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
-    </div>
-    <div class="flex-row mb-12">
-      <button onclick="analyzeErrors()" class="btn btn-danger">Analyze</button>
-      <button onclick="generateMail()" class="btn btn-secondary" id="btnMail" disabled>Generate Mail</button>
-      <button onclick="downloadErrorResult()" class="btn btn-secondary" id="btnErrorDL" disabled>Download Excel</button>
-    </div>
-    <div class="status-bar" id="errorStatus"></div>
-    <div id="errorResults" class="overflow-auto"></div>
-    <div id="mailArea" class="hidden mt-12">
-      <h2 style="color:var(--info)">Inquiry Mail</h2>
-      <div class="mb-12"><label>Subject</label><input id="mailSubject" type="text" readonly></div>
-      <div class="mb-12"><label>Body</label><textarea id="mailBody" rows="18" readonly></textarea></div>
-      <button onclick="copyMail()" class="btn btn-primary">Copy to Clipboard</button>
+    <!-- Sub Panel: History -->
+    <div id="snPanelHistory" class="hidden">
+      <div id="snHistoryTimeline"></div>
+      <div class="sn-note-form">
+        <input id="snNoteInput" type="text" placeholder="Add a note...">
+        <button onclick="snAddNote()" class="btn btn-primary btn-xs">Add Note</button>
+      </div>
     </div>
   </div>
 </div>
@@ -317,6 +610,83 @@ textarea:focus { border-color:var(--accent); }
   </div>
 </div>
 
+<!-- ============================================================ -->
+<!-- HELP -->
+<!-- ============================================================ -->
+<div id="panel-help" class="hidden">
+  <div class="card">
+    <h2>User Guide</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <h3 style="color:var(--accent);font-size:13px;margin-bottom:8px">SEARCH</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        検査項目名、略称、英名であいまい検索します。<br>
+        例: TP, ALB, CRP, HbA1c, アルブミン, albumin<br>
+        結果は SRL/BML/LSI 3社の情報付きで表示。<br>
+        スコア: 100=完全一致, 95=略称, 80+=先頭一致, 60+=部分一致
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">IMPORT</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        過去マッピング結果の Excel を JSON に変換し DB に統合。<br>
+        1. 病院名を入力<br>
+        2. Excel ファイルを選択<br>
+        3. 列番号を設定（A=項目名, B=略称, C=JLAC10, D=正式名称）<br>
+        4. Convert → Merge to DB → Export Merged DB
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">BULK MAP</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        病院マスター Excel を一括でJLAC10 にマッピング。<br>
+        1. Excel ファイルと項目名列を指定<br>
+        2. Map All で全件自動検索<br>
+        3. OK=自動確定(90+), ??=候補あり(50+), --=手動<br>
+        4. ??の行はプルダウンで候補を選択<br>
+        5. Confirm → Merge to DB で蓄積<br>
+        6. Download Result Excel で結果保存
+      </p>
+    </div>
+    <div>
+      <h3 style="color:var(--accent);font-size:13px;margin-bottom:8px">SN ERROR</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        SSMIX2 の SN エラー項目を分析。<br>
+        Excel ファイルまたはテキスト貼り付けで入力。<br>
+        付番可能な項目と要問い合わせ項目を自動分類。<br>
+        問い合わせメールを自動生成 → コピーして送信。
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">DATABASE</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        DB はページ読み込み時にリポジトリから自動ロード。<br>
+        手動で別の JSON をロードすることも可能。<br>
+        病院 JSON を追加で読み込んでマージ可能。<br>
+        Export Merged DB でダウンロード → git push で共有。
+      </p>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">JLAC10 CODE STRUCTURE</h3>
+      <div style="background:var(--bg-primary);padding:12px;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2">
+        <span style="color:var(--accent)">3A010</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--accent)">0000</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--accent)">023</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--accent)">271</span><span style="color:var(--text-secondary)">-</span><span style="color:var(--danger)">**</span><br>
+        <span style="color:var(--text-secondary)">
+        5桁:分析物 | 4桁:識別 | 3桁:材料 | 3桁:測定法 | 2桁:結果識別<br>
+        外注(SRL/BML/LSI) = 15桁（結果識別なし → **）<br>
+        院内(NCDA) = 17桁（結果識別あり）
+        </span>
+      </div>
+
+      <h3 style="color:var(--accent);font-size:13px;margin:16px 0 8px">WORKFLOW</h3>
+      <p class="text-sm" style="color:var(--text-secondary);line-height:1.8">
+        1. DB は定期更新済み（SRL/BML/LSI/JSLM）<br>
+        2. Search で単発検索 or Bulk Map で一括処理<br>
+        3. 確定したマッピングを DB に蓄積<br>
+        4. 蓄積するほど次回の精度が上がる<br>
+        5. Export → git push で全員に共有
+      </p>
+    </div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <!-- Toast -->
@@ -333,7 +703,7 @@ var lastErrorResult = null;
 var searchIndex = [];
 
 // DB auto-load from repository
-var DB_URL = "../data/merged_jlac10.json";
+var DB_URL = "./data/merged_jlac10.json";
 
 window.addEventListener("DOMContentLoaded", function() { reloadFromRepo(); });
 
@@ -578,37 +948,326 @@ function doSearch() {
 // =====================================================================
 // UI: Import
 // =====================================================================
+// Import: mode toggle
+var importMode = "auto";
+var fileSource = "repo";
+var importWb = null;
+var importHeaders = [];
+var repoIndex = null;  // index.json の内容
+
+// リポジトリ index.json を読み込み
+var REPO_INDEX_URL = "./excel/hospitals/index.json";
+
+function loadRepoIndex() {
+  fetch(REPO_INDEX_URL).then(function(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  }).then(function(data) {
+    repoIndex = data;
+    var sel = document.getElementById("repoFileSelect");
+    while (sel.firstChild) sel.removeChild(sel.firstChild);
+    var optNone = document.createElement("option");
+    optNone.value = ""; optNone.textContent = "-- Select Hospital --";
+    sel.appendChild(optNone);
+    var files = data.file || data.files || [];
+    for (var f of files) {
+      var opt = document.createElement("option");
+      opt.value = f.file;
+      opt.setAttribute("data-hospital", f.hospital_name || "");
+      opt.setAttribute("data-vendor", f.vender || f.vendor || "");
+      opt.textContent = f.hospital_id + " | " + (f.hospital_name||"") + " | " + (f.vender||f.vendor||"");
+      sel.appendChild(opt);
+    }
+    document.getElementById("repoFileStatus").textContent = files.length + " hospitals loaded";
+  }).catch(function(err) {
+    document.getElementById("repoFileStatus").textContent = "index.json load failed: " + err.message;
+    // ローカルモードにフォールバック
+    toggleFileSource("local");
+  });
+}
+
+function onRepoFileSelect() {
+  var sel = document.getElementById("repoFileSelect");
+  var filename = sel.value;
+  if (!filename) return;
+  var opt = sel.options[sel.selectedIndex];
+  var hospitalName = opt.getAttribute("data-hospital") || "";
+  var vendor = opt.getAttribute("data-vendor") || "";
+
+  // 病院名とベンダーを自動設定
+  document.getElementById("hospitalName").value = hospitalName;
+  if (vendor) {
+    var vendorSel = document.getElementById("importVendor");
+    if (vendorSel) {
+      for (var i = 0; i < vendorSel.options.length; i++) {
+        if (vendorSel.options[i].value.toUpperCase() === vendor.toUpperCase()) {
+          vendorSel.selectedIndex = i; break;
+        }
+      }
+    }
+  }
+
+  document.getElementById("repoFileStatus").textContent = "Loading: " + filename + "...";
+
+  // リポジトリからExcelをfetch
+  var url = "./excel/hospitals/" + encodeURIComponent(filename);
+  fetch(url).then(function(r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.arrayBuffer();
+  }).then(function(buf) {
+    importWb = XLSX.read(new Uint8Array(buf), {type:"array"});
+    var sheetInput = document.getElementById("importSheet").value.trim();
+    var sheetName = sheetInput || importWb.SheetNames[0];
+    var ws = importWb.Sheets[sheetName] || importWb.Sheets[importWb.SheetNames[0]];
+    var rows = XLSX.utils.sheet_to_json(ws, {header:1});
+    importHeaders = rows.length > 0 ? rows[0].map(function(h){ return String(h||"").replace(/\n/g," ").trim(); }) : [];
+
+    populateHeaderSelects(importHeaders);
+    runAutoDetect(importHeaders);
+    document.getElementById("repoFileStatus").textContent =
+      "Loaded: " + filename + " (" + (rows.length-1) + " rows, " + importHeaders.length + " cols, sheet: " + sheetName + ")";
+    showToast("Loaded: " + filename);
+  }).catch(function(err) {
+    document.getElementById("repoFileStatus").textContent = "Load failed: " + err.message;
+  });
+}
+
+function toggleFileSource(src) {
+  fileSource = src;
+  document.getElementById("fileSourceRepo").classList.toggle("hidden", src !== "repo");
+  document.getElementById("fileSourceLocal").classList.toggle("hidden", src !== "local");
+  document.getElementById("fileSrcRepo").style.borderBottom = src === "repo" ? "2px solid var(--accent)" : "none";
+  document.getElementById("fileSrcLocal").style.borderBottom = src === "local" ? "2px solid var(--accent)" : "none";
+}
+
+// ページロード時にindex.jsonを読む
+window.addEventListener("DOMContentLoaded", function() { loadRepoIndex(); });
+
+function toggleImportMode(mode) {
+  importMode = mode;
+  document.getElementById("importAuto").classList.toggle("hidden", mode !== "auto");
+  document.getElementById("importHeader").classList.toggle("hidden", mode !== "header");
+  document.getElementById("importManual").classList.toggle("hidden", mode !== "manual");
+  ["impModeAuto","impModeHeader","impModeManual"].forEach(function(id) {
+    document.getElementById(id).style.borderBottom = "none";
+  });
+  var btnId = mode === "auto" ? "impModeAuto" : mode === "header" ? "impModeHeader" : "impModeManual";
+  document.getElementById(btnId).style.borderBottom = "2px solid var(--accent)";
+}
+
+function onImportFileLoad(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    importWb = XLSX.read(e.target.result, {type:"array"});
+    var sheetInput = document.getElementById("importSheet").value.trim();
+    var sheetName = sheetInput || importWb.SheetNames[0];
+    var ws = importWb.Sheets[sheetName];
+    if (!ws && sheetInput) { ws = importWb.Sheets[importWb.SheetNames[0]]; }
+    var rows = XLSX.utils.sheet_to_json(ws, {header:1});
+    importHeaders = rows.length > 0 ? rows[0].map(function(h){ return String(h||"").replace(/\n/g," ").trim(); }) : [];
+
+    // Header Select プルダウン構築
+    populateHeaderSelects(importHeaders);
+    // Auto Detect 実行
+    runAutoDetect(importHeaders);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function populateHeaderSelects(headers) {
+  var ids = ["hdrItemName","hdrAbbr","hdrJlac10","hdrStdName"];
+  for (var id of ids) {
+    var sel = document.getElementById(id);
+    while (sel.firstChild) sel.removeChild(sel.firstChild);
+    var optNone = document.createElement("option");
+    optNone.value = "-1"; optNone.textContent = "(none)";
+    sel.appendChild(optNone);
+    for (var i = 0; i < headers.length; i++) {
+      var opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = colLetter(i) + ": " + (headers[i] || "(empty)");
+      sel.appendChild(opt);
+    }
+  }
+}
+
+function colLetter(idx) {
+  var s = "";
+  idx++;
+  while (idx > 0) { idx--; s = String.fromCharCode(65 + idx % 26) + s; idx = Math.floor(idx / 26); }
+  return s;
+}
+
+// ベンダー自動検出（JS版 vendor_profiles と同等）
+var VENDOR_KEYWORDS = {
+  "col_item_name": ["TESTITEMNAME","検査項目名","項目名称","検査名称","項目名","結果項目名"],
+  "col_short_name": ["TESTITEMSHORTNAME","SHORTNAME","略称","短縮名","表示名"],
+  "col_jlac10": ["最終的JLAC10","JLAC10CODE","JLAC10コード","JLAC10","JLACコード","標準コード"],
+  "col_jlac10_name": ["JLAC10NAME","JLAC10標準名称","JLAC10名称","標準名称"],
+  "col_item_code": ["TESTITEMCODE","項目コード","検査コード"]
+};
+
+function normalizeHeader(h) { return (h||"").replace(/[\n\r\s]/g,"").toUpperCase(); }
+
+function runAutoDetect(headers) {
+  var hNorm = headers.map(normalizeHeader);
+  var detected = {};
+
+  for (var field in VENDOR_KEYWORDS) {
+    var kwList = VENDOR_KEYWORDS[field];
+    var foundIdx = -1;
+    // 完全一致優先
+    for (var kw of kwList) {
+      var kwN = normalizeHeader(kw);
+      for (var i = 0; i < hNorm.length; i++) {
+        if (kwN === hNorm[i]) { foundIdx = i; break; }
+      }
+      if (foundIdx >= 0) break;
+    }
+    // 部分一致
+    if (foundIdx < 0) {
+      var sorted = kwList.slice().sort(function(a,b){return b.length-a.length;});
+      for (var kw2 of sorted) {
+        var kwN2 = normalizeHeader(kw2);
+        if (kwN2.length < 4) continue;
+        for (var j = 0; j < hNorm.length; j++) {
+          if (hNorm[j].indexOf(kwN2) >= 0) { foundIdx = j; break; }
+        }
+        if (foundIdx >= 0) break;
+      }
+    }
+    detected[field.replace("col_","")] = foundIdx;
+  }
+
+  // JLAC10列の右隣を正式名称として使う
+  if (detected.jlac10 >= 0 && detected.jlac10_name < 0) {
+    var right = detected.jlac10 + 1;
+    if (right < headers.length) {
+      var rh = (headers[right]||"").trim();
+      if (!rh || rh.indexOf("名称") >= 0 || rh.toUpperCase().indexOf("NAME") >= 0) {
+        detected.jlac10_name = right;
+      }
+    }
+  }
+
+  // Header Select プルダウンに反映
+  var mapping = {item_name:"hdrItemName", short_name:"hdrAbbr", jlac10:"hdrJlac10", jlac10_name:"hdrStdName"};
+  for (var dk in mapping) {
+    if (detected[dk] >= 0) {
+      document.getElementById(mapping[dk]).value = detected[dk];
+    }
+  }
+
+  // 検出結果を表示
+  var info = [];
+  for (var k in detected) {
+    if (detected[k] >= 0) info.push(k + "=" + colLetter(detected[k]) + "(" + (headers[detected[k]]||"empty") + ")");
+  }
+  document.getElementById("autoDetectResult").textContent = info.join(" | ") || "No columns detected";
+}
+
+function getImportColumns() {
+  // 現在のモードに応じて列インデックスを返す
+  if (importMode === "manual") {
+    return {
+      ci: colToIndex(document.getElementById("colItemName").value),
+      ca: colToIndex(document.getElementById("colAbbr").value),
+      cj: colToIndex(document.getElementById("colJlac10").value),
+      cs: colToIndex(document.getElementById("colStdName").value)
+    };
+  }
+  // auto / header → プルダウンの値を使う
+  return {
+    ci: parseInt(document.getElementById("hdrItemName").value),
+    ca: parseInt(document.getElementById("hdrAbbr").value),
+    cj: parseInt(document.getElementById("hdrJlac10").value),
+    cs: parseInt(document.getElementById("hdrStdName").value)
+  };
+}
+
 function convertExcel() {
+  var hospital, sheetInput;
+  if (fileSource === "repo") {
+    hospital = document.getElementById("hospitalName").value.trim() || "Unknown";
+    sheetInput = document.getElementById("importSheet").value.trim();
+    // リポジトリモード: importWb が既にロード済み
+    if (!importWb) { showToast("Hospital を選択してください"); return; }
+    doConvertFromWb(importWb, hospital, sheetInput);
+    return;
+  }
+  // ローカルモード
   var file = document.getElementById("excelFile").files[0];
   if (!file) { showToast("Select a file"); return; }
-  var hospital = document.getElementById("hospitalName").value.trim() || "Unknown";
-  var ci=colToIndex(document.getElementById("colItemName").value), ca=colToIndex(document.getElementById("colAbbr").value);
-  var cj=colToIndex(document.getElementById("colJlac10").value), cs=colToIndex(document.getElementById("colStdName").value);
+  hospital = document.getElementById("hospitalNameLocal").value.trim() || document.getElementById("hospitalName").value.trim() || "Unknown";
+  sheetInput = document.getElementById("importSheetLocal").value.trim() || document.getElementById("importSheet").value.trim();
+
   var reader = new FileReader();
   reader.onload = function(e) {
     var wb = XLSX.read(e.target.result, {type:"array"});
-    var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1});
-    var items = [];
-    for (var i = 1; i < rows.length; i++) {
-      var row = rows[i]; if (!row||row.length===0) continue;
-      var itemName = ci>=0 ? String(row[ci]==null?"":row[ci]).trim() : "";
-      var abbr = ca>=0 ? String(row[ca]==null?"":row[ca]).trim() : "";
-      var rawJlac = cj>=0 ? String(row[cj]==null?"":row[cj]).trim() : "";
-      var stdName = cs>=0 ? String(row[cs]==null?"":row[cs]).trim() : "";
-      if (!itemName && !rawJlac) continue;
-      var jlac10 = rawJlac.replace(/-/g,"");
-      items.push({hospital:hospital,item_name:itemName,abbreviation:abbr,jlac10:jlac10,
-        analyte_code:jlac10.length>=5?jlac10.substring(0,5):"",jlac10_standard_name:stdName});
-    }
-    lastConvertedJson = {metadata:{hospital:hospital,exported_at:new Date().toISOString(),total_items:items.length},items:items};
-    document.getElementById("importStatus").textContent = "Converted: "+items.length+" items (JLAC10: "+items.filter(function(x){return x.jlac10;}).length+")";
-    document.getElementById("btnMerge").disabled=false; document.getElementById("btnDownload").disabled=false;
-    var h='<table><tr><th>Item Name</th><th>Abbr</th><th>JLAC10</th><th>Standard Name</th></tr>';
-    for (var p of items.slice(0,10)) h+='<tr><td>'+esc(p.item_name)+'</td><td>'+esc(p.abbreviation)+'</td><td><code>'+esc(p.jlac10)+'</code></td><td>'+esc(p.jlac10_standard_name)+'</td></tr>';
-    h+='</table>'; if(items.length>10) h+='<div class="status-bar">...and '+(items.length-10)+' more</div>';
-    setHtml("importPreview",h);
+    doConvertFromWb(wb, hospital, sheetInput);
   };
   reader.readAsArrayBuffer(file);
+}
+
+function doConvertFromWb(wb, hospital, sheetInput) {
+  var cols = getImportColumns();
+  var ci = cols.ci, ca = cols.ca, cj = cols.cj, cs = cols.cs;
+  var sheetName = sheetInput || wb.SheetNames[0];
+  var ws = wb.Sheets[sheetName] || wb.Sheets[wb.SheetNames[0]];
+  var rows = XLSX.utils.sheet_to_json(ws, {header:1});
+
+  var usage = "依頼,結果";
+  if (sheetName) {
+    if (sheetName.indexOf("依頼") >= 0) usage = "依頼";
+    else if (sheetName.indexOf("結果") >= 0) usage = "結果";
+  }
+
+  var items = [];
+  for (var i = 1; i < rows.length; i++) {
+    var row = rows[i]; if (!row||row.length===0) continue;
+    var itemName = ci>=0 ? String(row[ci]==null?"":row[ci]).trim() : "";
+    var abbr = ca>=0 ? String(row[ca]==null?"":row[ca]).trim() : "";
+    if (!itemName && !abbr) continue;
+    if (!itemName) itemName = abbr;
+    var rawJlac = cj>=0 ? String(row[cj]==null?"":row[cj]).trim() : "";
+    var stdName = cs>=0 ? String(row[cs]==null?"":row[cs]).trim() : "";
+    var jlac10 = rawJlac.replace(/-/g,"");
+    items.push({hospital:hospital,item_name:itemName,abbreviation:abbr,jlac10:jlac10,
+      analyte_code:jlac10.length>=5?jlac10.substring(0,5):"",jlac10_standard_name:stdName,
+      usage:usage,source_sheet:sheetName});
+  }
+  lastConvertedJson = {metadata:{hospital:hospital,exported_at:new Date().toISOString(),
+    total_items:items.length,usage:usage,source_sheet:sheetName},items:items};
+
+  var validCount = items.filter(function(x){return isValidJlac(x.jlac10);}).length;
+  document.getElementById("importStatus").textContent =
+    "Converted: "+items.length+" items | JLAC10 valid: "+validCount+" | Usage: "+usage;
+  document.getElementById("btnMerge").disabled=false; document.getElementById("btnDownload").disabled=false;
+
+  var container = document.getElementById("importPreview");
+  while(container.firstChild) container.removeChild(container.firstChild);
+  var table = document.createElement("table");
+  var thead = document.createElement("tr");
+  ["Item Name","Abbr","JLAC10","Standard Name","Usage"].forEach(function(t){
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+  for (var p of items.slice(0,10)) {
+    var tr = document.createElement("tr");
+    [p.item_name, p.abbreviation, p.jlac10, p.jlac10_standard_name, p.usage].forEach(function(v){
+      var td = document.createElement("td"); td.textContent = v||""; tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  }
+  container.appendChild(table);
+  if (items.length > 10) {
+    var more = document.createElement("div");
+    more.className = "status-bar";
+    more.textContent = "...and " + (items.length - 10) + " more";
+    container.appendChild(more);
+  }
 }
 
 function mergeToDb() {
@@ -650,62 +1309,533 @@ function doBulkMapping() {
       if(matches.length>0&&matches[0].score>=90){status="auto";best=matches[0];auto++;}
       else if(matches.length>0&&matches[0].score>=50){status="candidate";best=matches[0];cand++;}
       else{status="manual";best=null;manual++;}
-      results.push({row:i+1,itemName:name,status:status,matches:matches,bestMatch:best});
+      results.push({row:i+1,itemName:name,status:status,matches:matches,bestMatch:best,
+        confirmed:false,selectedIdx:0});
     }
     lastBulkResult=results;
-    document.getElementById("bulkStatus").innerHTML="Done: <b>"+results.length+"</b> | <span style='color:var(--success)'>Auto: "+auto+"</span> | <span style='color:var(--warning)'>Review: "+cand+"</span> | <span style='color:var(--danger)'>Manual: "+manual+"</span>";
+    document.getElementById("bulkStatus").textContent =
+      "Done: "+results.length+" | Auto: "+auto+" | Review: "+cand+" | Manual: "+manual;
     document.getElementById("btnBulkDL").disabled=false;
-    var h='<table><tr><th></th><th>Item Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
-    for(var r of results){
-      var cls=r.status==="auto"?"row-ok":r.status==="candidate"?"row-warn":"row-ng";
-      var icon=r.status==="auto"?"OK":r.status==="candidate"?"??":"--";
-      h+='<tr class="'+cls+'"><td>'+icon+'</td><td>'+esc(r.itemName)+'</td><td><code>'+(r.bestMatch?esc(r.bestMatch.jlac10):"")+'</code></td><td>'+(r.bestMatch?esc(r.bestMatch.matchedName):"")+'</td><td>'+(r.bestMatch?r.bestMatch.score.toFixed(0):"-")+'</td></tr>';
-    }
-    h+='</table>'; setHtml("bulkResults",h);
+    document.getElementById("btnConfirmAuto").disabled=false;
+    renderBulkTable();
   };
   reader.readAsArrayBuffer(file);
+}
+
+function renderBulkTable() {
+  if (!lastBulkResult) return;
+  var container = document.getElementById("bulkResults");
+  // Clear and build DOM safely
+  while(container.firstChild) container.removeChild(container.firstChild);
+
+  var table = document.createElement("table");
+  // Header
+  var thead = document.createElement("tr");
+  ["","Item Name","JLAC10 Candidate","Score","Action"].forEach(function(t){
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+
+  for (var i=0; i<lastBulkResult.length; i++) {
+    (function(idx){
+      var r = lastBulkResult[idx];
+      var tr = document.createElement("tr");
+      var cls = r.confirmed ? "row-confirmed" : r.status==="auto" ? "row-ok" : r.status==="candidate" ? "row-warn" : "row-ng";
+      tr.className = cls;
+      tr.setAttribute("data-idx", idx);
+
+      // Col 1: Status icon
+      var td0 = document.createElement("td");
+      td0.textContent = r.confirmed ? "OK" : r.status==="auto" ? "OK" : r.status==="candidate" ? "??" : "--";
+      tr.appendChild(td0);
+
+      // Col 2: Item name
+      var td1 = document.createElement("td");
+      td1.textContent = r.itemName;
+      tr.appendChild(td1);
+
+      // Col 3: JLAC10 candidate (select for candidate/manual, text for auto/confirmed)
+      var td2 = document.createElement("td");
+      if (r.confirmed || r.status === "auto") {
+        var code = document.createElement("code");
+        code.textContent = r.bestMatch ? r.bestMatch.jlac10 + " " + r.bestMatch.matchedName : "";
+        td2.appendChild(code);
+      } else if (r.matches.length > 0) {
+        var sel = document.createElement("select");
+        sel.className = "candidate-select";
+        for (var j=0; j<r.matches.length; j++) {
+          var opt = document.createElement("option");
+          opt.value = j;
+          opt.textContent = r.matches[j].jlac10 + " | " + r.matches[j].matchedName + " (" + r.matches[j].score.toFixed(0) + ")";
+          if (j === r.selectedIdx) opt.selected = true;
+          sel.appendChild(opt);
+        }
+        sel.addEventListener("change", function(ev) {
+          lastBulkResult[idx].selectedIdx = parseInt(ev.target.value);
+          lastBulkResult[idx].bestMatch = lastBulkResult[idx].matches[lastBulkResult[idx].selectedIdx];
+        });
+        td2.appendChild(sel);
+      } else {
+        td2.textContent = "(no match)";
+      }
+      tr.appendChild(td2);
+
+      // Col 4: Score
+      var td3 = document.createElement("td");
+      td3.textContent = r.bestMatch ? r.bestMatch.score.toFixed(0) : "-";
+      tr.appendChild(td3);
+
+      // Col 5: Action button
+      var td4 = document.createElement("td");
+      if (!r.confirmed && r.matches.length > 0) {
+        var btn = document.createElement("button");
+        btn.className = "btn btn-primary btn-xs";
+        btn.textContent = "Confirm";
+        btn.addEventListener("click", function() { confirmBulkRow(idx); });
+        td4.appendChild(btn);
+      } else if (r.confirmed) {
+        td4.textContent = "Confirmed";
+        td4.style.color = "var(--success)";
+      }
+      tr.appendChild(td4);
+
+      table.appendChild(tr);
+    })(i);
+  }
+  container.appendChild(table);
+}
+
+function confirmBulkRow(idx) {
+  var r = lastBulkResult[idx];
+  r.bestMatch = r.matches[r.selectedIdx];
+  r.confirmed = true;
+  r.status = "confirmed";
+  renderBulkTable();
+  updateBulkSummary();
+}
+
+function confirmAllAuto() {
+  for (var i=0;i<lastBulkResult.length;i++) {
+    var r = lastBulkResult[i];
+    if (r.status === "auto" && !r.confirmed) {
+      r.confirmed = true;
+      r.status = "confirmed";
+    }
+  }
+  renderBulkTable();
+  updateBulkSummary();
+  showToast("Auto items confirmed");
+}
+
+function updateBulkSummary() {
+  var confirmed=0, review=0, manual=0;
+  for (var r of lastBulkResult) {
+    if (r.confirmed) confirmed++;
+    else if (r.status==="candidate") review++;
+    else if (r.status==="manual") manual++;
+  }
+  document.getElementById("bulkStatus").textContent =
+    "Total: "+lastBulkResult.length+" | Confirmed: "+confirmed+" | Review: "+review+" | Manual: "+manual;
+  document.getElementById("btnBulkMerge").disabled = (confirmed === 0);
+}
+
+function mergeBulkToDb() {
+  var hospital = document.getElementById("bulkHospital").value.trim() || "Unknown";
+  var added = 0;
+  for (var r of lastBulkResult) {
+    if (!r.confirmed || !r.bestMatch) continue;
+    var jlac10 = r.bestMatch.jlac10;
+    if (!jlac10 || !isValidJlac(jlac10)) continue;
+    var existing = DB.items.find(function(e){return e.jlac10===jlac10;});
+    if (!existing) {
+      existing={jlac10:jlac10,analyte_code:jlac10.substring(0,5),
+        jlac10_decoded:{raw:jlac10,valid:false},sources:{},mapping_history:[]};
+      DB.items.push(existing);
+    }
+    if (!existing.mapping_history) existing.mapping_history=[];
+    var dup = existing.mapping_history.some(function(h){
+      return h.hospital===hospital&&h.item_name===r.itemName;});
+    if (!dup) {
+      existing.mapping_history.push({hospital:hospital,item_name:r.itemName,
+        abbreviation:"",jlac10_standard_name:r.bestMatch.matchedName});
+      added++;
+    }
+  }
+  DB.metadata.total_unique_jlac10=DB.items.length;
+  searchIndex=buildSearchIndex();
+  updateDbStatus();
+  showToast("Merged "+added+" entries to DB");
+  document.getElementById("btnExportDb").disabled=false;
 }
 
 function downloadBulkResult() {
   if(!lastBulkResult)return;
   var d=[["Status","Row","Item Name","JLAC10","Matched","Score","Analyte","Alt1","Alt2"]];
-  for(var r of lastBulkResult) d.push([r.status==="auto"?"OK":r.status==="candidate"?"Review":"Manual",r.row,r.itemName,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):"",r.bestMatch?r.bestMatch.analyte_code:"",r.matches[1]?r.matches[1].jlac10:"",r.matches[2]?r.matches[2].jlac10:""]);
+  for(var r of lastBulkResult) {
+    var st = r.confirmed ? "Confirmed" : r.status==="auto" ? "Auto" : r.status==="candidate" ? "Review" : "Manual";
+    d.push([st,r.row,r.itemName,r.bestMatch?r.bestMatch.jlac10:"",
+      r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):"",
+      r.bestMatch?r.bestMatch.analyte_code:"",
+      r.matches[1]?r.matches[1].jlac10:"",r.matches[2]?r.matches[2].jlac10:""]);
+  }
   var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Mapping"); XLSX.writeFile(wb,"mapping_result.xlsx");
 }
 
 // =====================================================================
-// UI: SN Error
+// UI: SN Error Dashboard
 // =====================================================================
+var snCases = {};
+var snSelectedCase = null;
+var snCurrentFilter = "all";
+var snCurrentSubtab = "items";
 var errorInputMode = "file";
-function toggleErrorInput(mode) {
+
+// --- LocalStorage ---
+function snLoadCases() {
+  try {
+    var raw = localStorage.getItem("sn_dashboard_cases");
+    if (raw) snCases = JSON.parse(raw);
+    else snCases = {};
+  } catch(e) { snCases = {}; }
+}
+function snSaveCases() {
+  localStorage.setItem("sn_dashboard_cases", JSON.stringify(snCases));
+}
+
+// --- CRUD ---
+function snCreateCase(issueNumber, hospitalName, contact) {
+  var key = "#" + issueNumber;
+  if (snCases[key]) { showToast("Case " + key + " already exists"); return null; }
+  var now = new Date().toISOString();
+  snCases[key] = {
+    issue_number: parseInt(issueNumber),
+    hospital_name: hospitalName || "",
+    hospital_id: "",
+    contact: contact || "",
+    cc: "",
+    created_at: now,
+    updated_at: now,
+    status: "open",
+    error_items: [],
+    history: [
+      { date: now, action: "created", note: "Case created" }
+    ],
+    workflow: {}
+  };
+  snSaveCases();
+  return snCases[key];
+}
+function snUpdateCase(issueNumber, updates) {
+  var key = "#" + issueNumber;
+  if (!snCases[key]) return null;
+  for (var k in updates) {
+    if (updates.hasOwnProperty(k)) snCases[key][k] = updates[k];
+  }
+  snCases[key].updated_at = new Date().toISOString();
+  snSaveCases();
+  return snCases[key];
+}
+function snDeleteCase(issueNumber) {
+  var key = "#" + issueNumber;
+  if (!snCases[key]) return;
+  delete snCases[key];
+  if (snSelectedCase === key) { snSelectedCase = null; document.getElementById("snCaseDetail").classList.add("hidden"); }
+  snSaveCases();
+  snRenderCaseList(snCurrentFilter);
+}
+function snGetCase(issueNumber) {
+  return snCases["#" + issueNumber] || null;
+}
+
+// --- History ---
+function snAddHistory(issueNumber, action, note) {
+  var key = "#" + issueNumber;
+  if (!snCases[key]) return;
+  snCases[key].history.push({
+    date: new Date().toISOString(),
+    action: action,
+    note: note || ""
+  });
+  snCases[key].updated_at = new Date().toISOString();
+  snSaveCases();
+}
+
+// --- UI: New Case ---
+function snDoCreateCase() {
+  var issue = document.getElementById("snNewIssue").value.trim();
+  var hospital = document.getElementById("snNewHospital").value.trim();
+  var contact = document.getElementById("snNewContact").value.trim();
+  if (!issue) { showToast("Issue # is required"); return; }
+  var c = snCreateCase(issue, hospital, contact);
+  if (c) {
+    document.getElementById("snNewCaseForm").classList.add("hidden");
+    document.getElementById("snNewIssue").value = "";
+    document.getElementById("snNewHospital").value = "";
+    document.getElementById("snNewContact").value = "";
+    snRenderCaseList(snCurrentFilter);
+    snSelectCase("#" + issue);
+    showToast("Case #" + issue + " created");
+  }
+}
+
+// --- UI: Filter Bar ---
+function snRenderFilterBar() {
+  var bar = document.getElementById("snFilterBar");
+  while (bar.firstChild) bar.removeChild(bar.firstChild);
+  var statuses = ["all","open","mapping","waiting","verifying","closed"];
+  var labels = { all:"All", open:"Open", mapping:"Mapping", waiting:"Waiting", verifying:"Verifying", closed:"Closed" };
+  var counts = { all:0, open:0, mapping:0, waiting:0, verifying:0, closed:0 };
+  for (var k in snCases) { counts.all++; counts[snCases[k].status] = (counts[snCases[k].status]||0) + 1; }
+  for (var s of statuses) {
+    var btn = document.createElement("button");
+    btn.className = "sn-filter-btn" + (snCurrentFilter === s ? " active" : "");
+    btn.setAttribute("data-filter", s);
+    var txt = document.createTextNode(labels[s]);
+    btn.appendChild(txt);
+    var cnt = document.createElement("span");
+    cnt.className = "sn-count";
+    cnt.textContent = "(" + (counts[s]||0) + ")";
+    btn.appendChild(cnt);
+    btn.addEventListener("click", function(ev) {
+      var f = ev.currentTarget.getAttribute("data-filter");
+      snCurrentFilter = f;
+      snRenderCaseList(f);
+      snRenderFilterBar();
+    });
+    bar.appendChild(btn);
+  }
+}
+
+// --- UI: Case List ---
+function snRenderCaseList(filter) {
+  filter = filter || "all";
+  var container = document.getElementById("snCaseList");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  var keys = Object.keys(snCases).sort(function(a,b) {
+    return (snCases[b].updated_at || "").localeCompare(snCases[a].updated_at || "");
+  });
+
+  var shown = 0;
+  for (var key of keys) {
+    var c = snCases[key];
+    if (filter !== "all" && c.status !== filter) continue;
+    shown++;
+
+    var row = document.createElement("div");
+    row.className = "sn-case-row" + (snSelectedCase === key ? " selected" : "");
+    row.setAttribute("data-key", key);
+
+    var issueEl = document.createElement("span");
+    issueEl.className = "sn-case-issue";
+    issueEl.textContent = key;
+    row.appendChild(issueEl);
+
+    var hospEl = document.createElement("span");
+    hospEl.className = "sn-case-hospital";
+    hospEl.textContent = c.hospital_name || "-";
+    row.appendChild(hospEl);
+
+    var statusEl = document.createElement("span");
+    statusEl.className = "sn-status sn-status-" + c.status;
+    statusEl.textContent = c.status;
+    row.appendChild(statusEl);
+
+    var countEl = document.createElement("span");
+    countEl.className = "sn-case-count";
+    countEl.textContent = (c.error_items || []).length + " items";
+    row.appendChild(countEl);
+
+    var dateEl = document.createElement("span");
+    dateEl.className = "sn-case-date";
+    var d = c.updated_at ? new Date(c.updated_at) : new Date(c.created_at);
+    dateEl.textContent = (d.getMonth()+1) + "/" + d.getDate();
+    row.appendChild(dateEl);
+
+    var delBtn = document.createElement("button");
+    delBtn.className = "sn-case-del";
+    delBtn.textContent = "x";
+    delBtn.setAttribute("data-issue", String(c.issue_number));
+    delBtn.addEventListener("click", function(ev) {
+      ev.stopPropagation();
+      var iss = ev.currentTarget.getAttribute("data-issue");
+      if (confirm("Delete case #" + iss + "?")) {
+        snDeleteCase(iss);
+      }
+    });
+    row.appendChild(delBtn);
+
+    row.addEventListener("click", function(ev) {
+      var k = ev.currentTarget.getAttribute("data-key");
+      snSelectCase(k);
+    });
+
+    container.appendChild(row);
+  }
+
+  if (shown === 0) {
+    var empty = document.createElement("div");
+    empty.className = "status-bar";
+    empty.textContent = "No cases found. Click [+ New Case] to create one.";
+    container.appendChild(empty);
+  }
+
+  snRenderFilterBar();
+}
+
+// --- UI: Select Case ---
+function snSelectCase(key) {
+  snSelectedCase = key;
+  var c = snCases[key];
+  if (!c) return;
+
+  document.getElementById("snCaseDetail").classList.remove("hidden");
+  document.getElementById("snDetailTitle").textContent = "Case " + key;
+  document.getElementById("snDetHospital").value = c.hospital_name || "";
+  document.getElementById("snDetContact").value = c.contact || "";
+  document.getElementById("snDetIssue").value = key;
+  document.getElementById("snDetStatus").value = c.status;
+
+  // Sync fields for workflow
+  document.getElementById("errorHospital").value = c.hospital_name || "";
+  if (document.getElementById("wfContact")) document.getElementById("wfContact").value = c.contact || "";
+
+  snRenderErrorItems();
+  snRenderHistory(c.issue_number);
+  snSwitchSubtab(snCurrentSubtab);
+
+  // Re-render list to show selection
+  var rows = document.querySelectorAll(".sn-case-row");
+  for (var r of rows) {
+    r.classList.toggle("selected", r.getAttribute("data-key") === key);
+  }
+}
+
+function snCloseDetail() {
+  snSelectedCase = null;
+  document.getElementById("snCaseDetail").classList.add("hidden");
+  var rows = document.querySelectorAll(".sn-case-row");
+  for (var r of rows) r.classList.remove("selected");
+}
+
+// --- UI: Update Field ---
+function snUpdateField(field, value) {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var upd = {};
+  upd[field] = value;
+  snUpdateCase(snCases[snSelectedCase].issue_number, upd);
+  snRenderCaseList(snCurrentFilter);
+}
+
+// --- UI: Status Change ---
+function snChangeStatus(newStatus) {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var c = snCases[snSelectedCase];
+  var oldStatus = c.status;
+  if (oldStatus === newStatus) return;
+  snUpdateCase(c.issue_number, { status: newStatus });
+  snAddHistory(c.issue_number, "status_changed", oldStatus + " -> " + newStatus);
+  snRenderCaseList(snCurrentFilter);
+  snRenderHistory(c.issue_number);
+  showToast("Status: " + newStatus);
+}
+
+// --- UI: Sub Tabs ---
+function snSwitchSubtab(name) {
+  snCurrentSubtab = name;
+  var panels = ["items","actions","history"];
+  for (var p of panels) {
+    var el = document.getElementById("snPanel" + p.charAt(0).toUpperCase() + p.slice(1));
+    if (el) el.classList.toggle("hidden", p !== name);
+    var btn = document.getElementById("snSub" + p.charAt(0).toUpperCase() + p.slice(1));
+    if (btn) btn.className = p === name ? "sn-subtab active" : "sn-subtab";
+  }
+}
+
+// --- UI: Import Mode Toggle ---
+function snToggleImportMode(mode) {
   errorInputMode = mode;
-  document.getElementById("errorInputFile").classList.toggle("hidden", mode !== "file");
-  document.getElementById("errorInputPaste").classList.toggle("hidden", mode !== "paste");
-  document.getElementById("errToggleFile").style.borderBottom = mode === "file" ? "2px solid var(--accent)" : "none";
-  document.getElementById("errTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
+  document.getElementById("snErrorInputFile").classList.toggle("hidden", mode !== "file");
+  document.getElementById("snErrorInputPaste").classList.toggle("hidden", mode !== "paste");
+  document.getElementById("snErrToggleFile").style.borderBottom = mode === "file" ? "2px solid var(--accent)" : "none";
+  document.getElementById("snErrTogglePaste").style.borderBottom = mode === "paste" ? "2px solid var(--accent)" : "none";
+}
+
+// Keep old toggleErrorInput as alias
+function toggleErrorInput(mode) { snToggleImportMode(mode); }
+
+// HL7v2 OBX セグメントからコード+名称を抽出
+function parseHL7Segments(text) {
+  var rows = [];
+  var lines = text.split("\n");
+  for (var line of lines) {
+    line = line.trim();
+    if (!line) continue;
+    // OBX|1|NM|12345^TP^JC10||7.2|g/dL|...
+    if (line.startsWith("OBX|")) {
+      var fields = line.split("|");
+      if (fields.length >= 4) {
+        var obx3 = fields[3] || "";
+        var components = obx3.split("^");
+        var code = components[0] || "";
+        var name = components[1] || "";
+        var value = fields.length >= 6 ? fields[5] : "";
+        var unit = fields.length >= 7 ? fields[6] : "";
+        if (code || name) {
+          rows.push({ code: code, name: name, value: value, unit: unit });
+        }
+      }
+    }
+    // OBR|1||12345^検査名^... → オーダー情報（参考）
+    // MSH は無視
+  }
+  return rows;
+}
+
+// フォーマット自動検知
+function detectErrorFormat(text) {
+  var lines = text.split("\n");
+  for (var line of lines) {
+    if (line.trim().startsWith("MSH|") || line.trim().startsWith("OBX|") || line.trim().startsWith("OBR|")) {
+      return "hl7";
+    }
+  }
+  if (lines[0] && lines[0].includes("\t")) return "tsv";
+  if (lines[0] && lines[0].includes(",") && lines[0].split(",").length >= 3) return "csv";
+  return "simple";
 }
 
 function parseErrorRows(callback) {
   if (errorInputMode === "paste") {
-    // テキストペースト入力
     var text = document.getElementById("errorPasteText").value.trim();
     if (!text) { showToast("テキストを貼り付けてください"); return; }
-    var ccIdx = parseInt(document.getElementById("pasteColCode").value);
-    var cnIdx = parseInt(document.getElementById("pasteColName").value);
-    if (isNaN(cnIdx)) cnIdx = 0;
-    if (isNaN(ccIdx)) ccIdx = -1;
-    var lines = text.split("\n");
+
+    var format = detectErrorFormat(text);
     var rows = [];
-    for (var line of lines) {
-      var parts = line.includes("\t") ? line.split("\t") : line.split(",");
-      if (parts.length === 1 && ccIdx < 0) {
-        // 1列のみ → 項目名として扱う
-        rows.push({ code: "", name: parts[0].trim() });
-      } else {
-        rows.push({
-          code: ccIdx >= 0 && parts[ccIdx] ? parts[ccIdx].trim() : "",
-          name: cnIdx >= 0 && parts[cnIdx] ? parts[cnIdx].trim() : ""
-        });
+
+    if (format === "hl7") {
+      // HL7v2 OBXセグメント解析
+      rows = parseHL7Segments(text);
+      showToast("HL7v2 format detected: " + rows.length + " OBX segments");
+    } else {
+      // TSV / CSV / 単一列
+      var ccIdx = parseInt(document.getElementById("pasteColCode").value);
+      var cnIdx = parseInt(document.getElementById("pasteColName").value);
+      if (isNaN(cnIdx)) cnIdx = 0;
+      if (isNaN(ccIdx)) ccIdx = -1;
+      var lines = text.split("\n");
+      for (var line of lines) {
+        line = line.trim();
+        if (!line) continue;
+        var parts = format === "tsv" ? line.split("\t") : format === "csv" ? line.split(",") : [line];
+        if (parts.length === 1 && ccIdx < 0) {
+          rows.push({ code: "", name: parts[0].trim() });
+        } else {
+          rows.push({
+            code: ccIdx >= 0 && parts[ccIdx] ? parts[ccIdx].trim() : "",
+            name: cnIdx >= 0 && parts[cnIdx] ? parts[cnIdx].trim() : ""
+          });
+        }
       }
     }
     callback(rows);
@@ -733,7 +1863,7 @@ function parseErrorRows(callback) {
   }
 }
 
-function analyzeErrors() {
+function analyzeErrors(callback) {
   parseErrorRows(function(rows) {
     var results = [], ok = 0, ng = 0;
     for (var i = 0; i < rows.length; i++) {
@@ -745,43 +1875,373 @@ function analyzeErrors() {
       results.push({ row: i + 1, code: code, name: name, status: status, matches: matches, bestMatch: best });
     }
     lastErrorResult = results;
-    document.getElementById("errorStatus").innerHTML = "<b>" + results.length + "</b> errors | <span style='color:var(--success)'>Assignable: " + ok + "</span> | <span style='color:var(--danger)'>Inquiry: " + ng + "</span>";
-    document.getElementById("btnMail").disabled = (ng === 0); document.getElementById("btnErrorDL").disabled = false;
-    var h = '<table><tr><th></th><th>Code</th><th>Name</th><th>JLAC10</th><th>Matched</th><th>Score</th></tr>';
-    for (var r of results) {
-      var cls = r.status === "assignable" ? "row-ok" : "row-ng";
-      h += '<tr class="' + cls + '"><td>' + (r.status === "assignable" ? "OK" : "??") + '</td><td>' + esc(r.code) + '</td><td>' + esc(r.name) + '</td><td><code>' + (r.bestMatch ? formatJlac17(r.bestMatch.jlac10, r.bestMatch.jlac10_status) : "") + '</code></td><td>' + (r.bestMatch ? esc(r.bestMatch.matchedName) : "") + '</td><td>' + (r.bestMatch ? r.bestMatch.score.toFixed(0) : "-") + '</td></tr>';
-    }
-    h += '</table>'; setHtml("errorResults", h);
+    document.getElementById("errorStatus").textContent =
+      results.length + " errors | Assignable: " + ok + " | Inquiry: " + ng;
+    document.getElementById("btnErrorDL").disabled = false;
+    if (callback) callback(results);
   });
 }
 
-function generateMail() {
-  if(!lastErrorResult)return;
-  var hospital=document.getElementById("errorHospital").value.trim()||"Hospital";
-  var dept=document.getElementById("errorDept").value.trim()||"検査科";
-  var items=lastErrorResult.filter(function(r){return r.status==="inquiry";});
-  if(items.length===0){showToast("No inquiry items");return;}
-  document.getElementById("mailSubject").value="検査項目コード確認のお願い（JLAC10未設定項目）";
-  var b=hospital+" "+dept+" 御中\n\nお世話になっております。\nSSMIX2データにおいて、以下の検査項目にJLAC10コードが設定されていないため、\n付番に必要な情報のご確認をお願いいたします。\n\n";
-  b+="■ 対象項目（"+items.length+"件）\n\n";
-  for(var i=0;i<items.length;i++) b+=(i+1)+". ["+items[i].code+"] "+items[i].name+"\n";
-  b+="\n■ 各項目について以下をご教示ください\n\n";
-  b+="1. 結果値の種類（数値/文字列/コード値/定性）\n2. 結果値の単位\n3. 使用している測定法または試薬名\n4. 検体の種類（血清/血漿/尿/その他）\n5. 親検査項目がある場合、その項目名\n6. 外注の場合、外注先（SRL/BML/LSI/その他）\n\nお忙しいところ恐れ入りますが、ご回答のほどよろしくお願いいたします。\n";
-  document.getElementById("mailBody").value=b;
-  document.getElementById("mailArea").classList.remove("hidden");
+// --- Dashboard: Import Errors into selected case ---
+function snImportErrors() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) {
+    showToast("Select or create a case first");
+    return;
+  }
+  analyzeErrors(function(results) {
+    var c = snCases[snSelectedCase];
+    // Convert analysis results to case error_items
+    var items = [];
+    for (var r of results) {
+      items.push({
+        code: r.code,
+        name: r.name,
+        status: r.status,
+        jlac10: r.bestMatch ? r.bestMatch.jlac10 : "",
+        matched_name: r.bestMatch ? r.bestMatch.matchedName : "",
+        score: r.bestMatch ? r.bestMatch.score : 0
+      });
+    }
+    snUpdateCase(c.issue_number, { error_items: items });
+    // Also keep lastErrorResult for workflow generation
+    lastErrorResult = results;
+
+    var ok = items.filter(function(x){return x.status==="assignable";}).length;
+    var ng = items.filter(function(x){return x.status==="inquiry";}).length;
+    snAddHistory(c.issue_number, "analyzed", items.length + " items (" + ok + " assignable, " + ng + " inquiry)");
+
+    snRenderErrorItems();
+    snRenderCaseList(snCurrentFilter);
+    snRenderHistory(c.issue_number);
+    showToast("Imported " + items.length + " error items");
+  });
 }
 
-function copyMail() {
-  navigator.clipboard.writeText(document.getElementById("mailBody").value).then(function(){showToast("Copied!");});
+// --- UI: Render Error Items Table ---
+function snRenderErrorItems() {
+  var container = document.getElementById("snErrorItemsTable");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var items = snCases[snSelectedCase].error_items || [];
+  if (items.length === 0) {
+    var empty = document.createElement("div");
+    empty.className = "status-bar";
+    empty.textContent = "No error items. Use [Import Errors] to analyze and import.";
+    container.appendChild(empty);
+    return;
+  }
+
+  var table = document.createElement("table");
+  var thead = document.createElement("tr");
+  ["","Code","Name","JLAC10","Matched","Score"].forEach(function(t){
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+
+  for (var item of items) {
+    var tr = document.createElement("tr");
+    tr.className = item.status === "assignable" ? "row-ok" : "row-ng";
+
+    var td0 = document.createElement("td");
+    var badge = document.createElement("span");
+    badge.className = "sn-error-item-status sn-errst-" + item.status;
+    badge.textContent = item.status === "assignable" ? "OK" : "??";
+    td0.appendChild(badge);
+    tr.appendChild(td0);
+
+    var td1 = document.createElement("td"); td1.textContent = item.code; tr.appendChild(td1);
+    var td2 = document.createElement("td"); td2.textContent = item.name; tr.appendChild(td2);
+
+    var td3 = document.createElement("td");
+    if (item.jlac10) {
+      var codeEl = document.createElement("code");
+      codeEl.className = "mono";
+      codeEl.textContent = item.jlac10;
+      td3.appendChild(codeEl);
+    }
+    tr.appendChild(td3);
+
+    var td4 = document.createElement("td"); td4.textContent = item.matched_name || ""; tr.appendChild(td4);
+    var td5 = document.createElement("td"); td5.textContent = item.score ? item.score.toFixed(0) : "-"; tr.appendChild(td5);
+
+    table.appendChild(tr);
+  }
+  container.appendChild(table);
 }
 
-function downloadErrorResult() {
-  if(!lastErrorResult)return;
-  var d=[["Status","Row","Code","Name","JLAC10","Matched","Score"]];
-  for(var r of lastErrorResult) d.push([r.status==="assignable"?"Assignable":"Inquiry",r.row,r.code,r.name,r.bestMatch?r.bestMatch.jlac10:"",r.bestMatch?r.bestMatch.matchedName:"",r.bestMatch?r.bestMatch.score.toFixed(0):""]);
-  var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(d),"Error Analysis"); XLSX.writeFile(wb,"error_analysis.xlsx");
+// --- UI: Download Error Excel ---
+function snDownloadErrorExcel() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var items = snCases[snSelectedCase].error_items || [];
+  if (items.length === 0) { showToast("No error items"); return; }
+  var d = [["Status","Code","Name","JLAC10","Matched","Score"]];
+  for (var r of items) {
+    d.push([r.status==="assignable"?"Assignable":"Inquiry", r.code, r.name, r.jlac10, r.matched_name, r.score ? r.score.toFixed(0) : ""]);
+  }
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(d), "Error Analysis");
+  XLSX.writeFile(wb, "error_analysis_" + snCases[snSelectedCase].issue_number + ".xlsx");
 }
+
+// --- Workflow: get case error data as lastErrorResult format ---
+function snGetErrorResultFromCase() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return null;
+  var items = snCases[snSelectedCase].error_items || [];
+  if (items.length === 0) return null;
+  return items.map(function(item) {
+    return {
+      code: item.code, name: item.name, status: item.status,
+      bestMatch: item.jlac10 ? { jlac10: item.jlac10, matchedName: item.matched_name, score: item.score } : null
+    };
+  });
+}
+
+// --- Workflow: Generate Email ---
+function snGenerateEmail() {
+  var errorData = snGetErrorResultFromCase();
+  if (!errorData) { showToast("No error items. Import errors first."); return; }
+  var c = snCases[snSelectedCase];
+  var hospital = c.hospital_name || "Hospital";
+  var contact = (document.getElementById("wfContact").value.trim()) || c.contact || "Contact";
+  var cc = document.getElementById("wfCc").value.trim();
+  var issueNum = c.issue_number;
+  var dateStr = new Date().toISOString().split("T")[0];
+
+  var assignable = errorData.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = errorData.filter(function(r) { return r.status === "inquiry"; });
+
+  var subject = hospital + "_" + dateStr + "_#" + issueNum;
+  var body = hospital + " " + contact + "\n";
+  if (cc) body += "CC: " + cc + "\n";
+  body += "\nお世話になっております。\n\n";
+  body += "SSMIX2 データ出力におきまして、JLAC10 コードに関するエラーが発生いたしました。\n";
+  body += "下記のマッピング結果に基づき、電子カルテの検査マスターへの設定をお願いいたします。\n\n";
+
+  if (assignable.length > 0) {
+    body += "■ 設定いただくマッピング結果（" + assignable.length + "件）\n\n";
+    body += "| 項目コード | 項目名称 | JLAC10 | JLAC10標準名称 |\n";
+    body += "|-----------|---------|--------|---------------|\n";
+    for (var a of assignable) {
+      body += "| " + a.code + " | " + a.name + " | " + a.bestMatch.jlac10 + " | " + a.bestMatch.matchedName + " |\n";
+    }
+    body += "\n";
+  }
+
+  if (inquiry.length > 0) {
+    body += "■ 確認が必要な項目（" + inquiry.length + "件）\n";
+    body += "以下の項目は自動マッピングできませんでした。\n";
+    body += "結果値の種類、測定法、検体の種類等をご教示ください。\n\n";
+    for (var i = 0; i < inquiry.length; i++) {
+      body += (i+1) + ". [" + inquiry[i].code + "] " + inquiry[i].name + "\n";
+    }
+    body += "\n";
+  }
+
+  body += "■ 設定依頼\n";
+  body += "上記マッピング結果のJLAC10コードを、電子カルテの検査マスターに設定をお願いいたします。\n";
+  body += "設定完了後、SSMIX2 データの再出力をお願いいたします。\n\n";
+  body += "ご不明な点がございましたら、お気軽にお問い合わせください。\n";
+  body += "よろしくお願いいたします。\n";
+
+  document.getElementById("snEmailSubject").value = subject;
+  document.getElementById("snEmailBody").value = body;
+  document.getElementById("snEmailOutput").classList.remove("hidden");
+
+  snAddHistory(c.issue_number, "mail_sent", "Email generated: " + assignable.length + " assignable, " + inquiry.length + " inquiry");
+  snUpdateCase(c.issue_number, { workflow: Object.assign(c.workflow || {}, { mail_subject: subject, mail_sent_at: new Date().toISOString() }) });
+  snRenderHistory(c.issue_number);
+  showToast("Email generated");
+}
+
+function snCopyEmail() {
+  var subject = document.getElementById("snEmailSubject").value;
+  var body = document.getElementById("snEmailBody").value;
+  navigator.clipboard.writeText("Subject: " + subject + "\n\n" + body).then(function() { showToast("Email copied"); });
+}
+
+// --- Workflow: Generate GHE Comment ---
+function snGenerateGheComment() {
+  var errorData = snGetErrorResultFromCase();
+  if (!errorData) { showToast("No error items. Import errors first."); return; }
+  var c = snCases[snSelectedCase];
+  var dateStr = new Date().toISOString().split("T")[0];
+
+  var assignable = errorData.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = errorData.filter(function(r) { return r.status === "inquiry"; });
+
+  var gheComment = "## マッピング完了・病院へ設定依頼済み\n\n";
+  gheComment += "- 日時: " + dateStr + "\n";
+  gheComment += "- 付番完了: " + assignable.length + "件\n";
+  gheComment += "- 要確認: " + inquiry.length + "件\n";
+  gheComment += "- 病院へメール送信済み\n\n";
+  if (assignable.length > 0) {
+    gheComment += "### マッピング結果\n";
+    gheComment += "| 項目コード | 項目名称 | JLAC10 |\n";
+    gheComment += "|-----------|---------|--------|\n";
+    for (var g of assignable) {
+      gheComment += "| " + g.code + " | " + g.name + " | `" + g.bestMatch.jlac10 + "` |\n";
+    }
+  }
+
+  document.getElementById("snGheComment").value = gheComment;
+  document.getElementById("snGheOutput").classList.remove("hidden");
+
+  snAddHistory(c.issue_number, "inquiry_sent", "GHE comment generated");
+  snUpdateCase(c.issue_number, { workflow: Object.assign(c.workflow || {}, { ghe_comment_posted: true }) });
+  snRenderHistory(c.issue_number);
+  showToast("GHE comment generated");
+}
+
+// --- Workflow: Generate Chat Message ---
+function snGenerateChatMsg() {
+  var errorData = snGetErrorResultFromCase();
+  if (!errorData) { showToast("No error items. Import errors first."); return; }
+  var c = snCases[snSelectedCase];
+  var hospital = c.hospital_name || "Hospital";
+  var mention = document.getElementById("wfMention").value.trim() || "@user";
+  var issueNum = c.issue_number;
+
+  var assignable = errorData.filter(function(r) { return r.status === "assignable" && r.bestMatch; });
+  var inquiry = errorData.filter(function(r) { return r.status === "inquiry"; });
+
+  var chatMsg = mention + " SSMIX2 エラー対応完了\n";
+  chatMsg += "病院: " + hospital + "\n";
+  chatMsg += "イシュー: #" + issueNum + "\n";
+  chatMsg += "付番: " + assignable.length + "件 / 要確認: " + inquiry.length + "件\n";
+  chatMsg += "病院へ設定依頼メール送信済み\n";
+  chatMsg += "GHE: （イシューコメントのリンクをここに貼り付け）";
+
+  document.getElementById("snChatMsg").value = chatMsg;
+  document.getElementById("snChatOutput").classList.remove("hidden");
+
+  snUpdateCase(c.issue_number, { workflow: Object.assign(c.workflow || {}, { rocketchat_posted: true }) });
+  showToast("Chat message generated");
+}
+
+// --- Keep legacy functions working ---
+function generateWorkflowPackage() {
+  if (snSelectedCase) {
+    snGenerateEmail();
+    snGenerateGheComment();
+    snGenerateChatMsg();
+  } else {
+    showToast("Select a case first");
+  }
+}
+
+function copyToClipboard(subjectId, bodyId) {
+  var subject = document.getElementById(subjectId).value;
+  var body = document.getElementById(bodyId).value;
+  navigator.clipboard.writeText("Subject: " + subject + "\n\n" + body).then(function() { showToast("Email copied"); });
+}
+
+function copyField(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.value).then(function() { showToast("Copied!"); });
+}
+
+// --- UI: History ---
+function snRenderHistory(issueNumber) {
+  var container = document.getElementById("snHistoryTimeline");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  var c = snGetCase(issueNumber);
+  if (!c) return;
+
+  var history = (c.history || []).slice().reverse();
+  if (history.length === 0) {
+    var empty = document.createElement("div");
+    empty.className = "status-bar";
+    empty.textContent = "No history entries.";
+    container.appendChild(empty);
+    return;
+  }
+
+  var timeline = document.createElement("div");
+  timeline.className = "sn-timeline";
+
+  for (var h of history) {
+    var item = document.createElement("div");
+    item.className = "sn-timeline-item";
+
+    var dateEl = document.createElement("div");
+    dateEl.className = "sn-timeline-date";
+    var dt = new Date(h.date);
+    dateEl.textContent = dt.getFullYear() + "-" + String(dt.getMonth()+1).padStart(2,"0") + "-" + String(dt.getDate()).padStart(2,"0") + " " + String(dt.getHours()).padStart(2,"0") + ":" + String(dt.getMinutes()).padStart(2,"0");
+    item.appendChild(dateEl);
+
+    var actionEl = document.createElement("div");
+    actionEl.className = "sn-timeline-action";
+    var badge = document.createElement("span");
+    badge.className = "sn-action-badge sn-action-" + (h.action || "note");
+    badge.textContent = h.action || "note";
+    actionEl.appendChild(badge);
+    item.appendChild(actionEl);
+
+    if (h.note) {
+      var noteEl = document.createElement("div");
+      noteEl.className = "sn-timeline-note";
+      noteEl.textContent = h.note;
+      item.appendChild(noteEl);
+    }
+
+    timeline.appendChild(item);
+  }
+
+  container.appendChild(timeline);
+}
+
+// --- UI: Add Note ---
+function snAddNote() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) return;
+  var input = document.getElementById("snNoteInput");
+  var note = input.value.trim();
+  if (!note) { showToast("Enter a note"); return; }
+  snAddHistory(snCases[snSelectedCase].issue_number, "note", note);
+  input.value = "";
+  snRenderHistory(snCases[snSelectedCase].issue_number);
+  showToast("Note added");
+}
+
+// --- Export / Import ---
+function snExportCases() {
+  var data = { exported_at: new Date().toISOString(), cases: snCases };
+  downloadFile("sn_dashboard_" + new Date().toISOString().split("T")[0] + ".json", JSON.stringify(data, null, 2));
+  showToast("Cases exported");
+}
+
+function snImportCases(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      var imported = data.cases || data;
+      var count = 0;
+      for (var k in imported) {
+        if (imported.hasOwnProperty(k) && imported[k].issue_number) {
+          snCases[k] = imported[k];
+          count++;
+        }
+      }
+      snSaveCases();
+      snRenderCaseList(snCurrentFilter);
+      showToast("Imported " + count + " cases");
+    } catch(err) {
+      showToast("Import failed: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+  input.value = "";
+}
+
+// Keep old generateMail for backward compatibility
+function generateMail() { snGenerateEmail(); }
+function copyMail() { snCopyEmail(); }
+function downloadErrorResult() { snDownloadErrorExcel(); }
 
 // =====================================================================
 // UI: Database
@@ -837,13 +2297,28 @@ function updateDbStatus() {
 // Tab Switch
 // =====================================================================
 function switchTab(name) {
-  var tabs=["search","import","bulk","error","data"];
+  var tabs=["search","import","bulk","error","data","help"];
   for(var t of tabs){
     document.getElementById("panel-"+t).classList.toggle("hidden",t!==name);
     var btn=document.getElementById("tab-"+t);
     btn.className=t===name?"tab active":"tab";
   }
+  // When switching to error tab, refresh the dashboard
+  if (name === "error") {
+    snRenderCaseList(snCurrentFilter);
+    if (snSelectedCase && snCases[snSelectedCase]) {
+      snSelectCase(snSelectedCase);
+    }
+  }
 }
+
+// =====================================================================
+// SN Dashboard Init
+// =====================================================================
+window.addEventListener("DOMContentLoaded", function() {
+  snLoadCases();
+  snRenderCaseList("all");
+});
 </script>
 </body>
 </html>
