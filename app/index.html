@@ -499,10 +499,6 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
         <label>病院名</label>
         <input id="snNewHospital" type="text" placeholder="病院名">
       </div>
-      <div>
-        <label>担当者</label>
-        <input id="snNewContact" type="text" placeholder="担当者">
-      </div>
       <div style="display:flex;gap:4px;align-items:end">
         <button onclick="snDoCreateCase()" class="btn btn-primary btn-xs">作成</button>
         <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary btn-xs">キャンセル</button>
@@ -1742,13 +1738,11 @@ function snParseIssueUrl() {
 function snDoCreateCase() {
   var issue = document.getElementById("snNewIssue").value.trim();
   var hospital = document.getElementById("snNewHospital").value.trim();
-  var contact = document.getElementById("snNewContact").value.trim();
   var issueUrl = document.getElementById("snNewIssueUrl").value.trim();
   var repo = document.getElementById("snNewRepo").value.trim();
   if (!issue) { showToast("イシュー URL または番号を入力してください"); return; }
-  var c = snCreateCase(issue, hospital, contact);
+  var c = snCreateCase(issue, hospital, "");
   if (c) {
-    // URL とリポジトリ情報を保存
     c.issue_url = issueUrl;
     c.repository = repo;
     snSaveCases();
@@ -1757,7 +1751,6 @@ function snDoCreateCase() {
     document.getElementById("snNewIssue").value = "";
     document.getElementById("snNewRepo").value = "";
     document.getElementById("snNewHospital").value = "";
-    document.getElementById("snNewContact").value = "";
     snRenderCaseList(snCurrentFilter);
     snSelectCase("#" + issue);
     showToast("案件 #" + issue + " を作成しました");
