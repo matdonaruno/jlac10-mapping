@@ -703,26 +703,33 @@ var lastErrorResult = null;
 var searchIndex = [];
 
 // DB auto-load from repository
-var DB_URL = "./data/merged_jlac10.json";
+var DB_URLS = ["./data/merged_jlac10.json", "../data/merged_jlac10.json"];
 
 window.addEventListener("DOMContentLoaded", function() { reloadFromRepo(); });
 
 function reloadFromRepo() {
   document.getElementById("dbStatus").textContent = "LOADING...";
-  fetch(DB_URL).then(function(r) {
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    return r.json();
-  }).then(function(data) {
-    DB = data;
-    if (!DB.items) DB.items = [];
-    if (!DB.metadata) DB.metadata = {};
-    searchIndex = buildSearchIndex();
-    updateDbStatus();
-    showToast("DB loaded: " + DB.items.length + " entries");
-  }).catch(function(err) {
-    document.getElementById("dbStatus").textContent = "DB LOAD FAILED - use Database tab to load manually";
-    console.error(err);
-  });
+  function tryLoad(urls, idx) {
+    if (idx >= urls.length) {
+      document.getElementById("dbStatus").textContent = "DB LOAD FAILED - use Database tab to load manually";
+      return;
+    }
+    fetch(urls[idx]).then(function(r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function(data) {
+      DB = data;
+      if (!DB.items) DB.items = [];
+      if (!DB.metadata) DB.metadata = {};
+      searchIndex = buildSearchIndex();
+      updateDbStatus();
+      showToast("DB loaded: " + DB.items.length + " entries");
+    }).catch(function(err) {
+      console.warn("DB load failed from " + urls[idx] + ": " + err.message);
+      tryLoad(urls, idx + 1);
+    });
+  }
+  tryLoad(DB_URLS, 0);
 }
 
 // =====================================================================
