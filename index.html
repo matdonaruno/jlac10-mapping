@@ -298,6 +298,14 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 .knowledge-modal input:focus, .knowledge-modal textarea:focus, .knowledge-modal select:focus { border-color:var(--accent); }
 .knowledge-modal .km-actions { display:flex; gap:8px; margin-top:16px; justify-content:flex-end; }
 
+/* Tab Color Coding - card borders and subtle backgrounds */
+#panel-import .card { border-left: 3px solid #6a9ec7; background: #2d2d30; }
+#panel-bulk .card { border-left: 3px solid #7ab87a; background: #2d302d; }
+#panel-error .card { border-left: 3px solid #c75c5c; background: #302d2d; }
+#panel-error > .card { border-left: 3px solid #c75c5c; background: #302d2d; }
+#panel-data .card { border-left: 3px solid #d4a853; background: #30302d; }
+#panel-help .card { border-left: 3px solid #9a9590; background: #2e2e2e; }
+
 </style>
 </head>
 <body>
@@ -486,6 +494,11 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
         <label>イシュー URL を貼り付け（または番号を直接入力）</label>
         <div class="guide" style="margin-bottom:4px">GHE のイシュー URL を貼り付けると番号を自動抽出します。例: https://ghe.../issues/4123</div>
         <input id="snNewIssueUrl" type="text" placeholder="https://ghe.ncda.hospital.local/org/repo/issues/4123 または 4123" oninput="snParseIssueUrl()">
+      </div>
+      <div style="grid-column:1/-1">
+        <label>イシュータイトル（GHEからコピペ）</label>
+        <div class="guide" style="margin-bottom:4px">GHEイシューのタイトルを貼り付け。病院ID(数字)があれば病院名を自動補正します。</div>
+        <input id="snNewTitle" type="text" placeholder="100北がん_JLAC10エラー_2026-04-18" oninput="snParseTitle()">
       </div>
       <div>
         <label>イシュー番号</label>
@@ -1735,6 +1748,33 @@ function snParseIssueUrl() {
   repoField.value = "";
 }
 
+function snParseTitle() {
+  var title = document.getElementById("snNewTitle").value.trim();
+  if (!title) return;
+
+  // タイトルから先頭の数字を抽出して病院IDとして使う
+  var idMatch = title.match(/^(\d+)/);
+  if (!idMatch) return;
+  var hospitalId = idMatch[1];
+
+  // repoIndex (index.json) から病院名を検索
+  if (repoIndex) {
+    var files = repoIndex.file || repoIndex.files || [];
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+      if (String(f.hospital_id) === hospitalId) {
+        document.getElementById("snNewHospital").value = f.hospital_name || hospitalId;
+        return;
+      }
+    }
+  }
+  // index.json にない場合、タイトルの数字以降をそのまま設定
+  var nameGuess = title.replace(/^\d+/, "").replace(/^[_\s]+/, "").split(/[_\s]/)[0];
+  if (nameGuess) {
+    document.getElementById("snNewHospital").value = hospitalId + "_" + nameGuess;
+  }
+}
+
 function snDoCreateCase() {
   var issue = document.getElementById("snNewIssue").value.trim();
   var hospital = document.getElementById("snNewHospital").value.trim();
@@ -1745,9 +1785,11 @@ function snDoCreateCase() {
   if (c) {
     c.issue_url = issueUrl;
     c.repository = repo;
+    c.issue_title = document.getElementById("snNewTitle").value.trim();
     snSaveCases();
     document.getElementById("snNewCaseForm").classList.add("hidden");
     document.getElementById("snNewIssueUrl").value = "";
+    document.getElementById("snNewTitle").value = "";
     document.getElementById("snNewIssue").value = "";
     document.getElementById("snNewRepo").value = "";
     document.getElementById("snNewHospital").value = "";
@@ -1870,7 +1912,7 @@ function snSelectCase(key) {
   if (!c) return;
 
   document.getElementById("snCaseDetail").classList.remove("hidden");
-  document.getElementById("snDetailTitle").textContent = "案件 " + key;
+  document.getElementById("snDetailTitle").textContent = "案件 " + key + (c.issue_title ? " - " + c.issue_title : "");
   document.getElementById("snDetHospital").value = c.hospital_name || "";
   document.getElementById("snDetContact").value = c.contact || "";
   document.getElementById("snDetIssue").value = key;
@@ -2910,12 +2952,29 @@ function knowledgeModalSave() {
 // =====================================================================
 // Tab Switch
 // =====================================================================
+var TAB_COLORS = {
+  "search": "#d4a853",
+  "import": "#6a9ec7",
+  "bulk":   "#7ab87a",
+  "error":  "#c75c5c",
+  "data":   "#d4a853",
+  "help":   "#9a9590"
+};
+
 function switchTab(name) {
   var tabs=["search","import","bulk","error","data","help"];
   for(var t of tabs){
     document.getElementById("panel-"+t).classList.toggle("hidden",t!==name);
     var btn=document.getElementById("tab-"+t);
-    btn.className=t===name?"tab active":"tab";
+    if(t===name){
+      btn.className="tab active";
+      btn.style.color=TAB_COLORS[t];
+      btn.style.borderBottomColor=TAB_COLORS[t];
+    } else {
+      btn.className="tab";
+      btn.style.color="";
+      btn.style.borderBottomColor="";
+    }
   }
   // When switching to error tab, refresh the dashboard
   if (name === "error") {
