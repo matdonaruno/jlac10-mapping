@@ -280,7 +280,7 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <div class="card">
     <div class="flex-row mb-16">
       <input id="searchInput" type="text" placeholder="TP / albumin / CRP / HbA1c ..."
-        style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doSearch()">
+        style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doSearch()" placeholder="検査項目名・略称を入力（TP, アルブミン, CRP...）">
       <button onclick="doSearch()" class="btn btn-primary" style="white-space:nowrap">SEARCH</button>
     </div>
     <div id="searchResults"></div>
@@ -296,8 +296,8 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
     <!-- ファイルソース切替 -->
     <div class="flex-row mb-12">
-      <button onclick="toggleFileSource('repo')" class="btn btn-secondary" id="fileSrcRepo" style="border-bottom:2px solid var(--accent)">Repository</button>
-      <button onclick="toggleFileSource('local')" class="btn btn-secondary" id="fileSrcLocal">Local File</button>
+      <button onclick="toggleFileSource('repo')" class="btn btn-secondary" id="fileSrcRepo" style="border-bottom:2px solid var(--accent)">リポジトリ</button>
+      <button onclick="toggleFileSource('local')" class="btn btn-secondary" id="fileSrcLocal">ローカルファイル</button>
     </div>
 
     <!-- リポジトリから選択 -->
@@ -309,8 +309,8 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
             <option value="">Loading...</option>
           </select>
         </div>
-        <div><label>Hospital Name</label><input id="hospitalName" type="text" placeholder="H001"></div>
-        <div><label>Sheet (optional)</label><input id="importSheet" type="text" placeholder="依頼"></div>
+        <div><label>病院名</label><input id="hospitalName" type="text" placeholder="H001"></div>
+        <div><label>シート名（任意）</label><input id="importSheet" type="text" placeholder="依頼"></div>
       </div>
       <div class="status-bar mb-12" id="repoFileStatus"></div>
     </div>
@@ -319,23 +319,23 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <div id="fileSourceLocal" class="hidden">
       <div class="grid-3 mb-12">
         <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv" onchange="onImportFileLoad(this)"></div>
-        <div><label>Hospital Name</label><input id="hospitalNameLocal" type="text" placeholder="H001"></div>
-        <div><label>Sheet (optional)</label><input id="importSheetLocal" type="text" placeholder="依頼"></div>
+        <div><label>病院名</label><input id="hospitalNameLocal" type="text" placeholder="H001"></div>
+        <div><label>シート名（任意）</label><input id="importSheetLocal" type="text" placeholder="依頼"></div>
       </div>
     </div>
 
     <!-- モード切替 -->
     <div class="flex-row mb-12">
-      <button onclick="toggleImportMode('auto')" class="btn btn-secondary" id="impModeAuto" style="border-bottom:2px solid var(--accent)">Auto Detect</button>
-      <button onclick="toggleImportMode('header')" class="btn btn-secondary" id="impModeHeader">Header Select</button>
-      <button onclick="toggleImportMode('manual')" class="btn btn-secondary" id="impModeManual">Manual</button>
+      <button onclick="toggleImportMode('auto')" class="btn btn-secondary" id="impModeAuto" style="border-bottom:2px solid var(--accent)">自動検出</button>
+      <button onclick="toggleImportMode('header')" class="btn btn-secondary" id="impModeHeader">ヘッダー選択</button>
+      <button onclick="toggleImportMode('manual')" class="btn btn-secondary" id="impModeManual">手動指定</button>
     </div>
 
     <!-- Auto Detect モード -->
     <div id="importAuto">
       <div class="grid-2 mb-12">
         <div>
-          <label>Vendor (optional)</label>
+          <label>ベンダー（任意）</label>
           <select id="importVendor" class="candidate-select" style="width:100%;padding:10px">
             <option value="">(auto detect)</option>
             <option value="NEC">NEC</option>
@@ -349,7 +349,7 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
           </select>
         </div>
         <div>
-          <label>Detection Result</label>
+          <label>検出結果</label>
           <div id="autoDetectResult" class="status-bar" style="min-height:36px;padding:8px;background:var(--bg-secondary);border:1px solid var(--border)"></div>
         </div>
       </div>
@@ -358,27 +358,27 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <!-- Header Select モード -->
     <div id="importHeader" class="hidden">
       <div class="grid-4 mb-12">
-        <div><label>Item Name</label><select id="hdrItemName" class="candidate-select" style="width:100%"></select></div>
-        <div><label>Abbreviation</label><select id="hdrAbbr" class="candidate-select" style="width:100%"></select></div>
+        <div><label>項目名</label><select id="hdrItemName" class="candidate-select" style="width:100%"></select></div>
+        <div><label>略称</label><select id="hdrAbbr" class="candidate-select" style="width:100%"></select></div>
         <div><label>JLAC10</label><select id="hdrJlac10" class="candidate-select" style="width:100%"></select></div>
-        <div><label>JLAC10 Standard Name</label><select id="hdrStdName" class="candidate-select" style="width:100%"></select></div>
+        <div><label>JLAC10正式名称</label><select id="hdrStdName" class="candidate-select" style="width:100%"></select></div>
       </div>
     </div>
 
     <!-- Manual モード -->
     <div id="importManual" class="hidden">
       <div class="grid-4 mb-12">
-        <div><label>Item Name Col</label><input id="colItemName" type="text" value="A"></div>
-        <div><label>Abbreviation Col</label><input id="colAbbr" type="text" value="B" placeholder="optional"></div>
-        <div><label>JLAC10 Col</label><input id="colJlac10" type="text" value="C"></div>
-        <div><label>Standard Name Col</label><input id="colStdName" type="text" value="D" placeholder="optional"></div>
+        <div><label>項目名の列</label><input id="colItemName" type="text" value="A"></div>
+        <div><label>略称の列</label><input id="colAbbr" type="text" value="B" placeholder="任意"></div>
+        <div><label>JLAC10の列</label><input id="colJlac10" type="text" value="C"></div>
+        <div><label>JLAC10正式名称の列</label><input id="colStdName" type="text" value="D" placeholder="任意"></div>
       </div>
     </div>
 
     <div class="flex-row mb-12">
-      <button onclick="convertExcel()" class="btn btn-primary">Convert</button>
-      <button onclick="mergeToDb()" class="btn btn-secondary" id="btnMerge" disabled>Merge to DB</button>
-      <button onclick="downloadJson()" class="btn btn-secondary" id="btnDownload" disabled>Download JSON</button>
+      <button onclick="convertExcel()" class="btn btn-primary">変換</button>
+      <button onclick="mergeToDb()" class="btn btn-secondary" id="btnMerge" disabled>DBに統合</button>
+      <button onclick="downloadJson()" class="btn btn-secondary" id="btnDownload" disabled>JSONダウンロード</button>
     </div>
     <div class="status-bar" id="importStatus"></div>
     <div id="importPreview" class="overflow-auto"></div>
@@ -392,17 +392,17 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <div class="card">
     <h2>Bulk JLAC10 Mapping</h2>
     <div class="grid-4 mb-12">
-      <div><label>Hospital Master (Excel)</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
-      <div><label>Item Name Col</label><input id="bulkColName" type="text" value="A"></div>
-      <div><label>Hospital Name</label><input id="bulkHospital" type="text" placeholder="H001"></div>
-      <div style="display:flex;align-items:end"><button onclick="doBulkMapping()" class="btn btn-primary" style="width:100%">Map All</button></div>
+      <div><label>病院マスター（Excel）</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
+      <div><label>項目名の列</label><input id="bulkColName" type="text" value="A"></div>
+      <div><label>病院名</label><input id="bulkHospital" type="text" placeholder="H001"></div>
+      <div style="display:flex;align-items:end"><button onclick="doBulkMapping()" class="btn btn-primary" style="width:100%">一括マッピング</button></div>
     </div>
     <div class="status-bar" id="bulkStatus"></div>
     <div id="bulkResults" class="overflow-auto"></div>
     <div class="flex-row mt-12">
-      <button onclick="confirmAllAuto()" class="btn btn-primary" id="btnConfirmAuto" disabled>Confirm All Auto</button>
-      <button onclick="mergeBulkToDb()" class="btn btn-secondary" id="btnBulkMerge" disabled>Merge Confirmed to DB</button>
-      <button onclick="downloadBulkResult()" class="btn btn-secondary" id="btnBulkDL" disabled>Download Result Excel</button>
+      <button onclick="confirmAllAuto()" class="btn btn-primary" id="btnConfirmAuto" disabled>自動確定を全て確定</button>
+      <button onclick="mergeBulkToDb()" class="btn btn-secondary" id="btnBulkMerge" disabled>確定分をDBに統合</button>
+      <button onclick="downloadBulkResult()" class="btn btn-secondary" id="btnBulkDL" disabled>結果Excelダウンロード</button>
     </div>
   </div>
 </div>
@@ -418,29 +418,29 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <!-- New Case Form (hidden by default) -->
     <div id="snNewCaseForm" class="sn-new-case-form hidden">
       <div>
-        <label>Issue #</label>
+        <label>イシュー番号</label>
         <input id="snNewIssue" type="text" placeholder="4123">
       </div>
       <div>
-        <label>Hospital Name</label>
-        <input id="snNewHospital" type="text" placeholder="Hospital Name">
+        <label>病院名</label>
+        <input id="snNewHospital" type="text" placeholder="病院名">
       </div>
       <div>
-        <label>Contact</label>
-        <input id="snNewContact" type="text" placeholder="Contact">
+        <label>担当者</label>
+        <input id="snNewContact" type="text" placeholder="担当者">
       </div>
       <div style="display:flex;gap:4px;align-items:end">
-        <button onclick="snDoCreateCase()" class="btn btn-primary btn-xs">Create</button>
-        <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary btn-xs">Cancel</button>
+        <button onclick="snDoCreateCase()" class="btn btn-primary btn-xs">作成</button>
+        <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary btn-xs">キャンセル</button>
       </div>
     </div>
 
     <!-- Toolbar -->
     <div class="flex-row mb-12">
-      <button onclick="document.getElementById('snNewCaseForm').classList.toggle('hidden')" class="btn btn-primary btn-xs">+ New Case</button>
+      <button onclick="document.getElementById('snNewCaseForm').classList.toggle('hidden')" class="btn btn-primary btn-xs">+ 新規案件</button>
       <div style="margin-left:auto">
-        <button onclick="snExportCases()" class="btn btn-secondary btn-xs">Export JSON</button>
-        <button onclick="document.getElementById('snImportFile').click()" class="btn btn-secondary btn-xs">Import JSON</button>
+        <button onclick="snExportCases()" class="btn btn-secondary btn-xs">JSONエクスポート</button>
+        <button onclick="document.getElementById('snImportFile').click()" class="btn btn-secondary btn-xs">JSONインポート</button>
         <input id="snImportFile" type="file" accept=".json" style="display:none" onchange="snImportCases(this)">
       </div>
     </div>
@@ -456,40 +456,40 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <div id="snCaseDetail" class="card hidden">
     <div class="flex-row mb-12" style="justify-content:space-between;align-items:center">
       <h2 id="snDetailTitle" style="margin-bottom:0;padding-bottom:0;border-bottom:none">Case Detail</h2>
-      <button onclick="snCloseDetail()" class="btn btn-secondary btn-xs">Close</button>
+      <button onclick="snCloseDetail()" class="btn btn-secondary btn-xs">閉じる</button>
     </div>
 
     <!-- Basic Info -->
     <div class="sn-detail-header mb-12">
       <div>
-        <label>Hospital</label>
+        <label>病院名</label>
         <input id="snDetHospital" type="text" onchange="snUpdateField('hospital_name',this.value)">
       </div>
       <div>
-        <label>Contact</label>
+        <label>担当者</label>
         <input id="snDetContact" type="text" onchange="snUpdateField('contact',this.value)">
       </div>
       <div>
-        <label>Issue #</label>
+        <label>イシュー番号</label>
         <input id="snDetIssue" type="text" readonly style="opacity:0.7">
       </div>
       <div>
         <label>Status</label>
         <select id="snDetStatus" class="sn-status-select" onchange="snChangeStatus(this.value)">
-          <option value="open">OPEN</option>
-          <option value="mapping">MAPPING</option>
-          <option value="waiting">WAITING</option>
-          <option value="verifying">VERIFYING</option>
-          <option value="closed">CLOSED</option>
+          <option value="open">未対応</option>
+          <option value="mapping">マッピング中</option>
+          <option value="waiting">病院待ち</option>
+          <option value="verifying">確認中</option>
+          <option value="closed">完了</option>
         </select>
       </div>
     </div>
 
     <!-- Sub Tabs -->
     <div class="sn-subtabs">
-      <button class="sn-subtab active" onclick="snSwitchSubtab('items')" id="snSubItems">Error Items</button>
-      <button class="sn-subtab" onclick="snSwitchSubtab('actions')" id="snSubActions">Actions</button>
-      <button class="sn-subtab" onclick="snSwitchSubtab('history')" id="snSubHistory">History</button>
+      <button class="sn-subtab active" onclick="snSwitchSubtab('items')" id="snSubItems">エラー項目</button>
+      <button class="sn-subtab" onclick="snSwitchSubtab('actions')" id="snSubActions">アクション</button>
+      <button class="sn-subtab" onclick="snSwitchSubtab('history')" id="snSubHistory">履歴</button>
     </div>
 
     <!-- Sub Panel: Error Items -->
@@ -503,8 +503,8 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       <div id="snErrorInputFile">
         <div class="grid-3 mb-12">
           <div><label>Error List (Excel/CSV)</label><input id="errorFile" type="file" accept=".xlsx,.xls,.csv"></div>
-          <div><label>Item Code Col</label><input id="errorColCode" type="text" value="A"></div>
-          <div><label>Item Name Col</label><input id="errorColName" type="text" value="B"></div>
+          <div><label>項目コードの列</label><input id="errorColCode" type="text" value="A"></div>
+          <div><label>項目名の列</label><input id="errorColName" type="text" value="B"></div>
         </div>
       </div>
 
@@ -520,13 +520,13 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       </div>
 
       <div class="grid-2 mb-12">
-        <div><label>Hospital Name</label><input id="errorHospital" type="text" placeholder="Hospital Name"></div>
+        <div><label>病院名</label><input id="errorHospital" type="text" placeholder="病院名"></div>
         <div><label>Department</label><input id="errorDept" type="text" value="検査科"></div>
       </div>
 
       <div class="flex-row mb-12">
-        <button onclick="snImportErrors()" class="btn btn-danger btn-xs">Import Errors</button>
-        <button onclick="snDownloadErrorExcel()" class="btn btn-secondary btn-xs" id="btnErrorDL" disabled>Download Excel</button>
+        <button onclick="snImportErrors()" class="btn btn-danger btn-xs">エラー取込</button>
+        <button onclick="snDownloadErrorExcel()" class="btn btn-secondary btn-xs" id="btnErrorDL" disabled>Excelダウンロード</button>
       </div>
       <div class="status-bar" id="errorStatus"></div>
 
@@ -537,22 +537,22 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <!-- Sub Panel: Actions -->
     <div id="snPanelActions" class="hidden">
       <div class="grid-3 mb-12">
-        <div><label>Contact Person</label><input id="wfContact" type="text" placeholder="Contact" onchange="snUpdateField('contact',this.value)"></div>
+        <div><label>担当者</label><input id="wfContact" type="text" placeholder="担当者" onchange="snUpdateField('contact',this.value)"></div>
         <div><label>CC</label><input id="wfCc" type="text" placeholder="CC"></div>
         <div><label>Rocket.Chat Mention</label><input id="wfMention" type="text" placeholder="@username"></div>
       </div>
 
       <div class="flex-row mb-12">
-        <button onclick="snGenerateEmail()" class="btn btn-primary btn-xs">Generate Email</button>
-        <button onclick="snGenerateGheComment()" class="btn btn-primary btn-xs">Generate GHE Comment</button>
-        <button onclick="snGenerateChatMsg()" class="btn btn-primary btn-xs">Generate Chat Message</button>
+        <button onclick="snGenerateEmail()" class="btn btn-primary btn-xs">メール生成</button>
+        <button onclick="snGenerateGheComment()" class="btn btn-primary btn-xs">GHEコメント生成</button>
+        <button onclick="snGenerateChatMsg()" class="btn btn-primary btn-xs">チャット文生成</button>
       </div>
 
       <!-- Email Output -->
       <div id="snEmailOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
         <div class="flex-row mb-12" style="justify-content:space-between">
           <h3 style="color:var(--info);font-size:13px;font-weight:700">EMAIL (Outlook)</h3>
-          <button onclick="snCopyEmail()" class="btn btn-primary btn-xs">Copy Email</button>
+          <button onclick="snCopyEmail()" class="btn btn-primary btn-xs">メールをコピー</button>
         </div>
         <div class="mb-12"><label>Subject</label><input id="snEmailSubject" type="text" readonly></div>
         <div><label>Body</label><textarea id="snEmailBody" rows="12" readonly></textarea></div>
@@ -562,7 +562,7 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       <div id="snGheOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
         <div class="flex-row mb-12" style="justify-content:space-between">
           <h3 style="color:var(--success);font-size:13px;font-weight:700">GHE ISSUE COMMENT</h3>
-          <button onclick="copyField('snGheComment')" class="btn btn-primary btn-xs">Copy</button>
+          <button onclick="copyField('snGheComment')" class="btn btn-primary btn-xs">コピー</button>
         </div>
         <textarea id="snGheComment" rows="6" readonly></textarea>
       </div>
@@ -571,7 +571,7 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       <div id="snChatOutput" class="hidden mb-12" style="border:1px solid var(--border);padding:12px">
         <div class="flex-row mb-12" style="justify-content:space-between">
           <h3 style="color:var(--warning);font-size:13px;font-weight:700">ROCKET.CHAT MESSAGE</h3>
-          <button onclick="copyField('snChatMsg')" class="btn btn-primary btn-xs">Copy</button>
+          <button onclick="copyField('snChatMsg')" class="btn btn-primary btn-xs">コピー</button>
         </div>
         <textarea id="snChatMsg" rows="6" readonly></textarea>
       </div>
@@ -581,8 +581,8 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <div id="snPanelHistory" class="hidden">
       <div id="snHistoryTimeline"></div>
       <div class="sn-note-form">
-        <input id="snNoteInput" type="text" placeholder="Add a note...">
-        <button onclick="snAddNote()" class="btn btn-primary btn-xs">Add Note</button>
+        <input id="snNoteInput" type="text" placeholder="メモを入力...">
+        <button onclick="snAddNote()" class="btn btn-primary btn-xs">メモ追加</button>
       </div>
     </div>
   </div>
@@ -596,16 +596,16 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <h2>Database Management</h2>
     <div class="status-bar mb-16" id="dbInfo"></div>
     <div class="mb-12">
-      <label>Load merged_jlac10.json (override)</label>
+      <label>merged_jlac10.json を読み込み（上書き）</label>
       <input id="dbFile" type="file" accept=".json" onchange="loadDbFile(this)">
     </div>
     <div class="mb-12">
-      <label>Add Hospital JSON (multiple OK)</label>
+      <label>病院JSONを追加読み込み（複数可）</label>
       <input id="hospitalFiles" type="file" accept=".json" multiple onchange="loadHospitalFiles(this)">
     </div>
     <div class="flex-row">
-      <button onclick="exportMergedDb()" class="btn btn-primary" id="btnExportDb">Export Merged DB</button>
-      <button onclick="reloadFromRepo()" class="btn btn-secondary">Reload from Repo</button>
+      <button onclick="exportMergedDb()" class="btn btn-primary" id="btnExportDb">統合DBエクスポート</button>
+      <button onclick="reloadFromRepo()" class="btn btn-secondary">リポジトリから再読み込み</button>
     </div>
   </div>
 </div>
@@ -723,7 +723,7 @@ function reloadFromRepo() {
       if (!DB.metadata) DB.metadata = {};
       searchIndex = buildSearchIndex();
       updateDbStatus();
-      showToast("DB loaded: " + DB.items.length + " entries");
+      showToast("DB読込完了: " + DB.items.length + "件");
     }).catch(function(err) {
       console.warn("DB load failed from " + urls[idx] + ": " + err.message);
       tryLoad(urls, idx + 1);
@@ -1033,7 +1033,7 @@ function onRepoFileSelect() {
     runAutoDetect(importHeaders);
     document.getElementById("repoFileStatus").textContent =
       "Loaded: " + filename + " (" + (rows.length-1) + " rows, " + importHeaders.length + " cols, sheet: " + sheetName + ")";
-    showToast("Loaded: " + filename);
+    showToast("読込完了: " + filename);
   }).catch(function(err) {
     document.getElementById("repoFileStatus").textContent = "Load failed: " + err.message;
   });
@@ -1206,7 +1206,7 @@ function convertExcel() {
   }
   // ローカルモード
   var file = document.getElementById("excelFile").files[0];
-  if (!file) { showToast("Select a file"); return; }
+  if (!file) { showToast("ファイルを選択してください"); return; }
   hospital = document.getElementById("hospitalNameLocal").value.trim() || document.getElementById("hospitalName").value.trim() || "Unknown";
   sheetInput = document.getElementById("importSheetLocal").value.trim() || document.getElementById("importSheet").value.trim();
 
@@ -1257,7 +1257,7 @@ function doConvertFromWb(wb, hospital, sheetInput) {
   while(container.firstChild) container.removeChild(container.firstChild);
   var table = document.createElement("table");
   var thead = document.createElement("tr");
-  ["Item Name","Abbr","JLAC10","Standard Name","Usage"].forEach(function(t){
+  ["項目名","略称","JLAC10","JLAC10正式名称","用途"].forEach(function(t){
     var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
   });
   table.appendChild(thead);
@@ -1289,7 +1289,7 @@ function mergeToDb() {
     if (!dup) { existing.mapping_history.push({hospital:item.hospital,item_name:item.item_name,abbreviation:item.abbreviation,jlac10_standard_name:item.jlac10_standard_name}); added++; }
   }
   DB.metadata.total_unique_jlac10=DB.items.length; searchIndex=buildSearchIndex(); updateDbStatus();
-  showToast("Merged: "+added+" entries added");
+  showToast("統合完了: "+added+"件追加");
 }
 
 function downloadJson() {
@@ -1302,7 +1302,7 @@ function downloadJson() {
 // =====================================================================
 function doBulkMapping() {
   var file = document.getElementById("bulkFile").files[0];
-  if (!file) { showToast("Select a file"); return; }
+  if (!file) { showToast("ファイルを選択してください"); return; }
   var colIdx = colToIndex(document.getElementById("bulkColName").value);
   var reader = new FileReader();
   reader.onload = function(e) {
@@ -1338,7 +1338,7 @@ function renderBulkTable() {
   var table = document.createElement("table");
   // Header
   var thead = document.createElement("tr");
-  ["","Item Name","JLAC10 Candidate","Score","Action"].forEach(function(t){
+  ["","項目名","JLAC10候補","スコア","アクション"].forEach(function(t){
     var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
   });
   table.appendChild(thead);
@@ -1397,11 +1397,11 @@ function renderBulkTable() {
       if (!r.confirmed && r.matches.length > 0) {
         var btn = document.createElement("button");
         btn.className = "btn btn-primary btn-xs";
-        btn.textContent = "Confirm";
+        btn.textContent = "確定";
         btn.addEventListener("click", function() { confirmBulkRow(idx); });
         td4.appendChild(btn);
       } else if (r.confirmed) {
-        td4.textContent = "Confirmed";
+        td4.textContent = "確定済";
         td4.style.color = "var(--success)";
       }
       tr.appendChild(td4);
@@ -1590,7 +1590,7 @@ function snRenderFilterBar() {
   var bar = document.getElementById("snFilterBar");
   while (bar.firstChild) bar.removeChild(bar.firstChild);
   var statuses = ["all","open","mapping","waiting","verifying","closed"];
-  var labels = { all:"All", open:"Open", mapping:"Mapping", waiting:"Waiting", verifying:"Verifying", closed:"Closed" };
+  var labels = { all:"All", open:"未対応", mapping:"マッピング中", waiting:"病院待ち", verifying:"確認中", closed:"完了" };
   var counts = { all:0, open:0, mapping:0, waiting:0, verifying:0, closed:0 };
   for (var k in snCases) { counts.all++; counts[snCases[k].status] = (counts[snCases[k].status]||0) + 1; }
   for (var s of statuses) {
@@ -1645,7 +1645,8 @@ function snRenderCaseList(filter) {
 
     var statusEl = document.createElement("span");
     statusEl.className = "sn-status sn-status-" + c.status;
-    statusEl.textContent = c.status;
+    var statusLabels = { open:"未対応", mapping:"マッピング中", waiting:"病院待ち", verifying:"確認中", closed:"完了" };
+    statusEl.textContent = statusLabels[c.status] || c.status;
     row.appendChild(statusEl);
 
     var countEl = document.createElement("span");
@@ -1683,7 +1684,7 @@ function snRenderCaseList(filter) {
   if (shown === 0) {
     var empty = document.createElement("div");
     empty.className = "status-bar";
-    empty.textContent = "No cases found. Click [+ New Case] to create one.";
+    empty.textContent = "案件がありません。「+ 新規案件」で作成してください。";
     container.appendChild(empty);
   }
 
@@ -1934,7 +1935,7 @@ function snRenderErrorItems() {
   if (items.length === 0) {
     var empty = document.createElement("div");
     empty.className = "status-bar";
-    empty.textContent = "No error items. Use [Import Errors] to analyze and import.";
+    empty.textContent = "エラー項目がありません。「エラー取込」で分析してください。";
     container.appendChild(empty);
     return;
   }
@@ -2146,7 +2147,7 @@ function copyToClipboard(subjectId, bodyId) {
 function copyField(id) {
   var el = document.getElementById(id);
   if (!el) return;
-  navigator.clipboard.writeText(el.value).then(function() { showToast("Copied!"); });
+  navigator.clipboard.writeText(el.value).then(function() { showToast("コピーしました"); });
 }
 
 // --- UI: History ---
@@ -2258,7 +2259,7 @@ function loadDbFile(input) {
   var reader=new FileReader();
   reader.onload=function(e){
     try{DB=JSON.parse(e.target.result);if(!DB.items)DB.items=[];if(!DB.metadata)DB.metadata={};
-      searchIndex=buildSearchIndex();updateDbStatus();showToast("DB loaded: "+DB.items.length);}
+      searchIndex=buildSearchIndex();updateDbStatus();showToast("DB読込完了: "+DB.items.length+"件");}
     catch(err){showToast("JSON parse error");}
   };
   reader.readAsText(file);
