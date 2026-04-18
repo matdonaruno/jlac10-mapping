@@ -542,12 +542,29 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
       <div id="snErrorInputPaste" class="hidden">
         <div class="mb-12">
-          <label>SSMIX2 error output (tab/comma/single line)</label>
-          <textarea id="errorPasteText" rows="6" placeholder="code&#9;name&#10;12345&#9;TP&#10;67890&#9;ALB"></textarea>
+          <label>エラーデータを貼り付け</label>
+          <div class="guide" style="margin-bottom:4px">項目名だけ1行1件、またはタブ/カンマ区切りで貼り付け。HL7v2 OBXセグメントも自動検知します。</div>
+          <textarea id="errorPasteText" rows="6" placeholder="総蛋白&#10;ALB&#10;CRP&#10;&#10;または&#10;&#10;12345&#9;総蛋白&#10;23456&#9;ALB"></textarea>
         </div>
-        <div class="grid-2 mb-12">
-          <div><label>Code col (0-based, -1=none)</label><input id="pasteColCode" type="text" value="0"></div>
-          <div><label>Name col (0-based)</label><input id="pasteColName" type="text" value="1"></div>
+        <div class="guide" style="margin-bottom:4px">貼り付けデータの形式を指定してください。項目名だけなら「項目名のみ」を選択。</div>
+        <div class="grid-3 mb-12">
+          <div>
+            <label>入力形式</label>
+            <select id="pasteFormat" class="candidate-select" style="width:100%;padding:8px" onchange="onPasteFormatChange()">
+              <option value="name_only">項目名のみ（1行1件）</option>
+              <option value="code_name">コード + 項目名（タブ/カンマ区切り）</option>
+              <option value="name_code">項目名 + コード（タブ/カンマ区切り）</option>
+              <option value="custom">カスタム（列番号指定）</option>
+            </select>
+          </div>
+          <div id="customColArea" class="hidden">
+            <label>コード列（0始まり、-1=なし）</label>
+            <input id="pasteColCode" type="text" value="-1">
+          </div>
+          <div id="customNameArea" class="hidden">
+            <label>項目名列（0始まり）</label>
+            <input id="pasteColName" type="text" value="0">
+          </div>
         </div>
       </div>
 
@@ -1817,6 +1834,24 @@ function snToggleImportMode(mode) {
 
 // Keep old toggleErrorInput as alias
 function toggleErrorInput(mode) { snToggleImportMode(mode); }
+
+function onPasteFormatChange() {
+  var fmt = document.getElementById("pasteFormat").value;
+  var showCustom = (fmt === "custom");
+  document.getElementById("customColArea").classList.toggle("hidden", !showCustom);
+  document.getElementById("customNameArea").classList.toggle("hidden", !showCustom);
+  // プリセット値を設定
+  if (fmt === "name_only") {
+    document.getElementById("pasteColCode").value = "-1";
+    document.getElementById("pasteColName").value = "0";
+  } else if (fmt === "code_name") {
+    document.getElementById("pasteColCode").value = "0";
+    document.getElementById("pasteColName").value = "1";
+  } else if (fmt === "name_code") {
+    document.getElementById("pasteColCode").value = "1";
+    document.getElementById("pasteColName").value = "0";
+  }
+}
 
 // HL7v2 OBX セグメントからコード+名称を抽出
 function parseHL7Segments(text) {
