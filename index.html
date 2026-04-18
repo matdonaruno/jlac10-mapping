@@ -254,6 +254,13 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   text-transform:uppercase; cursor:pointer; }
 .sn-export-bar { display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
 
+/* Step Guidance */
+.guide { font-size:11px; color:var(--text-secondary); padding:6px 10px;
+  border-left:2px solid var(--accent); margin-bottom:8px; background:var(--bg-secondary); }
+.guide b { color:var(--accent); }
+.step-num { display:inline-block; width:18px; height:18px; line-height:18px; text-align:center;
+  background:var(--accent); color:#1a1a1a; font-size:10px; font-weight:700; margin-right:6px; }
+
 </style>
 </head>
 <body>
@@ -278,6 +285,10 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <!-- ============================================================ -->
 <div id="panel-search">
   <div class="card">
+    <div class="guide">
+      検査項目名、略称(<b>TP</b>,<b>ALB</b>等)、英名(<b>albumin</b>等)で検索できます。<br>
+      スコア: <b>100</b>=完全一致 / <b>95</b>=略称一致 / <b>80+</b>=先頭一致 / <b>60+</b>=部分一致
+    </div>
     <div class="flex-row mb-16">
       <input id="searchInput" type="text" placeholder="TP / albumin / CRP / HbA1c ..."
         style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doSearch()" placeholder="検査項目名・略称を入力（TP, アルブミン, CRP...）">
@@ -293,6 +304,12 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <div id="panel-import" class="hidden">
   <div class="card">
     <h2>Excel to JSON + DB Merge</h2>
+    <div class="guide">
+      <span class="step-num">1</span>ファイルを選択（リポジトリまたはローカル）<br>
+      <span class="step-num">2</span>列を設定（自動検出 / ヘッダー選択 / 手動指定）<br>
+      <span class="step-num">3</span>[<b>変換</b>] でJSON化 → プレビューを確認<br>
+      <span class="step-num">4</span>[<b>DBに統合</b>] で検索DBに蓄積 → [<b>JSONダウンロード</b>] で保存
+    </div>
 
     <!-- ファイルソース切替 -->
     <div class="flex-row mb-12">
@@ -391,6 +408,14 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <div id="panel-bulk" class="hidden">
   <div class="card">
     <h2>Bulk JLAC10 Mapping</h2>
+    <div class="guide">
+      <span class="step-num">1</span>病院マスター(Excel)と項目名の列を指定<br>
+      <span class="step-num">2</span>[<b>一括マッピング</b>] で全項目を自動検索<br>
+      <span class="step-num">3</span>結果: ✅自動確定(90+) / ⚠️候補あり(50+) / ❌手動<br>
+      <span class="step-num">4</span>⚠️の行はプルダウンで候補を選択 → [<b>確定</b>]<br>
+      <span class="step-num">5</span>[<b>自動確定を全て確定</b>] で一括確定<br>
+      <span class="step-num">6</span>[<b>確定分をDBに統合</b>] で蓄積 → [<b>結果Excelダウンロード</b>]
+    </div>
     <div class="grid-4 mb-12">
       <div><label>病院マスター（Excel）</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
       <div><label>項目名の列</label><input id="bulkColName" type="text" value="A"></div>
@@ -414,6 +439,9 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <!-- Case List -->
   <div class="card">
     <h2>SN Error Dashboard</h2>
+    <div class="guide">
+      SSMIX2エラーの案件管理。イシュー番号で管理し、エラー→マッピング→メール→確認まで追跡。
+    </div>
 
     <!-- New Case Form (hidden by default) -->
     <div id="snNewCaseForm" class="sn-new-case-form hidden">
@@ -494,6 +522,10 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
     <!-- Sub Panel: Error Items -->
     <div id="snPanelItems">
+      <div class="guide">
+        <span class="step-num">1</span>エラーデータを貼り付けまたはExcel読み込み → [<b>エラー取込</b>]<br>
+        <span class="step-num">2</span>分析結果: 付番可能(<b>OK</b>) / 要問い合わせ(<b>??</b>) に自動分類
+      </div>
       <!-- Import controls -->
       <div class="flex-row mb-12">
         <button onclick="snToggleImportMode('file')" class="btn btn-secondary btn-xs" id="snErrToggleFile" style="border-bottom:2px solid var(--accent)">Excel File</button>
@@ -536,6 +568,12 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
     <!-- Sub Panel: Actions -->
     <div id="snPanelActions" class="hidden">
+      <div class="guide">
+        <span class="step-num">1</span>担当者・イシュー番号・メンションを入力<br>
+        <span class="step-num">2</span>[<b>メール生成</b>] → Outlookにコピペして送信<br>
+        <span class="step-num">3</span>[<b>GHEコメント生成</b>] → イシューに貼り付け<br>
+        <span class="step-num">4</span>[<b>チャット文生成</b>] → Rocket.Chatに貼り付け
+      </div>
       <div class="grid-3 mb-12">
         <div><label>担当者</label><input id="wfContact" type="text" placeholder="担当者" onchange="snUpdateField('contact',this.value)"></div>
         <div><label>CC</label><input id="wfCc" type="text" placeholder="CC"></div>
@@ -579,6 +617,9 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
     <!-- Sub Panel: History -->
     <div id="snPanelHistory" class="hidden">
+      <div class="guide">
+        対応履歴が時系列で記録されます。メモを追加して経過を記録してください。
+      </div>
       <div id="snHistoryTimeline"></div>
       <div class="sn-note-form">
         <input id="snNoteInput" type="text" placeholder="メモを入力...">
@@ -594,6 +635,11 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <div id="panel-data" class="hidden">
   <div class="card">
     <h2>Database Management</h2>
+    <div class="guide">
+      DBはページ読み込み時にリポジトリから自動ロードされます。<br>
+      手動で別のJSONを読み込むか、病院JSONを追加でマージできます。<br>
+      変更後は [<b>統合DBエクスポート</b>] → git push で全員に共有。
+    </div>
     <div class="status-bar mb-16" id="dbInfo"></div>
     <div class="mb-12">
       <label>merged_jlac10.json を読み込み（上書き）</label>
