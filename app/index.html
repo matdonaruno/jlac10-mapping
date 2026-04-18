@@ -298,13 +298,35 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 .knowledge-modal input:focus, .knowledge-modal textarea:focus, .knowledge-modal select:focus { border-color:var(--accent); }
 .knowledge-modal .km-actions { display:flex; gap:8px; margin-top:16px; justify-content:flex-end; }
 
-/* Tab Color Coding - card borders and subtle backgrounds */
+/* Tab Color Coding - card borders, backgrounds, and input accents */
 #panel-import .card { border-left: 3px solid #6a9ec7; background: #2d2d30; }
+#panel-import input[type="text"]:focus, #panel-import select:focus,
+#panel-import textarea:focus { border-color: #6a9ec7; }
+#panel-import .btn-primary { background: #6a9ec7; }
+#panel-import .btn-primary:hover { background: #7dbee0; }
+#panel-import .guide { border-left-color: #6a9ec7; }
+
 #panel-bulk .card { border-left: 3px solid #7ab87a; background: #2d302d; }
-#panel-error .card { border-left: 3px solid #c75c5c; background: #302d2d; }
-#panel-error > .card { border-left: 3px solid #c75c5c; background: #302d2d; }
+#panel-bulk input[type="text"]:focus, #panel-bulk select:focus,
+#panel-bulk textarea:focus { border-color: #7ab87a; }
+#panel-bulk .btn-primary { background: #7ab87a; }
+#panel-bulk .btn-primary:hover { background: #8ed08e; }
+#panel-bulk .guide { border-left-color: #7ab87a; }
+
+#panel-error .card, #panel-error > .card { border-left: 3px solid #c75c5c; background: #302d2d; }
+#panel-error input[type="text"]:focus, #panel-error select:focus,
+#panel-error textarea:focus { border-color: #c75c5c; }
+#panel-error .btn-primary { background: #c75c5c; }
+#panel-error .btn-primary:hover { background: #d87070; }
+#panel-error .guide { border-left-color: #c75c5c; }
+
 #panel-data .card { border-left: 3px solid #d4a853; background: #30302d; }
+#panel-data input[type="text"]:focus, #panel-data select:focus,
+#panel-data textarea:focus { border-color: #d4a853; }
+#panel-data .guide { border-left-color: #d4a853; }
+
 #panel-help .card { border-left: 3px solid #9a9590; background: #2e2e2e; }
+#panel-help .guide { border-left-color: #9a9590; }
 
 </style>
 </head>
