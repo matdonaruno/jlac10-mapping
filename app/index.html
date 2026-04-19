@@ -1834,11 +1834,40 @@ function doConvertFromWb(wb, hospital, sheetInput) {
 // =====================================================================
 
 // テキスト変更時: 列数を検出して割り当てプルダウンを生成
+// HTML テーブルをタブ区切りテキストに変換（DOMPurify でサニタイズ済み）
+function htmlTableToTsv(text) {
+  if (!/<t[dr][\s>]/i.test(text)) return null;
+  var safe = DOMPurify.sanitize(text, {
+    ALLOWED_TAGS: ["table","thead","tbody","tr","td","th"],
+    ALLOWED_ATTR: []
+  });
+  var parser = new DOMParser();
+  var doc = parser.parseFromString("<div>" + safe + "</div>", "text/html");
+  var trs = doc.querySelectorAll("tr");
+  if (trs.length === 0) return null;
+  var lines = [];
+  for (var i = 0; i < trs.length; i++) {
+    var cells = trs[i].querySelectorAll("td,th");
+    var row = [];
+    for (var j = 0; j < cells.length; j++) row.push(cells[j].textContent.trim());
+    if (row.some(function(v){return v;})) lines.push(row.join("\t"));
+  }
+  return lines.length > 0 ? lines.join("\n") : null;
+}
+
 function onPasteInput() {
   var text = document.getElementById("pasteData").value.trim();
   if (!text) {
     document.getElementById("pasteColumnAssign").classList.add("hidden");
     return;
+  }
+
+  // HTML テーブルが貼り付けられた場合 → タブ区切りに変換
+  var converted = htmlTableToTsv(text);
+  if (converted) {
+    document.getElementById("pasteData").value = converted;
+    text = converted;
+    showToast("HTML テーブルを検出 → タブ区切りに変換しました");
   }
 
   // 区切り文字を検出
