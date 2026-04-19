@@ -517,33 +517,38 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     </div>
 
     <!-- New Case Form (hidden by default) -->
-    <div id="snNewCaseForm" class="sn-new-case-form hidden">
-      <div style="grid-column:1/-1">
-        <label>イシュー URL を貼り付け（または番号を直接入力）</label>
-        <div class="guide" style="margin-bottom:4px">GHE のイシュー URL を貼り付けると番号を自動抽出します。例: https://ghe.../issues/4123</div>
-        <input id="snNewIssueUrl" type="text" placeholder="https://ghe.ncda.hospital.local/org/repo/issues/4123 または 4123" oninput="snParseIssueUrl()">
+    <div id="snNewCaseForm" class="hidden" style="background:var(--bg-secondary);border:1px solid var(--border);padding:16px;margin-bottom:12px">
+
+      <!-- Step 1: URL or 番号 -->
+      <div class="mb-12">
+        <label style="font-size:13px;color:var(--accent)">① イシュー URL or 番号</label>
+        <input id="snNewIssueUrl" type="text" placeholder="URLを貼り付け or 番号を入力" style="font-size:15px;padding:12px" oninput="snParseIssueUrl();snShowStep2()">
       </div>
-      <div style="grid-column:1/-1">
-        <label>イシュータイトル（GHEからコピペ）</label>
-        <div class="guide" style="margin-bottom:4px">GHEイシューのタイトルを貼り付け。病院ID(数字)があれば病院名を自動補正します。</div>
-        <input id="snNewTitle" type="text" placeholder="100北がん_JLAC10エラー_2026-04-18" oninput="snParseTitle()">
+
+      <!-- Step 2: タイトル + 病院名 (URL入力後に表示) -->
+      <div id="snStep2" class="hidden">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <span style="font-family:'JetBrains Mono';font-size:14px;color:var(--accent);font-weight:700" id="snParsedInfo"></span>
+        </div>
+        <div class="grid-2 mb-12">
+          <div>
+            <label style="font-size:13px;color:var(--accent)">② イシュータイトル（GHEからコピペ）</label>
+            <input id="snNewTitle" type="text" placeholder="100北がん_JLAC10エラー" oninput="snParseTitle()">
+          </div>
+          <div>
+            <label style="font-size:13px;color:var(--accent)">③ 病院名</label>
+            <input id="snNewHospital" type="text" placeholder="自動入力 or 手動入力">
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button onclick="snDoCreateCase()" class="btn btn-primary">作成</button>
+          <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary">キャンセル</button>
+        </div>
       </div>
-      <div>
-        <label>イシュー番号</label>
-        <input id="snNewIssue" type="text" placeholder="自動入力" readonly style="background:var(--bg-primary)">
-      </div>
-      <div>
-        <label>リポジトリ</label>
-        <input id="snNewRepo" type="text" placeholder="自動検出" readonly style="background:var(--bg-primary)">
-      </div>
-      <div>
-        <label>病院名</label>
-        <input id="snNewHospital" type="text" placeholder="病院名">
-      </div>
-      <div style="display:flex;gap:4px;align-items:end">
-        <button onclick="snDoCreateCase()" class="btn btn-primary btn-xs">作成</button>
-        <button onclick="document.getElementById('snNewCaseForm').classList.add('hidden')" class="btn btn-secondary btn-xs">キャンセル</button>
-      </div>
+
+      <!-- hidden fields -->
+      <input id="snNewIssue" type="hidden">
+      <input id="snNewRepo" type="hidden">
     </div>
 
     <!-- Toolbar -->
@@ -1768,14 +1773,12 @@ function snParseIssueUrl() {
   var issueField = document.getElementById("snNewIssue");
   var repoField = document.getElementById("snNewRepo");
 
-  // URL パターン: https://ghe.../org/repo/issues/4123
   var urlMatch = input.match(/\/([^\/]+\/[^\/]+)\/issues\/(\d+)/);
   if (urlMatch) {
     repoField.value = urlMatch[1];
     issueField.value = urlMatch[2];
     return;
   }
-  // 数字のみ
   var numMatch = input.match(/^#?(\d+)$/);
   if (numMatch) {
     issueField.value = numMatch[1];
@@ -1784,6 +1787,20 @@ function snParseIssueUrl() {
   }
   issueField.value = "";
   repoField.value = "";
+}
+
+function snShowStep2() {
+  var issue = document.getElementById("snNewIssue").value;
+  var repo = document.getElementById("snNewRepo").value;
+  var step2 = document.getElementById("snStep2");
+  var info = document.getElementById("snParsedInfo");
+  if (issue) {
+    step2.classList.remove("hidden");
+    info.textContent = "#" + issue + (repo ? " (" + repo + ")" : "");
+  } else {
+    step2.classList.add("hidden");
+    info.textContent = "";
+  }
 }
 
 function snParseTitle() {
