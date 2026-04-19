@@ -1264,6 +1264,36 @@ function toggleImportMode(mode) {
 function onImportFileLoad(input) {
   var file = input.files[0];
   if (!file) return;
+
+  // ファイル名からメタデータ推定
+  if (repoIndex && file.name) {
+    var files = repoIndex.file || repoIndex.files || [];
+    for (var f of files) {
+      if (f.file === file.name) {
+        var hField = document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName");
+        if (hField && !hField.value) hField.value = f.hospital_name || "";
+        if (f.vender || f.vendor) {
+          var vSel = document.getElementById("importVendor");
+          if (vSel) {
+            var vName = (f.vender || f.vendor).toUpperCase();
+            for (var i = 0; i < vSel.options.length; i++) {
+              if (vSel.options[i].value.toUpperCase() === vName) { vSel.selectedIndex = i; break; }
+            }
+          }
+        }
+        break;
+      }
+    }
+    // ファイル名パターン: {id}_{name}_{vendor}.xlsx
+    if (!(document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName")).value) {
+      var fnMatch = file.name.match(/^(\d+)_([^_]+)/);
+      if (fnMatch) {
+        var hField2 = document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName");
+        hField2.value = fnMatch[1] + "_" + fnMatch[2];
+      }
+    }
+  }
+
   var reader = new FileReader();
   reader.onload = function(e) {
     importWb = XLSX.read(e.target.result, {type:"array"});
