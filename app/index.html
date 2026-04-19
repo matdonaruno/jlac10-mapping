@@ -1261,35 +1261,95 @@ function toggleImportMode(mode) {
   document.getElementById(btnId).style.borderBottom = "2px solid var(--accent)";
 }
 
+// ファイル名から汎用メタデータ抽出
+function parseFilenameMetadata(filename) {
+  var name = filename.replace(/\.[^.]+$/, ""); // 拡張子除去
+  var meta = { hospital: "", vendor: "", date: "", issue: "", hospitalId: "" };
+
+  // index.json と照合
+  if (repoIndex) {
+    var files = repoIndex.file || repoIndex.files || [];
+    for (var f of files) {
+      if (f.file === filename) {
+        meta.hospital = f.hospital_name || "";
+        meta.hospitalId = String(f.hospital_id || "");
+        meta.vendor = f.vender || f.vendor || "";
+        return meta;
+      }
+    }
+  }
+
+  // 病院ID（先頭の数字）
+  var idMatch = name.match(/^(\d{2,5})/);
+  if (idMatch) {
+    meta.hospitalId = idMatch[1];
+    // index.json で補正
+    if (repoIndex) {
+      var files2 = repoIndex.file || repoIndex.files || [];
+      for (var f2 of files2) {
+        if (String(f2.hospital_id) === meta.hospitalId) {
+          meta.hospital = f2.hospital_name || "";
+          meta.vendor = f2.vender || f2.vendor || "";
+          break;
+        }
+      }
+    }
+  }
+
+  // 病院名（日本語文字列）
+  if (!meta.hospital) {
+    var jpMatch = name.match(/([\u3000-\u9FFF\uF900-\uFAFF]+(?:[\u3000-\u9FFF\uF900-\uFAFF\w]*)*)/);
+    if (jpMatch) meta.hospital = jpMatch[1];
+  }
+
+  // ベンダー名検出
+  var vendorPatterns = [
+    { pattern: /NEC/i, name: "NEC" },
+    { pattern: /fujitsu|富士通|ﾌｼﾞﾂ/i, name: "Fujitsu" },
+    { pattern: /IBM/i, name: "IBM" },
+    { pattern: /SSI/i, name: "SSI" },
+    { pattern: /SBS/i, name: "SBS" },
+    { pattern: /KHI/i, name: "KHI" },
+    { pattern: /CSI/i, name: "CSI" },
+    { pattern: /NAIS/i, name: "NAIS" },
+  ];
+  if (!meta.vendor) {
+    for (var vp of vendorPatterns) {
+      if (vp.pattern.test(name)) { meta.vendor = vp.name; break; }
+    }
+  }
+
+  // 日付（YYYYMMDD or YYYY-MM-DD or YYYY_MM_DD）
+  var dateMatch = name.match(/(20\d{2})[_\-]?(\d{2})[_\-]?(\d{2})/);
+  if (dateMatch) meta.date = dateMatch[1] + "-" + dateMatch[2] + "-" + dateMatch[3];
+
+  // イシュー番号（#数字 or ＃数字）
+  var issueMatch = name.match(/[#＃](\d+)/);
+  if (issueMatch) meta.issue = issueMatch[1];
+
+  // 病院名がまだ空ならIDで代用
+  if (!meta.hospital && meta.hospitalId) {
+    // ID以降の文字列を病院名として使う
+    var afterId = name.replace(/^\d+[_\s]*/, "").split(/[_\s]/)[0];
+    meta.hospital = afterId ? meta.hospitalId + "_" + afterId : meta.hospitalId;
+  }
+
+  return meta;
+}
+
 function onImportFileLoad(input) {
   var file = input.files[0];
   if (!file) return;
 
-  // ファイル名からメタデータ推定
-  if (repoIndex && file.name) {
-    var files = repoIndex.file || repoIndex.files || [];
-    for (var f of files) {
-      if (f.file === file.name) {
-        var hField = document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName");
-        if (hField && !hField.value) hField.value = f.hospital_name || "";
-        if (f.vender || f.vendor) {
-          var vSel = document.getElementById("importVendor");
-          if (vSel) {
-            var vName = (f.vender || f.vendor).toUpperCase();
-            for (var i = 0; i < vSel.options.length; i++) {
-              if (vSel.options[i].value.toUpperCase() === vName) { vSel.selectedIndex = i; break; }
-            }
-          }
-        }
-        break;
-      }
-    }
-    // ファイル名パターン: {id}_{name}_{vendor}.xlsx
-    if (!(document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName")).value) {
-      var fnMatch = file.name.match(/^(\d+)_([^_]+)/);
-      if (fnMatch) {
-        var hField2 = document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName");
-        hField2.value = fnMatch[1] + "_" + fnMatch[2];
+  // ファイル名から汎用メタデータ抽出
+  var fnMeta = parseFilenameMetadata(file.name);
+  var hField = document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName");
+  if (hField && !hField.value && fnMeta.hospital) hField.value = fnMeta.hospital;
+  if (fnMeta.vendor) {
+    var vSel = document.getElementById("importVendor");
+    if (vSel) {
+      for (var i = 0; i < vSel.options.length; i++) {
+        if (vSel.options[i].value.toUpperCase() === fnMeta.vendor.toUpperCase()) { vSel.selectedIndex = i; break; }
       }
     }
   }
