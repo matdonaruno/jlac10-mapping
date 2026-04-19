@@ -170,6 +170,25 @@ tr.row-confirmed td { background:var(--bg-hover); }
 tr.row-confirmed td:first-child { border-left:3px solid var(--info); }
 .btn-xs { padding:4px 10px; font-size:11px; }
 
+/* DB History Timeline */
+.db-history-item { display:flex; gap:10px; align-items:flex-start; padding:6px 8px; border-left:2px solid var(--border); margin-left:4px; font-size:11px; }
+.db-history-item .hist-time { color:var(--text-secondary); font-family:'JetBrains Mono',monospace; white-space:nowrap; min-width:80px; }
+.db-history-item .hist-action { font-weight:600; font-family:'JetBrains Mono',monospace; min-width:70px; white-space:nowrap; }
+.db-history-item .hist-detail { color:var(--text-secondary); flex:1; }
+.db-history-item .hist-diff { font-family:'JetBrains Mono',monospace; white-space:nowrap; }
+.db-history-item.hist-import { border-left-color:var(--info); }
+.db-history-item.hist-reload { border-left-color:var(--info); }
+.db-history-item.hist-merge { border-left-color:var(--success); }
+.db-history-item.hist-apply_mapping { border-left-color:var(--success); }
+.db-history-item.hist-export { border-left-color:var(--warning); }
+.db-history-item.hist-cleanup { border-left-color:var(--danger); }
+
+/* DB Quality */
+.db-quality-row { display:flex; align-items:center; gap:8px; padding:4px 0; font-size:12px; }
+.db-quality-row .q-icon { font-size:14px; min-width:20px; text-align:center; }
+.db-quality-row .q-label { flex:1; color:var(--text-secondary); }
+.db-quality-row .q-count { font-family:'JetBrains Mono',monospace; font-weight:600; }
+
 .hidden { display:none; }
 .mb-12 { margin-bottom:12px; }
 .mb-16 { margin-bottom:16px; }
@@ -837,6 +856,30 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
     <!-- 最終更新 -->
     <div class="status-bar mb-16" id="dbInfo"></div>
 
+    <!-- 検索インデックス統計 -->
+    <div id="dbIndexStats" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:8px 12px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">検索インデックス</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:14px" id="statIndexEntries">0</span>
+      </div>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:8px 12px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">名称数</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:14px" id="statIndexNames">0</span>
+      </div>
+    </div>
+
+    <!-- 操作履歴 -->
+    <div id="dbHistory" style="margin-bottom:16px">
+      <label>操作履歴</label>
+      <div id="dbHistoryList" style="max-height:200px;overflow-y:auto;margin-top:4px"></div>
+    </div>
+
+    <!-- データ品質 -->
+    <div id="dbQuality" style="margin-bottom:16px">
+      <button onclick="dbRunQualityCheck()" class="btn btn-secondary btn-xs">データ品質チェック</button>
+      <div id="dbQualityResult" class="hidden" style="margin-top:8px"></div>
+    </div>
+
     <!-- 操作 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
       <div>
@@ -1000,12 +1043,14 @@ function reloadFromRepo() {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function(data) {
+      var beforeCount = DB.items ? DB.items.length : 0;
       DB = data;
       if (!DB.items) DB.items = [];
       if (!DB.metadata) DB.metadata = {};
       searchIndex = buildSearchIndex();
       updateDbStatus();
       showToast("DB読込完了: " + DB.items.length + "件");
+      dbAddHistory("reload","merged_jlac10.json loaded",beforeCount,DB.items.length);
     }).catch(function(err) {
       console.warn("DB load failed from " + urls[idx] + ": " + err.message);
       tryLoad(urls, idx + 1);
@@ -2097,6 +2142,7 @@ function convertPaste() {
 
 function mergeToDb() {
   if (!lastConvertedJson) return;
+  var beforeCount = DB.items.length;
   var added = 0;
   for (var item of lastConvertedJson.items) {
     if (!item.jlac10) continue;
@@ -2108,6 +2154,7 @@ function mergeToDb() {
   }
   DB.metadata.total_unique_jlac10=DB.items.length; searchIndex=buildSearchIndex(); updateDbStatus();
   showToast("統合完了: "+added+"件追加");
+  dbAddHistory("merge",((lastConvertedJson.metadata||{}).hospital||"")+" "+added+"entries",beforeCount,DB.items.length);
 }
 
 function downloadJson() {
@@ -2266,6 +2313,7 @@ function updateBulkSummary() {
 
 function mergeBulkToDb() {
   var hospital = document.getElementById("bulkHospital").value.trim() || "Unknown";
+  var beforeCount = DB.items.length;
   var added = 0;
   for (var r of lastBulkResult) {
     if (!r.confirmed || !r.bestMatch) continue;
@@ -2291,6 +2339,7 @@ function mergeBulkToDb() {
   updateDbStatus();
   showToast("Merged "+added+" entries to DB");
   document.getElementById("btnExportDb").disabled=false;
+  dbAddHistory("apply_mapping",hospital+" "+added+"entries",beforeCount,DB.items.length);
 }
 
 function downloadBulkResult() {
@@ -3446,12 +3495,157 @@ function downloadErrorResult() { snDownloadErrorExcel(); }
 // =====================================================================
 // UI: Database
 // =====================================================================
+// =====================================================================
+// DB Operation History (LocalStorage)
+// =====================================================================
+var DB_HISTORY_KEY = "db_operation_history";
+
+function dbLoadHistory() {
+  try { return JSON.parse(localStorage.getItem(DB_HISTORY_KEY)) || []; }
+  catch(e) { return []; }
+}
+
+function dbSaveHistory(hist) {
+  try { localStorage.setItem(DB_HISTORY_KEY, JSON.stringify(hist.slice(-20))); }
+  catch(e) { /* ignore */ }
+}
+
+function dbAddHistory(action, detail, before, after) {
+  var hist = dbLoadHistory();
+  var diff = "";
+  if (typeof before === "number" && typeof after === "number") {
+    var d = after - before;
+    diff = (d >= 0 ? "+" : "") + d;
+  }
+  hist.push({
+    date: new Date().toISOString(),
+    action: action,
+    detail: detail,
+    before: (typeof before === "number") ? before : null,
+    after: (typeof after === "number") ? after : null,
+    diff: diff
+  });
+  if (hist.length > 20) hist = hist.slice(-20);
+  dbSaveHistory(hist);
+  dbRenderHistory();
+}
+
+function dbRenderHistory() {
+  var container = document.getElementById("dbHistoryList");
+  if (!container) return;
+  while (container.firstChild) container.removeChild(container.firstChild);
+  var hist = dbLoadHistory();
+  if (hist.length === 0) {
+    var empty = document.createElement("div");
+    empty.style.cssText = "font-size:11px;color:var(--text-secondary);padding:8px 0";
+    empty.textContent = "履歴なし";
+    container.appendChild(empty);
+    return;
+  }
+  var actionLabels = {
+    "import":"DB読込","merge":"統合","export":"エクスポート",
+    "cleanup":"重複除去","reload":"DB読込","apply_mapping":"マッピング適用"
+  };
+  for (var i = hist.length - 1; i >= 0; i--) {
+    var h = hist[i];
+    var row = document.createElement("div");
+    row.className = "db-history-item hist-" + (h.action || "import");
+
+    var timeSpan = document.createElement("span");
+    timeSpan.className = "hist-time";
+    var d = new Date(h.date);
+    timeSpan.textContent = ("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)+" "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+
+    var actionSpan = document.createElement("span");
+    actionSpan.className = "hist-action";
+    actionSpan.textContent = actionLabels[h.action] || h.action;
+
+    var detailSpan = document.createElement("span");
+    detailSpan.className = "hist-detail";
+    detailSpan.textContent = h.detail || "";
+
+    row.appendChild(timeSpan);
+    row.appendChild(actionSpan);
+    row.appendChild(detailSpan);
+
+    if (h.diff) {
+      var diffSpan = document.createElement("span");
+      diffSpan.className = "hist-diff";
+      if (h.before != null && h.after != null) {
+        diffSpan.textContent = h.diff + " (" + h.before + "\u2192" + h.after + ")";
+      } else {
+        diffSpan.textContent = h.diff;
+      }
+      row.appendChild(diffSpan);
+    } else if (h.after != null) {
+      var countSpan = document.createElement("span");
+      countSpan.className = "hist-diff";
+      countSpan.textContent = h.after + "\u4EF6";
+      row.appendChild(countSpan);
+    }
+
+    container.appendChild(row);
+  }
+}
+
+// =====================================================================
+// DB Quality Check
+// =====================================================================
+function dbQualityCheck() {
+  var invalid = DB.items.filter(function(i){ return i.jlac10_status === "invalid"; });
+  var noHistory = DB.items.filter(function(i){ return !i.mapping_history || i.mapping_history.length === 0; });
+  var singleSource = DB.items.filter(function(i){ return Object.keys(i.sources||{}).length === 1; });
+  var noSource = DB.items.filter(function(i){ return Object.keys(i.sources||{}).length === 0; });
+  return { invalid: invalid, noHistory: noHistory, singleSource: singleSource, noSource: noSource };
+}
+
+function dbRunQualityCheck() {
+  if (!DB.items || DB.items.length === 0) { showToast("DBが空です"); return; }
+  var q = dbQualityCheck();
+  var container = document.getElementById("dbQualityResult");
+  if (!container) return;
+  container.classList.remove("hidden");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  var rows = [
+    { icon: q.invalid.length === 0 ? "\u2705" : "\u26A0\uFE0F", label: "JLAC10形式不正", count: q.invalid.length, color: q.invalid.length === 0 ? "var(--success)" : "var(--danger)" },
+    { icon: q.noHistory.length === 0 ? "\u2705" : "\u26A0\uFE0F", label: "マッピング実績なし", count: q.noHistory.length, color: q.noHistory.length === 0 ? "var(--success)" : "var(--warning)" },
+    { icon: "\u2139\uFE0F", label: "1社のみ", count: q.singleSource.length, color: "var(--info)" },
+    { icon: "\u2139\uFE0F", label: "ソースなし", count: q.noSource.length, color: "var(--info)" }
+  ];
+
+  for (var r of rows) {
+    var rowEl = document.createElement("div");
+    rowEl.className = "db-quality-row";
+
+    var iconEl = document.createElement("span");
+    iconEl.className = "q-icon";
+    iconEl.textContent = r.icon;
+
+    var labelEl = document.createElement("span");
+    labelEl.className = "q-label";
+    labelEl.textContent = r.label;
+
+    var countEl = document.createElement("span");
+    countEl.className = "q-count";
+    countEl.style.color = r.color;
+    countEl.textContent = r.count + "\u4EF6";
+
+    rowEl.appendChild(iconEl);
+    rowEl.appendChild(labelEl);
+    rowEl.appendChild(countEl);
+    container.appendChild(rowEl);
+  }
+}
+
 function loadDbFile(input) {
   var file=input.files[0]; if(!file)return;
   var reader=new FileReader();
   reader.onload=function(e){
-    try{DB=JSON.parse(e.target.result);if(!DB.items)DB.items=[];if(!DB.metadata)DB.metadata={};
-      searchIndex=buildSearchIndex();updateDbStatus();showToast("DB読込完了: "+DB.items.length+"件");}
+    try{var beforeCount=DB.items?DB.items.length:0;
+      DB=JSON.parse(e.target.result);if(!DB.items)DB.items=[];if(!DB.metadata)DB.metadata={};
+      searchIndex=buildSearchIndex();updateDbStatus();showToast("DB読込完了: "+DB.items.length+"件");
+      dbAddHistory("import",file.name+" loaded",beforeCount,DB.items.length);}
     catch(err){showToast("JSON parse error");}
   };
   reader.readAsText(file);
@@ -3459,6 +3653,7 @@ function loadDbFile(input) {
 
 function loadHospitalFiles(input) {
   var files=input.files,total=0,done=0;
+  var beforeCount=DB.items.length;
   for(var fi=0;fi<files.length;fi++){(function(f){
     var reader=new FileReader();
     reader.onload=function(e){
@@ -3470,14 +3665,18 @@ function loadHospitalFiles(input) {
           if(!ex.mapping_history.some(function(h){return h.hospital===item.hospital&&h.item_name===item.item_name;})){
             ex.mapping_history.push({hospital:item.hospital||(data.metadata||{}).hospital||"",item_name:item.item_name||"",abbreviation:item.abbreviation||"",jlac10_standard_name:item.jlac10_standard_name||""});total++;}
         }}catch(err){console.error(err);}
-      done++;if(done===files.length){DB.metadata.total_unique_jlac10=DB.items.length;searchIndex=buildSearchIndex();updateDbStatus();showToast(files.length+" files, "+total+" entries added");}
+      done++;if(done===files.length){DB.metadata.total_unique_jlac10=DB.items.length;searchIndex=buildSearchIndex();updateDbStatus();showToast(files.length+" files, "+total+" entries added");
+        dbAddHistory("merge",files.length+"files "+total+"entries added",beforeCount,DB.items.length);}
     };reader.readAsText(f);
   })(files[fi]);}
 }
 
 function exportMergedDb() {
   DB.metadata.exported_at=new Date().toISOString(); DB.metadata.total_unique_jlac10=DB.items.length;
-  downloadFile("merged_jlac10.json",JSON.stringify(DB,null,2));
+  var now=new Date(); var ds=now.getFullYear()+("0"+(now.getMonth()+1)).slice(-2)+("0"+now.getDate()).slice(-2);
+  var fname="merged_jlac10_"+ds+".json";
+  downloadFile(fname,JSON.stringify(DB,null,2));
+  dbAddHistory("export",fname,null,DB.items.length);
 }
 
 function updateDbStatus() {
@@ -3559,6 +3758,15 @@ function updateDbStatus() {
   if (DB.metadata.last_applied) infoText += " | 最終DB還元: " + DB.metadata.last_applied.replace("T"," ").substring(0,19);
   var dbInfoEl = document.getElementById("dbInfo");
   if (dbInfoEl) dbInfoEl.textContent = infoText;
+
+  // 検索インデックス統計
+  var totalNames = 0;
+  for (var si = 0; si < searchIndex.length; si++) { totalNames += (searchIndex[si].names || []).length; }
+  el = document.getElementById("statIndexEntries"); if (el) el.textContent = searchIndex.length + "\u30A8\u30F3\u30C8\u30EA";
+  el = document.getElementById("statIndexNames"); if (el) el.textContent = totalNames + "\u540D\u79F0";
+
+  // 履歴レンダリング
+  dbRenderHistory();
 }
 
 function dbCleanup() {
@@ -3597,6 +3805,7 @@ function dbCleanup() {
   updateDbStatus();
   var removed = before - cleaned.length;
   showToast("重複除去完了: " + removed + "件除去 (残: " + cleaned.length + "件)");
+  dbAddHistory("cleanup",removed+"件除去",before,cleaned.length);
 }
 
 // =====================================================================
