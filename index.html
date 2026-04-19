@@ -1014,8 +1014,7 @@ function esc(s) { return DOMPurify.sanitize(s || "", { ALLOWED_TAGS: [] }); }
 function setHtml(id, html) {
   document.getElementById(id).innerHTML = DOMPurify.sanitize(html, {
     ALLOWED_TAGS:["table","tr","td","th","thead","tbody","div","span","p","b","code","br","textarea","input","a"],
-    ALLOWED_ATTR:["class","style","readonly","rows","href","target"],
-    ALLOWED_ATTR:["class","style","readonly","rows"] });
+    ALLOWED_ATTR:["class","style","readonly","rows","href","target"] });
 }
 function showToast(msg) {
   var t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show");
