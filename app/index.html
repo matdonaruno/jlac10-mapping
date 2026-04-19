@@ -804,24 +804,54 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <!-- ============================================================ -->
 <div id="panel-data" class="hidden">
   <div class="card">
-    <h2>Database Management</h2>
-    <div class="guide">
-      DBはページ読み込み時にリポジトリから自動ロードされます。<br>
-      手動で別のJSONを読み込むか、病院JSONを追加でマージできます。<br>
-      変更後は [<b>統合DBエクスポート</b>] → git push で全員に共有。
+    <h2>Database
+      <span style="font-size:10px;font-weight:400;color:var(--text-secondary);letter-spacing:0;text-transform:none;margin-left:12px">DB管理・統計・バックアップ</span>
+    </h2>
+
+    <!-- 統計ダッシュボード -->
+    <div id="dbStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px">
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:var(--accent);font-family:'JetBrains Mono'" id="statJlac10">0</div>
+        <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">JLAC10</div>
+      </div>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:var(--info);font-family:'JetBrains Mono'" id="statMappings">0</div>
+        <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">マッピング実績</div>
+      </div>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:var(--success);font-family:'JetBrains Mono'" id="statHospitals">0</div>
+        <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">病院数</div>
+      </div>
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:700;color:var(--warning);font-family:'JetBrains Mono'" id="statNoJlac">0</div>
+        <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">JLAC10なし</div>
+      </div>
     </div>
+
+    <!-- ソース別内訳 -->
+    <div id="dbSourceBreakdown" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px"></div>
+
+    <!-- 病院別マッピング実績 -->
+    <div id="dbHospitalList" style="margin-bottom:16px"></div>
+
+    <!-- 最終更新 -->
     <div class="status-bar mb-16" id="dbInfo"></div>
-    <div class="mb-12">
-      <label>merged_jlac10.json を読み込み（上書き）</label>
-      <input id="dbFile" type="file" accept=".json" onchange="loadDbFile(this)">
-    </div>
-    <div class="mb-12">
-      <label>病院JSONを追加読み込み（複数可）</label>
-      <input id="hospitalFiles" type="file" accept=".json" multiple onchange="loadHospitalFiles(this)">
+
+    <!-- 操作 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <div>
+        <label>DB読み込み（上書き）</label>
+        <input id="dbFile" type="file" accept=".json" onchange="loadDbFile(this)">
+      </div>
+      <div>
+        <label>病院JSON追加（複数可）</label>
+        <input id="hospitalFiles" type="file" accept=".json" multiple onchange="loadHospitalFiles(this)">
+      </div>
     </div>
     <div class="flex-row">
       <button onclick="exportMergedDb()" class="btn btn-primary" id="btnExportDb">統合DBエクスポート</button>
       <button onclick="reloadFromRepo()" class="btn btn-secondary">リポジトリから再読み込み</button>
+      <button onclick="dbCleanup()" class="btn btn-secondary">重複除去</button>
     </div>
   </div>
 </div>
@@ -3451,16 +3481,122 @@ function exportMergedDb() {
 }
 
 function updateDbStatus() {
-  var hc=0,hospitals=new Set();
-  for(var it of DB.items) for(var h of(it.mapping_history||[])){hc++;if(h.hospital)hospitals.add(h.hospital);}
+  var hc=0, hospitals=new Set(), hospitalCounts={};
+  for(var it of DB.items) {
+    for(var h of(it.mapping_history||[])){
+      hc++;
+      if(h.hospital){
+        hospitals.add(h.hospital);
+        hospitalCounts[h.hospital] = (hospitalCounts[h.hospital]||0) + 1;
+      }
+    }
+  }
   var noJlacCount = (DB.items_no_jlac || []).length;
-  document.getElementById("dbStatus").textContent=DB.items.length+" JLAC10 | "+noJlacCount+" no-JLAC | "+hc+" mappings | "+hospitals.size+" hospitals";
-  setHtml("dbInfo",
-    '<b>'+DB.items.length+'</b> JLAC10 entries | <b>'+noJlacCount+'</b> JLAC10\u672a\u8a2d\u5b9a | <b>'+hc+'</b> mapping records | <b>'+hospitals.size+'</b> hospitals' +
-    '<br>SRL: '+DB.items.filter(function(x){return x.sources&&x.sources.srl;}).length+
-    ' | BML: '+DB.items.filter(function(x){return x.sources&&x.sources.bml;}).length+
-    ' | LSI: '+DB.items.filter(function(x){return x.sources&&x.sources.lsi;}).length+
-    (hospitals.size>0?'<br>Hospitals: '+esc([...hospitals].join(", ")):""));
+  var srlCount = DB.items.filter(function(x){return x.sources&&x.sources.srl;}).length;
+  var bmlCount = DB.items.filter(function(x){return x.sources&&x.sources.bml;}).length;
+  var lsiCount = DB.items.filter(function(x){return x.sources&&x.sources.lsi;}).length;
+
+  // ヘッダー
+  document.getElementById("dbStatus").textContent =
+    DB.items.length+" JLAC10 | "+noJlacCount+" no-JLAC | "+hc+" mappings | "+hospitals.size+" hospitals";
+
+  // 統計カード
+  var el;
+  el = document.getElementById("statJlac10"); if(el) el.textContent = DB.items.length;
+  el = document.getElementById("statMappings"); if(el) el.textContent = hc;
+  el = document.getElementById("statHospitals"); if(el) el.textContent = hospitals.size;
+  el = document.getElementById("statNoJlac"); if(el) el.textContent = noJlacCount;
+
+  // ソース別内訳
+  var srcDiv = document.getElementById("dbSourceBreakdown");
+  if (srcDiv) {
+    while(srcDiv.firstChild) srcDiv.removeChild(srcDiv.firstChild);
+    var srcData = [
+      {name:"SRL", count:srlCount, color:"#6abeef"},
+      {name:"BML", count:bmlCount, color:"#d48ae0"},
+      {name:"LSI", count:lsiCount, color:"#6abe7a"}
+    ];
+    for(var s of srcData) {
+      var box = document.createElement("div");
+      box.style.cssText = "background:var(--bg-secondary);border:1px solid var(--border);padding:8px 12px;display:flex;justify-content:space-between;align-items:center";
+      var lbl = document.createElement("span");
+      lbl.style.cssText = "font-weight:700;font-family:'JetBrains Mono';color:"+s.color;
+      lbl.textContent = s.name;
+      var cnt = document.createElement("span");
+      cnt.style.cssText = "font-family:'JetBrains Mono';font-size:16px;color:var(--text-primary)";
+      cnt.textContent = s.count + "件";
+      box.appendChild(lbl);
+      box.appendChild(cnt);
+      srcDiv.appendChild(box);
+    }
+  }
+
+  // 病院別マッピング実績
+  var hDiv = document.getElementById("dbHospitalList");
+  if (hDiv) {
+    while(hDiv.firstChild) hDiv.removeChild(hDiv.firstChild);
+    if (hospitals.size > 0) {
+      var hTitle = document.createElement("label");
+      hTitle.textContent = "病院別マッピング実績";
+      hDiv.appendChild(hTitle);
+      var hList = document.createElement("div");
+      hList.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;margin-top:4px";
+      var sorted = Object.entries(hospitalCounts).sort(function(a,b){return b[1]-a[1];});
+      for(var pair of sorted) {
+        var tag = document.createElement("span");
+        tag.style.cssText = "font-size:11px;padding:3px 8px;background:var(--bg-secondary);border:1px solid var(--border);font-family:'JetBrains Mono'";
+        tag.textContent = pair[0] + " (" + pair[1] + ")";
+        hList.appendChild(tag);
+      }
+      hDiv.appendChild(hList);
+    }
+  }
+
+  // 最終更新
+  var lastUpdate = DB.metadata.merged_at || DB.metadata.exported_at || "";
+  var infoText = "";
+  if (lastUpdate) infoText = "最終更新: " + lastUpdate.replace("T"," ").substring(0,19);
+  if (DB.metadata.last_applied) infoText += " | 最終DB還元: " + DB.metadata.last_applied.replace("T"," ").substring(0,19);
+  var dbInfoEl = document.getElementById("dbInfo");
+  if (dbInfoEl) dbInfoEl.textContent = infoText;
+}
+
+function dbCleanup() {
+  if (!DB.items || DB.items.length === 0) { showToast("DBが空です"); return; }
+  var before = DB.items.length;
+  // JLAC10 の重複除去（同じ JLAC10 のエントリをマージ）
+  var seen = {};
+  var cleaned = [];
+  for (var item of DB.items) {
+    var key = item.jlac10;
+    if (!key) { cleaned.push(item); continue; }
+    if (seen[key]) {
+      // sources をマージ
+      var existing = seen[key];
+      for (var sk in (item.sources||{})) {
+        if (!existing.sources[sk]) existing.sources[sk] = item.sources[sk];
+      }
+      // mapping_history をマージ（重複除去）
+      for (var mh of (item.mapping_history||[])) {
+        var dup = (existing.mapping_history||[]).some(function(h){
+          return h.hospital===mh.hospital && h.item_name===mh.item_name;
+        });
+        if (!dup) {
+          if (!existing.mapping_history) existing.mapping_history = [];
+          existing.mapping_history.push(mh);
+        }
+      }
+    } else {
+      seen[key] = item;
+      cleaned.push(item);
+    }
+  }
+  DB.items = cleaned;
+  DB.metadata.total_unique_jlac10 = cleaned.length;
+  searchIndex = buildSearchIndex();
+  updateDbStatus();
+  var removed = before - cleaned.length;
+  showToast("重複除去完了: " + removed + "件除去 (残: " + cleaned.length + "件)");
 }
 
 // =====================================================================
