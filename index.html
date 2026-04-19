@@ -312,6 +312,29 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 #panel-import .btn-secondary[style*="border-bottom: 2px"] { border-bottom-color: #6a9ec7 !important; color: #6a9ec7; }
 #panel-import .sub-toggle-active { border-bottom: 2px solid #6a9ec7 !important; color: #6a9ec7 !important; }
 
+/* Import: Sheet list */
+.sheet-row { display:flex; align-items:center; gap:12px; padding:8px 10px; border-bottom:1px solid var(--border); }
+.sheet-row:last-child { border-bottom:none; }
+.sheet-row label.sheet-check { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:500;
+  color:var(--text-primary); cursor:pointer; flex:1; min-width:0; margin-bottom:0; text-transform:none; letter-spacing:0; }
+.sheet-row label.sheet-check input[type="checkbox"] { accent-color:#6a9ec7; width:16px; height:16px; cursor:pointer; }
+.sheet-row .sheet-name { font-family:'JetBrains Mono',monospace; font-weight:600; }
+.sheet-row select.sheet-usage { background:var(--bg-primary); border:1px solid var(--border); color:var(--text-primary);
+  padding:4px 8px; font-size:12px; font-family:'JetBrains Mono',monospace; min-width:120px; }
+.sheet-row select.sheet-usage:focus { border-color:#6a9ec7; outline:none; }
+
+/* Import: Paste column assign */
+.paste-col-item { display:flex; flex-direction:column; gap:4px; min-width:140px; }
+.paste-col-item label { font-size:10px; margin-bottom:0; }
+.paste-col-item select { background:var(--bg-secondary); border:1px solid var(--border); color:var(--text-primary);
+  padding:6px 8px; font-size:12px; font-family:'Inter',sans-serif; }
+.paste-col-item select:focus { border-color:#6a9ec7; outline:none; }
+
+/* Import: Per-sheet preview */
+.sheet-preview-block { margin-bottom:12px; padding:12px; background:var(--bg-secondary); border:1px solid var(--border); }
+.sheet-preview-block h4 { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
+  color:#6a9ec7; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px; }
+
 #panel-bulk .card { border-left: 3px solid #7ab87a; background: #2d302d; }
 #panel-bulk input[type="text"]:focus, #panel-bulk select:focus,
 #panel-bulk textarea:focus { border-color: #7ab87a; }
@@ -376,102 +399,142 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <!-- ============================================================ -->
 <div id="panel-import" class="hidden">
   <div class="card">
-    <h2>Excel to JSON + DB Merge</h2>
-    <div class="guide">
-      <span class="step-num">1</span>ファイルを選択（リポジトリまたはローカル）<br>
-      <span class="step-num">2</span>列を設定（自動検出 / ヘッダー選択 / 手動指定）<br>
-      <span class="step-num">3</span>[<b>変換</b>] でJSON化 → プレビューを確認<br>
-      <span class="step-num">4</span>[<b>DBに統合</b>] で検索DBに蓄積 → [<b>JSONダウンロード</b>] で保存
-    </div>
+    <h2>Import <span style="font-size:10px;font-weight:400;color:var(--text-secondary);letter-spacing:0;text-transform:none;margin-left:12px">過去マッピング実績の蓄積</span></h2>
 
-    <!-- ファイルソース切替 -->
+    <!-- 入力モード切替 -->
     <div class="flex-row mb-12">
-      <button onclick="toggleFileSource('repo')" class="btn btn-secondary" id="fileSrcRepo" style="border-bottom:2px solid var(--accent)">リポジトリ</button>
-      <button onclick="toggleFileSource('local')" class="btn btn-secondary" id="fileSrcLocal">ローカルファイル</button>
+      <button onclick="toggleInputSource('excel')" class="btn btn-secondary sub-toggle-active" id="inputSrcExcel">Excel File</button>
+      <button onclick="toggleInputSource('paste')" class="btn btn-secondary" id="inputSrcPaste">コピペ</button>
     </div>
 
-    <!-- リポジトリから選択 -->
-    <div id="fileSourceRepo">
-      <div class="grid-3 mb-12">
-        <div>
-          <label>Hospital</label>
-          <select id="repoFileSelect" class="candidate-select" style="width:100%;padding:10px" onchange="onRepoFileSelect()">
-            <option value="">Loading...</option>
-          </select>
-        </div>
-        <div><label>病院名</label><input id="hospitalName" type="text" placeholder="H001"></div>
-        <div><label>シート名（任意）</label><input id="importSheet" type="text" placeholder="依頼"></div>
+    <!-- ===== Excel モード ===== -->
+    <div id="importExcelMode">
+      <!-- ファイルソース切替 -->
+      <div class="flex-row mb-12">
+        <button onclick="toggleFileSource('repo')" class="btn btn-secondary sub-toggle-active" id="fileSrcRepo">リポジトリ</button>
+        <button onclick="toggleFileSource('local')" class="btn btn-secondary" id="fileSrcLocal">ローカルファイル</button>
       </div>
-      <div class="status-bar mb-12" id="repoFileStatus"></div>
-    </div>
 
-    <!-- ローカルファイル -->
-    <div id="fileSourceLocal" class="hidden">
-      <div class="grid-3 mb-12">
-        <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv" onchange="onImportFileLoad(this)"></div>
-        <div><label>病院名</label><input id="hospitalNameLocal" type="text" placeholder="H001"></div>
-        <div><label>シート名（任意）</label><input id="importSheetLocal" type="text" placeholder="依頼"></div>
-      </div>
-    </div>
-
-    <!-- モード切替 -->
-    <div class="flex-row mb-12">
-      <button onclick="toggleImportMode('auto')" class="btn btn-secondary" id="impModeAuto" style="border-bottom:2px solid var(--accent)">自動検出</button>
-      <button onclick="toggleImportMode('header')" class="btn btn-secondary" id="impModeHeader">ヘッダー選択</button>
-      <button onclick="toggleImportMode('manual')" class="btn btn-secondary" id="impModeManual">手動指定</button>
-    </div>
-
-    <!-- Auto Detect モード -->
-    <div id="importAuto">
-      <div class="grid-2 mb-12">
-        <div>
-          <label>ベンダー（任意）</label>
-          <select id="importVendor" class="candidate-select" style="width:100%;padding:10px">
-            <option value="">(auto detect)</option>
-            <option value="NEC">NEC</option>
-            <option value="Fujitsu">Fujitsu</option>
-            <option value="IBM">IBM</option>
-            <option value="SSI">SSI</option>
-            <option value="SBS">SBS</option>
-            <option value="KHI">KHI</option>
-            <option value="CSI">CSI</option>
-            <option value="NAIS">NAIS</option>
-          </select>
+      <!-- リポジトリから選択 -->
+      <div id="fileSourceRepo">
+        <div class="grid-3 mb-12">
+          <div>
+            <label>Hospital</label>
+            <select id="repoFileSelect" class="candidate-select" style="width:100%;padding:10px" onchange="onRepoFileSelect()">
+              <option value="">Loading...</option>
+            </select>
+          </div>
+          <div><label>病院名</label><input id="hospitalName" type="text" placeholder="H001"></div>
+          <div><label>ベンダー（任意）</label>
+            <select id="importVendor" class="candidate-select" style="width:100%;padding:10px">
+              <option value="">(auto detect)</option>
+              <option value="NEC">NEC</option>
+              <option value="Fujitsu">Fujitsu</option>
+              <option value="IBM">IBM</option>
+              <option value="SSI">SSI</option>
+              <option value="SBS">SBS</option>
+              <option value="KHI">KHI</option>
+              <option value="CSI">CSI</option>
+              <option value="NAIS">NAIS</option>
+            </select>
+          </div>
         </div>
-        <div>
+        <div class="status-bar mb-12" id="repoFileStatus"></div>
+      </div>
+
+      <!-- ローカルファイル -->
+      <div id="fileSourceLocal" class="hidden">
+        <div class="grid-3 mb-12">
+          <div><label>Excel File</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv" onchange="onImportFileLoad(this)"></div>
+          <div><label>病院名</label><input id="hospitalNameLocal" type="text" placeholder="H001"></div>
+          <div><label>ベンダー（任意）</label>
+            <select id="importVendorLocal" class="candidate-select" style="width:100%;padding:10px">
+              <option value="">(auto detect)</option>
+              <option value="NEC">NEC</option>
+              <option value="Fujitsu">Fujitsu</option>
+              <option value="IBM">IBM</option>
+              <option value="SSI">SSI</option>
+              <option value="SBS">SBS</option>
+              <option value="KHI">KHI</option>
+              <option value="CSI">CSI</option>
+              <option value="NAIS">NAIS</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- シート一覧（ファイル読み込み後に表示） -->
+      <div id="sheetListSection" class="hidden">
+        <label>シート一覧</label>
+        <div id="sheetList" class="mb-12" style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px"></div>
+      </div>
+
+      <!-- 列設定モード切替 -->
+      <div class="flex-row mb-12">
+        <button onclick="toggleImportMode('auto')" class="btn btn-secondary sub-toggle-active" id="impModeAuto">自動検出</button>
+        <button onclick="toggleImportMode('header')" class="btn btn-secondary" id="impModeHeader">ヘッダー選択</button>
+        <button onclick="toggleImportMode('manual')" class="btn btn-secondary" id="impModeManual">手動指定</button>
+      </div>
+
+      <!-- Auto Detect モード -->
+      <div id="importAuto">
+        <div class="mb-12">
           <label>検出結果</label>
           <div id="autoDetectResult" class="status-bar" style="min-height:36px;padding:8px;background:var(--bg-secondary);border:1px solid var(--border)"></div>
         </div>
       </div>
-    </div>
 
-    <!-- Header Select モード -->
-    <div id="importHeader" class="hidden">
-      <div class="grid-4 mb-12">
-        <div><label>項目名</label><select id="hdrItemName" class="candidate-select" style="width:100%"></select></div>
-        <div><label>略称</label><select id="hdrAbbr" class="candidate-select" style="width:100%"></select></div>
-        <div><label>JLAC10</label><select id="hdrJlac10" class="candidate-select" style="width:100%"></select></div>
-        <div><label>JLAC10正式名称</label><select id="hdrStdName" class="candidate-select" style="width:100%"></select></div>
+      <!-- Header Select モード -->
+      <div id="importHeader" class="hidden">
+        <div class="grid-4 mb-12">
+          <div><label>項目名</label><select id="hdrItemName" class="candidate-select" style="width:100%"></select></div>
+          <div><label>略称</label><select id="hdrAbbr" class="candidate-select" style="width:100%"></select></div>
+          <div><label>JLAC10</label><select id="hdrJlac10" class="candidate-select" style="width:100%"></select></div>
+          <div><label>JLAC10正式名称</label><select id="hdrStdName" class="candidate-select" style="width:100%"></select></div>
+        </div>
+      </div>
+
+      <!-- Manual モード -->
+      <div id="importManual" class="hidden">
+        <div class="grid-4 mb-12">
+          <div><label>項目名の列</label><input id="colItemName" type="text" value="A"></div>
+          <div><label>略称の列</label><input id="colAbbr" type="text" value="B" placeholder="任意"></div>
+          <div><label>JLAC10の列</label><input id="colJlac10" type="text" value="C"></div>
+          <div><label>JLAC10正式名称の列</label><input id="colStdName" type="text" value="D" placeholder="任意"></div>
+        </div>
+      </div>
+
+      <div class="flex-row mb-12">
+        <button onclick="convertAllSheets()" class="btn btn-primary" id="btnConvertAll">全シート変換</button>
       </div>
     </div>
 
-    <!-- Manual モード -->
-    <div id="importManual" class="hidden">
-      <div class="grid-4 mb-12">
-        <div><label>項目名の列</label><input id="colItemName" type="text" value="A"></div>
-        <div><label>略称の列</label><input id="colAbbr" type="text" value="B" placeholder="任意"></div>
-        <div><label>JLAC10の列</label><input id="colJlac10" type="text" value="C"></div>
-        <div><label>JLAC10正式名称の列</label><input id="colStdName" type="text" value="D" placeholder="任意"></div>
+    <!-- ===== コピペモード ===== -->
+    <div id="importPasteMode" class="hidden">
+      <div class="grid-2 mb-12">
+        <div><label>病院コード</label><input id="pasteHospitalCode" type="text" placeholder="H001"></div>
+        <div><label>病院名</label><input id="pasteHospitalName" type="text" placeholder="東京大学病院"></div>
+      </div>
+      <div class="mb-12">
+        <label>データを貼り付け（タブ / カンマ / 改行区切り）</label>
+        <textarea id="pasteData" rows="8" placeholder="項目名&#9;JLAC10&#9;JLAC10正式名称&#10;TP&#9;3B010000001&#9;総蛋白&#10;ALB&#9;3A010000001&#9;アルブミン" oninput="onPasteInput()"></textarea>
+      </div>
+      <div id="pasteColumnAssign" class="hidden mb-12">
+        <label>列の割り当て</label>
+        <div id="pasteColumnSelects" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      </div>
+      <div class="flex-row mb-12">
+        <button onclick="convertPaste()" class="btn btn-primary" id="btnConvertPaste">変換</button>
       </div>
     </div>
 
-    <div class="flex-row mb-12">
-      <button onclick="convertExcel()" class="btn btn-primary">変換</button>
-      <button onclick="mergeToDb()" class="btn btn-secondary" id="btnMerge" disabled>DBに統合</button>
-      <button onclick="downloadJson()" class="btn btn-secondary" id="btnDownload" disabled>JSONダウンロード</button>
-    </div>
+    <!-- 共通: 結果プレビュー + アクション -->
     <div class="status-bar" id="importStatus"></div>
     <div id="importPreview" class="overflow-auto"></div>
+    <div class="flex-row mt-12" id="importActions" style="display:none">
+      <button onclick="mergeToDb()" class="btn btn-primary" id="btnMerge">DBに統合</button>
+      <button onclick="downloadJson()" class="btn btn-secondary" id="btnDownload">JSONダウンロード</button>
+    </div>
   </div>
 </div>
 
@@ -1157,9 +1220,21 @@ function doSearch() {
 // Import: mode toggle
 var importMode = "auto";
 var fileSource = "repo";
+var inputSource = "excel"; // "excel" or "paste"
 var importWb = null;
 var importHeaders = [];
 var repoIndex = null;  // index.json の内容
+
+// コピペモード列の役割定義
+var COLUMN_ROLES = [
+  {value: "ignore", label: "(無視)"},
+  {value: "item_name", label: "項目名"},
+  {value: "abbreviation", label: "略称"},
+  {value: "jlac10", label: "JLAC10"},
+  {value: "jlac10_standard_name", label: "JLAC10正式名称"},
+  {value: "item_code", label: "院内コード(LCS)"},
+  {value: "unit", label: "単位"}
+];
 
 // リポジトリ index.json を読み込み
 var REPO_INDEX_URL = "./excel/hospitals/index.json";
@@ -1222,28 +1297,47 @@ function onRepoFileSelect() {
     return r.arrayBuffer();
   }).then(function(buf) {
     importWb = XLSX.read(new Uint8Array(buf), {type:"array"});
-    var sheetInput = document.getElementById("importSheet").value.trim();
-    var sheetName = sheetInput || importWb.SheetNames[0];
-    var ws = importWb.Sheets[sheetName] || importWb.Sheets[importWb.SheetNames[0]];
+    buildSheetList(importWb);
+    // 最初のシートでヘッダー検出
+    var firstSheet = importWb.SheetNames[0];
+    var ws = importWb.Sheets[firstSheet];
     var rows = XLSX.utils.sheet_to_json(ws, {header:1});
     importHeaders = rows.length > 0 ? rows[0].map(function(h){ return String(h||"").replace(/\n/g," ").trim(); }) : [];
-
     populateHeaderSelects(importHeaders);
     runAutoDetect(importHeaders);
     document.getElementById("repoFileStatus").textContent =
-      "Loaded: " + filename + " (" + (rows.length-1) + " rows, " + importHeaders.length + " cols, sheet: " + sheetName + ")";
+      "Loaded: " + filename + " (" + importWb.SheetNames.length + " sheets)";
     showToast("読込完了: " + filename);
   }).catch(function(err) {
     document.getElementById("repoFileStatus").textContent = "Load failed: " + err.message;
   });
 }
 
+// 入力ソース切替（Excel / コピペ）
+function toggleInputSource(src) {
+  inputSource = src;
+  document.getElementById("importExcelMode").classList.toggle("hidden", src !== "excel");
+  document.getElementById("importPasteMode").classList.toggle("hidden", src !== "paste");
+  var exBtn = document.getElementById("inputSrcExcel");
+  var psBtn = document.getElementById("inputSrcPaste");
+  exBtn.classList.toggle("sub-toggle-active", src === "excel");
+  psBtn.classList.toggle("sub-toggle-active", src === "paste");
+  // 切替時にプレビューとアクションをリセット
+  document.getElementById("importStatus").textContent = "";
+  var container = document.getElementById("importPreview");
+  while(container.firstChild) container.removeChild(container.firstChild);
+  document.getElementById("importActions").style.display = "none";
+  lastConvertedJson = null;
+}
+
 function toggleFileSource(src) {
   fileSource = src;
   document.getElementById("fileSourceRepo").classList.toggle("hidden", src !== "repo");
   document.getElementById("fileSourceLocal").classList.toggle("hidden", src !== "local");
-  document.getElementById("fileSrcRepo").style.borderBottom = src === "repo" ? "2px solid var(--accent)" : "none";
-  document.getElementById("fileSrcLocal").style.borderBottom = src === "local" ? "2px solid var(--accent)" : "none";
+  var repoBtn = document.getElementById("fileSrcRepo");
+  var localBtn = document.getElementById("fileSrcLocal");
+  repoBtn.classList.toggle("sub-toggle-active", src === "repo");
+  localBtn.classList.toggle("sub-toggle-active", src === "local");
 }
 
 // ページロード時にindex.jsonを読む
@@ -1254,11 +1348,11 @@ function toggleImportMode(mode) {
   document.getElementById("importAuto").classList.toggle("hidden", mode !== "auto");
   document.getElementById("importHeader").classList.toggle("hidden", mode !== "header");
   document.getElementById("importManual").classList.toggle("hidden", mode !== "manual");
+  var modeMap = { auto: "impModeAuto", header: "impModeHeader", manual: "impModeManual" };
   ["impModeAuto","impModeHeader","impModeManual"].forEach(function(id) {
-    document.getElementById(id).style.borderBottom = "none";
+    var el = document.getElementById(id);
+    el.classList.toggle("sub-toggle-active", id === modeMap[mode]);
   });
-  var btnId = mode === "auto" ? "impModeAuto" : mode === "header" ? "impModeHeader" : "impModeManual";
-  document.getElementById(btnId).style.borderBottom = "2px solid var(--accent)";
 }
 
 // ファイル名から汎用メタデータ抽出
@@ -1337,6 +1431,81 @@ function parseFilenameMetadata(filename) {
   return meta;
 }
 
+// シート名から usage を自動推定
+function guessUsageFromSheetName(sheetName) {
+  var name = (sheetName || "").trim();
+  var hasIrai = name.indexOf("依頼") >= 0;
+  var hasKekka = name.indexOf("結果") >= 0;
+  if (hasIrai && hasKekka) return "依頼,結果";
+  if (hasIrai) return "依頼";
+  if (hasKekka) return "結果";
+  return "依頼,結果";
+}
+
+// シート一覧を構築
+function buildSheetList(wb) {
+  var section = document.getElementById("sheetListSection");
+  var container = document.getElementById("sheetList");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  if (!wb || !wb.SheetNames || wb.SheetNames.length === 0) {
+    section.classList.add("hidden");
+    return;
+  }
+
+  section.classList.remove("hidden");
+
+  for (var si = 0; si < wb.SheetNames.length; si++) {
+    (function(idx, sName) {
+      var row = document.createElement("div");
+      row.className = "sheet-row";
+
+      var lbl = document.createElement("label");
+      lbl.className = "sheet-check";
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.checked = true;
+      cb.setAttribute("data-sheet-idx", idx);
+      lbl.appendChild(cb);
+      var nameSpan = document.createElement("span");
+      nameSpan.className = "sheet-name";
+      nameSpan.textContent = sName;
+      lbl.appendChild(nameSpan);
+
+      // シートの行数情報
+      var ws = wb.Sheets[sName];
+      var rowCount = 0;
+      if (ws) {
+        var range = XLSX.utils.decode_range(ws["!ref"] || "A1");
+        rowCount = range.e.r;
+      }
+      var infoSpan = document.createElement("span");
+      infoSpan.style.cssText = "font-size:11px;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;margin-left:8px";
+      infoSpan.textContent = "(" + rowCount + " rows)";
+      lbl.appendChild(infoSpan);
+
+      row.appendChild(lbl);
+
+      // usage セレクト
+      var sel = document.createElement("select");
+      sel.className = "sheet-usage";
+      sel.setAttribute("data-sheet-idx", idx);
+      var usageOptions = ["依頼", "結果", "依頼,結果"];
+      var guessed = guessUsageFromSheetName(sName);
+      for (var ui = 0; ui < usageOptions.length; ui++) {
+        var opt = document.createElement("option");
+        opt.value = usageOptions[ui];
+        opt.textContent = usageOptions[ui];
+        if (usageOptions[ui] === guessed) opt.selected = true;
+        sel.appendChild(opt);
+      }
+      row.appendChild(sel);
+
+      container.appendChild(row);
+    })(si, wb.SheetNames[si]);
+  }
+}
+
 function onImportFileLoad(input) {
   var file = input.files[0];
   if (!file) return;
@@ -1346,7 +1515,7 @@ function onImportFileLoad(input) {
   var hField = document.getElementById("hospitalNameLocal") || document.getElementById("hospitalName");
   if (hField && !hField.value && fnMeta.hospital) hField.value = fnMeta.hospital;
   if (fnMeta.vendor) {
-    var vSel = document.getElementById("importVendor");
+    var vSel = document.getElementById("importVendorLocal");
     if (vSel) {
       for (var i = 0; i < vSel.options.length; i++) {
         if (vSel.options[i].value.toUpperCase() === fnMeta.vendor.toUpperCase()) { vSel.selectedIndex = i; break; }
@@ -1357,10 +1526,10 @@ function onImportFileLoad(input) {
   var reader = new FileReader();
   reader.onload = function(e) {
     importWb = XLSX.read(e.target.result, {type:"array"});
-    var sheetInput = document.getElementById("importSheet").value.trim();
-    var sheetName = sheetInput || importWb.SheetNames[0];
-    var ws = importWb.Sheets[sheetName];
-    if (!ws && sheetInput) { ws = importWb.Sheets[importWb.SheetNames[0]]; }
+    buildSheetList(importWb);
+    // 最初のシートでヘッダー検出
+    var firstSheet = importWb.SheetNames[0];
+    var ws = importWb.Sheets[firstSheet];
     var rows = XLSX.utils.sheet_to_json(ws, {header:1});
     importHeaders = rows.length > 0 ? rows[0].map(function(h){ return String(h||"").replace(/\n/g," ").trim(); }) : [];
 
@@ -1368,6 +1537,7 @@ function onImportFileLoad(input) {
     populateHeaderSelects(importHeaders);
     // Auto Detect 実行
     runAutoDetect(importHeaders);
+    showToast("読込完了: " + file.name + " (" + importWb.SheetNames.length + " sheets)");
   };
   reader.readAsArrayBuffer(file);
 }
@@ -1483,28 +1653,121 @@ function getImportColumns() {
   };
 }
 
-function convertExcel() {
-  var hospital, sheetInput;
+// 選択されたシート情報を取得
+function getSelectedSheets() {
+  var checkboxes = document.querySelectorAll("#sheetList input[type='checkbox']");
+  var usageSelects = document.querySelectorAll("#sheetList select.sheet-usage");
+  var selected = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      var idx = parseInt(checkboxes[i].getAttribute("data-sheet-idx"));
+      var usage = usageSelects[i] ? usageSelects[i].value : "依頼,結果";
+      selected.push({ idx: idx, name: importWb.SheetNames[idx], usage: usage });
+    }
+  }
+  return selected;
+}
+
+// 全シート変換
+function convertAllSheets() {
+  if (!importWb) { showToast("ファイルを読み込んでください"); return; }
+
+  var hospital;
   if (fileSource === "repo") {
     hospital = document.getElementById("hospitalName").value.trim() || "Unknown";
-    sheetInput = document.getElementById("importSheet").value.trim();
-    // リポジトリモード: importWb が既にロード済み
-    if (!importWb) { showToast("Hospital を選択してください"); return; }
-    doConvertFromWb(importWb, hospital, sheetInput);
-    return;
+  } else {
+    hospital = document.getElementById("hospitalNameLocal").value.trim() || "Unknown";
   }
-  // ローカルモード
-  var file = document.getElementById("excelFile").files[0];
-  if (!file) { showToast("ファイルを選択してください"); return; }
-  hospital = document.getElementById("hospitalNameLocal").value.trim() || document.getElementById("hospitalName").value.trim() || "Unknown";
-  sheetInput = document.getElementById("importSheetLocal").value.trim() || document.getElementById("importSheet").value.trim();
 
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var wb = XLSX.read(e.target.result, {type:"array"});
-    doConvertFromWb(wb, hospital, sheetInput);
+  var selectedSheets = getSelectedSheets();
+  if (selectedSheets.length === 0) { showToast("シートを選択してください"); return; }
+
+  var cols = getImportColumns();
+  var ci = cols.ci, ca = cols.ca, cj = cols.cj, cs = cols.cs;
+  var allItems = [];
+  var sheetResults = [];
+
+  for (var s = 0; s < selectedSheets.length; s++) {
+    var sheet = selectedSheets[s];
+    var ws = importWb.Sheets[sheet.name];
+    if (!ws) continue;
+    var rows = XLSX.utils.sheet_to_json(ws, {header:1});
+
+    var sheetItems = [];
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i]; if (!row || row.length === 0) continue;
+      var itemName = ci >= 0 ? String(row[ci] == null ? "" : row[ci]).trim() : "";
+      var abbr = ca >= 0 ? String(row[ca] == null ? "" : row[ca]).trim() : "";
+      if (!itemName && !abbr) continue;
+      if (!itemName) itemName = abbr;
+      var rawJlac = cj >= 0 ? String(row[cj] == null ? "" : row[cj]).trim() : "";
+      var stdName = cs >= 0 ? String(row[cs] == null ? "" : row[cs]).trim() : "";
+      var jlac10 = rawJlac.replace(/-/g, "");
+      sheetItems.push({
+        hospital: hospital, item_name: itemName, abbreviation: abbr, jlac10: jlac10,
+        analyte_code: jlac10.length >= 5 ? jlac10.substring(0, 5) : "",
+        jlac10_standard_name: stdName, usage: sheet.usage, source_sheet: sheet.name
+      });
+    }
+    sheetResults.push({ name: sheet.name, usage: sheet.usage, items: sheetItems });
+    allItems = allItems.concat(sheetItems);
+  }
+
+  lastConvertedJson = {
+    metadata: {
+      hospital: hospital, exported_at: new Date().toISOString(),
+      total_items: allItems.length, sheets_processed: selectedSheets.length
+    },
+    items: allItems
   };
-  reader.readAsArrayBuffer(file);
+
+  var validCount = allItems.filter(function(x) { return isValidJlac(x.jlac10); }).length;
+  document.getElementById("importStatus").textContent =
+    "Converted: " + allItems.length + " items from " + selectedSheets.length + " sheets | JLAC10 valid: " + validCount;
+
+  // プレビュー: シートごとにブロック表示
+  var container = document.getElementById("importPreview");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  for (var r = 0; r < sheetResults.length; r++) {
+    var sr = sheetResults[r];
+    var block = document.createElement("div");
+    block.className = "sheet-preview-block";
+    var heading = document.createElement("h4");
+    heading.textContent = sr.name + " [" + sr.usage + "] - " + sr.items.length + " items";
+    block.appendChild(heading);
+
+    var table = document.createElement("table");
+    var thead = document.createElement("tr");
+    ["項目名", "略称", "JLAC10", "JLAC10正式名称", "用途"].forEach(function(t) {
+      var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+    });
+    table.appendChild(thead);
+    var previewItems = sr.items.slice(0, 5);
+    for (var p = 0; p < previewItems.length; p++) {
+      var item = previewItems[p];
+      var tr = document.createElement("tr");
+      [item.item_name, item.abbreviation, item.jlac10, item.jlac10_standard_name, item.usage].forEach(function(v) {
+        var td = document.createElement("td"); td.textContent = v || ""; tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    }
+    block.appendChild(table);
+    if (sr.items.length > 5) {
+      var more = document.createElement("div");
+      more.className = "status-bar";
+      more.textContent = "...and " + (sr.items.length - 5) + " more";
+      block.appendChild(more);
+    }
+    container.appendChild(block);
+  }
+
+  document.getElementById("importActions").style.display = "flex";
+}
+
+// 旧互換: convertExcel は convertAllSheets にリダイレクト
+function convertExcel() {
+  convertAllSheets();
 }
 
 function doConvertFromWb(wb, hospital, sheetInput) {
@@ -1540,7 +1803,7 @@ function doConvertFromWb(wb, hospital, sheetInput) {
   var validCount = items.filter(function(x){return isValidJlac(x.jlac10);}).length;
   document.getElementById("importStatus").textContent =
     "Converted: "+items.length+" items | JLAC10 valid: "+validCount+" | Usage: "+usage;
-  document.getElementById("btnMerge").disabled=false; document.getElementById("btnDownload").disabled=false;
+  document.getElementById("importActions").style.display = "flex";
 
   var container = document.getElementById("importPreview");
   while(container.firstChild) container.removeChild(container.firstChild);
@@ -1565,6 +1828,213 @@ function doConvertFromWb(wb, hospital, sheetInput) {
     container.appendChild(more);
   }
 }
+
+// =====================================================================
+// コピペモード
+// =====================================================================
+
+// テキスト変更時: 列数を検出して割り当てプルダウンを生成
+function onPasteInput() {
+  var text = document.getElementById("pasteData").value.trim();
+  if (!text) {
+    document.getElementById("pasteColumnAssign").classList.add("hidden");
+    return;
+  }
+
+  // 区切り文字を検出
+  var lines = text.split(/\r?\n/);
+  var firstLine = lines[0] || "";
+  var delimiter = "\t";
+  if (firstLine.indexOf("\t") >= 0) {
+    delimiter = "\t";
+  } else if (firstLine.indexOf(",") >= 0) {
+    delimiter = ",";
+  }
+
+  var cols = firstLine.split(delimiter);
+  var numCols = cols.length;
+  if (numCols < 1) {
+    document.getElementById("pasteColumnAssign").classList.add("hidden");
+    return;
+  }
+
+  document.getElementById("pasteColumnAssign").classList.remove("hidden");
+  var container = document.getElementById("pasteColumnSelects");
+  while (container.firstChild) container.removeChild(container.firstChild);
+
+  // 列のサンプルデータを取得
+  var sampleRows = lines.slice(0, 3);
+
+  for (var c = 0; c < numCols; c++) {
+    (function(colIdx) {
+      var item = document.createElement("div");
+      item.className = "paste-col-item";
+
+      // サンプル表示
+      var samples = [];
+      for (var r = 0; r < sampleRows.length; r++) {
+        var parts = sampleRows[r].split(delimiter);
+        if (parts[colIdx]) samples.push(parts[colIdx].trim());
+      }
+      var sampleText = samples.slice(0, 2).join(", ");
+
+      var lbl = document.createElement("label");
+      lbl.textContent = (colIdx + 1) + "列目";
+      item.appendChild(lbl);
+
+      var sampleDiv = document.createElement("div");
+      sampleDiv.style.cssText = "font-size:10px;color:var(--text-secondary);font-family:'JetBrains Mono',monospace;margin-bottom:2px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap";
+      sampleDiv.textContent = sampleText || "(empty)";
+      sampleDiv.title = sampleText;
+      item.appendChild(sampleDiv);
+
+      var sel = document.createElement("select");
+      sel.setAttribute("data-paste-col", colIdx);
+      for (var ri = 0; ri < COLUMN_ROLES.length; ri++) {
+        var opt = document.createElement("option");
+        opt.value = COLUMN_ROLES[ri].value;
+        opt.textContent = COLUMN_ROLES[ri].label;
+        sel.appendChild(opt);
+      }
+
+      // 自動推定: サンプルデータの内容からロールを推定
+      var guessedRole = guessPasteColumnRole(colIdx, cols[colIdx], samples);
+      sel.value = guessedRole;
+
+      item.appendChild(sel);
+      container.appendChild(item);
+    })(c);
+  }
+}
+
+// 列ヘッダー/サンプルデータからロールを推定
+function guessPasteColumnRole(colIdx, header, samples) {
+  var h = (header || "").trim().toUpperCase();
+  // ヘッダー文字列マッチ
+  if (h.indexOf("項目名") >= 0 || h === "ITEM_NAME" || h === "TESTITEMNAME" || h.indexOf("検査名") >= 0) return "item_name";
+  if (h.indexOf("略称") >= 0 || h === "SHORTNAME" || h.indexOf("短縮") >= 0) return "abbreviation";
+  if (h.indexOf("JLAC10") >= 0 || h.indexOf("標準コード") >= 0) {
+    // JLAC10 か JLAC10正式名称かを区別
+    if (h.indexOf("名称") >= 0 || h.indexOf("NAME") >= 0) return "jlac10_standard_name";
+    return "jlac10";
+  }
+  if (h.indexOf("院内コード") >= 0 || h === "LCS" || h.indexOf("項目コード") >= 0) return "item_code";
+  if (h.indexOf("単位") >= 0 || h === "UNIT") return "unit";
+
+  // サンプルデータから推定
+  var joined = samples.join(" ");
+  if (/^[0-9A-Za-z]{15,17}$/.test(samples[0])) return "jlac10";
+
+  // デフォルト: 最初の列は項目名と推定
+  if (colIdx === 0) return "item_name";
+  return "ignore";
+}
+
+// コピペモード変換
+function convertPaste() {
+  var text = document.getElementById("pasteData").value.trim();
+  if (!text) { showToast("データを貼り付けてください"); return; }
+
+  var hospitalCode = document.getElementById("pasteHospitalCode").value.trim();
+  var hospitalName = document.getElementById("pasteHospitalName").value.trim();
+  var hospital = hospitalName || hospitalCode || "Unknown";
+
+  // 区切り文字検出
+  var lines = text.split(/\r?\n/);
+  var firstLine = lines[0] || "";
+  var delimiter = "\t";
+  if (firstLine.indexOf("\t") >= 0) {
+    delimiter = "\t";
+  } else if (firstLine.indexOf(",") >= 0) {
+    delimiter = ",";
+  }
+
+  // 列割り当て取得
+  var colSelects = document.querySelectorAll("#pasteColumnSelects select");
+  var colMapping = {};
+  for (var c = 0; c < colSelects.length; c++) {
+    var role = colSelects[c].value;
+    if (role !== "ignore") {
+      colMapping[role] = c;
+    }
+  }
+
+  var items = [];
+  for (var li = 0; li < lines.length; li++) {
+    var line = lines[li].trim();
+    if (!line) continue;
+    var parts = line.split(delimiter);
+
+    var itemName = colMapping.item_name != null ? (parts[colMapping.item_name] || "").trim() : "";
+    var abbr = colMapping.abbreviation != null ? (parts[colMapping.abbreviation] || "").trim() : "";
+    if (!itemName && !abbr) continue;
+    if (!itemName) itemName = abbr;
+
+    var rawJlac = colMapping.jlac10 != null ? (parts[colMapping.jlac10] || "").trim() : "";
+    var stdName = colMapping.jlac10_standard_name != null ? (parts[colMapping.jlac10_standard_name] || "").trim() : "";
+    var itemCode = colMapping.item_code != null ? (parts[colMapping.item_code] || "").trim() : "";
+    var unit = colMapping.unit != null ? (parts[colMapping.unit] || "").trim() : "";
+    var jlac10 = rawJlac.replace(/-/g, "");
+
+    var item = {
+      hospital: hospital, item_name: itemName, abbreviation: abbr, jlac10: jlac10,
+      analyte_code: jlac10.length >= 5 ? jlac10.substring(0, 5) : "",
+      jlac10_standard_name: stdName, usage: "依頼,結果", source_sheet: "paste"
+    };
+    if (itemCode) item.item_code = itemCode;
+    if (unit) item.unit = unit;
+    if (hospitalCode) item.hospital_code = hospitalCode;
+    items.push(item);
+  }
+
+  if (items.length === 0) { showToast("変換可能なデータがありません"); return; }
+
+  lastConvertedJson = {
+    metadata: {
+      hospital: hospital, hospital_code: hospitalCode,
+      exported_at: new Date().toISOString(),
+      total_items: items.length, source: "paste"
+    },
+    items: items
+  };
+
+  var validCount = items.filter(function(x) { return isValidJlac(x.jlac10); }).length;
+  document.getElementById("importStatus").textContent =
+    "Converted: " + items.length + " items | JLAC10 valid: " + validCount;
+
+  // プレビュー
+  var container = document.getElementById("importPreview");
+  while (container.firstChild) container.removeChild(container.firstChild);
+  var table = document.createElement("table");
+  var thead = document.createElement("tr");
+  ["項目名", "略称", "JLAC10", "JLAC10正式名称", "用途"].forEach(function(t) {
+    var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
+  });
+  table.appendChild(thead);
+  var previewItems = items.slice(0, 10);
+  for (var pi = 0; pi < previewItems.length; pi++) {
+    var pItem = previewItems[pi];
+    var tr = document.createElement("tr");
+    [pItem.item_name, pItem.abbreviation, pItem.jlac10, pItem.jlac10_standard_name, pItem.usage].forEach(function(v) {
+      var td = document.createElement("td"); td.textContent = v || ""; tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  }
+  container.appendChild(table);
+  if (items.length > 10) {
+    var more = document.createElement("div");
+    more.className = "status-bar";
+    more.textContent = "...and " + (items.length - 10) + " more";
+    container.appendChild(more);
+  }
+
+  document.getElementById("importActions").style.display = "flex";
+  showToast("変換完了: " + items.length + " items");
+}
+
+// =====================================================================
+// Import: DB統合 & ダウンロード
+// =====================================================================
 
 function mergeToDb() {
   if (!lastConvertedJson) return;
