@@ -1186,26 +1186,93 @@ var SOP_FORBIDDEN_IDENT = {
 var SOP_FORBIDDEN_METHOD = {"999":"999は使用しない→920(その他)"};
 var SOP_FORBIDDEN_RESULT = {"32":"陰性コントロール比→21に統一","33":"陽性コントロール比→21に統一"};
 
+// カスタムルール管理（LocalStorage）
+var CUSTOM_RULES_KEY = "sop_custom_rules";
+
+function customRulesLoad() {
+  try { return JSON.parse(localStorage.getItem(CUSTOM_RULES_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+function customRulesSave(rules) { localStorage.setItem(CUSTOM_RULES_KEY, JSON.stringify(rules)); }
+
+function customRuleAdd(rule) {
+  // rule: {type, sop_section, condition:{field, analyte, code}, message, rationale, note}
+  var rules = customRulesLoad();
+  rule.id = "R" + String(rules.length + 1).padStart(4,"0");
+  rule.created_at = new Date().toISOString().split("T")[0];
+  rule.sop_revision_flag = true;
+  rule.status = "active";
+  rules.push(rule);
+  customRulesSave(rules);
+  showToast("ルール " + rule.id + " を追加しました");
+  return rule;
+}
+
+function customRuleDelete(id) {
+  var rules = customRulesLoad().filter(function(r){return r.id !== id;});
+  customRulesSave(rules);
+}
+
+function customRulesExport() {
+  return JSON.stringify({custom_rules: customRulesLoad()}, null, 2);
+}
+
+function customRulesImport(json) {
+  var data = JSON.parse(json);
+  var rules = data.custom_rules || data;
+  customRulesSave(rules);
+  showToast(rules.length + "件のルールをインポートしました");
+}
+
+// SOP改版出力（revision_flag=true のルールを抽出）
+function customRulesForRevision() {
+  return customRulesLoad().filter(function(r){return r.sop_revision_flag && r.status === "active";});
+}
+
 function sopCheckJlac10(code) {
-  // Returns: [{severity:"warning", msg:"..."}] or []
+  // Returns: [{severity:"warning", msg:"...", source:"sop"|"custom"}] or []
   if (!code) return [];
   code = code.replace(/-/g,"");
   if (code.length < 15) return [];
   var warnings = [];
+  var analyte = code.substring(0,5);
   var ident = code.substring(5,9);
   var material = code.substring(9,12);
   var method = code.substring(12,15);
   var resultId = code.length >= 17 ? code.substring(15,17) : "";
 
-  if (SOP_FORBIDDEN_IDENT[ident]) warnings.push({severity:"warning",msg:"識別["+ident+"]: "+SOP_FORBIDDEN_IDENT[ident]});
-  if (SOP_FORBIDDEN_METHOD[method]) warnings.push({severity:"warning",msg:"測定法["+method+"]: "+SOP_FORBIDDEN_METHOD[method]});
-  if (resultId && SOP_FORBIDDEN_RESULT[resultId]) warnings.push({severity:"warning",msg:"結果識別["+resultId+"]: "+SOP_FORBIDDEN_RESULT[resultId]});
-
-  // 材料200-999禁止
+  // 固定ルール（SOP準拠）
+  if (SOP_FORBIDDEN_IDENT[ident]) warnings.push({severity:"warning",msg:"識別["+ident+"]: "+SOP_FORBIDDEN_IDENT[ident],source:"sop"});
+  if (SOP_FORBIDDEN_METHOD[method]) warnings.push({severity:"warning",msg:"測定法["+method+"]: "+SOP_FORBIDDEN_METHOD[method],source:"sop"});
+  if (resultId && SOP_FORBIDDEN_RESULT[resultId]) warnings.push({severity:"warning",msg:"結果識別["+resultId+"]: "+SOP_FORBIDDEN_RESULT[resultId],source:"sop"});
   var matNum = parseInt(material);
   if (!isNaN(matNum) && matNum >= 200 && matNum <= 999) {
-    warnings.push({severity:"warning",msg:"材料["+material+"]: 200-999は使用禁止"});
+    warnings.push({severity:"warning",msg:"材料["+material+"]: 200-999は使用禁止",source:"sop"});
   }
+
+  // カスタムルール
+  var custom = customRulesLoad();
+  for (var cr of custom) {
+    if (cr.status !== "active") continue;
+    var cond = cr.condition || {};
+    var match = false;
+
+    if (cr.type === "forbidden") {
+      // 禁止ルール: field + code が一致
+      if (cond.field === "identification" && cond.code === ident) match = true;
+      if (cond.field === "material" && cond.code === material) match = true;
+      if (cond.field === "method" && cond.code === method) match = true;
+      if (cond.field === "result_identification" && cond.code === resultId) match = true;
+      if (cond.field === "analyte" && cond.code === analyte) match = true;
+      // analyte 特定の禁止
+      if (cond.analyte && cond.analyte !== analyte) match = false;
+    }
+
+    if (match) {
+      warnings.push({severity:"warning",msg:"[カスタム] "+cr.message,source:"custom",ruleId:cr.id});
+    }
+  }
+
   return warnings;
 }
 function formatJlac17(code, status) {
