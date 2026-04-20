@@ -23,6 +23,8 @@ from .mapper import bulk_map, export_mapping_excel, export_mapping_json
 from .merge import apply_mapping_results
 from .ncda_checker import batch_check as ncda_batch_check, export_check_excel
 from .ssmix_parser import parse_ssmix
+from .delivery_format import export_delivery, generate_jlac10_standard_name
+from .audit_log import audit_add, audit_search
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -600,6 +602,139 @@ def cmd_parse_ssmix(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
+# 設定依頼フォーマット出力
+# ---------------------------------------------------------------------------
+
+def cmd_export_delivery(args: argparse.Namespace) -> int:
+    """マッピング結果から設定依頼Excelを一括出力"""
+    input_path = Path(args.input)
+    if not input_path.exists():
+        print(f"ファイルが見つかりません: {input_path}", file=sys.stderr)
+        return 1
+
+    data_dir = Path(args.data_dir)
+    output_dir = Path(args.output)
+    vendor = args.vendor or ""
+    hospital = args.hospital or ""
+    issue = args.issue or ""
+
+    # 入力JSON読み込み
+    data = json.loads(input_path.read_text(encoding="utf-8"))
+    raw_items = data.get("results", data.get("items", []))
+    if not raw_items:
+        print("エラー: 入力データが空です", file=sys.stderr)
+        return 1
+
+    # JLAC10 lookup 読み込み
+    from .merge import load_jlac10_lookup
+    lookup = load_jlac10_lookup(data_dir)
+    if not lookup:
+        print(
+            "警告: jlac10_lookup.json が見つかりません。"
+            "JLAC10標準名称は空欄になります。",
+            file=sys.stderr,
+        )
+
+    # マッピング結果をdelivery_format用に変換
+    items: list[dict] = []
+    for raw in raw_items:
+        jlac10 = raw.get("jlac10", raw.get("matched_jlac10", "")).replace("-", "")
+        item = {
+            "local_code": raw.get("local_code", ""),
+            "item_name": raw.get("item_name", ""),
+            "cs_name": raw.get("cs_name", ""),
+            "jlac10": jlac10,
+            "jlac10_standard_name": raw.get("jlac10_standard_name", ""),
+            "usage": raw.get("usage", "依頼"),
+            "exam_type": raw.get("exam_type", "検体"),
+        }
+        # JLAC10標準名称が未設定なら生成
+        if not item["jlac10_standard_name"] and jlac10 and lookup:
+            item["jlac10_standard_name"] = generate_jlac10_standard_name(jlac10, lookup)
+        items.append(item)
+
+    result = export_delivery(
+        items=items,
+        output_dir=output_dir,
+        vendor=vendor,
+        lookup=lookup,
+        hospital=hospital,
+        issue_number=issue,
+    )
+
+    # 監査ログ記録
+    audit_add(
+        data_dir=data_dir,
+        action="delivery_export",
+        detail={
+            "input": str(input_path),
+            "vendor": vendor,
+            "total_items": len(items),
+            "files": result["files"],
+        },
+        issue=issue,
+        hospital=hospital,
+    )
+
+    summary = result["summary"]
+    print(f"\n設定依頼フォーマット出力完了:")
+    print(f"  ベンダー: {vendor or '(未指定)'}")
+    print(f"  病院: {hospital or '(未指定)'}")
+    print(f"  イシュー: {issue or '(未指定)'}")
+    print(f"  依頼項目: {summary['request_items']}件")
+    print(f"  結果項目: {summary['result_items']}件")
+    print(f"  JJマスタ: {'あり' if summary['jj_exported'] else 'なし'}")
+    print(f"  出力ファイル:")
+    for f in result["files"]:
+        print(f"    {f}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# 監査ログ
+# ---------------------------------------------------------------------------
+
+def cmd_audit(args: argparse.Namespace) -> int:
+    """監査ログの表示・検索"""
+    data_dir = Path(args.data_dir)
+
+    results = audit_search(
+        data_dir=data_dir,
+        action=args.action,
+        issue=args.issue,
+        hospital=args.hospital,
+        limit=args.limit,
+    )
+
+    if not results:
+        print("監査ログが見つかりません。")
+        return 0
+
+    print(f"\n監査ログ: {len(results)}件")
+    print("-" * 80)
+    for entry in results:
+        ts = entry.get("timestamp", "")[:19].replace("T", " ")
+        action = entry.get("action", "")
+        eid = entry.get("id", "")
+        hospital = entry.get("hospital", "")
+        issue = entry.get("issue", "")
+        detail = entry.get("detail", {})
+        detail_str = json.dumps(detail, ensure_ascii=False)
+        if len(detail_str) > 60:
+            detail_str = detail_str[:60] + "..."
+
+        line = f"[{eid}] {ts} | {action:<20s}"
+        if hospital:
+            line += f" | H:{hospital}"
+        if issue:
+            line += f" | #:{issue}"
+        line += f" | {detail_str}"
+        print(line)
+
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # 統合・差分・チェック・一覧
 # ---------------------------------------------------------------------------
 
@@ -855,6 +990,23 @@ def main() -> None:
     p_ssmix.add_argument("--errors-only", action="store_true", help="エラー項目のみ出力")
     p_ssmix.add_argument("--encoding", default="utf-8", help="入力ファイルのエンコーディング (default: utf-8)")
 
+    # export-delivery
+    p_delivery = sub.add_parser("export-delivery", help="マッピング結果から設定依頼Excelを一括出力")
+    p_delivery.add_argument("input", help="マッピング結果JSON (mapコマンドの出力)")
+    p_delivery.add_argument("--vendor", default="", help="ベンダー名 (Fujitsu等。富士通の場合JJマスタも出力)")
+    p_delivery.add_argument("--hospital", default="", help="病院名/コード")
+    p_delivery.add_argument("--issue", default="", help="イシュー番号")
+    p_delivery.add_argument("-o", "--output", default="output", help="出力ディレクトリ (default: output)")
+    p_delivery.add_argument("-d", "--data-dir", default="data", help="データディレクトリ (default: data)")
+
+    # audit
+    p_audit = sub.add_parser("audit", help="監査ログの表示・検索")
+    p_audit.add_argument("--action", default=None, help="アクション絞り込み (mapping/delivery_export等)")
+    p_audit.add_argument("--issue", default=None, help="イシュー番号で絞り込み")
+    p_audit.add_argument("--hospital", default=None, help="病院名で絞り込み")
+    p_audit.add_argument("--limit", type=int, default=50, help="表示件数 (default: 50)")
+    p_audit.add_argument("-d", "--data-dir", default="data", help="データディレクトリ (default: data)")
+
     # list
     sub.add_parser("list", help="SRLカテゴリ一覧")
 
@@ -884,6 +1036,8 @@ def main() -> None:
         "vendors": lambda args: (print("\n".join(list_vendors())), 0)[1],
         "check-ncda": cmd_check_ncda,
         "parse-ssmix": cmd_parse_ssmix,
+        "export-delivery": cmd_export_delivery,
+        "audit": cmd_audit,
         "list": cmd_list,
     }
     sys.exit(commands[args.command](args))
