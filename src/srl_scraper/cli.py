@@ -22,6 +22,7 @@ from .vendor_profiles import list_vendors
 from .mapper import bulk_map, export_mapping_excel, export_mapping_json
 from .merge import apply_mapping_results
 from .ncda_checker import batch_check as ncda_batch_check, export_check_excel
+from .ssmix_parser import parse_ssmix
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -537,6 +538,68 @@ def cmd_check_ncda(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
+# SSMIX2 パーサー
+# ---------------------------------------------------------------------------
+
+def cmd_parse_ssmix(args: argparse.Namespace) -> int:
+    """SSMIX2 テキストファイルをパースしてエラーを検出"""
+    filepath = Path(args.input)
+    if not filepath.exists():
+        print(f"ファイルが見つかりません: {filepath}", file=sys.stderr)
+        return 1
+
+    text = filepath.read_text(encoding=args.encoding, errors="replace")
+    result = parse_ssmix(text)
+
+    summary = result["summary"]
+    errors = result["errors"]
+
+    # コンソールサマリー出力
+    print(f"\nSSMIX2 パース完了: {filepath.name}")
+    print(f"  メッセージ数: {summary['total_messages']}")
+    print(f"  OBX総数:      {summary['total_obx']}")
+    print(f"  JLAC10設定済: {summary['jlac10_set']}")
+    print(f"  JLAC10未設定: {summary['jlac10_missing']}")
+    print(f"  メタデータ:   {summary['metadata_skipped']} (スキップ)")
+    print(f"  ベンダー:     {summary['vendor']}")
+    print(f"  施設ID:       {summary['facility_id']}")
+    print(f"  エラー検出:   {len(errors)}件")
+
+    # エラー種別の内訳
+    if errors:
+        error_types = {}
+        for e in errors:
+            t = e["error_type"]
+            error_types[t] = error_types.get(t, 0) + 1
+        print("  エラー内訳:")
+        for t, c in sorted(error_types.items()):
+            print(f"    {t}: {c}件")
+
+    # 出力
+    if args.errors_only:
+        output_data = {
+            "summary": summary,
+            "errors": errors,
+        }
+    else:
+        output_data = result
+
+    if args.output:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(
+            json.dumps(output_data, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        print(f"  出力: {out_path}")
+    else:
+        # 標準出力にJSON
+        print(json.dumps(output_data, ensure_ascii=False, indent=2))
+
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # 統合・差分・チェック・一覧
 # ---------------------------------------------------------------------------
 
@@ -785,6 +848,13 @@ def main() -> None:
     p_ncda.add_argument("--sheet", default=None, help="Excelシート名 (省略で最初のシート)")
     p_ncda.add_argument("--skip-rows", type=int, default=1, help="スキップするヘッダ行数 (default: 1)")
 
+    # parse-ssmix
+    p_ssmix = sub.add_parser("parse-ssmix", help="SSMIX2テキストファイルをパースしてJLAC10エラーを検出")
+    p_ssmix.add_argument("input", help="SSMIX2テキストファイル")
+    p_ssmix.add_argument("-o", "--output", default=None, help="出力JSONパス (省略で標準出力)")
+    p_ssmix.add_argument("--errors-only", action="store_true", help="エラー項目のみ出力")
+    p_ssmix.add_argument("--encoding", default="utf-8", help="入力ファイルのエンコーディング (default: utf-8)")
+
     # list
     sub.add_parser("list", help="SRLカテゴリ一覧")
 
@@ -813,6 +883,7 @@ def main() -> None:
         "map-auto": cmd_map_auto,
         "vendors": lambda args: (print("\n".join(list_vendors())), 0)[1],
         "check-ncda": cmd_check_ncda,
+        "parse-ssmix": cmd_parse_ssmix,
         "list": cmd_list,
     }
     sys.exit(commands[args.command](args))
