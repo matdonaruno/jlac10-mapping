@@ -99,6 +99,8 @@ label { display:block; font-size:11px; font-weight:600; text-transform:uppercase
 .jlac-sep { color:var(--text-secondary); margin:0 1px; }
 .jlac-missing { color:var(--danger); font-weight:700; animation:blink 1.5s infinite; }
 .jlac-invalid { color:var(--danger); font-size:13px; font-style:italic; }
+.sop-warning { font-size:11px; padding:3px 8px; margin:2px 0; border-left:2px solid var(--danger);
+  background:rgba(199,92,92,0.1); color:var(--warning); }
 .jlac-empty { color:var(--text-secondary); font-size:13px; font-style:italic; background:var(--bg-hover); padding:4px 10px; border:1px dashed var(--border); }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 .analyte-code { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary);
@@ -1173,6 +1175,39 @@ function colToIndex(col) {
 function isValidJlac(code) {
   return /^[0-9A-Za-z]{15,17}$/.test(code);
 }
+
+// SOP ルールチェック（NCDA標準作業手順書準拠）
+var SOP_FORBIDDEN_IDENT = {
+  "1351":"定性は使用しない","1352":"定量は使用しない","1353":"半定量は使用しない",
+  "1411":"ウイルス抗原定性→1410","1412":"ウイルス抗原半定量→1410","1413":"ウイルス抗原定量→1410",
+  "1491":"ウイルス抗体定性→1430","1492":"ウイルス抗体定量→1430","1493":"ウイルス抗体半定量→1430",
+  "1441":"ウイルスDNA定量→1440","1453":"ウイルスRNA定量→1450"
+};
+var SOP_FORBIDDEN_METHOD = {"999":"999は使用しない→920(その他)"};
+var SOP_FORBIDDEN_RESULT = {"32":"陰性コントロール比→21に統一","33":"陽性コントロール比→21に統一"};
+
+function sopCheckJlac10(code) {
+  // Returns: [{severity:"warning", msg:"..."}] or []
+  if (!code) return [];
+  code = code.replace(/-/g,"");
+  if (code.length < 15) return [];
+  var warnings = [];
+  var ident = code.substring(5,9);
+  var material = code.substring(9,12);
+  var method = code.substring(12,15);
+  var resultId = code.length >= 17 ? code.substring(15,17) : "";
+
+  if (SOP_FORBIDDEN_IDENT[ident]) warnings.push({severity:"warning",msg:"識別["+ident+"]: "+SOP_FORBIDDEN_IDENT[ident]});
+  if (SOP_FORBIDDEN_METHOD[method]) warnings.push({severity:"warning",msg:"測定法["+method+"]: "+SOP_FORBIDDEN_METHOD[method]});
+  if (resultId && SOP_FORBIDDEN_RESULT[resultId]) warnings.push({severity:"warning",msg:"結果識別["+resultId+"]: "+SOP_FORBIDDEN_RESULT[resultId]});
+
+  // 材料200-999禁止
+  var matNum = parseInt(material);
+  if (!isNaN(matNum) && matNum >= 200 && matNum <= 999) {
+    warnings.push({severity:"warning",msg:"材料["+material+"]: 200-999は使用禁止"});
+  }
+  return warnings;
+}
 function formatJlac17(code, status) {
   // status が明示されている場合はそれを使う
   if (status === "empty" || (!code && !status)) return '<span class="jlac-empty">JLAC10\u672a\u8a2d\u5b9a</span>';
@@ -1254,6 +1289,14 @@ function doSearch() {
       html += '<span class="decode-part"><span class="decode-label">測定法</span>' + esc(methodName || "-") + '</span>';
       html += '<span class="decode-sep">/</span>';
       html += '<span class="decode-part"><span class="decode-label">結果識別</span>' + (r.jlac10.length >= 17 ? esc(r.jlac10.substring(15,17)) : '<span class="decode-missing">**</span>') + '</span>';
+      html += '</div>';
+    }
+    // SOP ルール警告
+    var sopW = sopCheckJlac10(r.jlac10);
+    if (sopW.length > 0) {
+      html += '<div style="margin:4px 0;padding:4px 8px;border-left:2px solid var(--danger);background:#3a1a1a;font-size:11px">';
+      html += '<span style="color:var(--danger);font-weight:700">⚠ SOP違反: </span>';
+      html += sopW.map(function(w){return '<span style="color:var(--warning)">'+esc(w.msg)+'</span>';}).join(' | ');
       html += '</div>';
     }
     // 4行目: 各社詳細（横並び、JLAC10+項目名+測定法+材料+リンク）
