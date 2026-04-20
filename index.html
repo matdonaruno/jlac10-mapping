@@ -2275,21 +2275,42 @@ function renderBulkTable() {
         var code = document.createElement("code");
         code.textContent = r.bestMatch ? r.bestMatch.jlac10 + " " + r.bestMatch.matchedName : "";
         td2.appendChild(code);
+        if (r.bestMatch) {
+          var autoSop = sopCheckJlac10(r.bestMatch.jlac10);
+          if (autoSop.length > 0) {
+            var autoWarn = document.createElement("div");
+            autoWarn.style.cssText = "font-size:10px;color:var(--danger);margin-top:2px";
+            autoWarn.textContent = "⚠ SOP: " + autoSop.map(function(w){return w.msg;}).join(", ");
+            td2.appendChild(autoWarn);
+          }
+        }
       } else if (r.matches.length > 0) {
         var sel = document.createElement("select");
         sel.className = "candidate-select";
         for (var j=0; j<r.matches.length; j++) {
           var opt = document.createElement("option");
           opt.value = j;
-          opt.textContent = r.matches[j].jlac10 + " | " + r.matches[j].matchedName + " (" + r.matches[j].score.toFixed(0) + ")";
+          var sopW = sopCheckJlac10(r.matches[j].jlac10);
+          var sopMark = sopW.length > 0 ? "⚠ " : "";
+          opt.textContent = sopMark + r.matches[j].jlac10 + " | " + r.matches[j].matchedName + " (" + r.matches[j].score.toFixed(0) + ")";
+          if (sopW.length > 0) opt.style.color = "#c75c5c";
           if (j === r.selectedIdx) opt.selected = true;
           sel.appendChild(opt);
         }
         sel.addEventListener("change", function(ev) {
           lastBulkResult[idx].selectedIdx = parseInt(ev.target.value);
           lastBulkResult[idx].bestMatch = lastBulkResult[idx].matches[lastBulkResult[idx].selectedIdx];
+          renderBulkTable(); // SOP警告を更新
         });
         td2.appendChild(sel);
+        // 選択中の候補のSOP警告表示
+        var currentSop = sopCheckJlac10(r.matches[r.selectedIdx].jlac10);
+        if (currentSop.length > 0) {
+          var warnDiv = document.createElement("div");
+          warnDiv.style.cssText = "font-size:10px;color:var(--danger);margin-top:2px";
+          warnDiv.textContent = "⚠ SOP: " + currentSop.map(function(w){return w.msg;}).join(", ");
+          td2.appendChild(warnDiv);
+        }
       } else {
         td2.textContent = "(no match)";
       }
@@ -3207,6 +3228,15 @@ function snBuildErrorDetailPanel(panel, item, itemIdx) {
         candDiv.appendChild(confirmBtn);
 
         panel.appendChild(candDiv);
+
+        // SOP rule check for this candidate
+        var candSop = sopCheckJlac10(cand.jlac10);
+        if (candSop.length > 0) {
+          var sopDiv = document.createElement("div");
+          sopDiv.style.cssText = "font-size:10px;color:var(--danger);padding:2px 0 2px 24px";
+          sopDiv.textContent = "\u26a0 SOP: " + candSop.map(function(w){return w.msg;}).join(", ");
+          panel.appendChild(sopDiv);
+        }
 
         // Source info for this candidate (SRL/BML/LSI)
         var srcKeys = Object.keys(cand.sources || {});
