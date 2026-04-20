@@ -2910,6 +2910,20 @@ function parseHL7Segments(text) {
 // =====================================================================
 
 // Error type definitions (extension point - add new types here)
+// CS名 → ベンダー判定（SSMIX2 OBX-3）
+var CS_VENDOR_MAP = {
+  "99Z14":"Fujitsu","99ZTI":"NEC","99ZRD":"NEC","99ZGP":"NEC","99ZGC":"NEC",
+  "99ZPP":"NEC","99ZPC":"NEC","99ZPI":"NEC","99ZGM":"NEC","99ZPm":"NEC","99DGO":"NEC",
+  "99Z18":"SSI","99ZER":"SSI","99ZS6":"SSI",
+  "99ZB3":"SBS","99ZC3":"SBS","99ZC4":"SBS","99ZC5":"SBS","99ZC6":"SBS","99ZC8":"SBS",
+  "99KEN":"KHI","99101":"IBM","99104":"IBM","99105":"IBM","99106":"IBM","99107":"IBM","99108":"IBM",
+  "99TM1":"CSI","99RM1":"CSI"
+};
+function detectVendorFromCs(cs) {
+  if (!cs) return "";
+  return CS_VENDOR_MAP[cs.trim()] || (cs.startsWith("99Z") ? "NEC(推定)" : "");
+}
+
 var ERROR_TYPES = {
   "jlac10_missing": { label: "JLAC10\u672a\u8a2d\u5b9a", severity: "error", color: "var(--danger)" },
   "jlac10_invalid": { label: "JLAC10\u5f62\u5f0f\u4e0d\u6b63", severity: "error", color: "var(--danger)" },
@@ -2959,22 +2973,38 @@ function parseSsmix2Data(text) {
 
     var fields = line.split("|");
     // OBX-3: Observation Identifier (field index 3)
+    // SSMIX2仕様:
+    //   JLAC10なし(3コンポーネント): ローカルコード^ローカル名称^CS名(99Znn)
+    //   JLAC10あり(6コンポーネント): JLAC10^標準名称^JC10^ローカルコード^ローカル名称^CS名
     var obx3 = (fields[3] || "").split("^");
-    var segment = {
-      line_number: i + 1,
-      raw: line,
-      sequence: fields[1] || "",
-      data_type: fields[2] || "",
-      jlac10: obx3[0] || "",
-      item_code: obx3[1] || "",
-      item_name: obx3[2] || "",
-      code_system: obx3[3] || "",
-      sub_id: fields[4] || "",
-      value: fields[5] || "",
-      unit: fields[6] || "",
-      ref_range: fields[7] || "",
-      abnormal_flag: fields[8] || ""
-    };
+    var segment = { line_number: i + 1, raw: line, sequence: fields[1] || "", data_type: fields[2] || "" };
+
+    if (obx3.length >= 6 && obx3[2] === "JC10") {
+      // JLAC10 設定あり
+      segment.jlac10 = obx3[0] || "";
+      segment.jlac10_name = obx3[1] || "";
+      segment.local_code = obx3[3] || "";
+      segment.item_name = obx3[4] || "";
+      segment.cs_name = obx3[5] || "";
+      segment.has_jlac10 = true;
+    } else {
+      // JLAC10 設定なし（エラー対象）
+      segment.jlac10 = "";
+      segment.jlac10_name = "";
+      segment.local_code = obx3[0] || "";
+      segment.item_name = obx3[1] || "";
+      segment.cs_name = obx3[2] || "";
+      segment.has_jlac10 = false;
+    }
+
+    // CS名からベンダー推定
+    segment.vendor = detectVendorFromCs(segment.cs_name);
+
+    segment.sub_id = fields[4] || "";
+    segment.value = fields[5] || "";
+    segment.unit = fields[6] || "";
+    segment.ref_range = fields[7] || "";
+    segment.abnormal_flag = fields[8] || "";
 
     // Run error detection
     var segErrors = detectErrors(segment);

@@ -282,6 +282,121 @@ def _get_keywords(vendor: str | None, sheet_name: str | None) -> dict[str, list[
     }
 
 
+# =========================================================================
+# CS名（Coding System）→ ベンダー/マスタ種別マッピング
+# SSMIX2 の OBX-3 フィールドに含まれる CS名からベン���ーを特定する
+# =========================================================================
+
+CS_TO_VENDOR: dict[str, dict] = {
+    # 富士通
+    "99Z14": {"vendor": "Fujitsu", "type": "検体検査", "master": "ET1/検歴"},
+    # NEC
+    "99ZTI": {"vendor": "NEC", "type": "検体検査依頼", "master": "検査オーダマスタ"},
+    "99ZRD": {"vendor": "NEC", "type": "検体検査結果", "master": "検査結果マスタ"},
+    "99ZGP": {"vendor": "NEC", "type": "細菌_塗抹", "master": "一般細菌塗抹"},
+    "99ZGC": {"vendor": "NEC", "type": "細菌_培養同定", "master": "一般細菌���養同定"},
+    "99ZPP": {"vendor": "NEC", "type": "細菌_抗酸菌塗抹", "master": "抗酸菌塗抹"},
+    "99ZPC": {"vendor": "NEC", "type": "細菌_抗酸菌培養同定", "master": "抗酸菌培養同定"},
+    "99ZPI": {"vendor": "NEC", "type": "細菌_抗酸菌同定", "master": "抗酸菌同定"},
+    "99ZGM": {"vendor": "NEC", "type": "細菌_感受性薬剤", "master": "一般細菌感受性"},
+    "99ZPm": {"vendor": "NEC", "type": "細菌_抗酸菌感受性", "master": "抗酸菌感受性"},
+    "99DGO": {"vendor": "NEC", "type": "細菌_その他", "master": "その他検査"},
+    # SSI
+    "99Z18": {"vendor": "SSI", "type": "検体検査_OML01", "master": "依頼結果一体"},
+    "99ZER": {"vendor": "SSI", "type": "検体検査_OML11", "master": "依頼結果一体"},
+    "99ZS6": {"vendor": "SSI", "type": "細菌検査", "master": "依頼結果一体"},
+    # SBS
+    "99ZB3": {"vendor": "SBS", "type": "検体検査", "master": "依頼結果一体"},  # NAISも同じ
+    "99ZC3": {"vendor": "SBS", "type": "細菌検査依頼", "master": "細菌検査依頼"},
+    "99ZC4": {"vendor": "SBS", "type": "細菌_塗抹", "master": "一般細菌塗���"},
+    "99ZC5": {"vendor": "SBS", "type": "細菌_感受性", "master": "感受性"},
+    "99ZC6": {"vendor": "SBS", "type": "細菌_培養同定", "master": "培養同定"},
+    "99ZC8": {"vendor": "SBS", "type": "細菌_その他", "master": "その他"},
+    # KHI
+    "99KEN": {"vendor": "KHI", "type": "検体検査", "master": "依頼結果一体"},
+    # IBM
+    "99101": {"vendor": "IBM", "type": "検体検査", "master": "検体検査マスタ"},
+    "99104": {"vendor": "IBM", "type": "細菌_塗抹", "master": "一般細菌塗抹"},
+    "99105": {"vendor": "IBM", "type": "細菌_感受性", "master": "一般細菌感受性"},
+    "99106": {"vendor": "IBM", "type": "細菌_抗酸菌感受性", "master": "抗酸菌感受性"},
+    "99107": {"vendor": "IBM", "type": "細菌_培養同定", "master": "培養同定"},
+    "99108": {"vendor": "IBM", "type": "細菌検査依頼", "master": "細菌検���依頼"},
+    # CSI
+    "99TM1": {"vendor": "CSI", "type": "検体検査依頼", "master": "検体検査依頼マスタ"},
+    "99RM1": {"vendor": "CSI", "type": "検体検査結果", "master": "検体検査結果マスタ"},
+}
+
+# 設定依頼の送付先パターン
+DELIVERY_TARGET: dict[str, dict[str, str]] = {
+    # vendor: {検査種別: 送付先}
+    "Fujitsu": {
+        "検体依頼": "病院(ET1画面)",
+        "検体結果": "病院(JJマスタツール)",
+        "細��依頼": "病院(ET2画面)",
+        "細菌結果": "病院(JJマスタツール)",
+    },
+    "NEC": {
+        "検体依頼": "病院(画面)",
+        "検体結果": "病院(画面)",
+        "細菌依頼": "病院(画面)",
+        "細菌結果": "NEC(指定フォーマット)",
+    },
+    "SSI": {
+        "検体": "病院(画面)",
+        "細菌JLAC10": "SSI(指定フォーマット)",
+        "細菌JANIS": "病院(画面)",
+    },
+    "SBS": {
+        "検体": "病院(画面)",
+        "細菌依頼": "病院(画面)",
+        "細菌結果": "SBS(登録依頼)",
+    },
+    "KHI": {"検体": "病院(画面)", "細菌": "出力なし"},
+    "IBM": {
+        "検体": "IBM or 病院検査科",
+        "細菌": "IBM or 病院検査科",
+    },
+    "CSI": {
+        "検体依頼": "病院(画面)",
+        "検体結果": "病院(画面)",
+        "細菌依頼": "病院(画面)",
+        "細菌結果": "CSI(登録依頼)",
+    },
+    "NAIS": {"検体": "病院(画面)", "細菌": "出力なし"},
+}
+
+
+def detect_vendor_from_cs(cs_name: str) -> dict | None:
+    """CS名からベンダーとマスタ種別を特定する
+
+    Args:
+        cs_name: SSMIX2 OBX-3 の CS名部分 (例: "99ZTI")
+
+    Returns:
+        {"vendor": "NEC", "type": "検体検査依頼", "master": "..."} or None
+    """
+    cs_upper = cs_name.strip().upper()
+    # 完全一致
+    if cs_upper in CS_TO_VENDOR:
+        return CS_TO_VENDOR[cs_upper]
+    # 99Z で始まるNEC系
+    if cs_upper.startswith("99Z"):
+        return {"vendor": "NEC(推定)", "type": "不明", "master": cs_upper}
+    return None
+
+
+def get_delivery_target(vendor: str, exam_type: str) -> str:
+    """ベンダーと検査種別から設定依頼の送付��を取得"""
+    targets = DELIVERY_TARGET.get(vendor, {})
+    if exam_type in targets:
+        return targets[exam_type]
+    # 部分一致
+    for k, v in targets.items():
+        if exam_type in k or k in exam_type:
+            return v
+    return "不明（過去例を参照）"
+
+
 def list_vendors() -> list[str]:
     """登録済みベンダー一覧"""
     return sorted(VENDOR_PROFILES.keys())
