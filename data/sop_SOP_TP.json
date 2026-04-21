@@ -1,0 +1,11 @@
+{
+  "source_file": "data/sop_samples/SOP_TP.docx",
+  "format": "docx",
+  "test_item": "総蛋白(TP) 測定 標準作業手順書",
+  "method": "ビウレット法（Biuret法）\nアルカリ溶液中で蛋白質のペプチド結合が銅イオンと反応し、紫色の錯体を形成する。この発色を波長540nmで比色定量する。",
+  "reagent": "アクアオート カイノス TP-II試薬（R-1, R-2）\nTP標準液（カイノス CS-1770）",
+  "instrument": "日立 LABOSPECT 008α\n2) 精度管理試料を測定する",
+  "purpose": "血清中の総蛋白濃度を測定し、栄養状態や肝・腎機能の評価に用いる。",
+  "specimen": "血清 0.5mL以上\nヘパリン血漿も可。EDTA血漿は不可。\n6. 操作手順",
+  "error": ""
+}

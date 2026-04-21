@@ -1,0 +1,2161 @@
+PS C:\Users\00198675\Documents\jlac10-mapping> py -m uv run srl-scraper -v convert-auto C:\Users\00198675\Downloads\jlac10-mapping-main\jlac10-mapping-main\exel\hospitals\100_hokkaidogan_center_NEC.xlsx --vendor NEC --sheet 依頼 --hospital H100
+2026-04-17 16:34:01 [INFO] ヘッダー自動検出: vendor=NEC, sheet=依頼
+2026-04-17 16:34:01 [DEBUG] ヘッダー: ['HOSPITAL\nCODE', 'TESTITEM\nCODE', 'GENERATION\nNO', 'TEST\nCATEGORY', 'KINDOF\nTEST', 'TESTITEM\nSHORTNAME', 'TESTITEMNAME', 'UNIT', 'GROUP\nSTATUS', 'SPECIMEN\nCODE', 'TEST\nROOM', 'CONTAINER', 'ANALIZE\nMACHINE', 'INSIDEOUTSIDE\nSTATUS', 'QUANTITY', 'CALCURATE\nCODE', 'QUANTITY2', 'WORKSHEET\nMARK', 'DEAD\nQUANTITY', 'CONTAINER\nQUANTITY', 'APPOINTMENT\nCODE', 'APPINTMENT\nPOINT', 'LACS\nCODE', 'IBARS\nCODE', 'REQUEST\nDIALOG', 'KINDOF\nMEDICINE', 'COMMENT\nCODE', 'CHANGESPECIMEN\nSTATUS', 'TIME\nCODE', 'RELATIVE\nMINUTES', 'IBARSCODE2', 'IBARSCODE3', 'IBARSCODE4', 'STARTVALID\nDATE', 'ENDVALID\nDATE', 'URGENCY\nCHECK', 'INSURANCE\nGROUP', 'CHECK\nCLOSING\nFLAG', 'LIMITO\nFORDER', 'UPDATE\nDATE', 'UPDATE\nTERMINAL', 'UPDATE\nOPERATOR', 'TEST\nREPOT\nTYPE', 'TIME\nINPUT\nSTATUS', 'CHGCONTAINER\nCODE', 'IRAICOMREQ\nFLG', 'IRAICOMREQ\nWINID', 'HOLIDAY\nCHECK', 'REPORT\nGROUP', 'RESULT\nITEM\nCOUNT', 'JLAC10\nCODE', 'JLAC10\nNAME', 'FASTITEM\nCODE', '第二クール\n機構JLAC10', '（1:新規、\n2:更新、\n3:変更無し）', '第二クール\n修正JLAC10\u3000\u3000\u3000', '12月と3月の差\n（1:新規、2:更新、\n3:変更無し）', '2月と3月の差\n（1:新規、2:更新、\n3:変更無し）', 'ファイル0のJLAC', '日立エラー修正後JLAC10', '最終的JLAC10', '']
+2026-04-17 16:34:01 [DEBUG] ヘッダー正規化: ['HOSPITALCODE', 'TESTITEMCODE', 'GENERATIONNO', 'TESTCATEGORY', 'KINDOFTEST', 'TESTITEMSHORTNAME', 'TESTITEMNAME', 'UNIT', 'GROUPSTATUS', 'SPECIMENCODE', 'TESTROOM', 'CONTAINER', 'ANALIZEMACHINE', 'INSIDEOUTSIDESTATUS', 'QUANTITY', 'CALCURATECODE', 'QUANTITY2', 'WORKSHEETMARK', 'DEADQUANTITY', 'CONTAINERQUANTITY', 'APPOINTMENTCODE', 'APPINTMENTPOINT', 'LACSCODE', 'IBARSCODE', 'REQUESTDIALOG', 'KINDOFMEDICINE', 'COMMENTCODE', 'CHANGESPECIMENSTATUS', 'TIMECODE', 'RELATIVEMINUTES', 'IBARSCODE2', 'IBARSCODE3', 'IBARSCODE4', 'STARTVALIDDATE', 'ENDVALIDDATE', 'URGENCYCHECK', 'INSURANCEGROUP', 'CHECKCLOSINGFLAG', 'LIMITOFORDER', 'UPDATEDATE', 'UPDATETERMINAL', 'UPDATEOPERATOR', 'TESTREPOTTYPE', 'TIMEINPUTSTATUS', 'CHGCONTAINERCODE', 'IRAICOMREQFLG', 'IRAICOMREQWINID', 'HOLIDAYCHECK', 'REPORTGROUP', 'RESULTITEMCOUNT', 'JLAC10CODE', 'JLAC10NAME', 'FASTITEMCODE', '第二クール機構JLAC10', '（1:新規、2:更新、3:変更無し）', '第二クール修正JLAC10', '12月と3月の差（1:新規、2:更新、3:変更無し）', '2月と3月の差（1:新規、2:更新、3:変更無し）', 'ファイル0のJLAC', '日立エラー修正後JLAC10', '最終的JLAC10', '']
+2026-04-17 16:34:01 [DEBUG] 検出キーワード: vendor=NEC, sheet=依頼
+2026-04-17 16:34:01 [DEBUG]   列検出: item_name → 6列目 (keyword='TESTITEMNAME', header='TESTITEMNAME')
+2026-04-17 16:34:01 [DEBUG]   列検出: short_name → 5列目 (keyword='TESTITEM SHORTNAME', header='TESTITEM
+SHORTNAME')
+2026-04-17 16:34:01 [DEBUG]   列検出: item_code → 1列目 (keyword='TESTITEM CODE', header='TESTITEM
+CODE')
+2026-04-17 16:34:01 [DEBUG]   列検出: jlac10 → 22列目 (keyword='LACS CODE', header='LACS
+CODE')
+2026-04-17 16:34:01 [DEBUG]   列検出: unit → 7列目 (keyword='UNIT', header='UNIT')
+2026-04-17 16:34:01 [DEBUG]   列検出: category → 3列目 (keyword='TEST CATEGORY', header='TEST
+CATEGORY')
+2026-04-17 16:34:01 [DEBUG]   列検出: hospital_code → 0列目 (keyword='HOSPITAL CODE', header='HOSPITAL
+CODE')
+2026-04-17 16:34:01 [INFO] 検出結果: {'item_name': '6列目(TESTITEMNAME)', 'short_name': '5列目(TESTITEM\nSHORTNAME)', 'item_code': '1列目(TESTITEM\nCODE)', 'jlac10': '22列目(LACS\nCODE)', 'unit': '7列目(UNIT)', 'category': '3列目(TEST\nCATEGORY)', 'hospital_code': '0列目(HOSPITAL\nCODE)'}
+2026-04-17 16:34:01 [DEBUG] ファイル読み込み開始: 100_hokkaidogan_center_NEC.xlsx (形式: .xlsx)
+2026-04-17 16:34:01 [DEBUG] ファイル読み込み完了: 100_hokkaidogan_center_NEC.xlsx (データ行数: 2129, ヘッダ: ['HOSPITAL\nCODE', 'TESTITEM\nCODE', 'GENERATION\nNO', 'TEST\nCATEGORY', 'KINDOF\nTEST'])
+2026-04-17 16:34:01 [DEBUG] 列解決: item_name = 列6 (指定: '7')
+2026-04-17 16:34:01 [DEBUG] 列解決: abbreviation = 列5 (指定: '6')
+2026-04-17 16:34:01 [DEBUG] 列解決: jlac10 = 列22 (指定: '23')
+2026-04-17 16:34:01 [DEBUG] Row 2: item_name='血清総蛋白' jlac10='1001' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 3: item_name='LDH' jlac10='1011' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 4: item_name='AST' jlac10='1012' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 5: item_name='ALT' jlac10='1013' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 6: item_name='ｺﾘﾝｴｽﾃﾗｰｾﾞ' jlac10='1017' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 7: item_name='総ﾋﾞﾘﾙﾋﾞﾝ' jlac10='1021' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 8: item_name='Na.K.Cl' jlac10='56' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 9: item_name='総ｶﾙｼｳﾑ' jlac10='1044' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 10: item_name='BUN' jlac10='1051' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 11: item_name='血清ｸﾚｱﾁﾆﾝ' jlac10='1052' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 12: item_name='尿酸' jlac10='1053' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 13: item_name='AMY' jlac10='1091' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 14: item_name='CRP' jlac10='1101' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 15: item_name='CK' jlac10='1081' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 16: item_name='CK-MB' jlac10='1082' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 17: item_name='ｼﾞｺﾞｷｼﾝ濃度' jlac10='16' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 18: item_name='ｱﾝﾓﾆｱ' jlac10='1104' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 19: item_name='HBs-Ag' jlac10='1511' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 20: item_name='HBs-Ab' jlac10='1513' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 21: item_name='HCV' jlac10='1512' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 22: item_name='血算' jlac10='2301' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 23: item_name='PT' jlac10='3002' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 24: item_name='APTT' jlac10='3005' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 25: item_name='ﾌｨﾌﾞﾘﾉｰｹﾞﾝ' jlac10='3007' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 26: item_name='FDP' jlac10='3011' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 27: item_name='血糖' jlac10='1601' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 28: item_name='血液型' jlac10='200100' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 29: item_name='尿定性' jlac10='5400' status=invalid
+2026-04-17 16:34:01 [DEBUG] 空行スキップ (item_name空): 行30
+2026-04-17 16:34:01 [DEBUG] Row 31: item_name='時間外ｾｯﾄ' jlac10='31' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 32: item_name='白血球分類' jlac10='2101' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 33: item_name='ALP' jlac10='1014' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 34: item_name='γ-GT' jlac10='1016' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 35: item_name='HIV' jlac10='1542' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 36: item_name='RCC用ｸﾛｽﾏｯﾁ' jlac10='200800' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 37: item_name='HIV手術前　　(時間外)' jlac10='1544' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 38: item_name='AT-Ⅲ' jlac10='3010' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 39: item_name='Dﾀﾞｲﾏｰ' jlac10='3012' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 40: item_name='Na.K.Cl' jlac10='56' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 41: item_name='Na.K.Cl(蓄尿)' jlac10='66' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 42: item_name='Na.K.Cl(随時尿)' jlac10='75' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 43: item_name='Na.K.Cl(他)' jlac10='76' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 44: item_name='総蛋白' jlac10='1001' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 45: item_name='ｱﾙﾌﾞﾐﾝ' jlac10='1002' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 46: item_name='A/G比' jlac10='1003' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 47: item_name='LDH' jlac10='1011' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 48: item_name='AST(GOT)' jlac10='1012' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 49: item_name='ALT(GPT)' jlac10='1013' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 50: item_name='ALP' jlac10='1014' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 51: item_name='LAP' jlac10='1015' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 52: item_name='γ-GT' jlac10='1016' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 53: item_name='ｺﾘﾝｴｽﾃﾗｰｾﾞ' jlac10='1017' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 54: item_name='総ﾋﾞﾘﾙﾋﾞﾝ' jlac10='1021' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 55: item_name='直接ﾋﾞﾘﾙﾋﾞﾝ' jlac10='1022' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 56: item_name='ZTT' jlac10='1031' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 57: item_name='TTT' jlac10='1032' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 58: item_name='Na' jlac10='1041' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 59: item_name='K' jlac10='1042' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 60: item_name='Cl' jlac10='1043' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 61: item_name='Ca' jlac10='1044' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 62: item_name='IP' jlac10='1045' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 63: item_name='Mg' jlac10='1046' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 64: item_name='Fe' jlac10='1047' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 65: item_name='BUN' jlac10='1051' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 66: item_name='ｸﾚｱﾁﾆﾝ' jlac10='1052' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 67: item_name='尿酸' jlac10='1053' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 68: item_name='総ｺﾚｽﾃﾛｰﾙ' jlac10='1061' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 69: item_name='中性脂肪' jlac10='1062' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 70: item_name='HDLｺﾚｽﾃﾛｰﾙ' jlac10='1063' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 71: item_name='LDLｺﾚｽﾃﾛｰﾙ' jlac10='1064' status=invalid
+2026-04-17 16:34:01 [DEBUG] 空行スキップ (item_name空): 行72
+2026-04-17 16:34:01 [DEBUG] 空行スキップ (item_name空): 行73
+2026-04-17 16:34:01 [DEBUG] Row 74: item_name='アポ蛋白' jlac10='1071' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 75: item_name='ﾘﾝ脂質' jlac10='1079' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 76: item_name='CK' jlac10='1081' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 77: item_name='CK-MB' jlac10='1082' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 78: item_name='ｱﾐﾗｰｾﾞ' jlac10='1091' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 79: item_name='p-ｱﾐﾗｰｾﾞ' jlac10='1092' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 80: item_name='ﾘﾊﾟｰｾﾞ' jlac10='1093' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 81: item_name='LIPA' jlac10='' status=empty
+2026-04-17 16:34:01 [DEBUG] Row 82: item_name='CRP' jlac10='1101' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 83: item_name='ｼﾞｺﾞｷｼﾝ' jlac10='1102' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 84: item_name='浸透圧(血清)' jlac10='1103' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 85: item_name='ｱﾝﾓﾆｱ' jlac10='1104' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 86: item_name='シアル化糖鎖抗原KL-6' jlac10='1105' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 87: item_name='乳び' jlac10='1111' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 88: item_name='溶血' jlac10='1112' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 89: item_name='黄だん' jlac10='1113' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 90: item_name='Na(蓄尿)' jlac10='1121' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 91: item_name='K(蓄尿)' jlac10='1122' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 92: item_name='Cl(蓄尿)' jlac10='1123' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 93: item_name='Ca(蓄尿)' jlac10='1124' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 94: item_name='IP(蓄尿)' jlac10='1125' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 95: item_name='TP(随時尿)' jlac10='' status=empty
+2026-04-17 16:34:01 [DEBUG] Row 96: item_name='ALB(随時尿)' jlac10='' status=empty
+2026-04-17 16:34:01 [DEBUG] Row 97: item_name='BUN(蓄尿)' jlac10='1131' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 98: item_name='ｸﾚｱﾁﾆﾝ(蓄尿)' jlac10='1132' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 99: item_name='尿酸(蓄尿)' jlac10='1133' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 100: item_name='ｱﾐﾗｰｾﾞ(随時尿)' jlac10='1134' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 101: item_name='浸透圧(随時尿)' jlac10='1135' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 102: item_name='尿NAG' jlac10='1136' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 103: item_name='β2ﾐｸﾛ(随時尿)' jlac10='1137' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 104: item_name='HCG(随時尿)' jlac10='1138' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 105: item_name='CCR2' jlac10='1141' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 106: item_name='ｸﾚｱﾁﾆﾝ1' jlac10='1142' status=invalid
+2026-04-17 16:34:01 [DEBUG] Row 107: item_name='ｸﾚｱﾁﾆﾝ2' jlac10='1143' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 108: item_name='尿ｸﾚｱﾁﾆﾝ1' jlac10='1144' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 109: item_name='尿ｸﾚｱﾁﾆﾝ2' jlac10='1145' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 110: item_name='ｸﾘｱﾗﾝｽ1' jlac10='1146' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 111: item_name='ｸﾘｱﾗﾝｽ2' jlac10='1147' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 112: item_name='尿量1' jlac10='1148' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 113: item_name='尿量2' jlac10='1149' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 114: item_name='CCR24ｾｯﾄ' jlac10='1151' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 115: item_name='ｸﾚｱﾁﾆﾝ24' jlac10='1152' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 116: item_name='尿ｸﾚｱﾁﾆﾝ24' jlac10='1153' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 117: item_name='CCR24' jlac10='1154' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 118: item_name='身長' jlac10='1161' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 119: item_name='体重' jlac10='1162' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 120: item_name='体表面積' jlac10='1163' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 121: item_name='尿検査' jlac10='1169' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 122: item_name='AST/ALT' jlac10='1171' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 123: item_name='TBIL/DBIL' jlac10='1172' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 124: item_name='ZTT/TTT' jlac10='1173' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 125: item_name='Na/Cl' jlac10='1174' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 126: item_name='BUN/CRE' jlac10='1175' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 127: item_name='ALP/LAP' jlac10='1176' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 128: item_name='ALP/GGT' jlac10='1177' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 129: item_name='LDL(Friedewald)' jlac10='1178' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 130: item_name='Ca/Ip' jlac10='1179' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 131: item_name='CHE/ALB' jlac10='1180' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 132: item_name='CK/CKMB' jlac10='1181' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 133: item_name='Na(随時尿)' jlac10='1182' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 134: item_name='K(随時尿)' jlac10='1183' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 135: item_name='Cl(随時尿)' jlac10='1184' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 136: item_name='Ca(随時尿)' jlac10='1185' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 137: item_name='IP(随時尿)' jlac10='1186' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 138: item_name='BUN(随時尿)' jlac10='1187' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 139: item_name='ｸﾚｱﾁﾆﾝ(随時尿)' jlac10='1188' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 140: item_name='尿酸(随時尿)' jlac10='1189' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 141: item_name='ｱﾐﾗｰｾﾞ(蓄尿)' jlac10='1190' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 142: item_name='浸透圧(蓄尿)' jlac10='1191' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 143: item_name='β2ﾐｸﾛ(蓄尿)' jlac10='1192' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 144: item_name='HCG(蓄尿)' jlac10='1193' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 145: item_name='摂取食塩量(随時尿)' jlac10='1194' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 146: item_name='TP(蓄尿)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 147: item_name='ALB(蓄尿)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 148: item_name='IgG' jlac10='1201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 149: item_name='IgA' jlac10='1202' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 150: item_name='IgM' jlac10='1203' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 151: item_name='IgD' jlac10='1204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 152: item_name='IgE' jlac10='1205' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 153: item_name='C3c' jlac10='1206' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 154: item_name='C4' jlac10='1207' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 155: item_name='Hp' jlac10='1211' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 156: item_name='IAP' jlac10='1212' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 157: item_name='Cp' jlac10='1213' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 158: item_name='α1-AG' jlac10='1214' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 159: item_name='α1-AT' jlac10='1215' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 160: item_name='PALB' jlac10='1221' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 161: item_name='RBP' jlac10='1222' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 162: item_name='Tf' jlac10='1223' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 163: item_name='蛋白分画' jlac10='1231' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 164: item_name='ｸﾘｵｸﾞﾛﾌﾞﾘﾝ' jlac10='1241' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 165: item_name='尿Tf' jlac10='1242' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 166: item_name='尿IgG' jlac10='1243' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 167: item_name='RF' jlac10='1301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 168: item_name='RAHA' jlac10='1302' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 169: item_name='ASLO' jlac10='1311' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 170: item_name='ASK' jlac10='1312' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 171: item_name='ｻｲﾛｲﾄﾞﾃｽﾄ' jlac10='1321' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 172: item_name='ﾏｲｸﾛｿﾞｰﾑﾃｽﾄ' jlac10='1322' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 173: item_name='ﾏｲｺﾌﾟﾗｽﾞﾏ抗体' jlac10='1331' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 174: item_name='寒冷凝集' jlac10='1332' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 175: item_name='LEﾃｽﾄ' jlac10='1341' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 176: item_name='ANA' jlac10='1342' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 177: item_name='AMA' jlac10='1345' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 178: item_name='ASMA' jlac10='1346' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 179: item_name='APCA' jlac10='1347' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 180: item_name='HPV-DNA(高リスク型)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 181: item_name='HPV-DNA(高リスク型)研究' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 182: item_name='TSH' jlac10='1401' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 183: item_name='Free-T3' jlac10='1402' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 184: item_name='Free-T4' jlac10='1403' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 185: item_name='ﾌﾟﾛﾗｸﾁﾝ' jlac10='1411' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 186: item_name='LH' jlac10='1412' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 187: item_name='FSH' jlac10='1413' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 188: item_name='HCG+β' jlac10='1414' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 189: item_name='BNP' jlac10='1415' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 190: item_name='コルチゾール' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 191: item_name='AFP' jlac10='1421' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 192: item_name='CEA' jlac10='1422' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 193: item_name='CA19-9' jlac10='1423' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 194: item_name='CA125' jlac10='1424' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 195: item_name='SCC' jlac10='1425' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 196: item_name='CA15-3' jlac10='1426' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 197: item_name='ﾌｪﾘﾁﾝ' jlac10='1427' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 198: item_name='β2ﾐｸﾛ(血清)' jlac10='1428' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 199: item_name='PSA' jlac10='1431' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 200: item_name='ｼﾌﾗ' jlac10='1441' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 201: item_name='NSE' jlac10='1442' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 202: item_name='sIL-2R' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 203: item_name='RPR' jlac10='1501' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 204: item_name='TPLA' jlac10='1502' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 205: item_name='HBs-Ag' jlac10='1511' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 206: item_name='HCV' jlac10='1512' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 207: item_name='HBs-Ab' jlac10='1513' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 208: item_name='HBe-Ag' jlac10='1521' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 209: item_name='HBe-Ab' jlac10='1522' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 210: item_name='HBc-Ab' jlac10='1523' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 211: item_name='HTLV-1' jlac10='1541' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 212: item_name='HIV' jlac10='1542' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 213: item_name='HIV手術前用' jlac10='1544' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行214
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行215
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行216
+2026-04-17 16:34:02 [DEBUG] Row 217: item_name='ｶﾝｼﾞﾃｯｸ' jlac10='1551' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 218: item_name='β-D-ｸﾞﾙｶﾝ' jlac10='1552' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行219
+2026-04-17 16:34:02 [DEBUG] Row 220: item_name='血糖' jlac10='1601' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 221: item_name='HbA1c' jlac10='1603' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 222: item_name='ｲﾝｽﾘﾝ' jlac10='1605' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 223: item_name='血糖 前' jlac10='1611' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 224: item_name='血糖 15分' jlac10='1612' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 225: item_name='血糖 30分' jlac10='1613' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 226: item_name='血糖 60分' jlac10='1614' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 227: item_name='血糖 90分' jlac10='1615' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 228: item_name='血糖120分' jlac10='1616' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 229: item_name='血糖150分' jlac10='1617' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 230: item_name='血糖180分' jlac10='1618' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 231: item_name='ｲﾝｽﾘﾝ 前' jlac10='1621' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 232: item_name='ｲﾝｽﾘﾝ 15分' jlac10='1622' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 233: item_name='ｲﾝｽﾘﾝ 30分' jlac10='1623' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 234: item_name='ｲﾝｽﾘﾝ 60分' jlac10='1624' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 235: item_name='ｲﾝｽﾘﾝ 90分' jlac10='1625' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 236: item_name='ｲﾝｽﾘﾝ120分' jlac10='1626' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 237: item_name='ｲﾝｽﾘﾝ150分' jlac10='1627' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 238: item_name='ｲﾝｽﾘﾝ180分' jlac10='1628' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 239: item_name='血糖朝食前' jlac10='1631' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 240: item_name='血糖朝食後' jlac10='1632' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 241: item_name='血糖昼食前' jlac10='1633' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 242: item_name='血糖昼食後' jlac10='1634' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 243: item_name='血糖夕食前' jlac10='1635' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 244: item_name='血糖夕食後' jlac10='1636' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 245: item_name='血糖就寝前' jlac10='1637' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 246: item_name='血糖 24:00' jlac10='1638' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 247: item_name='ｲﾝｽﾘﾝ朝食前' jlac10='1641' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 248: item_name='ｲﾝｽﾘﾝ朝食後' jlac10='1642' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 249: item_name='ｲﾝｽﾘﾝ昼食前' jlac10='1643' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 250: item_name='ｲﾝｽﾘﾝ昼食後' jlac10='1644' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 251: item_name='ｲﾝｽﾘﾝ夕食前' jlac10='1645' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 252: item_name='ｲﾝｽﾘﾝ夕食後' jlac10='1646' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 253: item_name='ｲﾝｽﾘﾝ就寝前' jlac10='1647' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 254: item_name='ｲﾝｽﾘﾝ 24:00' jlac10='1648' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 255: item_name='ｸﾞﾙｶｺﾞﾝ負荷前血糖' jlac10='1651' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 256: item_name='ｸﾞﾙｶｺﾞﾝ負荷後血糖' jlac10='1652' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 257: item_name='総蛋白(他)' jlac10='1701' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 258: item_name='ｱﾙﾌﾞﾐﾝ(他)' jlac10='1702' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 259: item_name='LDH(他)' jlac10='1703' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 260: item_name='総ﾋﾞﾘﾙﾋﾞﾝ(他)' jlac10='1704' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 261: item_name='Na(他)' jlac10='1705' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 262: item_name='K(他)' jlac10='1706' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 263: item_name='Cl(他)' jlac10='1707' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 264: item_name='Ca(他)' jlac10='1708' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 265: item_name='IP(他)' jlac10='1709' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 266: item_name='Mg(他)' jlac10='1710' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 267: item_name='BUN(他)' jlac10='1711' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 268: item_name='ｸﾚｱﾁﾆﾝ(他)' jlac10='1712' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 269: item_name='総ｺﾚｽﾃﾛｰﾙ(他)' jlac10='1713' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 270: item_name='中性脂肪(他)' jlac10='1714' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 271: item_name='ｱﾐﾗｰｾﾞ(他)' jlac10='1715' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 272: item_name='p-ｱﾐﾗｰｾﾞ(他)' jlac10='1716' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 273: item_name='ﾘﾊﾟｰｾﾞ(他)' jlac10='1717' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 274: item_name='浸透圧(他)' jlac10='1718' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 275: item_name='AFP(他)' jlac10='1719' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 276: item_name='CEA(他)' jlac10='1720' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 277: item_name='CA19-9(他)' jlac10='1721' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 278: item_name='CA125(他)' jlac10='1722' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 279: item_name='血糖(他)' jlac10='1723' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 280: item_name='SCC(他)' jlac10='1724' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 281: item_name='CA15-3(他)' jlac10='1725' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 282: item_name='ﾌｪﾘﾁﾝ(他)' jlac10='1726' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 283: item_name='β2MG(他)' jlac10='1727' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 284: item_name='PSA(他)' jlac10='1728' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 285: item_name='ｼﾌﾗ(他)' jlac10='1729' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 286: item_name='NSE(他)' jlac10='1730' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 287: item_name='白血球数' jlac10='2001' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 288: item_name='好中球' jlac10='2101' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 289: item_name='網状赤血球' jlac10='2201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 290: item_name='ﾍﾊﾟﾘﾝCBC' jlac10='2300' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 291: item_name='末梢静脈血算定' jlac10='2301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 292: item_name='赤血球抵抗試験(ParPart法)' jlac10='2311' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 293: item_name='好中球ALPｽｺｱ(朝長法）' jlac10='2331' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 294: item_name='白血球墨汁貪食能' jlac10='2350' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 295: item_name='末梢血　ﾒｲｸﾞﾘｭﾝﾜﾙﾄﾞ・ｷﾞﾑｻﾞ染色(MG)' jlac10='2351' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 296: item_name='末梢血　ﾍﾟﾙｵｷｼﾀﾞｰｾﾞ染色(PO)' jlac10='2352' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 297: item_name='末梢血　ｽﾞﾀﾞﾝﾌﾞﾗｯｸB染色(SBB)' jlac10='2353' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 298: item_name='末梢血　PAS染色(PAS)' jlac10='2354' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 299: item_name='末梢血　鉄染色(Fe)' jlac10='2355' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 300: item_name='末梢血　2重ｴｽﾃﾗｰｾﾞ染色(2ES)' jlac10='2356' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 301: item_name='末梢血　NaF阻害ｴｽﾃﾗｰｾﾞ染色(NaF-2ES)' jlac10='2357' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 302: item_name='骨髄　ﾒｲｸﾞﾘｭﾝﾜﾙﾄﾞ・ｷﾞﾑｻﾞ染色(MG)' jlac10='2361' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 303: item_name='骨髄　ﾍﾟﾙｵｷｼﾀﾞｰｾﾞ染色(PO)' jlac10='2362' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 304: item_name='骨髄　ｽﾞﾀﾞﾝﾌﾞﾗｯｸB染色(SBB)' jlac10='2363' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 305: item_name='骨髄　PAS染色(PAS)' jlac10='2364' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 306: item_name='骨髄　鉄染色(Fe)' jlac10='2365' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 307: item_name='骨髄　2重ｴｽﾃﾗｰｾﾞ染色(2ES)' jlac10='2366' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 308: item_name='骨髄　NaF阻害ｴｽﾃﾗｰｾﾞ染色(NaF-2ES)' jlac10='2367' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 309: item_name='その他　ﾒｲｸﾞﾘｭﾝﾜﾙﾄﾞ・ｷﾞﾑｻﾞ染色(MG)' jlac10='2371' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 310: item_name='その他　ﾍﾟﾙｵｷｼﾀﾞｰｾﾞ染色(PO)' jlac10='2372' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 311: item_name='その他　ｽﾞﾀﾞﾝﾌﾞﾗｯｸB染色(SBB)' jlac10='2373' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 312: item_name='その他　PAS染色(PAS)' jlac10='2374' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 313: item_name='その他　鉄染色(Fe)' jlac10='2375' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 314: item_name='その他　2重ｴｽﾃﾗｰｾﾞ染色(2ES)' jlac10='2376' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 315: item_name='その他　NaF阻害ｴｽﾃﾗｰｾﾞ染色(NaF-2ES)' jlac10='2377' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 316: item_name='骨髄像' jlac10='2380' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 317: item_name='骨髄細胞数' jlac10='2381' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 318: item_name='骨髄巨核球数' jlac10='2382' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 319: item_name='ﾐｴﾛｸﾘｯﾄ' jlac10='2390' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 320: item_name='鼻汁中好酸球(ｽﾗｲﾄﾞ標本提出)' jlac10='2400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 321: item_name='赤血球抵抗試験(HAM試験)' jlac10='2410' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 322: item_name='CBC(その他）' jlac10='2500' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 323: item_name='白血球分類(その他）' jlac10='2600' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 324: item_name='ｽﾗｲﾄﾞ保存' jlac10='2901' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 325: item_name='保存' jlac10='2902' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 326: item_name='末梢血液像（目視）' jlac10='2903' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 327: item_name='赤血球沈降速度' jlac10='2904' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 328: item_name='出血時間' jlac10='3001' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 329: item_name='PT活性値' jlac10='3002' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 330: item_name='APTT活性値' jlac10='3005' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 331: item_name='ﾌｨﾌﾞﾘﾉｰｹﾞﾝ' jlac10='3007' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 332: item_name='ﾄﾛﾝﾎﾞﾃｽﾄ' jlac10='3008' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 333: item_name='ﾍﾊﾟﾌﾟﾗｽﾁﾝﾃｽﾄ' jlac10='3009' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 334: item_name='AT-Ⅲ' jlac10='3010' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 335: item_name='FDP' jlac10='3011' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 336: item_name='Dﾀﾞｲﾏｰ' jlac10='3012' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 337: item_name='ﾄﾛﾝﾎﾞﾃｽﾄ' jlac10='3100' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 338: item_name='ﾍﾊﾟﾌﾟﾗｽﾁﾝﾃｽﾄ' jlac10='3110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 339: item_name='抗ﾄﾛﾝﾋﾞﾝⅢ' jlac10='3120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 340: item_name='Dﾀﾞｲﾏｰ（LPIA）' jlac10='3130' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 341: item_name='ﾄﾛﾝﾋﾞﾝ ｱﾝﾁﾄﾛﾝﾋﾞﾝⅢ' jlac10='3140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 342: item_name='ﾌﾟﾗｽﾐﾉｰｹﾞﾝ' jlac10='3150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 343: item_name='α2-PI ﾌﾟﾗｽﾐﾝｺﾝﾌﾟﾚｯｸｽ' jlac10='3160' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 344: item_name='α2ﾌﾟﾗｽﾐﾝｲﾝﾋﾋﾞﾀｰ' jlac10='3170' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 345: item_name='ﾄﾛﾝﾎﾞﾓｼﾞｭﾘﾝ（血漿）' jlac10='3180' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 346: item_name='ﾄﾛﾝﾎﾞﾓｼﾞｭﾘﾝ' jlac10='3180' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 347: item_name='ﾌﾟﾛﾃｲﾝC活性' jlac10='3190' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 348: item_name='ﾌﾟﾛﾃｲﾝS（遊離型）' jlac10='3200' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 349: item_name='PIVKA-II (ﾗﾃｯｸｽ)' jlac10='3210' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 350: item_name='ADAMTS13活性' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 351: item_name='ADAMTS13インヒビター定量' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 352: item_name='血小板凝集能' jlac10='3230' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 353: item_name='血小板粘着能' jlac10='3240' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 354: item_name='第2因子量' jlac10='3260' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 355: item_name='第5因子量' jlac10='3270' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 356: item_name='第7因子量' jlac10='3280' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 357: item_name='第8因子量' jlac10='3290' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 358: item_name='第9因子量' jlac10='3300' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 359: item_name='第10因子量' jlac10='3310' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 360: item_name='第11因子量' jlac10='3320' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 361: item_name='第12因子量' jlac10='3330' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 362: item_name='第13因子量' jlac10='3340' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 363: item_name='第8因子様抗原' jlac10='3350' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 364: item_name='第5因子ｲﾝﾋﾋﾞﾀｰ' jlac10='3360' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 365: item_name='第8因子ｲﾝﾋﾋﾞﾀｰ' jlac10='3370' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 366: item_name='第9因子ｲﾝﾋﾋﾞﾀｰ' jlac10='3380' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 367: item_name='Ｖｏｎ．Ｗｉｌｌ因子' jlac10='3390' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 368: item_name='C1ｲﾝｱｸﾁﾍﾞｰﾀｰ活性' jlac10='3400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 369: item_name='IgD' jlac10='3501' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 370: item_name='IgE(非特異的)' jlac10='3502' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 371: item_name='C3(補体因子)' jlac10='3503' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 372: item_name='C4(補体因子)' jlac10='3504' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 373: item_name='RAHA(RAPA)' jlac10='3510' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 374: item_name='抗ｽﾄﾚﾌﾟﾄﾘｼﾞﾝO価' jlac10='3511' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 375: item_name='抗ｽﾄﾚﾌﾟﾄｷﾅｰｾﾞ価' jlac10='3512' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 376: item_name='ｻｲﾛｲﾄﾞﾃｽﾄ' jlac10='3513' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 377: item_name='ﾏｲｸﾛｿﾞｰﾑﾃｽﾄ' jlac10='3514' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 378: item_name='寒冷凝集反応' jlac10='3515' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 379: item_name='ﾏｲｺﾌﾟﾗｽﾞﾏ抗体(PA法)' jlac10='3516' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 380: item_name='リパーゼ' jlac10='3521' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 381: item_name='N-ｱｾﾁﾙβ-D-ｸﾞﾙｺｻﾐﾆﾀﾞｰｾﾞ(NAG)' jlac10='3522' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 382: item_name='ｱﾎﾟ蛋白' jlac10='3524' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 383: item_name='ｱﾎﾟ蛋白 A-Ⅰ' jlac10='3525' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 384: item_name='ｱﾎﾟ蛋白 A-Ⅱ' jlac10='3526' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 385: item_name='ｱﾎﾟ蛋白 B' jlac10='3527' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 386: item_name='ｱﾎﾟ蛋白 C-Ⅱ' jlac10='3528' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 387: item_name='ｱﾎﾟ蛋白 C-Ⅲ' jlac10='3529' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 388: item_name='ｱﾎﾟ蛋白 E' jlac10='3530' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 389: item_name='ﾚﾑﾅﾝﾄ様ﾘﾎﾟ蛋白ｺﾚｽﾃﾛｰﾙ' jlac10='3532' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行390
+2026-04-17 16:34:02 [DEBUG] Row 391: item_name='蛋白分画' jlac10='3540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 392: item_name='蛋白分画(随時尿)' jlac10='3550' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 393: item_name='蛋白分画(蓄尿)' jlac10='3551' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 394: item_name='血液型(ABO、Rh)' jlac10='200100' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 395: item_name='Rh式血液型' jlac10='200200' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 396: item_name='Rh(因子型)式血液型' jlac10='200300' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 397: item_name='抗体ｽｸﾘｰﾆﾝｸﾞ総合判定' jlac10='200600' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 398: item_name='直接ｸｰﾑｽ総合' jlac10='200400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 399: item_name='間接ｸｰﾑｽ判定' jlac10='200500' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 400: item_name='RCC用ｸﾛｽﾏｯﾁ' jlac10='200800' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 401: item_name='ｱﾙﾍﾞｶｼﾝ(ABK) 投与直前' jlac10='4100' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 402: item_name='ｱﾙﾍﾞｶｼﾝ(ABK) 投与後2時間' jlac10='4101' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 403: item_name='ｱﾙﾍﾞｶｼﾝ(ABK) 投与後5時間' jlac10='4102' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 404: item_name='ｱﾙﾍﾞｶｼﾝ(ABK) その他' jlac10='4103' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 405: item_name='ｱﾌﾟﾘﾝｼﾞﾝ(APR) 投与直前' jlac10='4110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 406: item_name='ｱﾌﾟﾘﾝｼﾞﾝ(APR) その他' jlac10='4111' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 407: item_name='ｶﾙﾊﾞﾏｾﾞﾋﾟﾝ(CBZ) 投与直前' jlac10='4120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 408: item_name='ｶﾙﾊﾞﾏｾﾞﾋﾟﾝ(CBZ) その他' jlac10='4121' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 409: item_name='ｼｸﾛｽﾎﾟﾘﾝ(CYA) 投与直前' jlac10='4130' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 410: item_name='ｼｸﾛｽﾎﾟﾘﾝ(CYA) 投与後2時間' jlac10='4131' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 411: item_name='ｼｸﾛｽﾎﾟﾘﾝ(CYA) その他' jlac10='4132' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 412: item_name='ｼﾞｿﾋﾟﾗﾐﾄﾞ(DIS) 投与直前' jlac10='4140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 413: item_name='ｼﾞｿﾋﾟﾗﾐﾄﾞ(DIS) その他' jlac10='4141' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 414: item_name='ﾘﾄﾞｶｲﾝ(LID) 投与直前' jlac10='4150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 415: item_name='ﾘﾄﾞｶｲﾝ(LID) その他' jlac10='4151' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 416: item_name='ﾒﾄﾄﾚｷｾｰﾄ(MTX) 投与直前' jlac10='4160' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 417: item_name='ﾒﾄﾄﾚｷｾｰﾄ(MTX) 投与後6時間' jlac10='4161' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 418: item_name='ﾒﾄﾄﾚｷｾｰﾄ(MTX) 投与後24時間' jlac10='4162' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 419: item_name='ﾒﾄﾄﾚｷｾｰﾄ(MTX) 投与後48時間' jlac10='4163' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 420: item_name='ﾒﾄﾄﾚｷｾｰﾄ(MTX) 投与後72時間' jlac10='4164' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 421: item_name='ﾒﾄﾄﾚｷｾｰﾄ(MTX) その他' jlac10='4165' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 422: item_name='ﾌｪﾉﾊﾞﾙﾋﾞﾀｰﾙ(PB) 投与直前' jlac10='4170' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 423: item_name='ﾌｪﾉﾊﾞﾙﾋﾞﾀｰﾙ(PB) その他' jlac10='4171' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 424: item_name='ﾌｪﾆﾄｲﾝ(PHT) 投与直前' jlac10='4180' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 425: item_name='ﾌｪﾆﾄｲﾝ(PHT) その他' jlac10='4181' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 426: item_name='フェニトイン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 427: item_name='ﾃｵﾌｨﾘﾝ(TP) 投与直前' jlac10='4190' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 428: item_name='ﾃｵﾌｨﾘﾝ(TP) その他' jlac10='4191' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行429
+2026-04-17 16:34:02 [DEBUG] Row 430: item_name='ﾊﾞﾙﾌﾟﾛ酸(VPA) 投与直前' jlac10='4200' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 431: item_name='ﾊﾞﾙﾌﾟﾛ酸(VPA) その他' jlac10='4201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 432: item_name='バルプロ酸' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 433: item_name='ﾊﾞﾝｺﾏｲｼﾝ(VCM) 投与直前' jlac10='4210' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 434: item_name='ﾊﾞﾝｺﾏｲｼﾝ(VCM) 投与後2時間' jlac10='4211' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 435: item_name='ﾊﾞﾝｺﾏｲｼﾝ(VCM) 投与後5時間' jlac10='4212' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 436: item_name='ﾊﾞﾝｺﾏｲｼﾝ(VCM) その他' jlac10='4213' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 437: item_name='ﾃｲｺﾌﾟﾗﾆﾝ(TEIC) 投与直前' jlac10='4220' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 438: item_name='ﾃｲｺﾌﾟﾗﾆﾝ(TEIC) その他' jlac10='4221' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 439: item_name='ﾌﾟﾘﾐﾄﾞﾝ' jlac10='4500' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 440: item_name='ﾌﾟﾘﾐﾄﾞﾝ' jlac10='4500' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 441: item_name='ｴﾄｻｸｼﾐﾄﾞ' jlac10='4505' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 442: item_name='ｴﾄｻｸｼﾐﾄﾞ' jlac10='4505' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 443: item_name='ﾄﾘﾒﾀｼﾞｵﾝ' jlac10='4510' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 444: item_name='ｸﾛﾅｾﾞﾊﾟﾑ' jlac10='4515' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 445: item_name='ｸﾛﾅｾﾞﾊﾟﾑ' jlac10='4515' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 446: item_name='ﾆﾄﾗｾﾞﾊﾟﾑ' jlac10='4520' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 447: item_name='ﾆﾄﾗｾﾞﾊﾟﾑ' jlac10='4520' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行448
+2026-04-17 16:34:02 [DEBUG] Row 449: item_name='ｼﾞｱｾﾞﾊﾟﾑ' jlac10='4525' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 450: item_name='ｿﾞﾆｻﾐﾄﾞ' jlac10='4530' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行451
+2026-04-17 16:34:02 [DEBUG] Row 452: item_name='ｸﾛﾊﾞｻﾞﾑ' jlac10='4535' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 453: item_name='炭酸ﾘﾁｳﾑ' jlac10='4540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 454: item_name='炭酸ﾘﾁｳﾑ' jlac10='4540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 455: item_name='炭酸ﾘﾁｳﾑ' jlac10='4540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 456: item_name='ﾊﾛﾍﾟﾘﾄｰﾙ' jlac10='4545' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 457: item_name='ﾌﾞﾛﾑﾍﾟﾘﾄﾞｰﾙ' jlac10='4550' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 458: item_name='ｷﾆｼﾞﾝ' jlac10='4555' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 459: item_name='ｷﾆｼﾞﾝ' jlac10='4555' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 460: item_name='ﾌﾟﾛｶｲﾝｱﾐﾄﾞ' jlac10='4560' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 461: item_name='ﾌﾟﾛｶｲﾝｱﾐﾄﾞ' jlac10='4560' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 462: item_name='N-ｱｾﾁﾙﾌﾟﾛｶｲﾝｱﾐﾄﾞ' jlac10='4565' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 463: item_name='N-ｱｾﾁﾙﾌﾟﾛｶｲﾝｱﾐﾄﾞ' jlac10='4565' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 464: item_name='塩酸ﾋﾟﾙｼﾞｶｲﾆﾄﾞ' jlac10='4570' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 465: item_name='ﾒｷｼﾚﾁﾝ' jlac10='4575' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 466: item_name='ﾒｷｼﾚﾁﾝ' jlac10='4575' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 467: item_name='アミオダロン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 468: item_name='ｱﾐｵﾀﾞﾛﾝ' jlac10='4580' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 469: item_name='ﾋﾟﾘﾒﾉｰﾙ' jlac10='4585' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 470: item_name='ｺﾊｸ酸ｼﾍﾞﾝｿﾞﾘﾝ' jlac10='4590' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 471: item_name='ﾌﾚｶｲﾆﾄﾞ' jlac10='4595' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 472: item_name='ｼﾞｷﾞﾄｷｼﾝ' jlac10='4600' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 473: item_name='ｼﾞｷﾞﾄｷｼﾝ' jlac10='4600' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 474: item_name='ｹﾞﾝﾀﾏｲｼﾝ' jlac10='4605' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 475: item_name='ｹﾞﾝﾀﾏｲｼﾝ' jlac10='4605' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 476: item_name='ｱﾐｶｼﾝ' jlac10='4610' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 477: item_name='ｱﾐｶｼﾝ' jlac10='4610' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 478: item_name='ｱｾﾄｱﾐﾉﾌｪﾝ' jlac10='4615' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 479: item_name='ｱｾﾄｱﾐﾉﾌｪﾝ' jlac10='4615' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 480: item_name='ｻﾘﾁﾙ酸(ｱｽﾋﾟﾘﾝ)' jlac10='4620' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 481: item_name='ｻﾘﾁﾙ酸(ｱｽﾋﾟﾘﾝ)' jlac10='4620' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 482: item_name='ﾀｸﾛﾘﾑｽ' jlac10='4625' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 483: item_name='ﾀｸﾛﾘﾑｽ' jlac10='4625' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 484: item_name='ﾀｸﾛﾘﾑｽ 直前' jlac10='4625' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 485: item_name='ﾀｸﾛﾘﾑｽ その他' jlac10='4626' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 486: item_name='ｱﾌﾟﾘﾝｼﾞﾝ' jlac10='4630' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 487: item_name='ｼﾞｿﾋﾟﾗﾐﾄﾞ' jlac10='4635' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 488: item_name='ﾘﾄﾞｶｲﾝ' jlac10='4640' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 489: item_name='ｲﾏﾁﾆﾌﾞ' jlac10='4645' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 490: item_name='ｲﾏﾁﾆﾌﾞ(IMA) 投与直前' jlac10='4645' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 491: item_name='ｲﾏﾁﾆﾌﾞ(IMA) その他' jlac10='4646' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行492
+2026-04-17 16:34:02 [DEBUG] Row 493: item_name='ﾚﾍﾞﾁﾗｾﾀﾑ' jlac10='4650' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 494: item_name='ﾚﾍﾞﾁﾗｾﾀﾑ' jlac10='4650' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 495: item_name='ボリコナゾ-ル' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 496: item_name='T細胞B細胞百分率' jlac10='4701' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 497: item_name='MM-MRDセット(末梢血)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 498: item_name='T細胞ｻﾌﾞｸﾗｽ' jlac10='4705' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 499: item_name='B細胞表面免疫ｸﾞﾛﾌﾞﾘﾝ' jlac10='4706' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 500: item_name='PNHｾｯﾄ (PB)' jlac10='4707' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 501: item_name='血液・ﾏﾙｸｾｯﾄ (PB)' jlac10='4708' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 502: item_name='MMｾｯﾄ (PB)' jlac10='4709' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 503: item_name='組織・ﾘﾝﾊﾟ腫・CLLｾｯﾄ (PB)' jlac10='4710' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 504: item_name='ALLｾｯﾄ (PB)' jlac10='4711' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 505: item_name='AML-CMLｾｯﾄ (PB)' jlac10='4712' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 506: item_name='CD45Gateｾｯﾄ (PB)' jlac10='4713' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 507: item_name='CD45 (PB)' jlac10='4714' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 508: item_name='CD1a (PB)' jlac10='4715' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 509: item_name='CD2 (PB)' jlac10='4716' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 510: item_name='CD3 (PB)' jlac10='4717' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 511: item_name='CD4 (PB)' jlac10='4718' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 512: item_name='CD5 (PB)' jlac10='4719' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 513: item_name='CD7 (PB)' jlac10='4720' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 514: item_name='CD8 (PB)' jlac10='4721' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 515: item_name='TCR-α/β (PB)' jlac10='4722' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 516: item_name='TCR-γ/δ (PB)' jlac10='4723' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 517: item_name='CD10 (PB)' jlac10='4725' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 518: item_name='CD19 (PB)' jlac10='4726' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 519: item_name='CD20 (PB)' jlac10='4727' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 520: item_name='CD21 (PB)' jlac10='4728' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 521: item_name='CD22 (PB)' jlac10='4729' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 522: item_name='CD23 (PB)' jlac10='4730' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 523: item_name='CD79a (PB)' jlac10='4731' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 524: item_name='HLA-DR (PB)' jlac10='4732' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 525: item_name='B細胞表面免疫ｸﾞﾛﾌﾞﾘﾝ(末梢血)' jlac10='4733' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 526: item_name='CD16 (PB)' jlac10='4735' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 527: item_name='CD56 (PB)' jlac10='4736' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 528: item_name='CD57 (PB)' jlac10='4737' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 529: item_name='CD161 (PB)' jlac10='4738' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 530: item_name='CD41 (PB)' jlac10='4741' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 531: item_name='CD42b (PB)' jlac10='4742' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 532: item_name='CD61 (PB)' jlac10='4743' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 533: item_name='CD11b (PB)' jlac10='4745' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 534: item_name='CD11c (PB)' jlac10='4746' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 535: item_name='CD13 (PB)' jlac10='4747' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 536: item_name='CD14 (PB)' jlac10='4748' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 537: item_name='CD15 (PB)' jlac10='4749' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 538: item_name='CD33 (PB)' jlac10='4750' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 539: item_name='CD34 (PB)' jlac10='4751' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 540: item_name='CD117 (PB)' jlac10='4752' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 541: item_name='MPO (PB)' jlac10='4753' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 542: item_name='CD55 (PB)' jlac10='4755' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 543: item_name='CD59 (PB)' jlac10='4756' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 544: item_name='CD27(末梢血)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 545: item_name='CD81(末梢血)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 546: item_name='CD24 (PB)' jlac10='4761' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 547: item_name='CD25 (PB)' jlac10='4762' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 548: item_name='CD30 (PB)' jlac10='4763' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 549: item_name='CD38 (PB)' jlac10='4764' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 550: item_name='CD49e (PB)' jlac10='4765' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 551: item_name='CD71 (PB)' jlac10='4766' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 552: item_name='CD103 (PB)' jlac10='4767' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 553: item_name='CD138 (PB)' jlac10='4768' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 554: item_name='GP-A (PB)' jlac10='4769' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 555: item_name='MPC-1 (PB)' jlac10='4770' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 556: item_name='TdT活性 (PB)' jlac10='4771' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 557: item_name='IgG-FcR+T細胞百分率' jlac10='4772' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 558: item_name='好中球貧食能検査' jlac10='4773' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 559: item_name='好中球殺菌能検査' jlac10='4774' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 560: item_name='ﾘﾝﾊﾟ球幼若化(PHA)' jlac10='4775' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 561: item_name='ﾘﾝﾊﾟ球幼若化(CON-A)' jlac10='4776' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 562: item_name='IV型コラーゲン・7S' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 563: item_name='Bcell Sm-IgG(PB)' jlac10='4781' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 564: item_name='Bcell Sm-IgA(PB)' jlac10='4782' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 565: item_name='Bcell Sm-IgM(PB)' jlac10='4783' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 566: item_name='Bcell Sm-IgD(PB)' jlac10='4784' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 567: item_name='Bcell Sm-Ig K鎖(PB)' jlac10='4785' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 568: item_name='Bcell Sm-Ig L鎖(PB)' jlac10='4786' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 569: item_name='Cytoplasmic-IgG(末梢血)' jlac10='4791' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 570: item_name='Cytoplasmic-IgA(末梢血)' jlac10='4792' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 571: item_name='Cytoplasmic-IgM(末梢血)' jlac10='4793' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 572: item_name='Cytoplasmic-IgD(末梢血)' jlac10='4794' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 573: item_name='Cytoplasmic-Igκ(末梢血)' jlac10='4795' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 574: item_name='Cytoplasmic-Igλ(末梢血)' jlac10='4796' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 575: item_name='高感度PNH' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 576: item_name='MM-MRDセット(骨髄液)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 577: item_name='PNHｾｯﾄ (BM)' jlac10='4807' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 578: item_name='血液・ﾏﾙｸｾｯﾄ (BM)' jlac10='4808' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 579: item_name='MMｾｯﾄ (BM)' jlac10='4809' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 580: item_name='組織・ﾘﾝﾊﾟ腫・CLLｾｯﾄ (BM)' jlac10='4810' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 581: item_name='ALLｾｯﾄ (BM)' jlac10='4811' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 582: item_name='AML-CMLｾｯﾄ (BM)' jlac10='4812' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 583: item_name='CD45Gateｾｯﾄ (BM)' jlac10='4813' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 584: item_name='CD45 (BM)' jlac10='4814' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 585: item_name='CD1a (BM)' jlac10='4815' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 586: item_name='CD2 (BM)' jlac10='4816' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 587: item_name='CD3 (BM)' jlac10='4817' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 588: item_name='CD4 (BM)' jlac10='4818' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 589: item_name='CD5 (BM)' jlac10='4819' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 590: item_name='CD7 (BM)' jlac10='4820' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 591: item_name='CD8 (BM)' jlac10='4821' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 592: item_name='TCR-α/β (BM)' jlac10='4822' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 593: item_name='TCR-γ/δ (BM)' jlac10='4823' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 594: item_name='CD10 (BM)' jlac10='4825' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 595: item_name='CD19 (BM)' jlac10='4826' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 596: item_name='CD20 (BM)' jlac10='4827' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 597: item_name='CD21 (BM)' jlac10='4828' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 598: item_name='CD22 (BM)' jlac10='4829' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 599: item_name='CD23 (BM)' jlac10='4830' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 600: item_name='CD79a (BM)' jlac10='4831' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 601: item_name='HLA-DR (BM)' jlac10='4832' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 602: item_name='B細胞表面免疫ｸﾞﾛﾌﾞﾘﾝ(骨髄)' jlac10='4833' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 603: item_name='CD16 (BM)' jlac10='4835' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 604: item_name='CD56 (BM)' jlac10='4836' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 605: item_name='CD57 (BM)' jlac10='4837' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 606: item_name='CD161 (BM)' jlac10='4838' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 607: item_name='CD41 (BM)' jlac10='4841' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 608: item_name='CD42b (BM)' jlac10='4842' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 609: item_name='CD61 (BM)' jlac10='4843' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 610: item_name='CD11b (BM)' jlac10='4845' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 611: item_name='CD11c (BM)' jlac10='4846' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 612: item_name='CD13 (BM)' jlac10='4847' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 613: item_name='CD14 (BM)' jlac10='4848' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 614: item_name='CD15 (BM)' jlac10='4849' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 615: item_name='CD33 (BM)' jlac10='4850' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 616: item_name='CD34 (BM)' jlac10='4851' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 617: item_name='CD117 (BM)' jlac10='4852' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 618: item_name='MPO (BM)' jlac10='4853' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 619: item_name='CD55 (BM)' jlac10='4855' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 620: item_name='CD59 (BM)' jlac10='4856' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 621: item_name='CD27(骨髄液)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 622: item_name='CD81(骨髄液)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 623: item_name='CD24 (BM)' jlac10='4861' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 624: item_name='CD25 (BM)' jlac10='4862' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 625: item_name='CD30 (BM)' jlac10='4863' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 626: item_name='CD38 (BM)' jlac10='4864' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 627: item_name='CD49e (BM)' jlac10='4865' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 628: item_name='CD71 (BM)' jlac10='4866' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 629: item_name='CD103 (BM)' jlac10='4867' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 630: item_name='CD138 (BM)' jlac10='4868' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 631: item_name='GP-A (BM)' jlac10='4869' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 632: item_name='MPC-1 (BM)' jlac10='4870' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 633: item_name='TdT活性 (BM)' jlac10='4871' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 634: item_name='Bcell Sm-IgG(BM)' jlac10='4881' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 635: item_name='Bcell Sm-IgA(BM)' jlac10='4882' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 636: item_name='Bcell Sm-IgM(BM)' jlac10='4883' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 637: item_name='Bcell Sm-IgD(BM)' jlac10='4884' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 638: item_name='Bcell Sm-Ig K鎖(BM)' jlac10='4885' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 639: item_name='Bcell Sm-Ig L鎖(BM)' jlac10='4886' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 640: item_name='Cytoplasmic-IgG(骨髄)' jlac10='4891' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 641: item_name='Cytoplasmic-IgA(骨髄)' jlac10='4892' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 642: item_name='Cytoplasmic-IgM(骨髄)' jlac10='4893' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 643: item_name='Cytoplasmic-IgD(骨髄)' jlac10='4894' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 644: item_name='Cytoplasmic-Igκ(骨髄)' jlac10='4895' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 645: item_name='Cytoplasmic-Igλ(骨髄)' jlac10='4896' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 646: item_name='MM-MRDセット(その他)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 647: item_name='PNHｾｯﾄ (他)' jlac10='4907' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 648: item_name='血液・ﾏﾙｸｾｯﾄ (他)' jlac10='4908' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 649: item_name='MMｾｯﾄ (他)' jlac10='4909' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 650: item_name='組織・ﾘﾝﾊﾟ腫・CLLｾｯﾄ (他)' jlac10='4910' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 651: item_name='ALLｾｯﾄ (他)' jlac10='4911' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 652: item_name='AML-CMLｾｯﾄ (他)' jlac10='4912' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 653: item_name='CD45Gateｾｯﾄ (他)' jlac10='4913' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 654: item_name='CD45 (他)' jlac10='4914' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 655: item_name='CD1a (他)' jlac10='4915' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 656: item_name='CD2 (他)' jlac10='4916' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 657: item_name='CD3 (他)' jlac10='4917' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 658: item_name='CD4 (他)' jlac10='4918' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 659: item_name='CD5 (他)' jlac10='4919' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 660: item_name='CD7 (他)' jlac10='4920' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 661: item_name='CD8 (他)' jlac10='4921' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 662: item_name='TCR-α/β (他)' jlac10='4922' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 663: item_name='TCR-γ/δ (他)' jlac10='4923' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 664: item_name='CD10 (他)' jlac10='4925' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 665: item_name='CD19 (他)' jlac10='4926' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 666: item_name='CD20 (他)' jlac10='4927' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 667: item_name='CD21 (他)' jlac10='4928' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 668: item_name='CD22 (他)' jlac10='4929' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 669: item_name='CD23 (他)' jlac10='4930' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 670: item_name='CD79a (他)' jlac10='4931' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 671: item_name='HLA-DR (他)' jlac10='4932' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 672: item_name='B細胞表面免疫ｸﾞﾛﾌﾞﾘﾝ(他)' jlac10='4933' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 673: item_name='CD16 (他)' jlac10='4935' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 674: item_name='CD56 (他)' jlac10='4936' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 675: item_name='CD57 (他)' jlac10='4937' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 676: item_name='CD161 (他)' jlac10='4938' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 677: item_name='CD41 (他)' jlac10='4941' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 678: item_name='CD42b (他)' jlac10='4942' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 679: item_name='CD61 (他)' jlac10='4943' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 680: item_name='CD11b (他)' jlac10='4945' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 681: item_name='CD11c (他)' jlac10='4946' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 682: item_name='CD13 (他)' jlac10='4947' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 683: item_name='CD14 (他)' jlac10='4948' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 684: item_name='CD15 (他)' jlac10='4949' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 685: item_name='CD33 (他)' jlac10='4950' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 686: item_name='CD34 (他)' jlac10='4951' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 687: item_name='CD117 (他)' jlac10='4952' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 688: item_name='MPO (他)' jlac10='4953' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 689: item_name='CD55 (他)' jlac10='4955' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 690: item_name='CD59 (他)' jlac10='4956' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 691: item_name='CD27(その他)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 692: item_name='CD81(その他)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 693: item_name='CD24 (他)' jlac10='4961' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 694: item_name='CD25 (他)' jlac10='4962' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 695: item_name='CD30 (他)' jlac10='4963' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 696: item_name='CD38 (他)' jlac10='4964' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 697: item_name='CD49e (他)' jlac10='4965' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 698: item_name='CD71 (他)' jlac10='4966' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 699: item_name='CD103 (他)' jlac10='4967' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 700: item_name='CD138 (他)' jlac10='4968' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 701: item_name='GP-A (他)' jlac10='4969' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 702: item_name='MPC-1 (他)' jlac10='4970' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 703: item_name='TdT活性 (他)' jlac10='4971' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 704: item_name='Bcell Sm-IgG(他)' jlac10='4981' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 705: item_name='Bcell Sm-IgA(他)' jlac10='4982' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 706: item_name='Bcell Sm-IgM(他)' jlac10='4983' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 707: item_name='Bcell Sm-IgD(他)' jlac10='4984' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 708: item_name='Bcell Sm-Ig K鎖(他)' jlac10='4985' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 709: item_name='Bcell Sm-Ig L鎖(他)' jlac10='4986' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 710: item_name='Cytoplasmic-IgG(他)' jlac10='4991' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 711: item_name='Cytoplasmic-IgA(他)' jlac10='4992' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 712: item_name='Cytoplasmic-IgM(他)' jlac10='4993' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 713: item_name='Cytoplasmic-IgD(他)' jlac10='4994' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 714: item_name='Cytoplasmic-Igκ(他)' jlac10='4995' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 715: item_name='Cytoplasmic-Igλ(他)' jlac10='4996' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 716: item_name='尿定性' jlac10='5000' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 717: item_name='尿沈渣' jlac10='5100' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 718: item_name='尿沈渣標本保存' jlac10='5177' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 719: item_name='ﾋﾞﾘﾙﾋﾞﾝ' jlac10='5201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 720: item_name='VMA' jlac10='5202' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 721: item_name='B-J蛋白' jlac10='5210' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 722: item_name='糖定量(随時尿)' jlac10='5220' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 723: item_name='蛋白定量(随時尿)' jlac10='5221' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 724: item_name='妊娠反応' jlac10='5222' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 725: item_name='糖定量(蓄尿)' jlac10='5223' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 726: item_name='蛋白定量(蓄尿)' jlac10='5224' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 727: item_name='濃縮試験第1尿（早朝第1尿）' jlac10='5230' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 728: item_name='濃縮試験第2尿（1時間後）' jlac10='5231' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 729: item_name='濃縮試験第3尿（2時間後）' jlac10='5232' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 730: item_name='PSP試験　15分値' jlac10='5240' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 731: item_name='PSP試験　30分値' jlac10='5241' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 732: item_name='PSP試験　60分値' jlac10='5242' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 733: item_name='PSP試験　120分値' jlac10='5243' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 734: item_name='潜血　ｸﾞｱﾔｯｸ' jlac10='5250' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 735: item_name='便潜血 ヒトＨｂ法' jlac10='5251' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 736: item_name='便潜血 ヒトＨｂ法' jlac10='5251' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 737: item_name='便潜血 ﾋﾄHb＋Tf法' jlac10='5251' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 738: item_name='虫卵' jlac10='5252' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 739: item_name='脂肪' jlac10='5253' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 740: item_name='澱粉' jlac10='5254' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 741: item_name='寄生虫検索' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 742: item_name='髄液_定性' jlac10='5260' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 743: item_name='髄液_Pandy反応' jlac10='5265' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 744: item_name='髄液_Nonne-Apelt反応' jlac10='5266' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 745: item_name='髄液_蛋白質' jlac10='5267' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 746: item_name='髄液_糖' jlac10='5268' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 747: item_name='髄液_ｸﾛｰﾙ' jlac10='5269' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 748: item_name='髄液_細胞数' jlac10='5270' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 749: item_name='髄液_細胞種類' jlac10='5271' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 750: item_name='穿刺_定性' jlac10='5280' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 751: item_name='穿刺_沈渣' jlac10='5286' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 752: item_name='胸水_定性' jlac10='5295' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 753: item_name='胸水_沈渣' jlac10='5301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 754: item_name='腹水_定性' jlac10='5310' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 755: item_name='腹水_沈渣' jlac10='5316' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 756: item_name='他_定性' jlac10='5325' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 757: item_name='他_沈渣' jlac10='5331' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 758: item_name='精液量' jlac10='5340' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 759: item_name='精子濃度' jlac10='5341' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 760: item_name='運動率' jlac10='5342' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 761: item_name='奇形率' jlac10='5343' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 762: item_name='時間外尿定性項目' jlac10='5400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 763: item_name='ﾊｳｽﾀﾞｽﾄ1' jlac10='6001' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 764: item_name='ﾊｳｽﾀﾞｽﾄ2' jlac10='6002' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 765: item_name='ﾔｹﾋﾖｳﾋﾀﾞﾆ' jlac10='6003' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 766: item_name='ｺﾅﾋﾖｳﾋﾀﾞﾆ' jlac10='6004' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 767: item_name='ｱｼﾌﾞﾄｺﾅﾀﾞﾆ' jlac10='6005' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 768: item_name='ｻﾔｱｼﾆｸﾀﾞﾆ' jlac10='6006' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 769: item_name='ｹﾅｶﾞｺﾅﾀﾞﾆ' jlac10='6007' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 770: item_name='ﾊﾙｶﾞﾔ' jlac10='6008' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 771: item_name='ｷﾞﾖｳｷﾞｼﾊﾞ' jlac10='6009' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 772: item_name='ｶﾓｶﾞﾔ' jlac10='6010' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 773: item_name='ﾋﾛﾊｳｼﾉｹｸｻ' jlac10='6021' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 774: item_name='ﾎｿﾑｷﾞ' jlac10='6022' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 775: item_name='ｵｵｱﾜｶﾞｴﾘ' jlac10='6023' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 776: item_name='ｱｼ' jlac10='6024' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 777: item_name='ﾅｶﾞﾊｸﾞｻ' jlac10='6025' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 778: item_name='ｾｲﾊﾞﾝﾓﾛｺｼ' jlac10='6026' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 779: item_name='ｵｵｽｽﾞﾒﾉﾃﾂﾎﾟｳ' jlac10='6027' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 780: item_name='ﾌﾞﾀｸｻ' jlac10='6028' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 781: item_name='ﾖﾓｷﾞ' jlac10='6029' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 782: item_name='ﾌﾗﾝｽｷﾞｸ(ｿﾞｸ)' jlac10='6041' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 783: item_name='ﾀﾝﾎﾟﾎﾟ(ｿﾞｸ)' jlac10='6042' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 784: item_name='ﾍﾗｵｵﾊﾞｺ' jlac10='6043' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 785: item_name='ｱｷﾉｷﾘﾝｿｳ' jlac10='6044' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 786: item_name='ﾋﾒｽｲﾊﾞ' jlac10='6045' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 787: item_name='ｲﾗｸｻ(ｿﾞｸ)' jlac10='6046' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 788: item_name='ｶﾅﾑｸﾞﾗ' jlac10='6047' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 789: item_name='ｶｴﾃﾞ(ｿﾞｸ)' jlac10='6048' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 790: item_name='ﾊﾝﾉｷ(ｿﾞｸ)' jlac10='6049' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 791: item_name='ｼﾗｶﾝﾊﾞ(ｿﾞｸ)' jlac10='6050' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 792: item_name='ﾌﾞﾅ(ｿﾞｸ)' jlac10='6051' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 793: item_name='ﾋﾞﾔｸｼﾝ(ｿﾞｸ)' jlac10='6052' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 794: item_name='ｺﾅﾗ(ｿﾞｸ)' jlac10='6053' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 795: item_name='ﾆﾚ(ｿﾞｸ)' jlac10='6054' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 796: item_name='ｸﾙﾐ(ｿﾞｸ)' jlac10='6061' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 797: item_name='ﾔﾅｷﾞ(ｿﾞｸ)' jlac10='6062' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 798: item_name='ﾏﾂ(ｿﾞｸ)' jlac10='6063' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 799: item_name='ｽｷﾞ' jlac10='6064' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 800: item_name='ｱｶｼｱ(ｿﾞｸ)' jlac10='6065' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 801: item_name='ﾋﾉｷ' jlac10='6066' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 802: item_name='ｸﾜ(ｿﾞｸ)' jlac10='6067' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 803: item_name='ﾍﾟﾆｼﾘｳﾑ' jlac10='6071' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 804: item_name='ｸﾗﾄﾞｽﾎﾟﾘｳﾑ' jlac10='6072' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 805: item_name='ｱｽﾍﾟﾙｷﾞﾙｽ' jlac10='6073' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 806: item_name='ﾑｺ-ﾙ' jlac10='6074' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 807: item_name='ｶﾝｼﾞﾀﾞ' jlac10='6075' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 808: item_name='ｱﾙﾃﾙﾅﾘｱ' jlac10='6076' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 809: item_name='ﾋﾟﾃｨﾛｽﾎﾟﾘｳﾑ' jlac10='6077' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 810: item_name='ｶﾋﾞ' jlac10='6078' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 811: item_name='ｶｲﾁﾕｳ' jlac10='6081' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 812: item_name='ﾎｳﾁﾕｳ' jlac10='6082' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 813: item_name='ｱﾆｻｷｽ' jlac10='6083' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 814: item_name='ﾐﾂﾊﾞﾁ' jlac10='6084' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 815: item_name='ｽｽﾞﾒﾊﾞﾁ' jlac10='6085' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 816: item_name='ｱｼﾅｶﾞﾊﾞﾁ' jlac10='6086' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 817: item_name='ｺﾞｷﾌﾞﾘ' jlac10='6087' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 818: item_name='ﾕｽﾘｶｾｲﾁﾕｳ' jlac10='6088' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 819: item_name='ｶﾞ' jlac10='6089' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 820: item_name='ﾔﾌﾞｶ(ｿﾞｸ)' jlac10='6090' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 821: item_name='ﾈｺﾋｸｽﾞ' jlac10='6091' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 822: item_name='ｲﾇｼﾞﾖｳﾋ' jlac10='6092' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 823: item_name='ｳﾏﾋｸｽﾞ' jlac10='6093' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 824: item_name='ｳｼﾋｸｽﾞ' jlac10='6094' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 825: item_name='ｲﾇﾋｸｽﾞ' jlac10='6095' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 826: item_name='ﾓﾙﾓﾂﾄｼﾞﾖｳﾋ' jlac10='6096' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 827: item_name='ﾊﾄﾉﾌﾝ' jlac10='6097' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 828: item_name='ﾆﾜﾄﾘｳﾓｳ' jlac10='6098' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 829: item_name='ｱﾋﾙｳﾓｳ' jlac10='6101' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 830: item_name='ｾｷｾｲｲﾝｺﾉﾌﾝ' jlac10='6102' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 831: item_name='ｾｷｾｲｲﾝｺｳﾓｳ' jlac10='6103' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 832: item_name='ﾔｷﾞｼﾞﾖｳﾋ' jlac10='6104' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 833: item_name='ﾋﾂｼﾞｼﾞﾖｳﾋ' jlac10='6105' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 834: item_name='ｳｻｷﾞｼﾞﾖｳﾋ' jlac10='6106' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 835: item_name='ﾌﾞﾀｼﾞﾖｳﾋ' jlac10='6107' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 836: item_name='ﾊﾑｽﾀ-ｼﾞﾖｳﾋ' jlac10='6108' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 837: item_name='ﾗﾂﾄ' jlac10='6109' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 838: item_name='ﾏｳｽ' jlac10='6110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 839: item_name='ｷﾇ' jlac10='6121' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 840: item_name='ﾜﾀ' jlac10='6122' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 841: item_name='ｵｵﾊﾞｺｼﾕｼ' jlac10='6123' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 842: item_name='ｴﾁﾚﾝｵｷｻｲﾄﾞ' jlac10='6124' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 843: item_name='ﾑｽｲﾌﾀﾙｻﾝ' jlac10='6125' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 844: item_name='ﾎﾙﾏﾘﾝ' jlac10='6126' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 845: item_name='ﾗﾃｯｸｽ' jlac10='6127' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 846: item_name='ｺﾑｷﾞ' jlac10='6201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 847: item_name='ﾗｲﾑｷﾞ' jlac10='6202' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 848: item_name='ｵｵﾑｷﾞ' jlac10='6203' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 849: item_name='ﾊﾞｸｶﾞ' jlac10='6204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 850: item_name='ﾋﾞｰﾙｺｳﾎﾞ' jlac10='6205' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 851: item_name='ﾄｳﾓﾛｺｼ' jlac10='6206' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 852: item_name='ｺﾒ' jlac10='6207' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 853: item_name='ｼﾞﾔｶﾞｲﾓ' jlac10='6208' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 854: item_name='ｻﾂﾏｲﾓ' jlac10='6209' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 855: item_name='ｺﾞﾏ' jlac10='6210' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 856: item_name='ｿﾊﾞ' jlac10='6211' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 857: item_name='ｴﾝﾄﾞｳ' jlac10='6212' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 858: item_name='ﾋﾟ-ﾅﾂﾂ' jlac10='6213' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 859: item_name='ﾀﾞｲｽﾞ' jlac10='6214' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 860: item_name='ｲﾝｹﾞﾝ' jlac10='6215' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 861: item_name='ﾌﾞﾗｼﾞﾙﾅﾂﾂ' jlac10='6216' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 862: item_name='ｱ-ﾓﾝﾄﾞ' jlac10='6217' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 863: item_name='ｺｺﾅﾂﾂ' jlac10='6218' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 864: item_name='ｶｶｵ' jlac10='6219' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 865: item_name='ｸﾙﾐ' jlac10='6220' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 866: item_name='ﾆﾝﾆｸ' jlac10='6221' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 867: item_name='ﾆﾝｼﾞﾝ' jlac10='6222' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 868: item_name='ﾀﾏﾈｷﾞ' jlac10='6223' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 869: item_name='ﾔﾏｲﾓ' jlac10='6224' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 870: item_name='ｶﾎﾞﾁｬ' jlac10='6225' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 871: item_name='ﾀｹﾉｺ' jlac10='6226' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 872: item_name='ｾﾛﾘ' jlac10='6227' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 873: item_name='ﾊﾟｾﾘ' jlac10='6228' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 874: item_name='ﾎｳﾚﾝｿｳ' jlac10='6229' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 875: item_name='ﾄﾏﾄ' jlac10='6230' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 876: item_name='ｵﾚﾝｼﾞ' jlac10='6231' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 877: item_name='ｲﾁｺﾞ' jlac10='6232' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 878: item_name='ﾘﾝｺﾞ' jlac10='6233' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 879: item_name='ｷｳｲ' jlac10='6234' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 880: item_name='ﾒﾛﾝ' jlac10='6235' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 881: item_name='ﾏﾝｺﾞ' jlac10='6236' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 882: item_name='ﾊﾞﾅﾅ' jlac10='6237' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 883: item_name='ﾖｳﾅｼ' jlac10='6238' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 884: item_name='ﾓﾓ' jlac10='6239' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 885: item_name='ｱﾎﾞｶﾄﾞ' jlac10='6240' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 886: item_name='ｸﾞﾚ-ﾌﾟﾌﾙ-ﾂ' jlac10='6241' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 887: item_name='ｽｲｶ' jlac10='6242' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 888: item_name='ﾁｰｽﾞ' jlac10='6301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 889: item_name='ﾗﾝﾊﾟｸ' jlac10='6302' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 890: item_name='ﾗﾝｵｳ' jlac10='6303' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 891: item_name='ﾐﾙｸ' jlac10='6304' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 892: item_name='A-ﾗｸﾄｱﾙﾌﾞﾐﾝ' jlac10='6305' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 893: item_name='B-ﾗｸﾄｸﾞﾛﾌﾞﾘﾝ' jlac10='6306' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 894: item_name='ｶｾﾞｲﾝ' jlac10='6307' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 895: item_name='ｾﾞﾗﾁﾝ' jlac10='6308' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 896: item_name='ｸﾞﾙﾃﾝ' jlac10='6309' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 897: item_name='ﾏｽﾀｰﾄﾞ' jlac10='6310' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 898: item_name='ﾌﾞﾀﾆｸ' jlac10='6311' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 899: item_name='ｷﾞｭｳﾆｸ' jlac10='6312' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 900: item_name='ﾄﾘﾆｸ' jlac10='6313' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 901: item_name='ﾖｳﾆｸ' jlac10='6314' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 902: item_name='ｱｻﾘ' jlac10='6315' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 903: item_name='ｶｷ' jlac10='6316' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 904: item_name='ﾎﾀﾃ' jlac10='6317' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 905: item_name='ﾑﾗｻｷｲｶﾞｲ' jlac10='6318' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 906: item_name='ｶﾆ' jlac10='6319' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 907: item_name='ｴﾋﾞ' jlac10='6320' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 908: item_name='ﾛﾌﾞｽﾀｰ' jlac10='6321' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 909: item_name='ｲｶ' jlac10='6322' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 910: item_name='ﾀｺ' jlac10='6323' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 911: item_name='ｻﾊﾞ' jlac10='6324' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 912: item_name='ｱｼﾞ' jlac10='6325' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 913: item_name='ｲﾜｼ' jlac10='6326' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 914: item_name='ﾏｸﾞﾛ' jlac10='6327' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 915: item_name='ｻｹ' jlac10='6328' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 916: item_name='ﾀﾗ' jlac10='6329' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 917: item_name='ｶﾚｲ' jlac10='6330' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 918: item_name='ｲｸﾗ' jlac10='6331' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 919: item_name='ﾀﾗｺ' jlac10='6332' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 920: item_name='EBV.VCA-IgG' jlac10='6501' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 921: item_name='EBV.VCA-IgA' jlac10='6502' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 922: item_name='EBV.VCA-IgM' jlac10='6503' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 923: item_name='EBV.EA-IgG' jlac10='6504' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 924: item_name='EBV.EA-IgA' jlac10='6505' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 925: item_name='EBV.EA-IgM' jlac10='6506' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 926: item_name='EBV.EBNA抗体' jlac10='6507' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 927: item_name='単純ﾍﾙﾍﾟｽ/CF法' jlac10='6510' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 928: item_name='単純ﾍﾙﾍﾟｽ IgG/FA法' jlac10='6520' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 929: item_name='単純ﾍﾙﾍﾟｽ IgM/FA法' jlac10='6530' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 930: item_name='単純ﾍﾙﾍﾟｽ IgG/EIA法' jlac10='6540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 931: item_name='単純ﾍﾙﾍﾟｽ IgM/EIA法' jlac10='6550' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 932: item_name='単純ﾍﾙﾍﾟｽ1型/NT法' jlac10='6560' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 933: item_name='単純ﾍﾙﾍﾟｽ2型/NT法' jlac10='6570' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 934: item_name='水痘帯状ﾍﾙﾍﾟｽ CF法' jlac10='6580' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 935: item_name='水痘帯状ﾍﾙﾍﾟｽ IgG/FA法' jlac10='6590' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 936: item_name='水痘帯状ﾍﾙﾍﾟｽ IgM/FA法' jlac10='6600' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 937: item_name='水痘帯状ﾍﾙﾍﾟｽ IgG/EIA' jlac10='6610' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 938: item_name='水痘帯状ﾍﾙﾍﾟｽ IgM/EIA' jlac10='6620' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 939: item_name='ｻｲﾄﾒｶﾞﾛ/CF法' jlac10='6630' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 940: item_name='ｻｲﾄﾒｶﾞﾛ IgG/FA法' jlac10='6640' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 941: item_name='ｻｲﾄﾒｶﾞﾛ IgM/FA法' jlac10='6650' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 942: item_name='ｻｲﾄﾒｶﾞﾛ IgG/EIA法' jlac10='6660' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 943: item_name='ｻｲﾄﾒｶﾞﾛ IgM/EIA法' jlac10='6670' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 944: item_name='ｱﾃﾞﾉ/CF' jlac10='6680' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 945: item_name='ｱﾃﾞﾉ1/NT' jlac10='6681' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 946: item_name='ｱﾃﾞﾉ2/NT' jlac10='6682' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 947: item_name='ｱﾃﾞﾉ3/NT' jlac10='6683' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 948: item_name='ｱﾃﾞﾉ4/NT' jlac10='6684' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 949: item_name='ｱﾃﾞﾉ5/NT' jlac10='6685' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 950: item_name='ｱﾃﾞﾉ6/NT' jlac10='6686' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 951: item_name='ｱﾃﾞﾉ7/NT' jlac10='6687' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 952: item_name='ｱﾃﾞﾉ8/NT' jlac10='6688' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 953: item_name='ｱﾃﾞﾉ11/NT' jlac10='6689' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 954: item_name='ｱﾃﾞﾉ19/NT' jlac10='6690' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 955: item_name='ｱﾃﾞﾉ21/NT' jlac10='6691' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 956: item_name='ｱﾃﾞﾉ37/NT' jlac10='6692' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 957: item_name='ｲﾝﾌﾙｴﾝｻﾞA/CF' jlac10='6700' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 958: item_name='ｲﾝﾌﾙｴﾝｻﾞA/HI' jlac10='6710' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 959: item_name='ｲﾝﾌﾙｴﾝｻﾞB/CF' jlac10='6720' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 960: item_name='ｲﾝﾌﾙｴﾝｻﾞB/HI' jlac10='6721' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 961: item_name='RS/CF' jlac10='6730' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 962: item_name='RS/NT' jlac10='6731' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 963: item_name='ﾑﾝﾌﾟｽ/CF法' jlac10='6732' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 964: item_name='ﾑﾝﾌﾟｽ/HI法' jlac10='6733' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 965: item_name='ﾑﾝﾌﾟｽIgG/EIA法' jlac10='6740' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 966: item_name='ﾑﾝﾌﾟｽIgM/EIA法' jlac10='6750' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 967: item_name='ﾑﾝﾌﾟｽ/NT法' jlac10='6761' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 968: item_name='麻疹/CF法' jlac10='6762' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 969: item_name='麻疹/HI法' jlac10='6763' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 970: item_name='麻疹IgG/EIA法' jlac10='6774' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 971: item_name='麻疹IgM/EIA法' jlac10='6780' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 972: item_name='麻疹/NT法' jlac10='6791' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 973: item_name='風疹/HI法' jlac10='6792' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 974: item_name='風疹IgG/FA法' jlac10='6793' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 975: item_name='風疹IgM/FA法' jlac10='6794' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 976: item_name='風疹IgG/EIA法' jlac10='6795' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 977: item_name='風疹IgM/EIA法' jlac10='6800' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 978: item_name='日本脳炎/CF法' jlac10='6805' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 979: item_name='日本脳炎/HI法' jlac10='6806' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 980: item_name='ﾎﾟﾘｵ1/CF' jlac10='6811' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 981: item_name='ﾎﾟﾘｵ1/NT' jlac10='6812' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 982: item_name='ﾎﾟﾘｵ2/CF' jlac10='6813' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 983: item_name='ﾎﾟﾘｵ2/NT' jlac10='6814' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 984: item_name='ﾎﾟﾘｵ3/CF' jlac10='6815' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 985: item_name='ﾎﾟﾘｵ3/NT' jlac10='6816' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 986: item_name='ｺｸｻﾂｷ-A2/NT' jlac10='6821' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 987: item_name='ｺｸｻﾂｷ-A3/NT' jlac10='6822' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 988: item_name='ｺｸｻﾂｷ-A4/NT' jlac10='6823' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 989: item_name='ｺｸｻﾂｷｰA5/NT' jlac10='6824' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 990: item_name='ｺｸｻﾂｷ-A6/NT' jlac10='6825' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 991: item_name='ｺｸｻﾂｷ-A7/NT' jlac10='6826' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 992: item_name='ｺｸｻﾂｷ-A9/NT' jlac10='6827' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 993: item_name='ｺｸｻﾂｷ-A9/CF' jlac10='6828' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 994: item_name='ｺｸｻﾂｷ-A10/NT' jlac10='6829' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 995: item_name='ｺｸｻﾂｷ-A16/NT' jlac10='6830' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 996: item_name='ｺｸｻﾂｷ-B1/CF' jlac10='6831' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 997: item_name='ｺｸｻﾂｷ-B1/NT' jlac10='6832' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 998: item_name='ｺｸｻﾂｷ-B2/CF' jlac10='6833' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 999: item_name='ｺｸｻﾂｷ-B2/NT' jlac10='6834' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1000: item_name='ｺｸｻﾂｷ-B3/CF' jlac10='6835' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1001: item_name='ｺｸｻﾂｷ-B3/NT' jlac10='6836' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1002: item_name='ｺｸｻﾂｷ-B4/CF' jlac10='6837' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1003: item_name='ｺｸｻﾂｷ-B4/NT' jlac10='6838' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1004: item_name='ｺｸｻﾂｷ-B5/CF' jlac10='6839' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1005: item_name='ｺｸｻﾂｷ-B5/NT' jlac10='6840' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1006: item_name='ｺｸｻﾂｷ-B6/CF' jlac10='6841' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1007: item_name='ｺｸｻﾂｷ-B6/NT' jlac10='6842' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1008: item_name='ﾊﾟﾗｲﾝﾌﾙｴﾝｻ1/HI' jlac10='6845' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1009: item_name='ﾊﾟﾗｲﾝﾌﾙｴﾝｻ2/HI' jlac10='6846' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1010: item_name='ﾊﾟﾗｲﾝﾌﾙｴﾝｻ3/HI' jlac10='6847' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1011: item_name='ﾊﾟﾙﾎﾞB19 IgM/EIA法' jlac10='6850' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1012: item_name='ｴｺ-1/NT' jlac10='6861' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1013: item_name='ｴｺ-3/HI' jlac10='6862' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1014: item_name='ｴｺ-3/NT' jlac10='6863' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1015: item_name='ｴｺ-4/NT' jlac10='6864' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1016: item_name='ｴｺ-5/NT' jlac10='6865' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1017: item_name='ｴｺ-6/NT' jlac10='6866' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1018: item_name='ｴｺ-7/HI' jlac10='6867' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1019: item_name='ｴｺ-7/NT' jlac10='6868' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1020: item_name='ｴｺ-9/NT' jlac10='6869' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1021: item_name='ｴｺ-11/HI' jlac10='6870' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1022: item_name='ｴｺ-11/NT' jlac10='6871' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1023: item_name='ｴｺ-12/HI' jlac10='6872' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1024: item_name='ｴｺ-12/NT' jlac10='6873' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1025: item_name='ｴｺ-13/NT' jlac10='6874' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1026: item_name='ｴｺ-14/NT' jlac10='6875' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1027: item_name='ｴｺ-16/NT' jlac10='6876' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1028: item_name='ｴｺ-17/NT' jlac10='6877' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1029: item_name='ｴｺ-18/NT' jlac10='6878' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1030: item_name='ｴｺ-19/NT' jlac10='6879' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1031: item_name='ｴｺ-21/NT' jlac10='6880' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1032: item_name='ｴｺ-22/NT' jlac10='6881' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1033: item_name='ｴｺ-24/NT' jlac10='6882' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1034: item_name='ｴｺ-25/NT' jlac10='6883' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1035: item_name='ｴｺｰ27/NT' jlac10='6884' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1036: item_name='ｴｺ-30/NT' jlac10='6885' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1037: item_name='EBV.VCA-IgG-L' jlac10='6891' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1038: item_name='EBV.VCA-IgA-L' jlac10='6892' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1039: item_name='EBV.VCA-IgM-L' jlac10='6893' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1040: item_name='EBV.EA-IgG-L' jlac10='6894' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1041: item_name='EBV.EA-IgA-L' jlac10='6895' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1042: item_name='EBV.EA-IgM-L' jlac10='6896' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1043: item_name='EBV.EBNA抗体L' jlac10='6897' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1044: item_name='単純ﾍﾙﾍﾟｽ/CF法-L' jlac10='6901' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1045: item_name='単純ﾍﾙﾍﾟｽIgG/FA法-L' jlac10='6902' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1046: item_name='単純ﾍﾙﾍﾟｽIgM/FA法-L' jlac10='6905' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1047: item_name='単純ﾍﾙﾍﾟｽIgG/EIA法-L' jlac10='6910' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1048: item_name='単純ﾍﾙﾍﾟｽIgM/EIA法-L' jlac10='6915' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1049: item_name='単純ﾍﾙﾍﾟｽ1型NT法-L' jlac10='6920' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1050: item_name='単純ﾍﾙﾍﾟｽ2型NT法-L' jlac10='6925' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1051: item_name='水痘ﾍﾙﾍﾟｽ/CF法-L' jlac10='6928' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1052: item_name='水痘帯状ﾍﾙﾍﾟｽ IgG/FA法-L' jlac10='6930' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1053: item_name='水痘帯状ﾍﾙﾍﾟｽ IgM/FA法-L' jlac10='6935' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1054: item_name='水痘帯状ﾍﾙﾍﾟｽ IgG/EIA法-L' jlac10='6940' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1055: item_name='水痘帯状ﾍﾙﾍﾟｽ IgM/EIA法-L' jlac10='6945' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1056: item_name='ｻｲﾄﾒｶﾞﾛ/CF法-L' jlac10='6948' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1057: item_name='ｻｲﾄﾒｶﾞﾛ IgG/FA法-L' jlac10='6950' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1058: item_name='ｻｲﾄﾒｶﾞﾛ IgM/FA法-L' jlac10='6955' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1059: item_name='ｻｲﾄﾒｶﾞﾛ IgG/EIA法-L' jlac10='6960' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1060: item_name='ｻｲﾄﾒｶﾞﾛ IgM/EIA法-L' jlac10='6965' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1061: item_name='ｱﾃﾞﾉ/CF-L' jlac10='6971' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1062: item_name='ｱﾃﾞﾉ 1/NT-L' jlac10='6972' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1063: item_name='ｱﾃﾞﾉ2/NT-L' jlac10='6973' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1064: item_name='ｱﾃﾞﾉ3/NT-L' jlac10='6974' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1065: item_name='ｱﾃﾞﾉ4/NT-L' jlac10='6975' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1066: item_name='ｱﾃﾞﾉ5/NT-L' jlac10='6976' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1067: item_name='ｱﾃﾞﾉ6/NT-L' jlac10='6977' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1068: item_name='ｱﾃﾞﾉ7/NT-L' jlac10='6978' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1069: item_name='ｱﾃﾞﾉ8/NT-L' jlac10='6979' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1070: item_name='ｱﾃﾞﾉ11/NT-L' jlac10='6980' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1071: item_name='ｱﾃﾞﾉ19/NT-L' jlac10='6981' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1072: item_name='ｱﾃﾞﾉ21/NT-L' jlac10='6982' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1073: item_name='ｱﾃﾞﾉ37/NT-L' jlac10='6983' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1074: item_name='ｲﾝﾌﾙｴﾝｻﾞA/CF-L' jlac10='6985' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1075: item_name='ｲﾝﾌﾙｴﾝｻﾞA/HI-L' jlac10='6990' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1076: item_name='ｲﾝﾌﾙｴﾝｻﾞB/CF-L' jlac10='6993' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1077: item_name='ｲﾝﾌﾙｴﾝｻﾞB/HI-L' jlac10='6995' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1078: item_name='RS/CF-L' jlac10='6997' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1079: item_name='RS/NT-L' jlac10='6998' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1080: item_name='ﾑﾝﾌﾟｽ/CF-L' jlac10='6999' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1081: item_name='ﾑﾝﾌﾟｽ/HI-L' jlac10='7000' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1082: item_name='ｲﾝﾌﾙｴﾝｻﾞB/HI-L' jlac10='7001' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1083: item_name='ﾑﾝﾌﾟｽ IgG/EIA法-L' jlac10='7005' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1084: item_name='ﾑﾝﾌﾟｽ IgM/EIA法-L' jlac10='7010' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1085: item_name='ﾑﾝﾌﾟｽ/NT-L' jlac10='7013' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1086: item_name='麻疹/CF-L' jlac10='7014' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1087: item_name='麻疹/HI-L' jlac10='7015' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1088: item_name='麻疹 IgG/EIA法-L' jlac10='7020' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1089: item_name='麻疹 IgM/EIA法-L' jlac10='7025' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1090: item_name='麻疹/NT-L' jlac10='7028' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1091: item_name='風疹/HI-L' jlac10='7029' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1092: item_name='風疹 IgG/FA法-L' jlac10='7030' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1093: item_name='風疹 IgM/FA法-L' jlac10='7031' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1094: item_name='風疹 IgG/EIA法-L' jlac10='7035' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1095: item_name='風疹 IgM/EIA法-L' jlac10='7040' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1096: item_name='日本脳炎/CF-L' jlac10='7043' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1097: item_name='日本脳炎/HI-L' jlac10='7045' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1098: item_name='ﾎﾟﾘｵ1/CF-L' jlac10='7048' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1099: item_name='ﾎﾟﾘｵ1/NT-L' jlac10='7049' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1100: item_name='ﾎﾟﾘｵ2/CF-L' jlac10='7050' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1101: item_name='ﾎﾟﾘｵ2/NT-L' jlac10='7051' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1102: item_name='ﾎﾟﾘｵ3/CF-L' jlac10='7052' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1103: item_name='ﾎﾟﾘｵ3/NT-L' jlac10='7053' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1104: item_name='ｺｸｻﾂｷ-A2/NT-L' jlac10='7055' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1105: item_name='ｺｸｻﾂｷ-A3/NT-L' jlac10='7056' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1106: item_name='ｺｸｻﾂｷ-A4/NT-L' jlac10='7057' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1107: item_name='ｺｸｻﾂｷｰA5/NT-L' jlac10='7058' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1108: item_name='ｺｸｻﾂｷ-A6/NT-L' jlac10='7059' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1109: item_name='ｺｸｻﾂｷ-A7/NT-L' jlac10='7060' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1110: item_name='ｺｸｻﾂｷ-A9/NT-L' jlac10='7061' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1111: item_name='ｺｸｻﾂｷ-A9/CF-L' jlac10='7062' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1112: item_name='ｺｸｻﾂｷ-A10/NT-L' jlac10='7063' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1113: item_name='ｺｸｻﾂｷ-A16/NT-L' jlac10='7064' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1114: item_name='ｺｸｻﾂｷ-B1/CF-L' jlac10='7065' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1115: item_name='ｺｸｻﾂｷ-B1/NT-L' jlac10='7066' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1116: item_name='ｺｸｻﾂｷ-B2/CF-L' jlac10='7067' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1117: item_name='ｺｸｻﾂｷ-B2/NT-L' jlac10='7068' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1118: item_name='ｺｸｻﾂｷ-B3/CF-L' jlac10='7069' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1119: item_name='ｺｸｻﾂｷ-B3/NT-L' jlac10='7070' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1120: item_name='ｺｸｻﾂｷ-B4/CF-L' jlac10='7071' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1121: item_name='ｺｸｻﾂｷ-B4/NT-L' jlac10='7072' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1122: item_name='ｺｸｻﾂｷ-B5/CF-L' jlac10='7073' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1123: item_name='ｺｸｻﾂｷ-B5/NT-L' jlac10='7074' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1124: item_name='ｺｸｻﾂｷ-B6/CF-L' jlac10='7075' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1125: item_name='ｺｸｻﾂｷ-B6/NT-L' jlac10='7076' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1126: item_name='ﾊﾟﾗｲﾝﾌﾙｴﾝｻﾞ1-L' jlac10='7077' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1127: item_name='ﾊﾟﾗｲﾝﾌﾙｴﾝｻﾞ2-L' jlac10='7078' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1128: item_name='ﾊﾟﾗｲﾝﾌﾙｴﾝｻﾞ3-L' jlac10='7079' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1129: item_name='ｴｺ-1/NT-L' jlac10='7083' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1130: item_name='ｴｺ-3/NT-L' jlac10='7084' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1131: item_name='ｴｺ-3/HI-L' jlac10='7085' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1132: item_name='ｴｺ-4/NT-L' jlac10='7086' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1133: item_name='ｴｺ-5/NT-L' jlac10='7087' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1134: item_name='ｴｺ-6/NT-L' jlac10='7088' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1135: item_name='ｴｺ-7/NT-L' jlac10='7089' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1136: item_name='ｴｺ-7/HI-L' jlac10='7090' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1137: item_name='ｴｺ-9/NT-L' jlac10='7091' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1138: item_name='ｴｺ-11/NT-L' jlac10='7092' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1139: item_name='ｴｺ-11/HI-L' jlac10='7093' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1140: item_name='ｴｺ-12/NT-L' jlac10='7094' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1141: item_name='ｴｺ-12/HI-L' jlac10='7095' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1142: item_name='ｴｺ-13/NT-L' jlac10='7096' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1143: item_name='ｴｺ-14/NT-L' jlac10='7097' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1144: item_name='ｴｺ-16/NT-L' jlac10='7098' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1145: item_name='ｴｺ-17/NT-L' jlac10='7099' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1146: item_name='ｴｺ-18/NT-L' jlac10='7100' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1147: item_name='ｴｺｰ19/NT-L' jlac10='7101' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1148: item_name='ｴｺｰ21/NT-L' jlac10='7102' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1149: item_name='ｴｺ-22/NT-L' jlac10='7103' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1150: item_name='ｴｺ-24/NT-L' jlac10='7104' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1151: item_name='ｴｺ-25/NT-L' jlac10='7105' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1152: item_name='ｴｺｰ27/NT-L' jlac10='7106' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1153: item_name='ｴｺ-30/NT-L' jlac10='7107' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1154: item_name='ﾋﾄﾊﾟﾋﾟﾛｰﾏｳｲﾙｽ(HPV)-DNA(高ﾘｽｸ型)' jlac10='7110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1155: item_name='ｻｲﾄﾒｶﾞﾛｳｲﾙｽ抗原C7-HRP' jlac10='7115' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1156: item_name='ﾋﾄﾊﾟﾋﾟﾛｰﾏｳｲﾙｽ(HPV)-DNA 型判定' jlac10='7120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1157: item_name='ﾋﾄﾊﾟﾋﾟﾛｰﾏｳｲﾙｽ(HPV)ｼﾞｪﾉﾀｲﾌﾟ判定' jlac10='7120' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1158
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1159
+2026-04-17 16:34:02 [DEBUG] Row 1160: item_name='EBウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1161: item_name='EBウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1162: item_name='EBウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1163: item_name='EBウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1164: item_name='EBウイルス DNA(WBC)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1165: item_name='単純ヘルペスウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1166: item_name='単純ヘルペスウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1167: item_name='単純ヘルペスウイルス DNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1168: item_name='水痘・帯状疱疹ウイルスDNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1169: item_name='水痘・帯状疱疹ウイルスDNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1170: item_name='水痘・帯状疱疹ウイルスDNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1171: item_name='サイトメガロウイルス DNA' jlac10='7145' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1172
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1173
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1174
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1175
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1176
+2026-04-17 16:34:02 [DEBUG] Row 1177: item_name='ｸｫﾝﾃｨﾌｪﾛﾝ' jlac10='7500' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1178
+2026-04-17 16:34:02 [DEBUG] Row 1179: item_name='ｴｷﾉｺｯｸｽ' jlac10='7530' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1180: item_name='T-スポット' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1181: item_name='ｸｫﾝﾃｨﾌｪﾛﾝ' jlac10='7540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1182: item_name='ｸｫﾝﾃｨﾌｪﾛﾝ-γN' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1183: item_name='ｸｫﾝﾃｨﾌｪﾛﾝ-γA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1184: item_name='ｸｫﾝﾃｨﾌｪﾛﾝ-γM' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1185: item_name='LDHｱｲｿｻﾞｲﾑ' jlac10='7551' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1186: item_name='CKｱｲｿｻﾞｲﾑ' jlac10='7570' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1187: item_name='ASTアイソザイム' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1188: item_name='AFPレクチン分画' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1189: item_name='AFPﾚｸﾁﾝ分画/LBA' jlac10='7897' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1190: item_name='AFP-分画' jlac10='7901' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1191: item_name='ｼｱﾘﾙLex-i抗原(SLX)' jlac10='7905' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1192: item_name='ｼｱﾘﾙTn抗原(STN)' jlac10='7906' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1193: item_name='塩基性ﾌｪﾄﾌﾟﾛﾃｲﾝ(BFP)' jlac10='7907' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1194: item_name='CA602' jlac10='7911' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1195: item_name='CA54/61' jlac10='7912' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1196: item_name='CA72-4' jlac10='7913' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1197: item_name='BCA225' jlac10='7914' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1198: item_name='NCC-ST-439' jlac10='7915' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1199: item_name='DUPAN-2' jlac10='7916' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1200: item_name='組織ポリペプタイド抗原(TPA)' jlac10='7917' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1201: item_name='Span-1' jlac10='7918' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1202: item_name='γ-ｾﾐﾉﾌﾟﾛﾃｲﾝ(γ-Sm)' jlac10='7919' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1203: item_name='ｶﾞｽﾄﾘﾝ放出ﾍﾟﾌﾟﾁﾄﾞ前駆体(ProGRP)' jlac10='7920' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1204: item_name='ｶﾞｽﾄﾘﾝ放出ﾍﾟﾌﾟﾁﾄﾞ前駆体(ProGRP)' jlac10='7920' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1205: item_name='Ⅰ型ｺﾗｰｹﾞﾝ-C-ﾃﾛﾍﾟﾌﾟﾁﾄﾞ(ⅠCTP)' jlac10='7921' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1206: item_name='可溶性ｲﾝﾀｰﾛｲｷﾝ2ﾚｾﾌﾟﾀｰ' jlac10='7922' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1207: item_name='尿中膀胱組織抗原(BTA)' jlac10='7923' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1208: item_name='抗P53抗体' jlac10='7924' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1209: item_name='Ⅰ型ｺﾗｰｹﾞﾝ架橋N-ﾃﾛﾍﾟﾌﾟﾁﾄﾞ' jlac10='7925' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1210: item_name='骨型ｱﾙｶﾘﾌｫｽﾌｧﾀｰｾﾞEIA' jlac10='7926' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1211: item_name='骨型ｱﾙｶﾘﾌｫｽﾌｧﾀｰｾﾞCLEIA' jlac10='7927' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1212: item_name='TRACP-5b(骨型酒石酸抵抗性酸性ﾌｫｽﾌｧﾀｰｾﾞ)' jlac10='7929' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1213: item_name='ｴﾗｽﾀｰｾﾞ1' jlac10='7931' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1214: item_name='PIVKA:CLEIA' jlac10='7932' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1215: item_name='ﾋﾄ絨毛性ｺﾞﾅﾄﾞﾄﾛﾋﾟﾝHCG' jlac10='7933' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1216: item_name='尿中HCGβｺｱﾌﾗｸﾞﾒﾝﾄ' jlac10='7934' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1217: item_name='HER2蛋白定量' jlac10='7937' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1218: item_name='HGH ｾﾞﾝ' jlac10='7940' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1219: item_name='HGH 15ﾌﾝ' jlac10='7941' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1220: item_name='HGH 30ﾌﾝ' jlac10='7942' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1221: item_name='HGH 60ﾌﾝ' jlac10='7943' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1222: item_name='HGH 90ﾌﾝ' jlac10='7944' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1223: item_name='HGH 120ﾌﾝ' jlac10='7945' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1224: item_name='尿中成長ﾎﾙﾓﾝ' jlac10='7950' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1225: item_name='尿中成長ﾎﾙﾓﾝ' jlac10='7950' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1226: item_name='HGH ｾﾞﾝ' jlac10='7954' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1227: item_name='HGH 15ﾌﾝ' jlac10='7955' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1228: item_name='HGH 30ﾌﾝ' jlac10='7956' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1229: item_name='HGH 60ﾌﾝ' jlac10='7957' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1230: item_name='HGH 90ﾌﾝ' jlac10='7958' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1231: item_name='HGH 120ﾌﾝ' jlac10='7959' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1232: item_name='血清ｿﾏﾄﾒｼﾞﾝ-C/RIA' jlac10='7961' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1233: item_name='血漿ｿﾏﾄﾒｼﾞﾝ-C/RIA' jlac10='7962' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1234: item_name='ACTH ｾﾞﾝ' jlac10='7970' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1235: item_name='ACTH 15' jlac10='7971' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1236: item_name='ACTH 30' jlac10='7972' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1237: item_name='ACTH 60' jlac10='7973' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1238: item_name='ACTH 90' jlac10='7974' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1239: item_name='ACTH 120' jlac10='7975' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1240: item_name='AVP' jlac10='7981' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1241: item_name='ADH' jlac10='7981' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1242: item_name='ｴｽﾄﾗｼﾞｵ-ﾙ' jlac10='7982' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1243: item_name='ｴｽﾄﾗｼﾞｵ-ﾙ-ｿﾉﾀ' jlac10='7983' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1244: item_name='ﾌﾟﾛｹﾞｽﾃﾛﾝ' jlac10='7984' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1245: item_name='ﾃｽﾄｽﾃﾛﾝ' jlac10='7985' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1246: item_name='ﾃｽﾄｽﾃﾛﾝ' jlac10='7986' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1247: item_name='ﾃｽﾄｽﾃﾛﾝ(蓄尿)' jlac10='7990' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1248: item_name='ﾃｽﾄｽﾃﾛﾝ(蓄尿)' jlac10='7990' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1249: item_name='ﾃｽﾄｽﾃﾛﾝ(随時尿)' jlac10='7995' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1250: item_name='ﾃｽﾄｽﾃﾛﾝ(随時尿)' jlac10='7995' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1251: item_name='ﾌﾘｰﾃｽﾄｽﾃﾛﾝ' jlac10='7999' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1252: item_name='血清ｺﾙﾁｿﾞ-ﾙ ｾﾞﾝ' jlac10='8000' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1253: item_name='血清ｺﾙﾁｿﾞ-ﾙ 15' jlac10='8001' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1254: item_name='血清ｺﾙﾁｿﾞ-ﾙ 30' jlac10='8002' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1255: item_name='血清ｺﾙﾁｿﾞ-ﾙ 60' jlac10='8003' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1256: item_name='血清ｺﾙﾁｿﾞ-ﾙ 90' jlac10='8004' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1257: item_name='血清ｺﾙﾁｿﾞ-ﾙ 120' jlac10='8005' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1258: item_name='血漿ｺﾙﾁｿﾞ-ﾙ ｾﾞﾝ' jlac10='8010' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1259: item_name='血漿ｺﾙﾁｿﾞ-ﾙ 15' jlac10='8011' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1260: item_name='血漿ｺﾙﾁｿﾞ-ﾙ 30' jlac10='8012' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1261: item_name='血漿ｺﾙﾁｿﾞ-ﾙ 60' jlac10='8013' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1262: item_name='血漿ｺﾙﾁｿﾞ-ﾙ 90' jlac10='8014' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1263: item_name='血漿ｺﾙﾁｿﾞ-ﾙ 120' jlac10='8015' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1264
+2026-04-17 16:34:02 [DEBUG] Row 1265: item_name='尿中ｺﾙﾁｿﾞｰﾙ/CLIA' jlac10='8020' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1266: item_name='尿中ｺﾙﾁｿﾞｰﾙ/CLIA' jlac10='8021' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1267: item_name='11.OHCS ｾﾞﾝ' jlac10='8022' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1268: item_name='ﾃﾞﾋﾄﾞﾛｴﾋﾟｱﾝﾄﾞﾛｽﾃﾛﾝｻﾙﾌｴ-ﾄ' jlac10='8024' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1269: item_name='ﾚﾆﾝ活性(PRA)' jlac10='8025' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1270: item_name='活性型ﾚﾆﾝ定量(ARC)' jlac10='8026' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1271: item_name='ｱﾝｷﾞｵﾃﾝｼﾝⅠ転換酵素(ACE)' jlac10='8027' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1272: item_name='ﾃﾞﾋﾄﾞﾛｴﾋﾟｱﾝﾄﾞﾛｽﾃﾛﾝｻﾙﾌｴ-ﾄ' jlac10='8028' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1273: item_name='血清ｱﾙﾄﾞｽﾃﾛﾝ(旧)' jlac10='8029' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1274: item_name='血漿ｱﾙﾄﾞｽﾃﾛﾝ(旧)' jlac10='8030' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1275: item_name='血清ｱﾙﾄﾞｽﾃﾛﾝ(新)' jlac10='8031' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1276: item_name='血漿ｱﾙﾄﾞｽﾃﾛﾝ(新)' jlac10='8032' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1277
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1278
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1279
+2026-04-17 16:34:02 [DEBUG] Row 1280: item_name='ｱﾙﾄﾞｽﾃﾛﾝ/I(蓄尿)' jlac10='8040' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1281: item_name='ｱﾙﾄﾞｽﾃﾛﾝ(蓄尿)' jlac10='8040' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1282: item_name='ｱﾙﾄﾞｽﾃﾛﾝ/I(随時尿)' jlac10='8045' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1283: item_name='ｱﾙﾄﾞｽﾃﾛﾝ(随時尿)' jlac10='8045' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1284: item_name='血漿ｶﾃｺﾗﾐﾝF3' jlac10='8050' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1285: item_name='ｶﾃｺﾗﾐﾝ3分画' jlac10='8060' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1286: item_name='ｶﾃｺﾗﾐﾝ3分画(蓄尿)' jlac10='8060' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1287: item_name='ｶﾃｺﾗﾐﾝ3分画(随時尿)' jlac10='8064' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1288: item_name='ﾒﾀﾈﾌﾘﾝ2分画' jlac10='8070' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1289: item_name='ﾒﾀﾈﾌﾘﾝ2分画(蓄尿)' jlac10='8070' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1290: item_name='ﾒﾀﾈﾌﾘﾝ2分画(随時尿)' jlac10='8073' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1291
+2026-04-17 16:34:02 [DEBUG] Row 1292: item_name='血漿VMA/ﾃｲﾘﾖｳ' jlac10='8081' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1293
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1294
+2026-04-17 16:34:02 [DEBUG] Row 1295: item_name='ﾊﾞﾆﾘﾙﾏﾝﾃﾞﾙ酸定量(蓄尿)' jlac10='8090' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1296: item_name='ﾊﾞﾆﾘﾙﾏﾝﾃﾞﾙ酸定量(随時尿)' jlac10='8093' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1297: item_name='血漿HVA/ﾃｲﾘｮｳ' jlac10='8101' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1298: item_name='ﾎﾓﾊﾞﾆﾘﾝ酸(蓄尿)' jlac10='8110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1299: item_name='ﾎﾓﾊﾞﾆﾘﾝ酸(随時尿)' jlac10='8113' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1300
+2026-04-17 16:34:02 [DEBUG] Row 1301: item_name='髄液HVA' jlac10='8121' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1302
+2026-04-17 16:34:02 [DEBUG] Row 1303: item_name='T3摂取率' jlac10='8130' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1304: item_name='ｻｲﾛｷｼﾝ結合ｸﾞﾛﾌﾞﾘﾝ(TBG)' jlac10='8141' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1305: item_name='TSHﾚｾﾌﾟﾀ-抗体' jlac10='8150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1306: item_name='TSHﾚｾﾌﾟﾀ-抗体定量' jlac10='8153' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1307: item_name='甲状腺刺激抗体(TS-Ab)' jlac10='8156' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1308: item_name='抗ｻｲﾛｸﾞﾛﾌﾞﾘﾝ抗体' jlac10='8157' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1309: item_name='抗甲状腺ﾍﾟﾙｵｷｼﾀﾞｰｾﾞ抗体(TPO抗体)' jlac10='8158' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1310: item_name='PTH-C ｾﾞﾝ' jlac10='8159' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1311: item_name='抗ｻｲﾛｸﾞﾛﾌﾞﾘﾝ抗体' jlac10='8160' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1312: item_name='旧)甲状腺刺激抗体(TS-Ab)' jlac10='8161' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1313: item_name='ｻｲﾛｸﾞﾛﾌﾞﾘﾝ' jlac10='8162' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1314: item_name='ｻｲﾛｸﾞﾛﾌﾞﾘﾝその他' jlac10='8163' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1315: item_name='抗ｻｲﾛｸﾞﾛﾌﾞﾘﾝ抗体' jlac10='8164' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1316: item_name='抗甲状腺ﾍﾟﾙｵｷｼﾀﾞｰｾﾞ抗体(TPO抗体)' jlac10='8165' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1317: item_name='PTH-C ｾﾞﾝ' jlac10='8166' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1318: item_name='PTH-INTACT' jlac10='8167' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1319: item_name='PTH-INTACT' jlac10='8167' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1320: item_name='PTH-INTACT ｿﾉﾀ' jlac10='8168' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1321: item_name='PTH-RP(INTACT)' jlac10='8169' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1322: item_name='PTH-RP(INTACT)' jlac10='8169' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1323: item_name='PTH-RP(INTACT)' jlac10='8169' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1324: item_name='ｺｳｶﾝﾄﾞ PTH ｾﾞﾝ' jlac10='8170' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1325: item_name='ｺｳｶﾝﾄﾞ PTH ｾﾞﾝ' jlac10='8170' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1326: item_name='ｶﾙｼﾄﾆﾝ ｾﾞﾝ' jlac10='8171' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1327: item_name='ｵｽﾃｵｶﾙｼﾝ(BGP)' jlac10='8172' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1328: item_name='ｶﾞｽﾄﾘﾝ ｾﾞﾝ' jlac10='8173' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1329: item_name='ｸﾞﾙｶｺﾞﾝ ｾﾞﾝ' jlac10='8174' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1330: item_name='ｲﾝｽﾘﾝ抗体確認試験' jlac10='8175' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1331: item_name='ｶﾙｼﾄﾆﾝ' jlac10='8179' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1332: item_name='C-ﾍﾟﾌﾟﾁﾄﾞ ｾﾞﾝ' jlac10='8180' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1333: item_name='C-ﾍﾟﾌﾟﾁﾄﾞ 30' jlac10='8181' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1334: item_name='C-ﾍﾟﾌﾟﾁﾄﾞ 60' jlac10='8182' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1335: item_name='C-ﾍﾟﾌﾟﾁﾄﾞ 90' jlac10='8183' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1336: item_name='C-ﾍﾟﾌﾟﾁﾄﾞ 120' jlac10='8184' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1337: item_name='C-ﾍﾟﾌﾟﾁﾄﾞ 180' jlac10='8185' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1338: item_name='C-PEP 後' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1339: item_name='蓄尿Cﾍﾟﾌﾟﾀｲﾄﾞ' jlac10='8190' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1340: item_name='蓄尿Cﾍﾟﾌﾟﾀｲﾄﾞ' jlac10='8190' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1341: item_name='蓄尿Cﾍﾟﾌﾟﾀｲﾄﾞ' jlac10='8190' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1342
+2026-04-17 16:34:02 [DEBUG] Row 1343: item_name='Ⅰ型ｺﾗｰｹﾞﾝ架橋N-ﾃﾛﾍﾟﾌﾟﾁﾄﾞ[NTx骨粗鬆症]' jlac10='8195' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1344: item_name='Ⅰ型ｺﾗｰｹﾞﾝ架橋N-ﾃﾛﾍﾟﾌﾟﾁﾄﾞ[NTx骨粗鬆症]' jlac10='8195' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1345: item_name='ｴﾘｽﾛﾎﾟｴﾁﾝ:RIA' jlac10='8201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1346: item_name='肝細胞増殖因子(HGF)' jlac10='8202' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1347: item_name='BNP/CLEIA' jlac10='8203' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1348: item_name='HANP' jlac10='8204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1349: item_name='ﾋﾄ心房性ﾅﾄﾘｳﾑ利尿ﾍﾟﾌﾟﾁﾄﾞ(HANP)' jlac10='8204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1350: item_name='ﾋﾄ心房性ﾅﾄﾘｳﾑ利尿ﾍﾟﾌﾟﾁﾄﾞ(HANP)' jlac10='8204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1351: item_name='ﾋﾄ心房性ﾅﾄﾘｳﾑ利尿ﾍﾟﾌﾟﾁﾄﾞ(HANP)' jlac10='8204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1352: item_name='蓄尿5-ﾊｲﾄﾞﾛｵｷｼｲﾝﾄﾞｰﾙ酢酸(5-HIAA)' jlac10='8205' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1353: item_name='5-ﾊｲﾄﾞﾛｷｼｲﾝﾄﾞｰﾙ酢酸(5-HIAA) (蓄尿)' jlac10='8205' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1354: item_name='髄液5-HIAA' jlac10='8206' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1355: item_name='ｻｲｸﾘｯｸAMP' jlac10='8207' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1356: item_name='蓄尿ｻｲｸﾘｯｸAMP' jlac10='8208' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1357: item_name='Ⅰ型ｺﾗｰｹﾞﾝ架橋N-ﾃﾛﾍﾟﾌﾟﾁﾄﾞ' jlac10='8209' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1358: item_name='Ⅰ型ｺﾗｰｹﾞﾝ架橋N-ﾃﾛﾍﾟﾌﾟﾁﾄﾞ(血清NTx)' jlac10='8210' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1359: item_name='5-ﾊｲﾄﾞﾛｷｼｲﾝﾄﾞｰﾙ酢酸(5-HIAA) (随時尿)' jlac10='8211' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1360: item_name='ﾋﾄ脳性ﾅﾄﾘｳﾑ利尿ﾍﾟﾌﾟﾁﾄﾞ前駆体N端ﾌﾗｸﾞﾒﾝﾄ' jlac10='8212' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1361
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1362
+2026-04-17 16:34:02 [DEBUG] Row 1363: item_name='結石鑑別' jlac10='8251' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1364: item_name='ｲﾝﾄﾞｻｲｱﾆﾝｸﾞﾘｰﾝ試験(ICG)前' jlac10='8301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1365: item_name='ｲﾝﾄﾞｻｲｱﾆﾝｸﾞﾘｰﾝ試験(ICG)前' jlac10='8301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1366: item_name='ｲﾝﾄﾞｻｲｱﾆﾝｸﾞﾘｰﾝ試験(ICG)15分後' jlac10='8302' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1367: item_name='ｲﾝﾄﾞｻｲｱﾆﾝｸﾞﾘｰﾝ試験(ICG)15分後' jlac10='8302' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1368: item_name='PFDﾃｽﾄ前' jlac10='8310' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1369: item_name='PFDﾃｽﾄ前' jlac10='8310' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1370: item_name='PFDﾃｽﾄ6時間後' jlac10='8311' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1371: item_name='PFDﾃｽﾄ6時間後' jlac10='8311' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1372: item_name='結石鑑別' jlac10='8321' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1373: item_name='エタノール' jlac10='8322' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1374
+2026-04-17 16:34:02 [DEBUG] Row 1375: item_name='ペントシジン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1376: item_name='ｸﾞﾘｺｱﾙﾌﾞﾐﾝ(GA)' jlac10='8332' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1377: item_name='ｸﾞﾘｺｱﾙﾌﾞﾐﾝ(GA)' jlac10='8332' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1378: item_name='1・5-ｱﾝﾋﾄﾞﾛｸﾞﾙｼﾄｰﾙ(1・5AG)' jlac10='8333' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1379: item_name='ｼｱﾙ化糖鎖抗原KL-6(KL-6)' jlac10='8334' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1380: item_name='ﾋｱﾙﾛﾝ酸' jlac10='8335' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1381: item_name='ﾋｱﾙﾛﾝ酸他' jlac10='8336' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1382: item_name='乳酸' jlac10='8337' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1383: item_name='乳酸' jlac10='8337' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1384: item_name='ﾋﾟﾙﾋﾞﾝ酸' jlac10='8338' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1385: item_name='ﾋﾟﾙﾋﾞﾝ酸' jlac10='8338' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1386: item_name='25-OHビタミンD' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1387: item_name='ｹﾄﾝ体分画動脈' jlac10='8340' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1388: item_name='IV型コラーゲン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1389
+2026-04-17 16:34:02 [DEBUG] Row 1390: item_name='M2BPGi' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1391: item_name='ﾋﾞﾀﾐﾝB1' jlac10='8349' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1392: item_name='ﾋﾞﾀﾐﾝB1' jlac10='8349' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1393: item_name='ﾋﾞﾀﾐﾝB2' jlac10='8350' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1394: item_name='ﾋﾞﾀﾐﾝB2' jlac10='8350' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1395: item_name='TIBC:CPB' jlac10='8351' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1396: item_name='TIBC:比色' jlac10='8352' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1397: item_name='UIBC:CPB' jlac10='8353' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1398: item_name='UIBC:比色' jlac10='8354' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1399: item_name='亜鉛(血中)' jlac10='8355' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1400: item_name='亜鉛(血中)' jlac10='8355' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1401: item_name='亜鉛(血中)' jlac10='8355' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1402: item_name='亜鉛(尿中)' jlac10='8356' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1403: item_name='亜鉛(尿中)' jlac10='8356' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1404: item_name='亜鉛(尿中)' jlac10='8356' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1405: item_name='銅(血中)' jlac10='8357' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1406: item_name='銅(尿中)' jlac10='8358' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1407: item_name='銅(尿中)' jlac10='8358' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1408: item_name='銅(尿中)' jlac10='8358' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1409: item_name='ﾋﾞﾀﾐﾝB1' jlac10='8359' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1410: item_name='ﾋﾞﾀﾐﾝB1' jlac10='8359' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1411: item_name='ﾋﾞﾀﾐﾝB2' jlac10='8360' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1412: item_name='ﾋﾞﾀﾐﾝB2' jlac10='8360' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1413: item_name='ﾋﾞﾀﾐﾝB12' jlac10='8361' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1414: item_name='葉酸' jlac10='8362' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1415: item_name='1α,25-(OH)2ﾋﾞﾀﾐﾝD' jlac10='8363' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1416: item_name='CCR4タンパク(末梢血)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1417: item_name='クレアチン(蓄尿)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1418: item_name='BCAA/TYR' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1419: item_name='クレアチン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1420: item_name='クレアチン(随時尿)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1421: item_name='ﾄﾛﾎﾟﾆﾝＴ' jlac10='8370' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1422: item_name='ｼｽﾀﾁﾝC:LA' jlac10='8371' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1423: item_name='ﾎﾓｼｽﾃｲﾝ' jlac10='8372' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1424: item_name='ﾍﾓﾍﾟｷｼﾝ' jlac10='8373' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1425: item_name='総胆汁酸' jlac10='8374' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1426: item_name='ﾐｵｼﾝ軽鎖Ｉ' jlac10='8375' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1427: item_name='ﾄﾛﾎﾟﾆﾝＴ' jlac10='8376' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1428: item_name='ﾌﾟﾛｺﾗｰｹﾞﾝⅢﾍﾟﾌﾟﾀｲﾄﾞ(PⅢP)' jlac10='8377' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1429: item_name='KL-6' jlac10='8378' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1430: item_name='ｻｰﾌｧｸﾀﾝﾄﾌﾟﾛﾃｲﾝA' jlac10='8379' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1431: item_name='ｻｰﾌｧｸﾀﾝﾄﾌﾟﾛﾃｲﾝD' jlac10='8380' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1432: item_name='ﾐｵｸﾞﾛﾋﾞﾝ' jlac10='8381' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1433: item_name='α2ﾏｸﾛｸﾞﾛﾌﾞﾘﾝ' jlac10='8382' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1434: item_name='α2ﾏｸﾛｸﾞﾛﾌﾞﾘﾝ' jlac10='8383' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1435: item_name='ｾﾙﾛﾌﾟﾗｽﾐﾝ' jlac10='8384' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1436: item_name='ﾄﾗﾝｽﾌｪﾘﾝ' jlac10='8385' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1437
+2026-04-17 16:34:02 [DEBUG] Row 1438: item_name='尿ﾄﾗﾝｽﾌｪﾘﾝ' jlac10='8390' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1439: item_name='尿ﾄﾗﾝｽﾌｪﾘﾝ' jlac10='8390' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1440: item_name='尿ﾐｵｸﾞﾛﾋﾞﾝ' jlac10='8394' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1441: item_name='ｱﾐﾛｲﾄﾞA' jlac10='8395' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1442: item_name='随時尿ｱﾙﾌﾞﾐﾝ' jlac10='8400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1443: item_name='随時尿ｱﾙﾌﾞﾐﾝ' jlac10='8400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1444: item_name='随時尿ｱﾙﾌﾞﾐﾝ' jlac10='8400' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1445: item_name='蓄尿ｱﾙﾌﾞﾐﾝ' jlac10='8405' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1446: item_name='蓄尿ｱﾙﾌﾞﾐﾝ' jlac10='8405' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1447: item_name='蓄尿ｱﾙﾌﾞﾐﾝ' jlac10='8405' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1448: item_name='α1-ﾏｲｸﾛｸﾞﾛﾌﾞﾘﾝ' jlac10='8411' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1449: item_name='尿α1-ﾏｲｸﾛｸﾞﾛﾌﾞﾘﾝ' jlac10='8412' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1450: item_name='尿α1-ﾏｲｸﾛｸﾞﾛﾌﾞﾘﾝ' jlac10='8412' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1451: item_name='ｱﾃﾞﾉｼﾝﾃﾞｱﾐﾅｰｾﾞ(ADA)' jlac10='8413' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1452: item_name='ｱﾃﾞﾉｼﾝﾃﾞｱﾐﾅｰｾﾞ(ADA)穿刺液' jlac10='8414' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1453: item_name='ｱﾙﾄﾞﾗｰｾﾞ' jlac10='8415' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1454: item_name='ﾄﾘﾌﾟｼﾝ' jlac10='8416' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1455: item_name='膵分泌性ﾄﾘﾌﾟｼﾝｲﾝﾋﾋﾞﾀｰ(PSTI)' jlac10='8417' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1456: item_name='膵ﾎｽﾎﾘﾊﾟｰｾﾞA2' jlac10='8418' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1457: item_name='2-5A合成酵素活性：ＲＩＡ' jlac10='8419' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1458: item_name='LDHｱｲｿｻﾞｲﾑ' jlac10='8420' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1459: item_name='ALPｱｲｿｻﾞｲﾑ' jlac10='8430' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1460: item_name='CKｱｲｿｻﾞｲﾑ' jlac10='8450' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1461: item_name='HBVｼﾞｪﾉﾀｲﾌﾟ判定' jlac10='8454' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1462: item_name='HBV-DNA定量(Taq Man PCR法)' jlac10='8455' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1463: item_name='HBV-DNA定量(Taq Man PCR法)' jlac10='8455' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1464: item_name='HBV-DNA定量(Taq Man PCR法)' jlac10='8455' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1465: item_name='HBV-DNAﾎﾟﾘﾒﾗｰｾﾞ(RA法)' jlac10='8458' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1466: item_name='HA抗体' jlac10='8460' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1467: item_name='HBVﾌﾟﾚｺｱ/ｺｱﾌﾟﾛﾓｰﾀ' jlac10='8463' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1468: item_name='HA抗体IgM' jlac10='8470' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1469: item_name='HBc抗体IgM' jlac10='8475' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1470: item_name='HBVﾌﾟﾚｺｱ/ｺｱﾌﾟﾛﾓｰﾀ' jlac10='8480' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1471: item_name='HCV-RNA定量(Taq Man PCR法)' jlac10='8485' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1472: item_name='HCV-RNA定量(Taq Man PCR法)' jlac10='8485' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1473: item_name='HCV-RNA定量(Taq Man PCR法)' jlac10='8485' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1474: item_name='HCV-RNA定量(Taq Man PCR法)' jlac10='8485' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1475: item_name='B型肝炎ｳｲﾙｽｺｱ関連抗原' jlac10='8488' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1476: item_name='IgA-HEV抗体' jlac10='8489' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1477: item_name='HCV抗体(3rd)' jlac10='8490' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1478: item_name='HCVコア抗原' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1479: item_name='HCVｺｱC22' jlac10='8495' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1480: item_name='HCV群別' jlac10='8501' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1481: item_name='HIV-RNA定量(Taq Man PCR法)' jlac10='8502' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1482: item_name='HIV-RNA定量(Taq Man PCR法)' jlac10='8502' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1483: item_name='HIV-RNA定量(Taq Man PCR法)' jlac10='8502' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1484: item_name='HIV-1確認試験' jlac10='8503' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1485: item_name='HIV-1確認試験' jlac10='8503' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1486: item_name='HIVｼﾞｪﾉﾀｲﾌﾟ薬剤耐性検査' jlac10='8504' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1487: item_name='HIV-2抗体確認試験' jlac10='8507' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1488: item_name='HIT抗体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1489: item_name='血小板表面IgG' jlac10='8510' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1490: item_name='ﾓﾉｸﾛｰﾅﾙRF結合免疫複合体' jlac10='8511' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1491: item_name='免疫複合体-C1q' jlac10='8512' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1492: item_name='抗DNA抗体RI' jlac10='8513' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1493: item_name='抗DS-DNA抗体IgG/EIA' jlac10='8514' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1494: item_name='抗DS-DNA抗体IgG/FEIA' jlac10='8514' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1495: item_name='ｺｳSS-DNA/IgG' jlac10='8515' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1496: item_name='抗SS-DNA/IgG' jlac10='8516' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1497: item_name='旧)抗SS-DNA抗体IgG' jlac10='8516' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1498: item_name='抗RNP抗体/EIA' jlac10='8520' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1499: item_name='抗RNP抗体/FEIA' jlac10='8520' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1500: item_name='抗SM抗体/EIA' jlac10='8525' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1501: item_name='抗SM抗体/FEIA' jlac10='8525' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1502: item_name='抗SCL-70抗体/EIA' jlac10='8530' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1503: item_name='抗SCL-70抗体/FEIA' jlac10='8530' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1504: item_name='抗ｾﾝﾄﾛﾒｱ抗体/EIA' jlac10='8535' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1505: item_name='抗ｾﾝﾄﾛﾒｱ抗体/FEIA' jlac10='8535' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1506: item_name='抗SS-A抗体/EIA' jlac10='8540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1507: item_name='抗SS-A抗体/FEIA' jlac10='8540' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1508: item_name='抗SS-B抗体/EIA' jlac10='8545' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1509: item_name='抗SS-B抗体/FEIA' jlac10='8545' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1510: item_name='抗JO-1抗体/EIA' jlac10='8550' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1511: item_name='抗JO-1抗体/FEIA' jlac10='8550' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1512: item_name='抗SS-DNA抗体IgG/FEIA' jlac10='8553' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1513: item_name='抗ｶﾞﾗｸﾄｰｽ欠損IgG抗体' jlac10='8556' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1514: item_name='ﾏﾄﾘｯｸｽﾒﾀﾛﾌﾟﾛﾃｱｰｾﾞ3(MMP3)' jlac10='8557' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1515: item_name='IgG型ﾘｳﾏﾁ因子' jlac10='8560' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1516: item_name='抗ｼﾄﾙﾘﾝ化ﾍﾟﾌﾟﾁﾄﾞ抗体(抗CCP抗体)' jlac10='8565' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1517: item_name='抗GAD抗体' jlac10='8566' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1518: item_name='ICA/IgG膵島細胞質抗体' jlac10='8567' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1519: item_name='抗ﾐﾄｺﾝﾄﾞﾘｱM2抗体' jlac10='8570' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1520: item_name='抗IA-2抗体' jlac10='8573' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1521
+2026-04-17 16:34:02 [DEBUG] Row 1522: item_name='抗好中球細胞質ﾍﾟﾙｵｷｼﾀﾞｰｾﾞ抗体' jlac10='8575' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1523: item_name='抗糸球体基底膜抗体(GBM)' jlac10='8576' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1524: item_name='抗ｶﾙｼﾞｵﾘﾋﾟﾝ' jlac10='8577' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1525: item_name='抗ｶﾙｼﾞｵﾘﾋﾟﾝβ2GPⅠ' jlac10='8578' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1526: item_name='抗好中球細胞質抗体(PR3-ANCA)' jlac10='8579' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1527: item_name='抗ﾃﾞｽﾓｸﾞﾚｲﾝ1抗体' jlac10='8580' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1528: item_name='抗ﾃﾞｽﾓｸﾞﾚｲﾝ3抗体' jlac10='8581' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1529: item_name='抗BP180抗体' jlac10='8582' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1530: item_name='ｱｾﾁﾙｺﾘﾝﾚｾﾌﾟﾀｰ結合抗体' jlac10='8585' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1531: item_name='LKM-1抗体' jlac10='8590' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1532: item_name='抗糸球体基底膜抗体(GBM)' jlac10='8593' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1533: item_name='ﾙｰﾌﾟｽｱﾝﾁｺｱｸﾞﾗﾝﾄ：dRVVT' jlac10='8596' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1534: item_name='百日咳菌抗体' jlac10='8597' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1535: item_name='百日咳菌抗体/EIA' jlac10='8600' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1536: item_name='ﾚｼﾞｵﾈﾗAG/EIA-U' jlac10='8601' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1537: item_name='ﾏｲｺﾌﾟﾗｽﾞﾏ/CF' jlac10='8602' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1538: item_name='ﾏｲｺﾌﾟﾗｽﾞﾏ/CF-L' jlac10='8603' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1539: item_name='ｱｽﾍﾟﾙｷﾞﾙｽ抗体/CF' jlac10='8604' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1540: item_name='ｱｽﾍﾟﾙｷﾞﾙｽ抗原' jlac10='8605' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1541: item_name='ｱｽﾍﾟﾙｷﾞﾙｽ抗原その他' jlac10='8610' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1542: item_name='ﾄｷｿﾌﾟﾗｽﾞﾏ抗体/PHA' jlac10='8615' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1543: item_name='FTA/ABS法定性' jlac10='8616' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1544: item_name='ﾄｷｿﾌﾟﾗｽﾞﾏIgG抗体 CLEIA法' jlac10='8620' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1545: item_name='ﾄｷｿﾌﾟﾗｽﾞﾏIgM抗体 CLEIA法' jlac10='8625' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1546: item_name='MAC抗体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1547: item_name='赤痢ｱﾒ-ﾊﾞ抗体FA' jlac10='8631' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1548: item_name='ﾎﾟ-ﾙﾊﾞﾝﾈﾙ' jlac10='8632' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1549: item_name='H.ﾋﾟﾛﾘ抗体' jlac10='8635' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1550: item_name='Hピロリ抗体(随時尿)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1551: item_name='便中ﾍﾘｺﾊﾞｸﾀｰﾋﾟﾛﾘ抗原' jlac10='8641' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1552: item_name='ｵｰﾑ病/CF' jlac10='8642' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1553: item_name='ｵｰﾑ病/CF-L' jlac10='8643' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1554: item_name='ｸﾗﾐｼﾞｱﾄﾗｺﾏﾃｨｽ抗体.IgA.IgG' jlac10='8645' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1555: item_name='ｸﾗﾐｼﾞｱﾆｭｰﾓﾆｴIgA' jlac10='8650' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1556: item_name='ｸﾗﾐｼﾞｱﾆｭｰﾓﾆｴIgG' jlac10='8655' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1557: item_name='ｸﾗﾐｼﾞｱ・ﾄﾗｺﾏﾃｨｽ同定DNA PCR法(尿)' jlac10='8658' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1558: item_name='ｸﾗﾐｼﾞｱ・ﾄﾗｺﾏﾃｨｽ/ﾘｱﾙﾀｲﾑPCR(尿)' jlac10='8658' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1559: item_name='ｸﾗﾐｼﾞｱ・ﾄﾗｺﾏﾃｨｽ同定DNA PCR法(ｽﾜﾌﾞ)' jlac10='8659' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1560: item_name='ｸﾗﾐｼﾞｱ・ﾄﾗｺﾏﾃｨｽ/ﾘｱﾙﾀｲﾑPCR(ｽﾜﾌﾞ)' jlac10='8659' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1561: item_name='尿中レジオネラ抗原' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1562: item_name='ｸﾘﾌﾟﾄｺﾂｸｽAG' jlac10='8661' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1563: item_name='ｸﾘﾌﾟﾄｺﾂｸｽAG-L' jlac10='8662' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1564: item_name='ｸﾘﾌﾟﾄｺﾂｸｽAG-L' jlac10='8662' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1565: item_name='β-D-ｸﾞﾙｶﾝ' jlac10='8663' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1566: item_name='ﾌﾟﾛｶﾙｼﾄﾆﾝ' jlac10='8664' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1567: item_name='D-ｱﾗﾋﾞﾆﾄ-ﾙ' jlac10='8665' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1568: item_name='淋菌DNA PCR法(尿)' jlac10='8669' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1569: item_name='淋菌/ﾘｱﾙﾀｲﾑPCR(尿)' jlac10='8669' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1570: item_name='淋菌DNA PCR法(ｽﾜﾌﾞ)' jlac10='8670' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1571: item_name='淋菌/ﾘｱﾙﾀｲﾑPCR(ｽﾜﾌﾞ)' jlac10='8670' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1572: item_name='ｴﾝﾄﾞﾄｷｼﾝ定量' jlac10='8671' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1573: item_name='肺炎球菌莢膜抗原(尿)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1574: item_name='肺炎球菌莢膜抗原(髄)' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1575: item_name='単純ﾍﾙﾍﾟｽ特異抗原' jlac10='8675' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1576: item_name='単純ﾍﾙﾍﾟｽ特異抗原' jlac10='8675' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1577: item_name='単純ﾍﾙﾍﾟｽ特異抗原' jlac10='8675' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1578: item_name='水痘・帯状ﾍﾙﾍﾟｽ抗原' jlac10='8681' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1579: item_name='水痘・帯状ﾍﾙﾍﾟｽ抗原' jlac10='8681' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1580: item_name='水痘・帯状ﾍﾙﾍﾟｽ抗原' jlac10='8681' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1581: item_name='遊離L鎖ｋ/λ比' jlac10='8684' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1582: item_name='IEP免疫固定法(M蛋白同定)' jlac10='8688' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1583: item_name='尿中ﾍﾞﾝｽｼﾞｮｰﾝｽﾞ(BJ)蛋白同定(免疫固定法)' jlac10='8689' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1584: item_name='IEP/抗ﾋﾄ血清' jlac10='8690' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1585: item_name='IEP/抗IgA(α鎖)' jlac10='8691' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1586: item_name='IEP/抗L鎖(κ型)' jlac10='8692' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1587: item_name='IEP/抗L鎖(λ型)' jlac10='8693' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1588: item_name='非特異的IgE' jlac10='8695' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1589: item_name='Mﾀﾝﾊﾟｸ' jlac10='8696' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1590: item_name='尿中ﾍﾞﾝｽｼﾞｮｰﾝｽﾞ(BJ)蛋白同定' jlac10='8697' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1591: item_name='尿中ﾍﾞﾝｽｼﾞｮｰﾝｽﾞ(BJ)蛋白同定' jlac10='8697' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1592: item_name='尿中ﾍﾞﾝｽｼﾞｮｰﾝｽﾞ(BJ)蛋白同定' jlac10='8697' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1593: item_name='血清補体価(CH50)' jlac10='8698' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1594: item_name='IgGｻﾌﾞｸﾗｽIgG4' jlac10='8699' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1595: item_name='TARC' jlac10='8700' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1596: item_name='染色体検査Gﾊﾞﾝﾄﾞ法(PB)' jlac10='8701' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1597: item_name='EGFR遺伝子解析コバスv2' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1598: item_name='EGFR遺伝子(新鮮組織)' jlac10='8711' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1599: item_name='EGFR遺伝子(胸水)' jlac10='8712' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1600: item_name='EGFR遺伝子(気管支鏡洗浄液)' jlac10='8713' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1601: item_name='EGFR遺伝子変異解析(ﾊﾟﾗﾌｨﾝﾛｰﾙ)' jlac10='8714' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1602: item_name='乳癌HER2遺伝子(FISH法)' jlac10='8715' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1603: item_name='EGFR蛋白免疫組織染色' jlac10='8716' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1604: item_name='K-ras遺伝子変異解析' jlac10='8717' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1605: item_name='K-ras遺伝子変異解析(PCR-rSSO法)' jlac10='8717' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1606: item_name='胃癌HER2遺伝子(FISH法)' jlac10='8718' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1607: item_name='肺癌ALK遺伝子(FISH法)' jlac10='8719' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1608: item_name='免疫ｸﾞﾛﾌﾞﾘﾝH鎖JH再構成(PB)' jlac10='8721' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1609: item_name='免疫ｸﾞﾛﾌﾞﾘﾝL鎖JK再構成(PB)' jlac10='8722' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1610: item_name='免疫ｸﾞﾛﾌﾞﾘﾝL鎖JL再構成(PB)' jlac10='8723' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1611: item_name='JAK2V617F' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1612: item_name='TCRβ鎖Jβ1領域再構成(PB)' jlac10='8731' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1613: item_name='TCRβ鎖Jβ2領域再構成(PB)' jlac10='8732' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1614: item_name='TCRβ鎖Cβ領域再構成(PB)' jlac10='8733' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1615: item_name='TCRγ鎖Jγ領域再構成(PB)' jlac10='8734' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1616: item_name='TCRδ鎖Jδ1領域再構成(PB)' jlac10='8735' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1617: item_name='IGH遺伝子再構成PCR(PB)' jlac10='8741' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1618: item_name='IGK遺伝子再構成PCR(PB)' jlac10='8742' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1619: item_name='IGL遺伝子再構成PCR(PB)' jlac10='8743' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1620: item_name='PDGFRβ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1621: item_name='FGFR1' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1622: item_name='CCND1' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1623: item_name='TRB遺伝子再構成PCR(PB)' jlac10='8751' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1624: item_name='TRG遺伝子再構成PCR(PB)' jlac10='8752' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1625: item_name='TRD遺伝子再構成PCR(PB)' jlac10='8753' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1626: item_name='4q12' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1627: item_name='BCL2' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1628: item_name='IgH/MAF' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1629: item_name='FGFR3/IgH' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1630: item_name='ALK' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1631: item_name='ATM' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1632: item_name='p53' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1633: item_name='末梢血好中球　bcr/abl [ t(9;22)転座解析 ]' jlac10='8761' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1634: item_name='Ph染色体 bcr/abl [ t(9;22)転座解析 ](PB)' jlac10='8762' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1635: item_name='異性間骨髄移植(PB)' jlac10='8763' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1636: item_name='AML1 (21q 22転座解析)(PB)' jlac10='8764' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1637: item_name='AML1/ETO (MTG8) [ t(8;21)転座解析 ](PB)' jlac10='8765' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1638: item_name='PML/RARα [ t(15;17)転座解析 ](PB)' jlac10='8766' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1639: item_name='CBFβ [ inv(16)(p13q 22)逆位解析 ](PB)' jlac10='8767' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1640: item_name='MLＬ (11q 23転座解析)(PB)' jlac10='8768' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1641: item_name='TEL (12q 13転座/欠失解析)(PB)' jlac10='8769' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1642: item_name='TEL/AML1 [ t(12;21)転座解析 ](PB)' jlac10='8770' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1643: item_name='p16 (9q21欠失解析)(PB)' jlac10='8771' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1644: item_name='12染色体　(12ﾄﾘｿﾐｰ)(PB)' jlac10='8772' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1645: item_name='7染色体 (7ﾓﾉｿﾐｰ)(PB)' jlac10='8773' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1646: item_name='8染色体 (8ﾄﾘｿﾐｰ)(PB)' jlac10='8774' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1647: item_name='IRF-1 (5q31欠失解析)(PB)' jlac10='8775' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1648: item_name='IgH (14q32転座解析)(PB)' jlac10='8776' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1649: item_name='IgH/CCND1 (BCL1) [t(11;14)転座解析](PB)' jlac10='8777' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1650: item_name='IgH/BCL2 [t(14;18)転座解析](PB)' jlac10='8778' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1651: item_name='c-myc/IgH [t(8;14)転座解析](PB)' jlac10='8779' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1652: item_name='BCL6/IgH [t(3;14)転座解析](PB)' jlac10='8780' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1653: item_name='BCL6 (3q27転座解析)(PB)' jlac10='8781' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1654: item_name='c-myc (8q24転座解析)(PB)' jlac10='8782' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1655: item_name='MALT1 (18q21 転座解析)(PB)' jlac10='8783' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1656: item_name='API2/MALT1 [t(11;18)転座解析](PB)' jlac10='8784' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1657: item_name='LEU (13q14 欠失解析)(PB)' jlac10='8785' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1658: item_name='N-myc (2p24.1 増幅解析)(PB)' jlac10='8786' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1659: item_name='AML1-MTG8 キメラmRNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1660: item_name='ﾏﾙﾁｶﾗｰFISH解析(PB)' jlac10='8791' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1661: item_name='FIP1L1-PDGFRα' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1662: item_name='FLT3/ITD' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1663: item_name='WT1 mRNA定量' jlac10='8794' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1664: item_name='AMP-CML(PB)' jlac10='8795' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1665: item_name='UGT1A1遺伝子多型解析(PB)' jlac10='8796' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1666: item_name='UGT1A1遺伝子多型解析(PB)' jlac10='8796' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1667: item_name='Major BCR-ABL mRNA IS' jlac10='8797' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1668: item_name='染色体検査Gﾊﾞﾝﾄﾞ法(BM)' jlac10='8801' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1669: item_name='RAS遺伝子変異解析(PCR-rSSO法)' jlac10='8802' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1670: item_name='免疫ｸﾞﾛﾌﾞﾘﾝH鎖JH再構成(BM)' jlac10='8821' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1671: item_name='免疫ｸﾞﾛﾌﾞﾘﾝL鎖JK再構成(BM)' jlac10='8822' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1672: item_name='免疫ｸﾞﾛﾌﾞﾘﾝL鎖JL再構成(BM)' jlac10='8823' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1673: item_name='JAK2V617F' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1674: item_name='TCRβ鎖Jβ1領域再構成(BM)' jlac10='8831' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1675: item_name='TCRβ鎖Jβ2領域再構成(BM)' jlac10='8832' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1676: item_name='TCRβ鎖Cβ領域再構成(BM)' jlac10='8833' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1677: item_name='TCRγ鎖Jγ領域再構成(BM)' jlac10='8834' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1678: item_name='TCRδ鎖Jδ1領域再構成(BM)' jlac10='8835' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1679: item_name='IGH遺伝子再構成PCR(BM)' jlac10='8841' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1680: item_name='IGK遺伝子再構成PCR(BM)' jlac10='8842' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1681: item_name='IGL遺伝子再構成PCR(BM)' jlac10='8843' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1682: item_name='PDGFRβ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1683: item_name='FGFR1' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1684: item_name='CCND1' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1685: item_name='TRB遺伝子再構成PCR(BM)' jlac10='8851' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1686: item_name='TRG遺伝子再構成PCR(BM)' jlac10='8852' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1687: item_name='TRD遺伝子再構成PCR(BM)' jlac10='8853' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1688: item_name='4q12' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1689: item_name='BCL2' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1690: item_name='IgH/MAF' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1691: item_name='FGFR3/IgH' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1692: item_name='ALK' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1693: item_name='ATM' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1694: item_name='p53' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1695: item_name='Ph染色体 bcr/abl [ t(9;22)転座解析 (BM)' jlac10='8862' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1696: item_name='異性間骨髄移植(BM)' jlac10='8863' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1697: item_name='AML1 (21q 22転座解析)(BM)' jlac10='8864' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1698: item_name='AML1/ETO (MTG8) [t(8;21)転座解析](BM)' jlac10='8865' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1699: item_name='PML/RARα t(15;17)転座解析](BM)' jlac10='8866' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1700: item_name='CBFβ [inv(16)(p13q 22)逆位解析](BM)' jlac10='8867' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1701: item_name='MLＬ (11q 23転座解析)(BM)' jlac10='8868' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1702: item_name='TEL (12q13転座/欠失解析)(BM)' jlac10='8869' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1703: item_name='TEL/AML1 t[(12;21)転座解析](BM)' jlac10='8870' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1704: item_name='p16 (9q21欠失解析)(BM)' jlac10='8871' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1705: item_name='12染色体　(12ﾄﾘｿﾐｰ)(BM)' jlac10='8872' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1706: item_name='7染色体 (7ﾓﾉｿﾐｰ)(BM)' jlac10='8873' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1707: item_name='8染色体 (8ﾄﾘｿﾐｰ)(BM)' jlac10='8874' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1708: item_name='IRF-1 (5q31欠失解析)(BM)' jlac10='8875' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1709: item_name='IgH (14q32転座解析)(BM)' jlac10='8876' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1710: item_name='IgH/CCND1 (BCL1) t(11;14)転座解析](BM)' jlac10='8877' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1711: item_name='IgH/BCL2 [t(14;18)転座解析](BM)' jlac10='8878' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1712: item_name='c-myc/IgH [t(8;14)転座解析](BM)' jlac10='8879' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1713: item_name='BCL6/IgH [t(3;14)転座解析](BM)' jlac10='8880' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1714: item_name='BCL6 (3q27転座解析)(BM)' jlac10='8881' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1715: item_name='c-myc (8q24転座解析)(BM)' jlac10='8882' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1716: item_name='MALT1 (18q21 転座解析)(BM)' jlac10='8883' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1717: item_name='API2/MALT1 [t(11;18)転座解析](BM)' jlac10='8884' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1718: item_name='LEU (13q14 欠失解析)(BM)' jlac10='8885' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1719: item_name='N-myc (2p24.1 増幅解析)(BM)' jlac10='8886' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1720: item_name='AML1-MTG8 キメラmRNA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1721: item_name='ﾏﾙﾁｶﾗｰFISH解析(BM)' jlac10='8891' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1722: item_name='FIP1L1-PDGFRα' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1723: item_name='FLT3/ITD' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1724: item_name='WT1 mRNA定量' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1725: item_name='染色体検査Gﾊﾞﾝﾄﾞ法(他)' jlac10='8901' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1726: item_name='ROS1融合遺伝子解析' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1727: item_name='ROS1融合遺伝子解析' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1728: item_name='EGFR遺伝子解析コバスv2' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1729: item_name='PD-L1(28-8)頭頸部' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1730: item_name='BRACA' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1731: item_name='Gバンド分染+FISH' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1732: item_name='免疫ｸﾞﾛﾌﾞﾘﾝH鎖JH再構成(他)' jlac10='8921' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1733: item_name='免疫ｸﾞﾛﾌﾞﾘﾝL鎖JK再構成(他)' jlac10='8922' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1734: item_name='免疫ｸﾞﾛﾌﾞﾘﾝL鎖JL再構成(他)' jlac10='8923' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1735
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1736
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1737
+2026-04-17 16:34:02 [DEBUG] Row 1738: item_name='TCRβ鎖Jβ1領域再構成(他)' jlac10='8931' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1739: item_name='TCRβ鎖Jβ2領域再構成(他)' jlac10='8932' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1740: item_name='TCRβ鎖Cβ領域再構成(他)' jlac10='8933' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1741: item_name='TCRγ鎖Jγ領域再構成(他)' jlac10='8934' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1742: item_name='TCRδ鎖Jδ1領域再構成(他)' jlac10='8935' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1743: item_name='IGH遺伝子再構成PCR(他)' jlac10='8941' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1744: item_name='IGK遺伝子再構成PCR(他)' jlac10='8942' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1745: item_name='IGL遺伝子再構成PCR(他)' jlac10='8943' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1746: item_name='PDGFRβ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1747: item_name='FGFR1' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1748: item_name='CCND1' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1749: item_name='TRB遺伝子再構成PCR(他)' jlac10='8951' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1750: item_name='TRG遺伝子再構成PCR(他)' jlac10='8952' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1751: item_name='TRD遺伝子再構成PCR(他)' jlac10='8953' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1752: item_name='BCL2' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1753: item_name='IgH/MAF' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1754: item_name='FGFR3/IgH' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1755: item_name='ALK' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1756: item_name='ATM' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1757: item_name='p53' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1758: item_name='Ph染色体 bcr/abl [t(9;22)転座解析](他)' jlac10='8962' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1759: item_name='異性間骨髄移植(他)' jlac10='8963' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1760: item_name='AML1 (21q22転座解析)(他)' jlac10='8964' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1761: item_name='AML1/ETO (MTG8) [t(8;21)転座解析](他)' jlac10='8965' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1762: item_name='PML/RARα [t(15;17)転座解析](他)' jlac10='8966' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1763: item_name='CBFβ [inv(16)(p13q 22)逆位解析](他)' jlac10='8967' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1764: item_name='MLＬ (11q23転座解析)(他)' jlac10='8968' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1765: item_name='TEL (12q13転座/欠失解析)(他)' jlac10='8969' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1766: item_name='TEL/AML1 [t(12;21)転座解析](他)' jlac10='8970' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1767: item_name='p16 (9q21欠失解析)(他)' jlac10='8971' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1768: item_name='12染色体　(12ﾄﾘｿﾐｰ)(他)' jlac10='8972' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1769: item_name='7染色体 (7ﾓﾉｿﾐｰ)(他)' jlac10='8973' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1770: item_name='8染色体 (8ﾄﾘｿﾐｰ)(他)' jlac10='8974' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1771: item_name='IRF-1 (5q31欠失解析)(他)' jlac10='8975' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1772: item_name='IgH (14q32転座解析)(他)' jlac10='8976' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1773: item_name='IgH/CCND1 (BCL1) [t(11;14)転座解析](他)' jlac10='8977' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1774: item_name='IgH/BCL2 [t(14;18)転座解析](他)' jlac10='8978' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1775: item_name='c-myc/IgH [t(8;14)転座解析](他)' jlac10='8979' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1776: item_name='BCL6/IgH [t(3;14)転座解析](他)' jlac10='8980' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1777: item_name='BCL6 (3q27転座解析)(他)' jlac10='8981' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1778: item_name='c-myc (8q24転座解析)(他)' jlac10='8982' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1779: item_name='MALT1 (18q21 転座解析)(他)' jlac10='8983' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1780: item_name='API2/MALT1 [t(11;18)転座解析](他)' jlac10='8984' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1781: item_name='LEU (13q14 欠失解析)(他)' jlac10='8985' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1782: item_name='N-myc (2p24.1 増幅解析)(他)' jlac10='8986' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1783: item_name='ﾏﾙﾁｶﾗｰFISH解析(他)' jlac10='8991' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1784
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1785
+2026-04-17 16:34:02 [DEBUG] Row 1786: item_name='末梢血液像至急' jlac10='9009' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1787: item_name='ｸｫﾝﾃｨﾌｪﾛﾝ' jlac10='9100' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1788: item_name='尿素呼気試験' jlac10='9110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1789: item_name='ｴｷﾉｺｯｸｽ' jlac10='9120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1790: item_name='HIVｼﾞｪﾉﾀｲﾌﾟ薬剤耐性試験' jlac10='9151' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1791: item_name='血糖朝食前' jlac10='9201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1792: item_name='血糖朝食後' jlac10='9202' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1793: item_name='血糖昼食前' jlac10='9203' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1794: item_name='血糖昼食後' jlac10='9204' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1795: item_name='血糖夕食前' jlac10='9205' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1796: item_name='血糖夕食後' jlac10='9206' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1797: item_name='血糖就寝前' jlac10='9207' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1798: item_name='血糖 24:00' jlac10='9208' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1799: item_name='薬剤によるﾘﾝﾊﾟ球刺激試験 DLST' jlac10='9221' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1800: item_name='HTLV-1抗体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1801: item_name='抗ARS抗体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1802
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1803
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1804
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1805
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1806
+2026-04-17 16:34:02 [DEBUG] Row 1807: item_name='治験採血あり' jlac10='9301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1808: item_name='外注伝票あり' jlac10='9302' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1809: item_name='ペプチドワクチン採血有' jlac10='9301' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1810: item_name='医師主導臨床研究' jlac10='9301' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1811
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1812
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1813
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1814
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1815
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1816
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1817
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1818
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1819
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1820
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1821
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1822
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1823
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1824
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1825
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1826
+2026-04-17 16:34:02 [DEBUG] Row 1827: item_name='minor BCR（全血）' jlac10='10710' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1828
+2026-04-17 16:34:02 [DEBUG] Row 1829: item_name='minor BCR（骨髄液）' jlac10='10810' status=invalid
+2026-04-17 16:34:02 [DEBUG] 空行スキップ (item_name空): 行1830
+2026-04-17 16:34:02 [DEBUG] Row 1831: item_name='アザクタム注射用' jlac10='17' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1832: item_name='イセパシン注射液' jlac10='50' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1833: item_name='オメガシン点滴用' jlac10='19' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1834: item_name='クラフォラン注射用' jlac10='36' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1835: item_name='ゲンタシン注' jlac10='47' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1836: item_name='ザイボックス注射液' jlac10='52' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1837: item_name='シプロキサン注' jlac10='33' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1838: item_name='スルペラゾン静注用' jlac10='65' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1839: item_name='セファメジンα注射用' jlac10='24' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1840: item_name='セフメタゾン静注用' jlac10='30' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1841: item_name='タゾシン静注用' jlac10='68' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1842: item_name='ダラシンS注射液' jlac10='28' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1843: item_name='チエナム点滴用' jlac10='49' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1844: item_name='トブラシン注' jlac10='72' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1845: item_name='バクトラミン注' jlac10='67' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1846: item_name='パシル点滴静注液' jlac10='61' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1847: item_name='ハベカシン注射液' jlac10='11' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1848: item_name='パンスポリン静注用' jlac10='34' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1849: item_name='ビクリン注射用' jlac10='14' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1850: item_name='ファーストシン静注用' jlac10='38' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1851: item_name='フィニバックス点滴用' jlac10='40' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1852: item_name='フルマリン静注用' jlac10='44' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1853: item_name='ペントシリン注射用' jlac10='60' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1854: item_name='ホロサイル-S静注用' jlac10='45' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1855: item_name='メロペン点滴用' jlac10='53' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1856: item_name='モダシン静注用' jlac10='21' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1857: item_name='ユナシン-S静注用' jlac10='64' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1858: item_name='ロセフィン静注用' jlac10='35' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1859: item_name='塩酸バンコマイシン注' jlac10='73' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1860: item_name='結晶ペニシリンGｶﾘｳﾑ明治' jlac10='59' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1861: item_name='静注用ホスミシンS' jlac10='45' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1862: item_name='注射用エリスロシン' jlac10='42' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1863: item_name='注射用タゴシッド' jlac10='70' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1864: item_name='注射用パニマイシン' jlac10='39' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1865: item_name='注射用ビクシリン' jlac10='12' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1866: item_name='注射用マキシピーム' jlac10='26' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1867: item_name='注射用硫酸アミカシン｢萬有｣' jlac10='14' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1868: item_name='点滴静注用ミノペン' jlac10='55' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1869: item_name='アベロックス錠' jlac10='54' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1870: item_name='イスコチン' jlac10='48' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1871: item_name='エサンブトール錠' jlac10='41' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1872: item_name='エリスロシンドライシロップ' jlac10='42' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1873: item_name='エリスロシン錠' jlac10='42' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1874: item_name='オーグメンチン錠' jlac10='13' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1875: item_name='オゼックス錠' jlac10='71' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1876: item_name='オラセフ錠' jlac10='37' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1877: item_name='クラビット錠' jlac10='51' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1878: item_name='クラリスﾄﾞﾗｲｼﾛｯﾌﾟ小児用' jlac10='20' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1879: item_name='クラリス錠' jlac10='20' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1880: item_name='ケフラールカプセル' jlac10='22' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1881: item_name='ケフラール細粒小児用' jlac10='22' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1882: item_name='サワシリン細粒' jlac10='15' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1883: item_name='ジスロマック錠' jlac10='16' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1884: item_name='シプロキサン錠' jlac10='33' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1885: item_name='セフゾンカプセル' jlac10='25' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1886: item_name='セフゾン細粒小児用' jlac10='25' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1887: item_name='ダラシンカプセル' jlac10='28' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1888: item_name='バクタ錠' jlac10='67' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1889: item_name='パセトシンカプセル' jlac10='15' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1890: item_name='バナンドライシロップ' jlac10='32' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1891: item_name='バナン錠' jlac10='32' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1892: item_name='フロモックス錠' jlac10='27' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1893: item_name='ホスミシン錠' jlac10='45' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1894: item_name='ミノマイシンカプセル' jlac10='55' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1895: item_name='メイアクトMS' jlac10='23' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1896: item_name='ユナシン錠' jlac10='66' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1897: item_name='リファジンカプセル' jlac10='62' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1898: item_name='ルリッド錠' jlac10='63' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1899: item_name='塩酸バンコマイシン散' jlac10='73' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1900: item_name='アクアチムクリーム' jlac10='57' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1901: item_name='アクアチムローション' jlac10='57' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1902: item_name='アクロマイシン軟膏' jlac10='69' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1903: item_name='エコリシン点眼液' jlac10='42' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1904: item_name='クラビット点眼液' jlac10='51' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1905: item_name='クロマイ腟錠' jlac10='31' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1906: item_name='ゲンタシン軟膏' jlac10='47' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1907: item_name='コリマイC点眼液' jlac10='31' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1908: item_name='ソフラチュール' jlac10='46' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1909: item_name='タリビット眼軟膏' jlac10='58' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1910: item_name='タリビット耳科用液' jlac10='58' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1911: item_name='バクトロバン鼻腔用軟膏' jlac10='56' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1912: item_name='パニマイシン点眼液' jlac10='39' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1913: item_name='バラマイシン軟膏' jlac10='18' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1914: item_name='フシジンレオ軟膏' jlac10='43' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1915: item_name='ベストロン耳鼻科用' jlac10='29' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1916: item_name='ベストロン点眼用' jlac10='29' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1917: item_name='塗抹鏡検(口腔･気道･呼吸器)' jlac10='110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1918: item_name='塗抹鏡検(消化管)' jlac10='110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1919: item_name='塗抹鏡検(泌尿器･生殖器)' jlac10='110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1920: item_name='塗抹鏡検(血液･穿刺液)' jlac10='110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1921: item_name='塗抹鏡検(その他の部位)' jlac10='110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1922: item_name='培養同定(口腔･気道･呼吸器)' jlac10='120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1923: item_name='培養同定(消化管)' jlac10='120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1924: item_name='培養同定(泌尿器･生殖器)' jlac10='120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1925: item_name='培養同定(血液･穿刺液)' jlac10='120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1926: item_name='培養同定(その他の部位)' jlac10='120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1927: item_name='培養同定(血液)' jlac10='130' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1928: item_name='嫌気性培養(口腔･気道･呼吸器)' jlac10='140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1929: item_name='嫌気性培養(消化管)' jlac10='140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1930: item_name='嫌気性培養(泌尿器･生殖器)' jlac10='140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1931: item_name='嫌気性培養(血液･穿刺液)' jlac10='140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1932: item_name='嫌気性培養(その他の部位)' jlac10='140' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1933: item_name='感受性検査(口腔･気道･呼吸器)' jlac10='150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1934: item_name='感受性検査(消化管)' jlac10='150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1935: item_name='感受性検査(泌尿器･生殖器)' jlac10='150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1936: item_name='感受性検査(血液･穿刺液)' jlac10='150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1937: item_name='感受性検査(その他の部位)' jlac10='150' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1938: item_name='インフルエンザウイルス抗原' jlac10='200' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1939: item_name='Ａ群溶連菌迅速診断' jlac10='201' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1940: item_name='咽頭アデノウイルス抗原' jlac10='202' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1941: item_name='ＣＤトキシン' jlac10='203' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1942: item_name='ロタ・アデノウイルス抗原' jlac10='211' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1943: item_name='肺炎球菌細胞壁抗原' jlac10='209' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1944: item_name='ＰＣＲ　クラミジアトラコマチス同定' jlac10='207' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1945: item_name='ＰＣＲ　淋菌同定' jlac10='208' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1946: item_name='ＲＳウイルス抗原' jlac10='210' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1947: item_name='ノロウイルス抗原(便)' jlac10='212' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1948: item_name='ノロウイルス抗原(その他)' jlac10='212' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1949: item_name='抗酸菌塗抹[蛍光染色]' jlac10='2001' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1950: item_name='抗酸菌塗抹[ﾁｰﾙﾈﾙｾﾞﾝ]' jlac10='2002' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1951: item_name='抗酸菌分離培養[小川法]' jlac10='2003' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1952: item_name='PCR　結核菌群核酸同定' jlac10='2004' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1953: item_name='PCR　アビウム・イントラセルラー同定' jlac10='2005' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1954: item_name='左' jlac10='11' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1955: item_name='右' jlac10='12' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1956: item_name='上' jlac10='13' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1957: item_name='下' jlac10='14' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1958: item_name='No.1' jlac10='15' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1959: item_name='No.2' jlac10='16' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1960: item_name='No.3' jlac10='17' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1961: item_name='内' jlac10='18' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1962: item_name='外' jlac10='19' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1963: item_name='中' jlac10='20' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1964: item_name='頭部' jlac10='21' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1965: item_name='顔部' jlac10='22' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1966: item_name='頚部' jlac10='23' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1967: item_name='肩部' jlac10='24' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1968: item_name='腋部' jlac10='25' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1969: item_name='胸部' jlac10='26' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1970: item_name='背部' jlac10='27' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1971: item_name='腹部' jlac10='28' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1972: item_name='臀部' jlac10='29' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1973: item_name='臍部' jlac10='30' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1974: item_name='上肢' jlac10='31' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1975: item_name='下肢' jlac10='32' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1976: item_name='手指' jlac10='33' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1977: item_name='足指' jlac10='34' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1978: item_name='動脈血' jlac10='35' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1979: item_name='静脈血' jlac10='36' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1980: item_name='脳室' jlac10='37' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1981: item_name='硬膜下' jlac10='38' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1982: item_name='横隔膜下' jlac10='39' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1983: item_name='胸腔' jlac10='40' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1984: item_name='腹腔' jlac10='41' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1985: item_name='心臓' jlac10='42' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1986: item_name='心嚢' jlac10='43' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 1987: item_name='喀痰' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1988: item_name='吸引痰' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1989: item_name='咽頭' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1990: item_name='扁桃' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1991: item_name='口腔' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1992: item_name='舌苔' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1993: item_name='鼻腔' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1994: item_name='副鼻腔' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1995: item_name='上顎洞' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1996: item_name='気管チューブ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1997: item_name='肺組織' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1998: item_name='気管支洗浄液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 1999: item_name='肺胞洗浄液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2000: item_name='気管ブラッシング' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2001: item_name='気管支擦過物' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2002: item_name='その他（呼吸器）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2003: item_name='便' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2004: item_name='胃液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2005: item_name='胃粘膜（ピロリ菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2006: item_name='腸粘膜' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2007: item_name='大腸組織' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2008: item_name='十二指腸液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2009: item_name='胆汁' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2010: item_name='その他（消化器）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2011: item_name='カテーテル尿' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2012: item_name='自排尿' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2013: item_name='尿道' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2014: item_name='膣' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2015: item_name='頚管' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2016: item_name='外陰部' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2017: item_name='子宮内容物' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2018: item_name='骨盤内容物' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2019: item_name='バルトリン腺内容物' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2020: item_name='膣（STD-PCR）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2021: item_name='頚管（STD-PCR）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2022: item_name='その他（泌尿器）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2023: item_name='血液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2024: item_name='胸水' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2025: item_name='腹水' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2026: item_name='髄液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2027: item_name='関節液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2028: item_name='穿刺液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2029: item_name='心嚢液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2030: item_name='貯留液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2031: item_name='その他（穿刺液）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2032: item_name='ＩＶＨカテーテル' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2033: item_name='ドレーンチューブ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2034: item_name='ドレーン排液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2035: item_name='腹腔ドレーン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2036: item_name='胸腔ドレーン' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2037: item_name='カテーテル' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2038: item_name='チューブ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2039: item_name='その他（カテーテル類）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2040: item_name='開放性膿' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2041: item_name='非開放性膿' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2042: item_name='皮膚' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2043: item_name='爪' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2044: item_name='浸出液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2045: item_name='耳漏' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2046: item_name='組織' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2047: item_name='リンパ節' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2048: item_name='腫瘍内容物' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2049: item_name='眼脂' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2050: item_name='結膜擦過' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2051: item_name='角膜擦過' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2052: item_name='涙液' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2053: item_name='褥瘡' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2054: item_name='ガーゼ' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2055: item_name='創部' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2056: item_name='その他（その他の部位）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2057: item_name='迅速ｲﾝﾌﾙｴﾝｻﾞ検体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2058: item_name='迅速ｱﾃﾞﾉｳｨﾙｽ検体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2059: item_name='迅速A群溶連菌検体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2060: item_name='迅速肺炎球菌検体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2061: item_name='迅速RSｳｨﾙｽ検体' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2062: item_name='喀痰（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2063: item_name='吸引痰（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2064: item_name='肺組織（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2065: item_name='気管支洗浄液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2066: item_name='肺胞洗浄液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2067: item_name='気管ブラッシング（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2068: item_name='気管支擦過物（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2069: item_name='胃液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2070: item_name='カテーテル尿（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2071: item_name='自排尿（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2072: item_name='血液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2073: item_name='胸水（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2074: item_name='腹水（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2075: item_name='髄液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2076: item_name='関節液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2077: item_name='穿刺液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2078: item_name='心嚢液（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2079: item_name='開放性膿（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2080: item_name='非開放性膿（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2081: item_name='組織（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2082: item_name='リンパ節（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2083: item_name='腫瘍内容物（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2084: item_name='その他（抗酸菌）' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2085: item_name='MRSA' jlac10='101' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2086: item_name='ブドウ球菌' jlac10='102' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2087: item_name='A群溶連菌' jlac10='103' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2088: item_name='B群溶連菌' jlac10='104' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2089: item_name='肺炎球菌' jlac10='105' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2090: item_name='腸内細菌' jlac10='106' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2091: item_name='大腸菌' jlac10='107' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2092: item_name='緑膿菌' jlac10='108' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2093: item_name='O-157' jlac10='109' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2094: item_name='サルモネラ菌' jlac10='110' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2095: item_name='ビブリオ菌' jlac10='111' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2096: item_name='コレラ菌' jlac10='112' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2097: item_name='エルシニア菌' jlac10='113' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2098: item_name='キャンピロバクター菌' jlac10='114' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2099: item_name='ヘリコバクター・ピロリ菌' jlac10='115' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2100: item_name='ボツリヌス菌' jlac10='116' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2101: item_name='ガス壊疽菌' jlac10='117' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2102: item_name='破傷風菌' jlac10='118' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2103: item_name='嫌気性菌' jlac10='119' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2104: item_name='髄膜炎菌' jlac10='120' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2105: item_name='淋菌' jlac10='121' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2106: item_name='トリコモナス' jlac10='122' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2107: item_name='クリプトコッカス菌' jlac10='123' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2108: item_name='カンジタ菌' jlac10='124' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2109: item_name='アスペルギルス菌' jlac10='125' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2110: item_name='糸状菌' jlac10='126' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2111: item_name='レジオネラ菌' jlac10='127' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2112: item_name='ｸﾛｽﾄﾘｼﾞｳﾑﾃﾞｨﾌｨｼﾙ菌' jlac10='128' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2113: item_name='MRSAｽｸﾘｰﾆﾝｸﾞ' jlac10='129' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2114: item_name='発熱' jlac10='11' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2115: item_name='不明熱' jlac10='12' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2116: item_name='肺炎' jlac10='13' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2117: item_name='局所発赤' jlac10='14' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2118: item_name='創部離開' jlac10='15' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2119: item_name='下痢' jlac10='16' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2120: item_name='血便' jlac10='17' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2121: item_name='食中毒疑い' jlac10='18' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2122: item_name='結核既往歴あり' jlac10='19' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2123: item_name='好酸菌陽性疑い' jlac10='20' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2124: item_name='監視培養' jlac10='21' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2125: item_name='前回検出菌検索' jlac10='22' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2126: item_name='感受性検査不要' jlac10='23' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2127: item_name='渡航歴あり' jlac10='24' status=invalid
+2026-04-17 16:34:02 [DEBUG] Row 2128: item_name='一日目' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2129: item_name='二日目' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] Row 2130: item_name='三日目' jlac10='' status=empty
+2026-04-17 16:34:02 [DEBUG] 変換サマリー: empty=209, invalid=1856
+2026-04-17 16:34:02 [INFO] 変換完了: 2065件 (空行スキップ: 64件, ソース: 100_hokkaidogan_center_NEC.xlsx)
+2026-04-17 16:34:02 [INFO] JSON出力: C:\Users\00198675\Downloads\jlac10-mapping-main\jlac10-mapping-main\exel\hospitals\100_hokkaidogan_center_NEC.json
+
+変換完了: 2065件
+  病院: H100
+  ソース: 100_hokkaidogan_center_NEC.xlsx
+  empty: 209件
+  invalid: 1856件

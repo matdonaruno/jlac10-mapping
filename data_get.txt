@@ -1,0 +1,1931 @@
+データを取得します。
+以下のようなWEBページ
+
+https://test-directory.srl.info/akiruno/test/list/1
+
+<html class="no-js" lang="ja"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>蛋白・膠質反応 | SRL総合検査案内</title>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+
+<script type="text/javascript" src="https://log1.mobylog.jp/xd_jquery_selectors.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-QET358K5RE&amp;cx=c&amp;_slc=1"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-M3QLTMCW0Z&amp;cx=c&amp;_slc=1"></script><script type="text/javascript" src="https://log1.mobylog.jp/xd_plugin.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="/js/html_adjuster.js"></script>
+<script type="text/javascript" src="/js/hosoku_adjuster.js"></script>
+<script type="text/javascript" src="/js/jquery.skOuterClick.js"></script>
+<script type="text/javascript" src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="/js/suggest.js"></script>
+<script type="text/javascript" src="/js/suggest/akiruno_list.js"></script>
+<script type="text/javascript" src="/js/jquery.infinitescroll.js"></script>
+<script type="text/javascript" src="/js/jquery.ba-throttle-debounce.min.js"></script>
+<script type="text/javascript" src="/js/cookie.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="/js/search_modal.js"></script>
+
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/responsive.css">
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="/common/css/srl.css">
+
+<link rel="stylesheet" href="/css/common_add.css">
+<link rel="stylesheet" href="/common/css/c-akiruno.css">
+<link rel="stylesheet" href="/css/modal_new_cocktail.css">
+
+<script type="text/javascript">
+$(document).bind('cbox_cleanup', function(){
+      $('.tip_labo').remove();
+      $('#content section').css('position','');
+      $('#keyword_search_area section').css('position','');
+      $('footer').css('display','block');
+
+      $(".open_modal").removeClass("current_open_modal");
+});
+$(document).bind('cbox_open', function(event){
+      $('#content section').css('position','fixed');
+      $('#keyword_search_area section').css('position','fixed');
+      $('footer').css('display','none');
+      
+      $(event.target.activeElement).closest(".open_modal").addClass("current_open_modal");
+      _colorboxEvent();
+});
+
+function _colorboxEvent() {
+      $('.current_labo.open_modal').attr('href', '#labo_selection_modal');
+
+      var w = window.innerWidth;
+
+      var currentModalInfo = $(".current_open_modal").attr("href");
+      var colorboxHeight;
+      var minWidth = false;
+
+      if (w <= 721) {
+            if (currentModalInfo === "#search_option_modal") {
+                  colorboxHeight = "auto";
+            } else {
+                  colorboxHeight = "80%";
+            }
+            $.colorbox.resize({width:'90%', height:colorboxHeight, top:'80%'});
+            $(".open_modal").colorbox({
+                  preloading:false,
+                  transition:"none",
+                  inline:true,
+                  width:"90%",
+                  top:"70px",
+                  height:colorboxHeight,
+                  innerHeight:"100%",
+                  scalePhotos:false,
+                  fixed:true,
+                  closeButton:false,
+                  scrolling:true,
+                  reposition:false,
+                  overlayClose:true
+            });
+      } else if (w <= 769) {
+            if (currentModalInfo === "#search_option_modal") {
+                  colorboxHeight = "auto";
+            } else {
+                  colorboxHeight = "575px";
+            }
+            $.colorbox.resize({width:'90%', height:colorboxHeight,  top:'70px'});
+            $(".open_modal").colorbox({
+                  preloading:false,
+                  transition:"none",
+                  inline:true,
+                  width:"90%",
+                  top:"70px",
+                  height:colorboxHeight,
+                  scalePhotos:false,
+                  fixed:true,
+                  closeButton:false,
+                  scrolling:true,
+                  reposition:true,
+                  overlayClose:true
+            });
+      } else {
+            if (currentModalInfo === "#search_option_modal") {
+                  colorboxHeight = "auto";
+                  var colorboxWidth = "680px";
+            } else if (currentModalInfo === "#disease_modal") {
+                  colorboxHeight = "550px";
+                  var colorboxWidth = "500px";
+            } else {
+                  colorboxHeight = "620px";
+                  var colorboxWidth = "980px";
+            }
+            $.colorbox.resize({width:colorboxWidth, height: colorboxHeight, top:'80px'});
+            $(".open_modal").colorbox({
+                  preloading:false,
+                  transition:"none",
+                  inline:true,
+                  width:colorboxWidth,
+                  height:colorboxHeight,
+                  top:"80px",
+                  scalePhotos:false,
+                  fixed:false,
+                  closeButton:false,
+                  scrolling:true,
+                  reposition:true,
+                  overlayClose:true
+            });
+      }
+
+      clearInterval(timer1);
+}
+
+function _defaulColorboxEvent() {
+      var w = $(window).width();
+      var x = 769;
+      if (w <= x) {
+            $('.open_default_modal').colorbox({
+                  preloading:false,
+                  transition:"none",
+                  open:true,
+                  inline:true,
+                  width:"90%",
+                  top:"70px",
+                  height:"80%",
+                  innerHeight:"100%",
+                  scalePhotos:false,
+                  fixed:true,
+                  closeButton:false,
+                  scrolling:true,
+                  reposition:false,
+                  overlayClose:false,
+                  escKey: false
+            });
+      } else {
+            $('.open_default_modal').colorbox({
+                  preloading:false,
+                  transition:"none",
+                  open:true,
+                  inline:true,
+                  width:"980px",
+                  height:"620px",
+                  top:"80px",
+                  scalePhotos:false,
+                  fixed:false,
+                  closeButton:false,
+                  scrolling:true,
+                  reposition:true,
+                  overlayClose:false,
+                  escKey: false
+            });
+      }
+      
+      clearInterval(timer1);
+}
+
+var timer1;
+$(window).load(function () {
+      timer = setTimeout("_colorboxEvent()",500);
+});
+
+$(window).on('resize', function(){
+      _colorboxEvent();
+});
+
+$(window).on('load', function(){
+      _defaulColorboxEvent();
+});
+$(function(){
+      $('button.comparison__btn').prop('disabled',true);
+      $('.comparison_list ul li').on('click',function(){
+            var flg = false;
+            $('.comparison_list input[type=checkbox]').each(function(){
+                  if($(this).prop('checked')){
+                        flg = true;
+                        return false;
+                  }
+            });
+            if(flg){
+                  $('button.comparison__btn').addClass('is-active').prop('disabled',false);
+            }else{
+                  $('button.comparison__btn').removeClass('is-active').prop('disabled',true);
+            }
+      });
+});
+
+$().ready ( function() {
+    // id="level_one_menu"のliのaがクリック
+    $('#level_one_menu li a').click ( function() {
+            if ($(this).attr("class") == "open_modal cboxElement") {
+                  // $(this)はそのクリックされた要素。その要素のテキストを取得
+                  const alter = $(this).data('id');
+
+              if (alter == 'listing_log_modal') {
+                  document.getElementById("listing_log_modal").style.display="block";
+              } else {
+                  document.getElementById("listing_log_modal").style.display="none";
+              }
+              if (alter == 'new_introduction_modal') {
+                  document.getElementById("new_introduction_modal").style.display="block";
+              } else {
+                  document.getElementById("new_introduction_modal").style.display="none";
+              }
+              if (alter == 'change_log_modal') {
+                  document.getElementById("change_log_modal").style.display="block";
+              } else {
+                  document.getElementById("change_log_modal").style.display="none";
+              }
+                  _colorboxEvent();
+            }
+    });
+
+      // モーダルのリンクをクリックした際にモーダルを閉じるようにする
+      $('#level_one_modal_news_data dl a, #level_one_modal_disease_data a').click ( function() {
+            $.colorbox.close();
+      });
+
+      // 記号説明モーダル
+      $('#panel__header a').click ( function() {
+            if ($(this).attr("class") == "open_modal cboxElement") {
+                  _colorboxEvent();
+            }
+      });
+
+      // 保険注釈
+      $('#insurance_notes a').click ( function() {
+            if ($(this).attr("class") == "open_modal cboxElement") {
+                  _colorboxEvent();
+            }
+      });
+});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-81846425-1', 'auto');
+  ga('send', 'pageview');
+
+  ga('create', 'UA-20006091-4', 'auto', {'name': 'testguide'});
+  ga('testguide.send', 'pageview');
+</script>
+
+<script src="https://log1.mobylog.jp/_tag_mobylog.js" type="text/javascript"></script><link rel="stylesheet" href="/common/css/c-akiruno.css"></head>
+
+<body data-labo="akiruno">
+            <header>
+<div>
+<div class="bg"></div>
+<div class="header_parts">
+<div style="margin-left: 0px; margin-right: 0px;">
+<input type="button" id="btn_back" value="戻る">
+<input type="button" id="search_btn_back" value="戻る">
+<input type="button" id="btn_menu">
+<h1><a href="/akiruno">SRL総合検査案内</a></h1>
+<!--<form action="" method="">-->
+<fieldset style="width: 329.259px;">
+<label class="research_txtbox"><input type="text" name="" placeholder="キーワード検索" id="research_txtbox" autocomplete="off" style="width: 204.259px;"></label>
+<div class="research_switch">
+<input type="radio" name="operation" id="operation_and" value="0" checked="checked"><label for="operation_and">AND</label>
+<input type="radio" name="operation" id="operation_or" value="1"><label for="operation_or">OR</label>
+</div>
+</fieldset>
+<div class="research_result" id="suggest" style="width: 204.259px; display: none;"></div>
+<!--</form>-->
+
+<ul>
+<li><a href="javascript:void(0)" id="btn_research_txtbox"></a></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<div class="btn_pdf_dl_container">
+<form action="https://dl3.srl.info/" method="post" id="pdf_select_form" target="_blank">
+      <p><span>0</span>個選択中</p>
+      <select name="pdf[]" size="24" multiple="" id="pdf_select" style="display: none;"></select>
+      <input type="hidden" name="select_code">
+      <input type="hidden" name="labo_id" value="akiruno">
+      <input type="image" src="/img/icon_pdf2.png">
+</form>
+</div>
+</div>
+</div>
+
+
+<div class="menu_bg"></div>
+<div class="menu_parts">
+<nav id="menu_list" class="mCustomScrollbar _mCS_1 mCS-autoHide"><div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+<ul>
+      <li><a href="/akiruno" id="home">トップページ</a></li>
+<li><h3>News</h3></li>
+<li><a href="/akiruno/srlnews/01"><span class="lab_color">○</span>SRL NEWS</a></li>
+<li><h3>カテゴリから探す</h3></li>
+
+
+                  <li>
+            <p class="accodion close"><span style="background-color:#fff799">○</span>生化学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/1">蛋白・膠質反応</a></li>
+                                          <li><a href="/akiruno/test/list/2">酵素および関連物質</a></li>
+                                          <li><a href="/akiruno/test/list/3">低分子窒素化合物</a></li>
+                                          <li><a href="/akiruno/test/list/4">糖質および関連物質</a></li>
+                                          <li><a href="/akiruno/test/list/5">有機酸</a></li>
+                                          <li><a href="/akiruno/test/list/6">脂質および関連物質</a></li>
+                                          <li><a href="/akiruno/test/list/7">ビタミンおよび関連物質</a></li>
+                                          <li><a href="/akiruno/test/list/8">電解質・血液ガス</a></li>
+                                          <li><a href="/akiruno/test/list/9">生体微量金属</a></li>
+                                          <li><a href="/akiruno/test/list/10">生体色素関連物質</a></li>
+                                          <li><a href="/akiruno/test/list/11">毒物・産業医学的代謝物質</a></li>
+                                          <li><a href="/akiruno/test/list/12">生化学（その他）</a></li>
+                                          <li><a href="/akiruno/test/list/13">負荷試験・機能検査</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#cfa7cd">○</span>薬物検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/14">抗菌薬</a></li>
+                                          <li><a href="/akiruno/test/list/15">抗てんかん薬</a></li>
+                                          <li><a href="/akiruno/test/list/16">免疫抑制薬</a></li>
+                                          <li><a href="/akiruno/test/list/17">循環器用薬</a></li>
+                                          <li><a href="/akiruno/test/list/18">精神神経用薬</a></li>
+                                          <li><a href="/akiruno/test/list/19">薬物（その他）</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#a4abd6">○</span>血液学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/20">血液一般・形態検査</a></li>
+                                          <li><a href="/akiruno/test/list/21">凝固・線溶関連検査</a></li>
+                                          <li><a href="/akiruno/test/list/22">血液化学検査</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#bae3f9">○</span>内分泌学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/23">視床下部・下垂体ホルモン</a></li>
+                                          <li><a href="/akiruno/test/list/24">甲状腺ホルモンおよび結合蛋白</a></li>
+                                          <li><a href="/akiruno/test/list/25">副甲状腺ホルモン</a></li>
+                                          <li><a href="/akiruno/test/list/26">副腎皮質ホルモンおよび結合蛋白</a></li>
+                                          <li><a href="/akiruno/test/list/27">副腎髄質ホルモン</a></li>
+                                          <li><a href="/akiruno/test/list/28">性腺・胎盤ホルモンおよび結合蛋白</a></li>
+                                          <li><a href="/akiruno/test/list/29">膵・消化管ホルモン</a></li>
+                                          <li><a href="/akiruno/test/list/30">内分泌学的（その他）</a></li>
+                              </ul>
+            </li>
+      
+                  <li><a href="/akiruno/test/list/31"><span style="background-color:#bae3f9">○</span>腫瘍関連検査</a></li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#f7c9dd">○</span>ウイルス学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/82">肝炎ウイルス</a></li>
+                                          <li><a href="/akiruno/test/list/32">ウイルス感染症検査</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#a3bce2">○</span>免疫血清学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/33">感染症（非ウイルス）関連検査</a></li>
+                                          <li><a href="/akiruno/test/list/34">自己免疫関連検査</a></li>
+                                          <li><a href="/akiruno/test/list/35">免疫血液学的検査</a></li>
+                                          <li><a href="/akiruno/test/list/36">免疫グロブリン</a></li>
+                                          <li><a href="/akiruno/test/list/37">補体および関連物質</a></li>
+                                          <li><a href="/akiruno/test/list/38">血漿蛋白</a></li>
+                                          <li><a href="/akiruno/test/list/39">免疫血清学（その他）</a></li>
+                                          <li><a href="/akiruno/test/list/40">サイトカイン</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#bfdeae">○</span>アレルギー検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/42">アレルギー検査</a></li>
+                                          <li><a href="/akiruno/test/list/84">*ミックスアレルゲン〔CLEIA〕（アラスタット）</a></li>
+                                          <li><a href="/akiruno/test/list/85">*シングルアレルゲン〔CLEIA〕（アラスタット）</a></li>
+                                          <li><a href="/akiruno/test/list/86">*マルチアレルゲン〔FEIA〕（CAP）</a></li>
+                                          <li><a href="/akiruno/test/list/87">*シングルアレルゲン〔FEIA〕（CAP）</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#fbd8b5">○</span>細胞性免疫検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/43">細胞性免疫検査</a></li>
+                                          <li><a href="/akiruno/test/list/44">抗原特異的CTL</a></li>
+                                          <li><a href="/akiruno/test/list/88">*モノクローナル抗体によるリンパ球表面マーカーの自動解析</a></li>
+                                          <li><a href="/akiruno/test/list/89">*Two-color解析によるリンパ球表面マーカー検査</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#fbd8b5">○</span>染色体検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/45">先天異常の染色体検査</a></li>
+                                          <li><a href="/akiruno/test/list/46">白血病や悪性リンパ腫の染色体検査</a></li>
+                                          <li><a href="/akiruno/test/list/47">固形腫瘍の染色体検査</a></li>
+                                          <li><a href="/akiruno/test/list/90">*染色体 G-Banding（Myeloid系）</a></li>
+                                          <li><a href="/akiruno/test/list/91">*染色体 G-Banding（Lymphoid系）</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#fbd8b5">○</span>遺伝子関連検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/109">造血器腫瘍遺伝子検査</a></li>
+                                          <li><a href="/akiruno/test/list/110">免疫関連遺伝子再構成検査</a></li>
+                                          <li><a href="/akiruno/test/list/111">悪性腫瘍(固形腫瘍)遺伝子検査</a></li>
+                                          <li><a href="/akiruno/test/list/112">生殖細胞系列遺伝子解析(抗悪性腫瘍薬適応判定用)</a></li>
+                                          <li><a href="/akiruno/test/list/113">遺伝学的検査</a></li>
+                                          <li><a href="/akiruno/test/list/114">薬剤応答遺伝子検査</a></li>
+                                          <li><a href="/akiruno/test/list/115">移植関連遺伝子検査</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#fcd68c">○</span>一般検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/52">尿一般検査</a></li>
+                                          <li><a href="/akiruno/test/list/54">糞便検査</a></li>
+                                          <li><a href="/akiruno/test/list/53">一般検査（その他）</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#afc7e0">○</span>微生物学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/73">一般細菌</a></li>
+                                          <li><a href="/akiruno/test/list/74">一般細菌特殊検査</a></li>
+                                          <li><a href="/akiruno/test/list/75">大腸菌毒素関連</a></li>
+                                          <li><a href="/akiruno/test/list/76">黄色ブドウ球菌関連</a></li>
+                                          <li><a href="/akiruno/test/list/77">環境検査</a></li>
+                                          <li><a href="/akiruno/test/list/78">スクリーニング検査</a></li>
+                                          <li><a href="/akiruno/test/list/79">便検診検査</a></li>
+                                          <li><a href="/akiruno/test/list/80">抗酸菌</a></li>
+                                          <li><a href="/akiruno/test/list/81">核酸増幅同定検査</a></li>
+                                          <li><a href="/akiruno/test/list/56">培養同定検査</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#fbdac8">○</span>病理学的検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/57">細胞診検査</a></li>
+                                          <li><a href="/akiruno/test/list/58">病理組織検査</a></li>
+                                          <li><a href="/akiruno/test/list/92">*酵素抗体染色</a></li>
+                              </ul>
+            </li>
+      
+                  <li><a href="/akiruno/test/list/59"><span style="background-color:#fbdac8">○</span>総合解析検査</a></li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#fbdac8">○</span>その他検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/60">リスク検査</a></li>
+                                          <li><a href="/akiruno/test/list/123">健診・検診検査</a></li>
+                                          <li><a href="/akiruno/test/list/124">その他</a></li>
+                              </ul>
+            </li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#a2d7d4">○</span>研究検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/62">性腺・胎盤ホルモンおよび結合蛋白</a></li>
+                                          <li><a href="/akiruno/test/list/63">ウイルス感染症検査</a></li>
+                                          <li><a href="/akiruno/test/list/64">免疫関連検査</a></li>
+                                          <li><a href="/akiruno/test/list/65">自己免疫機能検査</a></li>
+                                          <li><a href="/akiruno/test/list/66">その他特殊検査</a></li>
+                                          <li><a href="/akiruno/test/list/67">自己抗体検査</a></li>
+                                          <li><a href="/akiruno/test/list/68">補体系検査</a></li>
+                                          <li><a href="/akiruno/test/list/69">その他</a></li>
+                              </ul>
+            </li>
+      
+                  <li><a href="/akiruno/test/list/70"><span style="background-color:#a2d7d4">○</span>GHI依頼検査</a></li>
+      
+                  <li>
+            <p class="accodion close"><span style="background-color:#a2d7d4">○</span>Athena依頼検査</p>
+            <ul>
+                                          <li><a href="/akiruno/test/list/71">神経・筋疾患検査</a></li>
+                                          <li><a href="/akiruno/test/list/72">腫瘍関連検査</a></li>
+                              </ul>
+            </li>
+      
+<li><h3>Support</h3></li>
+<li><a href="/common/otherdata/s-akiruno-guide.pdf"><span>○</span>ご利用の手引き</a></li>
+<li><a href="/common/otherdata/s-akiruno-emergency.pdf"><span>○</span>緊急報告検査値範囲</a></li>
+<li><a href="/pdf/akiruno/e040_kensarabo-akiruno.pdf"><span>○</span>検査ラボラトリー一覧</a></li>
+<li><a href="/pdf/akiruno/e050_otoiawase-akiruno.pdf"><span>○</span>お問い合わせ</a></li>
+
+</ul>
+</div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 307px; max-height: 640px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></nav>
+</div>
+
+</div>
+
+</header>
+<nav id="labo_menu">
+      <div>
+            <ul>
+                                                            <li><a class="current_labo open_modal cboxElement" href="#labo_selection_modal"><img src="/common/icons/akiruno.png" alt=""></a></li>
+                                    <li><a class="current_labo" href="https://test-directory-en.srl.info/akiruno_en/test/list/1"><img src="/common/icons/kirikae.png" alt=""></a></li>
+            </ul>
+      </div>
+</nav>      <div id="content">
+            
+<section id="Serch_List">
+<div style="margin-left: 0px; margin-right: 0px;">
+      <ul class="pankuzu">
+            <li><a href="/akiruno">TOP</a></li>
+            <li>
+                                          <a href="/akiruno/test/middle/1">生化学的検査</a>
+                              </li>
+            <li>蛋白・膠質反応</li>
+      </ul>
+
+      <p class="current_laboname">現在のラボ：<span>セントラルラボ</span></p>
+      
+            
+
+<h2><span class="colortip" style="background-color:#fff799;">○</span>蛋白・膠質反応</h2>
+
+
+      <div class="list-container-wrapper">
+<div class="list-container-div">
+<table class="list_culomn9">
+            <tbody><tr class="list-container list-header">
+            <th scope="row">
+                  <div>
+                        <p>検査項目<br>JLAC10</p>
+                  </div>
+            </th>
+            <td class="list_header_material_code">材料<br>検体量<br>（ｍL）</td>
+            <td>容器</td>
+            <td>キャップ<br>カラー</td>
+            <td>保存 <br>（安定性）</td>
+            <td>所要 <br>日数</td>
+            <td>実施料<br>判断料</td>
+            <td>検査方法</td>
+            <td>基準値<br>（単位）</td>
+      </tr>
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003810200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              総蛋白(TP)
+<br>
+                              3A010-0000-023-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  11<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  Biuret法           </td>
+                        <td>
+                  6.7～8.3(g/dL)           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/052030400">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              総蛋白(TP)
+<br>
+                              1C010-0000-041-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #ebf5ec;">
+                  
+                  髄液
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  A00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  11<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  ピロガロールレッド法        </td>
+                        <td>
+                  15～45(mg/dL)            </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/002460500">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              総蛋白(TP)
+<br>
+                              1A015-0000-004-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  蓄尿
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                                    7<br>
+                  ※1<br>
+                              </td>
+                        <td class="with_input">
+                  ピロガロールレッド法        </td>
+                        <td>
+                  31.2～120.0 (mg/day)           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/050590200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              アルブミン(Alb)
+<br>
+                              3A015-0000-023-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （21日）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  11<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  BCP改良法            </td>
+                        <td>
+                  3.8～5.2(g/dL)           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/007210500">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              尿中アルブミン
+<br>
+                              3A015-0000-004-061                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  蓄尿
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  99<br>
+                  ※1<br>
+                              </td>
+                        <td class="with_input">
+                  免疫比濁法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_2 mCS_no_scrollbar"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">TIA(Turbidimetric immnoassay)<br>免疫比濁法<br>抗原抗体反応による混濁物に光を照射させ、透過率を測定する方法。</div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  2～20(mg/day)            </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/051065400">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              尿中アルブミン(クレアチニン換算値)
+<br>
+                              3A015-0000-001-061                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  部分尿
+<br>
+                                    1
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  99<br>
+                  ※1<br>
+                              </td>
+                        <td class="with_input">
+                  免疫比濁法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_3 mCS_no_scrollbar"><div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">TIA(Turbidimetric immnoassay)<br>免疫比濁法<br>抗原抗体反応による混濁物に光を照射させ、透過率を測定する方法。</div><div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  尿中アルブミン換算値 10.0以下(mg/g・CRE)         </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003820200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              A/G比
+<br>
+                              3A016-0000-023-919                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  BCP改良法/Biuret法          </td>
+                        <td>
+                  1.1～2.1           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/065100200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              蛋白分画
+<br>
+                              3A020-0000-023-237                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.3
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  18<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  キャピラリー電気泳動法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_4 mCS_no_scrollbar"><div id="mCSB_4" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">電気泳動法<br>荷電粒子の浮遊する電解質溶液に通電すると，粒子は各粒子の荷電と逆の極側に移動する現象を利用し，移動度から目的の物質を測定する方法。<br>水溶液支持体にはセルロースアセテート膜，アガロースゲル，ポリアクリルアミドゲルなどが用いられる。</div><div id="mCSB_4_scrollbar_vertical" class="mCSB_scrollTools mCSB_4_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_4_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  ALB 55.8～66.1(%)　α1-グロブリン 2.9～4.9(%)　α2-グロブリン 7.1～11.8(%)　β1-グロブリン 4.7～7.2(%)　β2-グロブリン 3.2～6.5(%)　γ-グロブリン 11.1～18.8(%)　A/G 1.3～1.9        </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003850200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              クンケル反応 (ZTT)
+<br>
+                              3A030-0000-023-292                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （3日）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  日本消化器病学会肝機能研究班 標準法変法          </td>
+                        <td>
+                  4.0～12.0(U)       </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/022655400">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              <img src="/img/icon_01_stopped.png" alt="中止" width="47" height="18">
+
+<br>
+                              尿中蛋白分画（2025年12月4日ご依頼分をもって受託中止）
+<br>
+                              3A020-0000-001-233                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  部分尿
+<br>
+                                    1
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  18<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  アガロースゲル電気泳動法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_5 mCS_no_scrollbar"><div id="mCSB_5" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_5_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">電気泳動法<br>荷電粒子の浮遊する電解質溶液に通電すると，粒子は各粒子の荷電と逆の極側に移動する現象を利用し，移動度から目的の物質を測定する方法。<br>水溶液支持体にはセルロースアセテート膜，アガロースゲル，ポリアクリルアミドゲルなどが用いられる。</div><div id="mCSB_5_scrollbar_vertical" class="mCSB_scrollTools mCSB_5_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_5_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  (%)         </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003860200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              <img src="/img/icon_01_stopped.png" alt="中止" width="47" height="18">
+
+<br>
+                              チモール混濁反応 (TTT)（2019年3月29日ご依頼分をもって受託中止）
+<br>
+                              3A025-0000-023-292                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （21日）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  日本消化器病学会肝機能研究班 標準法変法          </td>
+                        <td>
+                  2.5以下(U)          </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/001850200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              <img src="/img/icon_01_stopped.png" alt="中止" width="47" height="18">
+
+<br>
+                              アルブミン定量（2020年12月3日ご依頼分をもって受託中止）
+<br>
+                              3A015-0000-023-063                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  ネフェロメトリー<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_6 mCS_no_scrollbar"><div id="mCSB_6" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_6_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">ネフェロメトリー(Nephelometry)<br>抗原抗体反応による混濁物に光を照射させ，光の散乱強度を測定する方法。</div><div id="mCSB_6_scrollbar_vertical" class="mCSB_scrollTools mCSB_6_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_6_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  3900～4900(mg/dL)        </td>
+
+      </tr>
+
+      </tbody></table>
+</div>
+<div class="list-container-div clone">
+<table class="list_culomn9">
+            <tbody><tr class="list-container list-header">
+            <th scope="row">
+                  <div>
+                        <p>検査項目<br>JLAC10</p>
+                  </div>
+            </th>
+            <td class="list_header_material_code">材料<br>検体量<br>（ｍL）</td>
+            <td>容器</td>
+            <td>キャップ<br>カラー</td>
+            <td>保存 <br>（安定性）</td>
+            <td>所要 <br>日数</td>
+            <td>実施料<br>判断料</td>
+            <td>検査方法</td>
+            <td>基準値<br>（単位）</td>
+      </tr>
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003810200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              総蛋白(TP)
+<br>
+                              3A010-0000-023-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  11<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  Biuret法           </td>
+                        <td>
+                  6.7～8.3(g/dL)           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/052030400">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              総蛋白(TP)
+<br>
+                              1C010-0000-041-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #ebf5ec;">
+                  
+                  髄液
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  A00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  11<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  ピロガロールレッド法        </td>
+                        <td>
+                  15～45(mg/dL)            </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/002460500">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              総蛋白(TP)
+<br>
+                              1A015-0000-004-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  蓄尿
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                                    7<br>
+                  ※1<br>
+                              </td>
+                        <td class="with_input">
+                  ピロガロールレッド法        </td>
+                        <td>
+                  31.2～120.0 (mg/day)           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/050590200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              アルブミン(Alb)
+<br>
+                              3A015-0000-023-271                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （21日）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  11<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  BCP改良法            </td>
+                        <td>
+                  3.8～5.2(g/dL)           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/007210500">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              尿中アルブミン
+<br>
+                              3A015-0000-004-061                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  蓄尿
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  99<br>
+                  ※1<br>
+                              </td>
+                        <td class="with_input">
+                  免疫比濁法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_2 mCS_no_scrollbar _mCS_7"><div id="mCSB_7" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_7_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">TIA(Turbidimetric immnoassay)<br>免疫比濁法<br>抗原抗体反応による混濁物に光を照射させ、透過率を測定する方法。</div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></div><div id="mCSB_7_scrollbar_vertical" class="mCSB_scrollTools mCSB_7_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_7_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  2～20(mg/day)            </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/051065400">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              尿中アルブミン(クレアチニン換算値)
+<br>
+                              3A015-0000-001-061                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  部分尿
+<br>
+                                    1
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  99<br>
+                  ※1<br>
+                              </td>
+                        <td class="with_input">
+                  免疫比濁法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_3 mCS_no_scrollbar _mCS_8"><div id="mCSB_8" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_8_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">TIA(Turbidimetric immnoassay)<br>免疫比濁法<br>抗原抗体反応による混濁物に光を照射させ、透過率を測定する方法。</div><div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></div><div id="mCSB_8_scrollbar_vertical" class="mCSB_scrollTools mCSB_8_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_8_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  尿中アルブミン換算値 10.0以下(mg/g・CRE)         </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003820200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              A/G比
+<br>
+                              3A016-0000-023-919                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  BCP改良法/Biuret法          </td>
+                        <td>
+                  1.1～2.1           </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/065100200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              蛋白分画
+<br>
+                              3A020-0000-023-237                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.3
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  18<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  キャピラリー電気泳動法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_4 mCS_no_scrollbar _mCS_9"><div id="mCSB_9" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_9_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div id="mCSB_4" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">電気泳動法<br>荷電粒子の浮遊する電解質溶液に通電すると，粒子は各粒子の荷電と逆の極側に移動する現象を利用し，移動度から目的の物質を測定する方法。<br>水溶液支持体にはセルロースアセテート膜，アガロースゲル，ポリアクリルアミドゲルなどが用いられる。</div><div id="mCSB_4_scrollbar_vertical" class="mCSB_scrollTools mCSB_4_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_4_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></div><div id="mCSB_9_scrollbar_vertical" class="mCSB_scrollTools mCSB_9_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_9_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  ALB 55.8～66.1(%)　α1-グロブリン 2.9～4.9(%)　α2-グロブリン 7.1～11.8(%)　β1-グロブリン 4.7～7.2(%)　β2-グロブリン 3.2～6.5(%)　γ-グロブリン 11.1～18.8(%)　A/G 1.3～1.9        </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003850200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              
+                              クンケル反応 (ZTT)
+<br>
+                              3A030-0000-023-292                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （3日）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  日本消化器病学会肝機能研究班 標準法変法          </td>
+                        <td>
+                  4.0～12.0(U)       </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/022655400">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              <img src="/img/icon_01_stopped.png" alt="中止" width="47" height="18">
+
+<br>
+                              尿中蛋白分画（2025年12月4日ご依頼分をもって受託中止）
+<br>
+                              3A020-0000-001-233                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color" style="background: #fffcdb;">
+                  
+                  部分尿
+<br>
+                                    1
+                              </td>
+                        <td>
+                  U00         </td>
+                        <td>
+                              </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                                                </td>
+                        <td>
+                  2～4         </td>
+                        <td class="jissiryo_handanryo">
+                  <img src="/img/icon_exclamation.png" width="15" height="15"><br>
+                  18<br>
+                  ※4<br>
+                              </td>
+                        <td class="with_input">
+                  アガロースゲル電気泳動法<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_5 mCS_no_scrollbar _mCS_10"><div id="mCSB_10" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_10_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div id="mCSB_5" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_5_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">電気泳動法<br>荷電粒子の浮遊する電解質溶液に通電すると，粒子は各粒子の荷電と逆の極側に移動する現象を利用し，移動度から目的の物質を測定する方法。<br>水溶液支持体にはセルロースアセテート膜，アガロースゲル，ポリアクリルアミドゲルなどが用いられる。</div><div id="mCSB_5_scrollbar_vertical" class="mCSB_scrollTools mCSB_5_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_5_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></div><div id="mCSB_10_scrollbar_vertical" class="mCSB_scrollTools mCSB_10_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_10_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  (%)         </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/003860200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              <img src="/img/icon_01_stopped.png" alt="中止" width="47" height="18">
+
+<br>
+                              チモール混濁反応 (TTT)（2019年3月29日ご依頼分をもって受託中止）
+<br>
+                              3A025-0000-023-292                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （21日）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  日本消化器病学会肝機能研究班 標準法変法          </td>
+                        <td>
+                  2.5以下(U)          </td>
+
+      </tr>
+
+                              <tr class="list-container with_link" link_url="/akiruno/test/detail/001850200">
+                        <th scope="row">
+                  <div>
+                        <p>
+                              <img src="/img/icon_01_stopped.png" alt="中止" width="47" height="18">
+
+<br>
+                              アルブミン定量（2020年12月3日ご依頼分をもって受託中止）
+<br>
+                              3A015-0000-023-063                        </p>
+                  </div>
+            </th>
+                        <td class="kentairyou_color">
+                  
+                  血清
+<br>
+                                    0.5
+                              </td>
+                        <td>
+                  S09<br>↓<br>A00         </td>
+                        <td>
+                  <img src="/common/cap-images/S09-c.png" class="img_chap">
+            </td>
+                        <td>
+                  
+<img src="/img/icon_02_freeze.png" alt="冷蔵" width="29" height="15"><br>
+                  （1ヵ月）<br>
+                              </td>
+                        <td>
+                  2～4         </td>
+                        <td>
+                                                                                    </td>
+                        <td class="with_input">
+                  ネフェロメトリー<input type="button" name="" class="btn_help"><div class="baloon"><p class="mCustomScrollbar _mCS_6 mCS_no_scrollbar _mCS_11"><div id="mCSB_11" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_11_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr"><div id="mCSB_6" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"><div id="mCSB_6_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">ネフェロメトリー(Nephelometry)<br>抗原抗体反応による混濁物に光を照射させ，光の散乱強度を測定する方法。</div><div id="mCSB_6_scrollbar_vertical" class="mCSB_scrollTools mCSB_6_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_6_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></div><div id="mCSB_11_scrollbar_vertical" class="mCSB_scrollTools mCSB_11_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_11_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div><div class="mCSB_draggerRail"></div></div></div></div></div></p></div>
+            </td>
+                        <td>
+                  3900～4900(mg/dL)        </td>
+
+      </tr>
+
+      </tbody></table>
+</div></div>
+
+
+
+</div>
+</section>  </div>
+      <div id="keyword_search_area">
+            <section id="Serch_List" style="display:none;">
+                  <div style="margin-left: 0px; margin-right: 0px;">
+                        <section class="scroll_area">
+                              <div class="post" style="margin-left: 0px; margin-right: 0px;">
+                                    <p class="current_laboname">現在のラボ：<span>セントラルラボ</span></p>
+                                    <div class="total_num">検索結果：<span class="total_num_value">0</span> 件</div>
+                                    <div class="search_option_area">
+                                          <div class="search_option_link">
+                                                <a href="#search_option_modal" class="open_modal cboxElement">
+                                                      検索オプションで絞り込む
+                                                </a>
+                                          </div>
+                                          <div class="selected_search_option">
+                                                選択中の検索オプション | <span id="searchOption" class="search_option" data-optionvalue=""></span>
+                                          </div>
+                                    </div>
+                                    <div class="search_list"></div>
+                                    <div class="scroll"></div>
+                                    <div class="loading_area" style="margin:30px 0 10px 0;"><center><span class="loading_cotainer"><img src="/js/ajax-loader.gif" id="loading"></span></center></div>
+                              </div>
+                        </section>
+                  </div>
+            </section>
+      </div>
+      <footer class="footer_parts">
+<div class="upper" style="margin-left: 0px; margin-right: 0px;">
+<nav>
+<ul>
+<li><a href="https://www.hugp.com/hufrontier/" target="_blank" class="with_blank"><span>H.U.フロンティア</span></a></li>
+<li><a href="https://www.srl-group.co.jp/" target="_blank" class="with_blank"><span>SRLグループサイト</span></a></li>
+</ul>
+</nav>
+<input type="button" id="page_skiper" name="page_skiper">
+<div id="otoiawase"><a href="https://huf.co.jp/inquiry/" target="_blank">お問い合わせ</a></div>
+</div>
+<hr>
+<div class="bottom" style="margin-left: 0px; margin-right: 0px;">
+<span>Copyright © SRL,Inc. All rights reserved.</span>
+
+<ul>
+<li><a href="https://www.hugp.com/hufrontier/" target="_blank"><img src="/img/logo_huf_jp.svg" alt="H.U.フロンティア"></a></li>
+<li><a href="https://www.srl-group.co.jp/" target="_blank"><img src="/img/logo_srl.svg" alt="株式会社エスアールエル"></a></li>
+<li><a href="https://www.hugp.com/" target="_blank"><img src="/img/logo_hu.png" alt="H.U.グループホールディングス"></a></li>
+</ul>
+</div>
+</footer>
+
+      <div style="display:none;">
+            <div id="default_modal" class="labo_modal">
+                  <h3>ラボ切替機能追加/URL変更のお知らせ</h3>
+                  <ul class="labo_info">
+                        <li>ラボ毎の検査項目が閲覧できるようになりました。下記ラボ一覧よりラボを選択してください。<br>
+                              <span>右上のラボアイコン</span>でいつでもラボの切替が可能です。</li>
+                        <li>「総合検査案内」サイトはドメインの変更を行いました。<br>
+                              恐れ入りますが、「お気に入り」「ブックマーク」等にご登録いただいている方は、新しいアドレスで登録し直していただけますようお願いいたします。</li>
+                  </ul>
+                  <h3>ラボを選択してください</h3>
+                  <div class="labo_selection">
+                  <ul>
+                                                      <li><a href="/akiruno/test/list/1"><img src="/common/icons/akiruno.png" alt=""><br>セントラルラボ</a></li>
+                                                      <li><a href="/muqs/test/list/1"><img src="/common/icons/muqs.png" alt=""><br>ＭＵＱＳラボ</a></li>
+                                                      <li><a href="/fukuoka/test/list/1"><img src="/common/icons/fukuoka.png" alt=""><br>SRL Advanced Lab.FMA</a></li>
+                                                      <li><a href="/hokkaido/test/list/1"><img src="/common/icons/hokkaido.png" alt=""><br>札幌ミライラボ</a></li>
+                                                      <li><a href="/chibachuo/test/list/1"><img src="/common/icons/chibachuo.png" alt=""><br>千葉中央</a></li>
+                                                      <li><a href="/chuo/test/list/1"><img src="/common/icons/chuo.png" alt=""><br>中央ラボ</a></li>
+                                                      <li><a href="/yokohama/test/list/1"><img src="/common/icons/yokohama.png" alt=""><br>横浜ラボ</a></li>
+                                                      <li><a href="/kanazawa/test/list/1"><img src="/common/icons/kanazawa.png" alt=""><br>金沢ラボ</a></li>
+                                                      <li><a href="/shizuoka/test/list/1"><img src="/common/icons/shizuoka.png" alt=""><br>静岡ラボ</a></li>
+                                                      <li><a href="/aichi/test/list/1"><img src="/common/icons/aichi.png" alt=""><br>愛知ラボ</a></li>
+                                                      <li><a href="/kyowa/test/list/1"><img src="/common/icons/kyowa.png" alt=""><br>杏和総合</a></li>
+                                          </ul>
+                  </div>
+            </div>
+            <!-- /#default_modal -->
+      </div>
+
+      <div style="display:none;">
+            <div id="labo_selection_modal" class="labo_modal">
+                  <h2>ラボを選ぶ</h2>
+                        <nav>
+                        <ul>
+                              <li>現在のラボ</li>
+                              <li><span class="current_labo"><img src="/common/icons/akiruno.png" alt=""></span>セントラルラボ</li>
+                              <li><a href="javascript:void(0)" onclick="$.colorbox.close(); return false;" class="btn_modal_close">閉じる</a></li>
+                        </ul>
+                  </nav>
+
+                  
+                  <h3 class="gcom">ラボ一覧</h3>
+                  <div id="gcom">
+                        <!--グループ会社検査センター-->
+                        検査・関連サービス事業 グループ会社:
+                        <ul>
+                              <li><a href="http://jcl.sub.jp/jcl_n_r/af-kensa.html"><img src="/common/icons/gp-link01.png" alt="日本臨床"></a></li>
+                              <li><a href="https://www.gunrin.com/inspection/"><img src="/common/icons/gp-link02.png" alt="SRL北関東"></a></li>
+                              <li><a href="http://hokushin-cl.co.jp/business/pdf/2018_kensa_annai.pdf"><img src="/common/icons/gp-link03.png" alt="北信臨床"></a></li>
+                        </ul>
+                  </div>
+                  <div class="labo_selection">
+                  <ul>
+                                                                                                                  <li><a href="/muqs/test/list/1"><img src="/common/icons/muqs.png" alt=""><br>ＭＵＱＳラボ</a></li>
+                                                                                    <li><a href="/fukuoka/test/list/1"><img src="/common/icons/fukuoka.png" alt=""><br>SRL Advanced Lab.FMA</a></li>
+                                                                                    <li><a href="/hokkaido/test/list/1"><img src="/common/icons/hokkaido.png" alt=""><br>札幌ミライラボ</a></li>
+                                                                                    <li><a href="/chibachuo/test/list/1"><img src="/common/icons/chibachuo.png" alt=""><br>千葉中央</a></li>
+                                                                                    <li><a href="/chuo/test/list/1"><img src="/common/icons/chuo.png" alt=""><br>中央ラボ</a></li>
+                                                                                    <li><a href="/yokohama/test/list/1"><img src="/common/icons/yokohama.png" alt=""><br>横浜ラボ</a></li>
+                                                                                    <li><a href="/kanazawa/test/list/1"><img src="/common/icons/kanazawa.png" alt=""><br>金沢ラボ</a></li>
+                                                                                    <li><a href="/shizuoka/test/list/1"><img src="/common/icons/shizuoka.png" alt=""><br>静岡ラボ</a></li>
+                                                                                    <li><a href="/aichi/test/list/1"><img src="/common/icons/aichi.png" alt=""><br>愛知ラボ</a></li>
+                                                                                    <li><a href="/kyowa/test/list/1"><img src="/common/icons/kyowa.png" alt=""><br>杏和総合</a></li>
+                                          </ul>
+                  </div>
+            </div>
+            <!-- /#labo_selection_modal -->
+      </div>
+      
+      
+      <div style="display:none;">
+            <div id="search_option_modal" class="labo_modal">
+                  <div class="modal_header">
+                        <h2>検索オプション</h2>
+                        <nav>
+                              <ul>
+                                    <li><a href="javascript:void(0)" onclick="$.colorbox.close(); return false;" id="closeButton" class="btn_modal_close">閉じる</a></li>
+                              </ul>
+                        </nav>
+                  </div>
+                  <div class="search_contetns">
+                        <div class="select_radio_all select_search_radio checked">
+                              <input type="radio" name="search_radio_parents" class="search_radio_parents" id="selectAllRadio" value="0" checked="">
+                              <label for="selectAllRadio">すべて</label>
+                        </div>
+
+                        <div class="select_radio_item select_search_radio large">
+                              <div class="parent_test_item_radio">
+                                    <input type="radio" name="search_radio_parents" class="search_radio_parents" id="selectTestItemRadio" value="1">
+                                    <label for="selectTestItemRadio">検査項目</label>
+                              </div>
+                              <div class="child_test_item_radios">
+                                    <span>
+                                          <input type="radio" name="test_items_radio" class="test_items_radio" id="testItemChildAll" value="0">
+                                          <label for="testItemChildAll">すべて</label>
+                                    </span>
+                                    <span>
+                                          <input type="radio" name="test_items_radio" class="test_items_radio" id="testItemChildItemName" value="1">
+                                          <label for="testItemChildItemName">項目名称</label>
+                                    </span>
+                                    <span>
+                                          <input type="radio" name="test_items_radio" class="test_items_radio" id="testItemChildReceptName" value="2">
+                                          <label for="testItemChildReceptName">レセプト名</label>
+                                    </span>
+                                    <span>
+                                          <input type="radio" name="test_items_radio" class="test_items_radio" id="testItemChiledDiseaseName" value="3">
+                                          <label for="testItemChiledDiseaseName">疾患名</label>
+                                    </span>
+                                    <span>
+                                          <input type="radio" name="test_items_radio" class="test_items_radio" id="testItemChildItemJlac10" value="4">
+                                          <label for="testItemChildItemJlac10">JLAC10</label>
+                                    </span>
+                                    <span>
+                                          <input type="radio" name="test_items_radio" class="test_items_radio" id="testItemChildItemCode" value="5">
+                                          <label for="testItemChildItemCode">項目コード</label>
+                                    </span>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="search_footer">
+                        <button id="buttonRefine" class="btn btn-primary">絞り込み</button>
+                  </div>
+            </div>
+      </div>
+      
+      <div class="mordal">
+      <div class="mordal_cotainer">
+      <p></p>
+      </div>
+      </div>
+
+      <div id="screen"></div>
+      <script src="//log1.mobylog.jp/__xdtc/500800.js" charset="UTF-8"></script>
+
+
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button type="button" id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div></body></html>
+
+このようなページで
+<tbody>を取得したい。
+
+ほかにも
+https://test-directory.srl.info/akiruno/test/list/2
+https://test-directory.srl.info/akiruno/test/list/3
+
+directory.srl.info/akiruno/test/list/72
+72まであるようだ。
+Copilot said:
+Copilot
+状況、よく分かりました。
+**目的は「SRL検査案内の各 /akiruno/test/list/{番号} ページから <tbody>（= 検査項目一覧）を機械的に取得したい」**ということですね。
+※ 1〜72 まで同じ構造のページが存在する想定。
+
+以下は 実務的に使えるやり方 を整理します。
+
+結論（ポイント要約）
+このページは JavaScriptで tbody を生成しているわけではない
+HTTP GETで取得したHTMLに最初から <tbody> が含まれている
+よって Selenium不要、requests + BeautifulSoup で十分
+/akiruno/test/list/1 ～ /akiruno/test/list/72 をループすればOK
+<table class="list_culomn9"> の最初の <tbody> だけを使えばよい
+下にある clone テーブルは 無視する必要あり
+HTML構造の重要ポイント
+① 取得したい <tbody> の特徴
+<table class="list_culomn9">
+  <tbody>
+    <tr class="list-container list-header">...</tr>
+    <tr class="list-container with_link" link_url="...">...</tr>
+    ...
+  </tbody>
+</table>
+
+
+Plain Text
+<table class="list_culomn9">
+  <tbody>
+    <tr class="list-container list-header">...</tr>
+    <tr class="list-container with_link" link_url="...">...</tr>
+    ...
+  </tbody>
+</table>
+✅ 最初の list_culomn9 テーブルが本体
+❌ 下部にある <div class="list-container-div clone"> 配下のテーブルは スクロール用の複製
+
+Python（requests + BeautifulSoup）の王道例
+① 必要ライブラリ
+pip install requests beautifulsoup4
+
+
+
+Shell
+pip install requests beautifulsoup4
+
+② 単一ページから <tbody> を取得
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://test-directory.srl.info/akiruno/test/list/1"
+html = requests.get(url).text
+
+soup = BeautifulSoup(html, "html.parser")
+
+# clone ではない方の table を取る
+table = soup.select_one(
+    "div.list-container-div:not(.clone) table.list_culomn9"
+)
+
+tbody = table.find("tbody")
+
+print(tbody.prettify())
+
+
+
+Shell
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://test-directory.srl.info/akiruno/test/list/1"
+html = requests.get(url).text
+
+soup = BeautifulSoup(html, "html.parser")
+
+# clone ではない方の table を取る
+table = soup.select_one(
+    "div.list-container-div:not(.clone) table.list_culomn9"
+)
+
+tbody = table.find("tbody")
+
+print(tbody.prettify())
+
+
+その他の行を表示する
+③ 1〜72 を一括で処理する
+import requests
+from bs4 import BeautifulSoup
+
+BASE_URL = "https://test-directory.srl.info/akiruno/test/list/{}"
+
+all_results = []
+
+for i in range(1, 73):
+    url = BASE_URL.format(i)
+    r = requests.get(url)
+    r.raise_for_status()
+
+    soup = BeautifulSoup(r.text, "html.parser")
+    table = soup.select_one(
+        "div.list-container-div:not(.clone) table.list_culomn9"
+    )
+
+    if not table:
+        print(f"no table: {url}")
+        continue
+
+    tbody = table.find("tbody")
+    rows = tbody.find_all("tr", class_="with_link")
+
+    for tr in rows:
+        item_name = tr.find("th").get_text(strip=True)
+        detail_url = tr.get("link_url")
+
+        all_results.append({
+            "category_id": i,
+            "item_name": item_name,
+            "detail_url": detail_url
+        })
+
+print(len(all_results))
+
+
+Python
+import requests
+from bs4 import BeautifulSoup
+
+BASE_URL = "https://test-directory.srl.info/akiruno/test/list/{}"
+
+all_results = []
+
+for i in range(1, 73):
+    url = BASE_URL.format(i)
+    r = requests.get(url)
+    r.raise_for_status()
+
+    soup = BeautifulSoup(r.text, "html.parser")
+    table = soup.select_one(
+        "div.list-container-div:not(.clone) table.list_culomn9"
+    )
+
+    if not table:
+        print(f"no table: {url}")
+        continue
+
+    tbody = table.find("tbody")
+    rows = tbody.find_all("tr", class_="with_link")
+
+    for tr in rows:
+        item_name = tr.find("th").get_text(strip=True)
+        detail_url = tr.get("link_url")
+
+        all_results.append({
+            "category_id": i,
+            "item_name": item_name,
+            "detail_url": detail_url
+        })
+
+print(len(all_results))
+
+
+
+よくあるハマりポイント（重要）
+✅ clone テーブルを取ってしまう問題
+
+div.list-container-div.clone
+
+Python
+div.list-container-div.clone
+を除外しないと 同じデータを二重取得 します。
+→ :not(.clone) が必須。
+
+✅ JavaScript不要
+<script> は大量にありますが
+tbody は初期HTMLに存在
+requests.get()
+↓
+HTML内に <tbody>
+実務でのおすすめ構成（病理・検査部向け）
+レベル   処理内容
+list  /test/list/{n} で一覧取得
+detail      /test/detail/{code} で詳細情報
+DB    JLAC10 / 材料 / 方法 / 基準値 を正規化
+更新    定期クロール（年1〜数回）
+補足（利用上の注意）
+
+業務利用の場合、社内利用・研究目的に限定するのが無難
+アクセス間隔は time.sleep(0.5〜1.0) ？
+不正アクセスと思われない間隔で。
+User-Agent を明示するとより安全
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (internal research use)"
+}
+
+Python
+headers = {
+    "User-Agent": "Mozilla/5.0 (internal research use)"
+}
