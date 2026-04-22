@@ -1,0 +1,5227 @@
+{
+  "version": "2026-04-22",
+  "source": "NCDA/Multi-parameter gene-related testing.xlsx",
+  "schema": {
+    "code_table": "メーカーキット毎のJLAC10要素分解（分析物/識別/材料/測定法/結果識別）",
+    "code_table_2": "商品名→JLAC10(17桁)連結形式",
+    "map": "院内コード/項目名称→JLAC10 のマッピング実例"
+  },
+  "counts": {
+    "code_table": 211,
+    "code_table_2": 214,
+    "map": 198
+  },
+  "sheets": {
+    "code_table": [
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "65"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "66"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "67"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "68"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "69"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "70"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "71"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "72"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "73"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "74"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "75"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "76"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "77"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "78"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "79"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "80"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "81"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "82"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "83"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "84"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "85"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "86"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "87"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "88"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "89"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "90"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "91"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "92"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "93"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "94"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "シスメックス・ビオメリュー株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "95"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "65"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "66"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "67"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "68"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "69"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "70"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "65"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "66"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "67"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "68"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "69"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "70"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "71"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "72"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "73"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "74"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "generic_name": "核酸同定・ウイルスキット",
+        "classification_code": "86010000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B653",
+        "identification": "0000",
+        "material": "063",
+        "methodology": "856",
+        "result_identifier": "75"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "65"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "66"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "67"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "68"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "69"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "70"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "71"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B649",
+        "identification": "0000",
+        "material": "015",
+        "methodology": "856",
+        "result_identifier": "72"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B654",
+        "identification": "0000",
+        "material": "041",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86002999.2",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル１",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86002999",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "65"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "66"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "67"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "68"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "69"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "70"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "71"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "72"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "73"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "74"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "75"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "76"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "77"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "78"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "79"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "80"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "81"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "82"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "83"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "84"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "85"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "86"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "87"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "88"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "89"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "90"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "91"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "92"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "93"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "94"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B652",
+        "identification": "0000",
+        "material": "097",
+        "methodology": "856",
+        "result_identifier": "95"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86002999",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "00"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "51"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "52"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "53"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "54"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "55"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "56"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "57"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "58"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "59"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "60"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "61"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "62"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "63"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "64"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "65"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "66"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "67"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "68"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "69"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "70"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "71"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "72"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "73"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "74"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "75"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "76"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "77"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "78"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "79"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "80"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "81"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "82"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "generic_name": "核酸同定・一般細菌キット",
+        "classification_code": "86003000",
+        "company": "ビオメリュー・ジャパン株式会社",
+        "analyte": "6B656",
+        "identification": "0000",
+        "material": "061",
+        "methodology": "856",
+        "result_identifier": "83"
+      }
+    ],
+    "code_table_2": [
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "核酸同定（グラム陽性菌・グラム陰性菌・酵母様真菌・薬剤耐性遺伝子）",
+        "jlac10": "6B652000009785600",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Enterococcus属",
+        "jlac10": "6B652000009785651",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Listeria monocytogenes",
+        "jlac10": "6B652000009785652",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Staphlococcus属",
+        "jlac10": "6B652000009785653",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Staphylococcus aureus",
+        "jlac10": "6B652000009785654",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Streptococcus属",
+        "jlac10": "6B652000009785655",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Streptococcus agalactiae(Group B Streptococcus)",
+        "jlac10": "6B652000009785656",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Streptococcus pneumoniae",
+        "jlac10": "6B652000009785657",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Streptococcus pyogenes(Group A Streptococcus)",
+        "jlac10": "6B652000009785658",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Acinetobacter baumannii",
+        "jlac10": "6B652000009785659",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Enterobacteriaceae/Enterobacterales",
+        "jlac10": "6B652000009785660",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Enterobacter cloacae complex",
+        "jlac10": "6B652000009785661",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Escherichia coli",
+        "jlac10": "6B652000009785662",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Klebsiella oxytoca",
+        "jlac10": "6B652000009785663",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Klebsiella pneumoniae",
+        "jlac10": "6B652000009785664",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Proteus 属",
+        "jlac10": "6B652000009785665",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Serratia marcescens",
+        "jlac10": "6B652000009785666",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Haemophilus influenzae",
+        "jlac10": "6B652000009785667",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Neisseria meningitidis",
+        "jlac10": "6B652000009785668",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Pseudomonas aeruginosa",
+        "jlac10": "6B652000009785669",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Candida albicans",
+        "jlac10": "6B652000009785670",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Candida glabrata",
+        "jlac10": "6B652000009785671",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Candida krusei",
+        "jlac10": "6B652000009785672",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Candida parapsilosis",
+        "jlac10": "6B652000009785673",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Candida tropicalis",
+        "jlac10": "6B652000009785674",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "mecA遺伝子",
+        "jlac10": "6B652000009785675",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "vanA/B遺伝子",
+        "jlac10": "6B652000009785676",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "KPC遺伝子",
+        "jlac10": "6B652000009785677",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "mecA/C and MREJ(MRSA)遺伝子",
+        "jlac10": "6B652000009785678",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "mecA/C遺伝子",
+        "jlac10": "6B652000009785679",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "OXA-48-like遺伝子",
+        "jlac10": "6B652000009785680",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "CTX-M遺伝子",
+        "jlac10": "6B652000009785681",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "IMP遺伝子",
+        "jlac10": "6B652000009785682",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "NDM遺伝子",
+        "jlac10": "6B652000009785683",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "VIM遺伝子",
+        "jlac10": "6B652000009785684",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "mcr-1遺伝子",
+        "jlac10": "6B652000009785685",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Enterococcus faecalis",
+        "jlac10": "6B652000009785686",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Enterococcus faecium",
+        "jlac10": "6B652000009785687",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Staphylococcus epidermidis",
+        "jlac10": "6B652000009785688",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Staphylococcus lugdunensis",
+        "jlac10": "6B652000009785689",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Bacteroides fragilis",
+        "jlac10": "6B652000009785690",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Klebsiella aerogenes",
+        "jlac10": "6B652000009785691",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Salmonella属",
+        "jlac10": "6B652000009785692",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Stenotrophomonas maltophilia",
+        "jlac10": "6B652000009785693",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Candida auris",
+        "jlac10": "6B652000009785694",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ血液培養パネル",
+        "note": "Cryptococcus neoformans/gattii",
+        "jlac10": "6B652000009785695",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "商品名",
+        "note": "備考",
+        "jlac10": "JLAC10コード",
+        "jlac10_material_name": "JLAC10材料",
+        "jlac10_methodology_name": "JLAC10測定方法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "核酸同定（一般細菌・ウイルス）",
+        "jlac10": "6B653000006385600",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "アデノウイルス",
+        "jlac10": "6B653000006385651",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "インフルエンザウイルスA型",
+        "jlac10": "6B653000006385652",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "インフルエンザウイルスA型 H1",
+        "jlac10": "6B653000006385653",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "インフルエンザウイルスA型 H3",
+        "jlac10": "6B653000006385654",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "インフルエンザウイルスA型 H1-2009",
+        "jlac10": "6B653000006385655",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "インフルエンザウイルスB型",
+        "jlac10": "6B653000006385656",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "パラインフルエンザウイルス1型",
+        "jlac10": "6B653000006385657",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "パラインフルエンザウイルス2型",
+        "jlac10": "6B653000006385658",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "パラインフルエンザウイルス3型",
+        "jlac10": "6B653000006385659",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "パラインフルエンザウイルス4型",
+        "jlac10": "6B653000006385660",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "RSウイルス",
+        "jlac10": "6B653000006385661",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "コロナウイルス 229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "コロナウイルス HKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "コロナウイルス NL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "コロナウイルス OC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "ヒトメタニューモウイルス",
+        "jlac10": "6B653000006385666",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "ヒトライノウイルス/エンテロウイルス",
+        "jlac10": "6B653000006385667",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "百日咳菌",
+        "jlac10": "6B653000006385668",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "クラミドフィラ・ニューモニエ",
+        "jlac10": "6B653000006385669",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル",
+        "note": "マイコプラズマ・ニューモニエ",
+        "jlac10": "6B653000006385670",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "商品名",
+        "note": "備考",
+        "jlac10": "JLAC10コード",
+        "jlac10_material_name": "JLAC10材料",
+        "jlac10_methodology_name": "JLAC10測定方法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "核酸同定（一般細菌・ウイルス）",
+        "jlac10": "6B653000006385600",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "アデノウイルス",
+        "jlac10": "6B653000006385651",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "インフルエンザウイルスA型",
+        "jlac10": "6B653000006385652",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "インフルエンザウイルスA型 H1",
+        "jlac10": "6B653000006385653",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "インフルエンザウイルスA型 H3",
+        "jlac10": "6B653000006385654",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "インフルエンザウイルスA型 H1-2009",
+        "jlac10": "6B653000006385655",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "インフルエンザウイルスB型",
+        "jlac10": "6B653000006385656",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "パラインフルエンザウイルス1型",
+        "jlac10": "6B653000006385657",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "パラインフルエンザウイルス2型",
+        "jlac10": "6B653000006385658",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "パラインフルエンザウイルス3型",
+        "jlac10": "6B653000006385659",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "パラインフルエンザウイルス4型",
+        "jlac10": "6B653000006385660",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "RSウイルス",
+        "jlac10": "6B653000006385661",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "コロナウイルス 229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "コロナウイルス HKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "コロナウイルス NL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "コロナウイルス OC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "ヒトメタニューモウイルス",
+        "jlac10": "6B653000006385666",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "ヒトライノウイルス/エンテロウイルス",
+        "jlac10": "6B653000006385667",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "百日咳菌",
+        "jlac10": "6B653000006385668",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "クラミドフィラ・ニューモニエ",
+        "jlac10": "6B653000006385669",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "マイコプラズマ・ニューモニエ",
+        "jlac10": "6B653000006385670",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "SARS-CoV-2",
+        "jlac10": "6B653000006385671",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ呼吸器パネル２．１",
+        "note": "パラ百日咳菌",
+        "jlac10": "6B653000006385672",
+        "jlac10_material_name": "鼻汁，鼻腔・鼻咽頭擦過物",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "商品名",
+        "note": "備考",
+        "jlac10": "JLAC10コード",
+        "jlac10_material_name": "JLAC10材料",
+        "jlac10_methodology_name": "JLAC10測定方法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "核酸検出(胃腸炎病原体)",
+        "jlac10": "6B649000001585600",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "カンピロバクター属",
+        "jlac10": "6B649000001585651",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "クロストリジオイデス・ディフィシル トキシンA/B",
+        "jlac10": "6B649000001585652",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "プレジオモナス・シゲロイデス",
+        "jlac10": "6B649000001585653",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "サルモネラ属",
+        "jlac10": "6B649000001585654",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "ビブリオ属",
+        "jlac10": "6B649000001585655",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "コレラ菌",
+        "jlac10": "6B649000001585656",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "エルシニア・エンテロコリチカ",
+        "jlac10": "6B649000001585657",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "腸管凝集性大腸菌(EAEC)",
+        "jlac10": "6B649000001585658",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "腸管病原性大腸菌(EPEC)",
+        "jlac10": "6B649000001585659",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "腸管毒素原性大腸菌(ETEC) LT/ET",
+        "jlac10": "6B649000001585660",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "志賀毒素産生性大腸菌(STEC) Stx1/Stx2",
+        "jlac10": "6B649000001585661",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "大腸菌157",
+        "jlac10": "6B649000001585662",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "赤痢菌/腸管侵入性大腸菌(EIEC)",
+        "jlac10": "6B649000001585663",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "アデノウイルス 40/41型",
+        "jlac10": "6B649000001585664",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "アストロウイルス",
+        "jlac10": "6B649000001585665",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "ノロウイルス GⅠ/GⅡ",
+        "jlac10": "6B649000001585666",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "ロタウイルスA",
+        "jlac10": "6B649000001585667",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "サポウイルス GⅠ/GⅡ/GⅣ/GⅤ",
+        "jlac10": "6B649000001585668",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "クリプトスポリジウム",
+        "jlac10": "6B649000001585669",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "サイクロスポラ・ケイタネンシス",
+        "jlac10": "6B649000001585670",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "赤痢アメーバ",
+        "jlac10": "6B649000001585671",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ消化管パネル",
+        "note": "ランブル鞭毛虫",
+        "jlac10": "6B649000001585672",
+        "jlac10_material_name": "便",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "商品名",
+        "note": "備考",
+        "jlac10": "JLAC10コード",
+        "jlac10_material_name": "JLAC10材料",
+        "jlac10_methodology_name": "JLAC10測定方法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "核酸同定（一般細菌・ウイルス・酵母様真菌）",
+        "jlac10": "6B654000004185600",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Escherichia coli K1",
+        "jlac10": "6B654000004185651",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Haemophilus influenzae",
+        "jlac10": "6B654000004185652",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Listeria   monocytogenes",
+        "jlac10": "6B654000004185653",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Neisseria    meningitidis",
+        "jlac10": "6B654000004185654",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Streptococcus agalactiae",
+        "jlac10": "6B654000004185655",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Streptococcus pneumoniae",
+        "jlac10": "6B654000004185656",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Cytomegalovirus",
+        "jlac10": "6B654000004185657",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Enterovirus",
+        "jlac10": "6B654000004185658",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Herpes simplex virus 1",
+        "jlac10": "6B654000004185659",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Herpes simplex virus 2",
+        "jlac10": "6B654000004185660",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Human herpesvirus  6",
+        "jlac10": "6B654000004185661",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Human parechovirus",
+        "jlac10": "6B654000004185662",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Varicella  zoster  virus",
+        "jlac10": "6B654000004185663",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＦｉｌｍＡｒｒａｙ髄膜炎・脳炎パネル",
+        "note": "Cryptococcus  neoformans/gattii",
+        "jlac10": "6B654000004185664",
+        "jlac10_material_name": "髄液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "商品名",
+        "note": "備考",
+        "jlac10": "JLAC10コード",
+        "jlac10_material_name": "JLAC10材料",
+        "jlac10_methodology_name": "JLAC10測定方法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "核酸同定（グラム陽性菌・グラム陰性菌・酵母様真菌・薬剤耐性遺伝子）",
+        "jlac10": "6B652000009785600",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル１",
+        "note": "Enterococcus属",
+        "jlac10": "6B652000009785651",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Listeria monocytogenes",
+        "jlac10": "6B652000009785652",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Staphlococcus属",
+        "jlac10": "6B652000009785653",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Staphylococcus aureus",
+        "jlac10": "6B652000009785654",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Streptococcus属",
+        "jlac10": "6B652000009785655",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Streptococcus agalactiae(Group B Streptococcus)",
+        "jlac10": "6B652000009785656",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Streptococcus pneumoniae",
+        "jlac10": "6B652000009785657",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Streptococcus pyogenes(Group A Streptococcus)",
+        "jlac10": "6B652000009785658",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Acinetobacter baumannii",
+        "jlac10": "6B652000009785659",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Enterobacteriaceae/Enterobacterales",
+        "jlac10": "6B652000009785660",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Enterobacter cloacae complex",
+        "jlac10": "6B652000009785661",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Escherichia coli",
+        "jlac10": "6B652000009785662",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Klebsiella oxytoca",
+        "jlac10": "6B652000009785663",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Klebsiella pneumoniae",
+        "jlac10": "6B652000009785664",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Proteus 属",
+        "jlac10": "6B652000009785665",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Serratia marcescens",
+        "jlac10": "6B652000009785666",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Haemophilus influenzae",
+        "jlac10": "6B652000009785667",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Neisseria meningitidis",
+        "jlac10": "6B652000009785668",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Pseudomonas aeruginosa",
+        "jlac10": "6B652000009785669",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Candida albicans",
+        "jlac10": "6B652000009785670",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Candida glabrata",
+        "jlac10": "6B652000009785671",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Candida krusei",
+        "jlac10": "6B652000009785672",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Candida parapsilosis",
+        "jlac10": "6B652000009785673",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Candida tropicalis",
+        "jlac10": "6B652000009785674",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "mecA遺伝子",
+        "jlac10": "6B652000009785675",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "vanA/B遺伝子",
+        "jlac10": "6B652000009785676",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "KPC遺伝子",
+        "jlac10": "6B652000009785677",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "mecA/C and MREJ(MRSA)遺伝子",
+        "jlac10": "6B652000009785678",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "mecA/C遺伝子",
+        "jlac10": "6B652000009785679",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "OXA-48-like遺伝子",
+        "jlac10": "6B652000009785680",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "CTX-M遺伝子",
+        "jlac10": "6B652000009785681",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "IMP遺伝子",
+        "jlac10": "6B652000009785682",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "NDM遺伝子",
+        "jlac10": "6B652000009785683",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "VIM遺伝子",
+        "jlac10": "6B652000009785684",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "mcr-1遺伝子",
+        "jlac10": "6B652000009785685",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Enterococcus faecalis",
+        "jlac10": "6B652000009785686",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Enterococcus faecium",
+        "jlac10": "6B652000009785687",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Staphylococcus epidermidis",
+        "jlac10": "6B652000009785688",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Staphylococcus lugdunensis",
+        "jlac10": "6B652000009785689",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Bacteroides fragilis",
+        "jlac10": "6B652000009785690",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Klebsiella aerogenes",
+        "jlac10": "6B652000009785691",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Salmonella属",
+        "jlac10": "6B652000009785692",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Stenotrophomonas maltophilia",
+        "jlac10": "6B652000009785693",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Candida auris",
+        "jlac10": "6B652000009785694",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ血液培養パネル２",
+        "note": "Cryptococcus neoformans/gattii",
+        "jlac10": "6B652000009785695",
+        "jlac10_material_name": "培養液",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "商品名",
+        "note": "備考",
+        "jlac10": "JLAC10コード",
+        "jlac10_material_name": "JLAC10材料",
+        "jlac10_methodology_name": "JLAC10測定方法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "核酸同定（一般細菌・ウイルス・薬剤耐性遺伝子）",
+        "jlac10": "6B656000006185600",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Acinetobacter calcoaceticus-baumannii complex",
+        "jlac10": "6B656000006185651",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Enterobacter cloacae complex",
+        "jlac10": "6B656000006185652",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Escherichia coli",
+        "jlac10": "6B656000006185653",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Haemophilus influenzae",
+        "jlac10": "6B656000006185654",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Klebsiella aerogenes",
+        "jlac10": "6B656000006185655",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Klebsiella oxytoca",
+        "jlac10": "6B656000006185656",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Klebsiella pneumoniae group",
+        "jlac10": "6B656000006185657",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Moraxella catarrhalis",
+        "jlac10": "6B656000006185658",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Proteus spp.",
+        "jlac10": "6B656000006185659",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Pseudomonas \naeruginosa",
+        "jlac10": "6B656000006185660",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Serratia marcescens",
+        "jlac10": "6B656000006185661",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Staphylococcus aureus",
+        "jlac10": "6B656000006185662",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Streptococcus agalactiae",
+        "jlac10": "6B656000006185663",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Streptococcus pneumoniae",
+        "jlac10": "6B656000006185664",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Streptococcus pyogenes",
+        "jlac10": "6B656000006185665",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Chlamydia pneumoniae",
+        "jlac10": "6B656000006185666",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Legionella pneumophila",
+        "jlac10": "6B656000006185667",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "Mycoplasma pneumoniae",
+        "jlac10": "6B656000006185668",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "アデノウイルス",
+        "jlac10": "6B656000006185669",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "コロナウイルス",
+        "jlac10": "6B656000006185670",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "ヒトメタニューモウイルス",
+        "jlac10": "6B656000006185671",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "ヒトライノウイルス/エンテロウイルス",
+        "jlac10": "6B656000006185672",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "インフルエンザウイルスA型",
+        "jlac10": "6B656000006185673",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "インフルエンザウイルスB型",
+        "jlac10": "6B656000006185674",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "パラインフルエンザウイルス",
+        "jlac10": "6B656000006185675",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "RSウイルス",
+        "jlac10": "6B656000006185676",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "CTX-M遺伝子",
+        "jlac10": "6B656000006185677",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "IMP遺伝子",
+        "jlac10": "6B656000006185678",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "KPC遺伝子",
+        "jlac10": "6B656000006185679",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "NDM遺伝子",
+        "jlac10": "6B656000006185680",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "OXA-48-like遺伝子",
+        "jlac10": "6B656000006185681",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "VIM遺伝子",
+        "jlac10": "6B656000006185682",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      },
+      {
+        "product_name": "ＢｉｏＦｉｒｅ肺炎パネル",
+        "note": "mecA/C and MREJ遺伝子",
+        "jlac10": "6B656000006185683",
+        "jlac10_material_name": "喀痰",
+        "jlac10_methodology_name": "multiplex PCR法"
+      }
+    ],
+    "map": [
+      {
+        "result_code": "",
+        "item_name": "Adenovirus",
+        "jlac10": "6B653000006385651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Influenza A",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Influenza B",
+        "jlac10": "6B653000006385656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Parainfluenza Virus1",
+        "jlac10": "6B653000006385657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Parainfluenza Virus2",
+        "jlac10": "6B653000006385658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Parainfluenza Virus3",
+        "jlac10": "6B653000006385659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Parainfluenza Virus4",
+        "jlac10": "6B653000006385660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "RS Virus",
+        "jlac10": "6B653000006385661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Coronavirus 229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Coronavirus HKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Coronavirus NL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Coronavirus OC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "HumanMetapneumovirus",
+        "jlac10": "6B653000006385666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "Rhino/Enterovirus",
+        "jlac10": "6B653000006385667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "B. pertussis",
+        "jlac10": "6B653000006385668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "C. pneumoniae",
+        "jlac10": "6B653000006385669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "M. pneumoniae",
+        "jlac10": "6B653000006385670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "SARS-CoV-2",
+        "jlac10": "6B653000006385671",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2",
+        "cs": ""
+      },
+      {
+        "result_code": "",
+        "item_name": "B. parapertussis",
+        "jlac10": "6B653000006385672",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラ百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "結果",
+        "item_name": "項目名称",
+        "jlac10": "LCS",
+        "jlac10_standard_name": "JLAC10",
+        "cs": "JLAC10標準名称"
+      },
+      {
+        "result_code": "2022070760254",
+        "item_name": "H metapneumovirus",
+        "jlac10": "99DGO",
+        "jlac10_standard_name": "6B653000006385666",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス"
+      },
+      {
+        "result_code": "2022070760254",
+        "item_name": "呼吸器パネル  2.1",
+        "jlac10": "99DGO",
+        "jlac10_standard_name": "6B653000006385611",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁・鼻腔擦過物_multiplex PCR法_判　定"
+      },
+      {
+        "result_code": "2022070760254",
+        "item_name": "(COVID19PCR)",
+        "jlac10": "99DGO",
+        "jlac10_standard_name": "6B653000006385671",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2"
+      },
+      {
+        "result_code": "2022070760254",
+        "item_name": "CoronavirusHKU",
+        "jlac10": "99DGO",
+        "jlac10_standard_name": "6B653000006385663",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex   PCR法_コロナウイルス HKU1"
+      },
+      {
+        "result_code": "2022021060636",
+        "item_name": "Adenovirus",
+        "jlac10": "99DGO",
+        "jlac10_standard_name": "6B653000006385651",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス"
+      },
+      {
+        "result_code": "190000",
+        "item_name": "PCR_咽頭",
+        "jlac10": "6B653000006485600",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "190001",
+        "item_name": "アデノウイルス",
+        "jlac10": "6B653000006485651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "190002",
+        "item_name": "コロナHKU1",
+        "jlac10": "6B653000006485663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "190003",
+        "item_name": "コロナNL63",
+        "jlac10": "6B653000006485664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "190004",
+        "item_name": "コロナ 229E",
+        "jlac10": "6B653000006485662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "190005",
+        "item_name": "コロナOC43",
+        "jlac10": "6B653000006485665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "190006",
+        "item_name": "COV_2",
+        "jlac10": "6B653000006485671",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_SARS-CoV-2",
+        "cs": ""
+      },
+      {
+        "result_code": "190007",
+        "item_name": "インフルA",
+        "jlac10": "6B653000006485652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "190008",
+        "item_name": "インフルA/H1",
+        "jlac10": "6B653000006485653",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_インフルエンザウイルスA型 H1",
+        "cs": ""
+      },
+      {
+        "result_code": "190009",
+        "item_name": "インフルA/H1_2",
+        "jlac10": "6B653000006485655",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_インフルエンザウイルスA型 H1-2009",
+        "cs": ""
+      },
+      {
+        "result_code": "190010",
+        "item_name": "インフルA/H3",
+        "jlac10": "6B653000006485654",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_インフルエンザウイルスA型 H3",
+        "cs": ""
+      },
+      {
+        "result_code": "190011",
+        "item_name": "インフルB",
+        "jlac10": "6B653000006485656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "190012",
+        "item_name": "パラインフル1",
+        "jlac10": "6B653000006485657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "190013",
+        "item_name": "パラインフル2",
+        "jlac10": "6B653000006485658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "190014",
+        "item_name": "パラインフル3",
+        "jlac10": "6B653000006485659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "190015",
+        "item_name": "パラインフル4",
+        "jlac10": "6B653000006485660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "190016",
+        "item_name": "RSウイルス",
+        "jlac10": "6B653000006485661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "190017",
+        "item_name": "ヒトライノ",
+        "jlac10": "6B653000006485667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "190018",
+        "item_name": "hMPV",
+        "jlac10": "6B653000006485666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "190019",
+        "item_name": "百日咳菌",
+        "jlac10": "6B653000006485668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "190020",
+        "item_name": "クラミジア",
+        "jlac10": "6B653000006485669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "190021",
+        "item_name": "マイコプラズマ",
+        "jlac10": "6B653000006485670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_咽喉からの分泌液_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "5265100",
+        "item_name": "新型コロナ遺伝子救急専用",
+        "jlac10": "6B653000006385649",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁・鼻腔擦過物_multiplex PCR法_別紙報告",
+        "cs": ""
+      },
+      {
+        "result_code": "5265400",
+        "item_name": "肺炎マイコプラズマ遺伝子",
+        "jlac10": "6B616000006488811",
+        "jlac10_standard_name": "核酸同定（マイコプラズマ・ニューモニエ）_咽喉からの分泌液_TRC法_判　定",
+        "cs": ""
+      },
+      {
+        "result_code": "20912012",
+        "item_name": "上気道感染症（FilmArray）",
+        "jlac10": "6B653000006385649",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁・鼻腔擦過物_multiplex PCR法_別紙報告",
+        "cs": ""
+      },
+      {
+        "result_code": "20912015",
+        "item_name": "Mycoplasma pneumoniae（TRC）",
+        "jlac10": "6B616000006488811",
+        "jlac10_standard_name": "核酸同定（マイコプラズマ・ニューモニエ）_咽喉からの分泌液_TRC法_判　定",
+        "cs": ""
+      },
+      {
+        "result_code": "0163400",
+        "item_name": "FilmArray呼吸器パネル2.1",
+        "jlac10": "6B653000006385600",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "0163401",
+        "item_name": "アデノウイルス",
+        "jlac10": "6B653000006385651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163402",
+        "item_name": "コロナウイルス229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "0163403",
+        "item_name": "コロナウイルスHKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "0163404",
+        "item_name": "コロナウイルスNL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "0163405",
+        "item_name": "コロナウイルスOC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "0163406",
+        "item_name": "SARS-CoV-2",
+        "jlac10": "6B653000006385671",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2",
+        "cs": ""
+      },
+      {
+        "result_code": "0163407",
+        "item_name": "ヒトメタニューモウイルス",
+        "jlac10": "6B653000006385666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163408",
+        "item_name": "ライノ/エンテロウイルス",
+        "jlac10": "6B653000006385667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163409",
+        "item_name": "インフルエンザA",
+        "jlac10": "6B653000006385654",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H3",
+        "cs": ""
+      },
+      {
+        "result_code": "0163411",
+        "item_name": "パラインフルエンザ1",
+        "jlac10": "6B653000006385657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163412",
+        "item_name": "パラインフルエンザ2",
+        "jlac10": "6B653000006385658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163413",
+        "item_name": "パラインフルエンザ3",
+        "jlac10": "6B653000006385659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163414",
+        "item_name": "パラインフルエンザ4",
+        "jlac10": "6B653000006385660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163415",
+        "item_name": "RSウイルス",
+        "jlac10": "6B653000006385661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163416",
+        "item_name": "パラ百日咳菌",
+        "jlac10": "6B653000006385672",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラ百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0163417",
+        "item_name": "百日咳菌",
+        "jlac10": "6B653000006385668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0163418",
+        "item_name": "クラミジア ニューモニエ",
+        "jlac10": "6B653000006385669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "0163419",
+        "item_name": "マイコプラズマ ニューモニエ",
+        "jlac10": "6B653000006385670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "0163420",
+        "item_name": "インフルエンザA",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163422",
+        "item_name": "インフルエンザA/H3",
+        "jlac10": "6B653000006385654",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H3",
+        "cs": ""
+      },
+      {
+        "result_code": "0163425",
+        "item_name": "インフルエンザB",
+        "jlac10": "6B653000006385656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163500",
+        "item_name": "研究用FilmArray呼吸器パネル2.1",
+        "jlac10": "6B653000006385600",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "0163501",
+        "item_name": "アデノウイルス",
+        "jlac10": "6B653000006385651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163502",
+        "item_name": "コロナウイルス229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "0163503",
+        "item_name": "コロナウイルスHKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "0163504",
+        "item_name": "コロナウイルスNL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "0163505",
+        "item_name": "コロナウイルスOC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "0163506",
+        "item_name": "SARS-CoV-2",
+        "jlac10": "6B653000006385671",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2",
+        "cs": ""
+      },
+      {
+        "result_code": "0163507",
+        "item_name": "ヒトメタニューモウイルス",
+        "jlac10": "6B653000006385666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163508",
+        "item_name": "ライノ/エンテロウイルス",
+        "jlac10": "6B653000006385667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163511",
+        "item_name": "パラインフルエンザ1",
+        "jlac10": "6B653000006385657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163512",
+        "item_name": "パラインフルエンザ2",
+        "jlac10": "6B653000006385658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163513",
+        "item_name": "パラインフルエンザ3",
+        "jlac10": "6B653000006385659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163514",
+        "item_name": "パラインフルエンザ4",
+        "jlac10": "6B653000006385660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163515",
+        "item_name": "RSウイルス",
+        "jlac10": "6B653000006385661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0163516",
+        "item_name": "パラ百日咳菌",
+        "jlac10": "6B653000006385672",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラ百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0163517",
+        "item_name": "百日咳菌",
+        "jlac10": "6B653000006385668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0163518",
+        "item_name": "クラミジア ニューモニエ",
+        "jlac10": "6B653000006385669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "0163519",
+        "item_name": "マイコプラズマ ニューモニエ",
+        "jlac10": "6B653000006385670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "0163520",
+        "item_name": "インフルエンザA",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "0163525",
+        "item_name": "インフルエンザB",
+        "jlac10": "6B653000006385656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "結果",
+        "item_name": "項目名称",
+        "jlac10": "JLAC10標準名称",
+        "jlac10_standard_name": "JLAC10標準名称2",
+        "cs": ""
+      },
+      {
+        "result_code": "0347075",
+        "item_name": "Adenovirus",
+        "jlac10": "6B653000006385651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0347080",
+        "item_name": "Coronavirus 229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "0347085",
+        "item_name": "Coronavirus HKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "0347090",
+        "item_name": "Coronavirus NL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "0347095",
+        "item_name": "Coronavirus OC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "0347105",
+        "item_name": "Human Metapneumovirus (hMPV)",
+        "jlac10": "6B653000006385666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0347110",
+        "item_name": "Human Rhinovirus/Enterovirus",
+        "jlac10": "6B653000006385667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0347115",
+        "item_name": "Influenza A",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "0347120",
+        "item_name": "Influenza A H1",
+        "jlac10": "6B653000006385653",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1",
+        "cs": ""
+      },
+      {
+        "result_code": "0347125",
+        "item_name": "Influenza A H1-2009",
+        "jlac10": "6B653000006385655",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1-2009",
+        "cs": ""
+      },
+      {
+        "result_code": "0347130",
+        "item_name": "Influenza A H3",
+        "jlac10": "6B653000006385654",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H3",
+        "cs": ""
+      },
+      {
+        "result_code": "0347135",
+        "item_name": "Influenza A (no subtype detect",
+        "jlac10": "6B653tttttttttttt",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "0347140",
+        "item_name": "Influenza B",
+        "jlac10": "6B653000006385656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "0347145",
+        "item_name": "Parainfluenza Virus 1",
+        "jlac10": "6B653000006385657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "0347150",
+        "item_name": "Parainfluenza Virus 2",
+        "jlac10": "6B653000006385658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "0347155",
+        "item_name": "Parainfluenza Virus 3",
+        "jlac10": "6B653000006385659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "0347160",
+        "item_name": "Parainfluenza Virus 4",
+        "jlac10": "6B653000006385660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "0347165",
+        "item_name": "Respiratory Syncytial Virus (R",
+        "jlac10": "6B653000006385661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0347170",
+        "item_name": "Bordetella parapertussis",
+        "jlac10": "6B653000006385672",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラ百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0347175",
+        "item_name": "Bordetella pertussis",
+        "jlac10": "6B653000006385668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0347180",
+        "item_name": "Chlamydia pneumoniae",
+        "jlac10": "6B653000006385669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "0347185",
+        "item_name": "Mycoplasma pneumoniae",
+        "jlac10": "6B653000006385670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "依頼",
+        "item_name": "項目名称",
+        "jlac10": "CS名",
+        "jlac10_standard_name": "JLAC10",
+        "cs": "JLAC10標準名称"
+      },
+      {
+        "result_code": "L82000",
+        "item_name": "呼吸器感染PCR",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385600",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）"
+      },
+      {
+        "result_code": "結果",
+        "item_name": "項目名称",
+        "jlac10": "CS名",
+        "jlac10_standard_name": "JLAC10",
+        "cs": "JLAC10標準名称"
+      },
+      {
+        "result_code": "8200000",
+        "item_name": "呼吸器感染PCR",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385600",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）"
+      },
+      {
+        "result_code": "8200100",
+        "item_name": "アデノウイルス",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385651",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス"
+      },
+      {
+        "result_code": "8200200",
+        "item_name": "コロナウイルス 229E",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385662",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E"
+      },
+      {
+        "result_code": "8200300",
+        "item_name": "コロナウイルス HKU1",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385663",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1"
+      },
+      {
+        "result_code": "8200400",
+        "item_name": "コロナウイルス OC43",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385665",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43"
+      },
+      {
+        "result_code": "8200500",
+        "item_name": "コロナウイルス NL63",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385664",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63"
+      },
+      {
+        "result_code": "8200600",
+        "item_name": "ヒトメタニューモウイルス(ｈMPV）",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385666",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス"
+      },
+      {
+        "result_code": "8200700",
+        "item_name": "ヒトライノウイルス/エンテロウイルス",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385667",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス"
+      },
+      {
+        "result_code": "8200800",
+        "item_name": "RSウイルス",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385661",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス"
+      },
+      {
+        "result_code": "8200900",
+        "item_name": "SARS-CoV-2",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385671",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2"
+      },
+      {
+        "result_code": "8201000",
+        "item_name": "インフルエンザA",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385652",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型"
+      },
+      {
+        "result_code": "8201100",
+        "item_name": "インフルエンザA/H1",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385653",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1"
+      },
+      {
+        "result_code": "8201200",
+        "item_name": "インフルエンザA/H1-2009",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385655",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1-2009"
+      },
+      {
+        "result_code": "8201300",
+        "item_name": "インフルエンザA/H3",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385654",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H3"
+      },
+      {
+        "result_code": "8201400",
+        "item_name": "インフルエンザB",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385656",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型"
+      },
+      {
+        "result_code": "8201500",
+        "item_name": "パラインフルエンザ1",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385657",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型"
+      },
+      {
+        "result_code": "8201600",
+        "item_name": "パラインフルエンザ2",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385658",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型"
+      },
+      {
+        "result_code": "8201700",
+        "item_name": "パラインフルエンザ3",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385659",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型"
+      },
+      {
+        "result_code": "8201800",
+        "item_name": "パラインフルエンザ4",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385660",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型"
+      },
+      {
+        "result_code": "8201900",
+        "item_name": "Bordetella pertussis(百日咳)",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385668",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌"
+      },
+      {
+        "result_code": "8202000",
+        "item_name": "クラミジア・ニューモニエ",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385669",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ"
+      },
+      {
+        "result_code": "8202100",
+        "item_name": "マイコプラズマ・ニューモニエ",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385670",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ"
+      },
+      {
+        "result_code": "8202200",
+        "item_name": "インフルエンザnoSUBTYPE",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653tttttttttttt",
+        "cs": "核酸同定（一般細菌・ウイルス）"
+      },
+      {
+        "result_code": "8202300",
+        "item_name": "Bordetella parapertussis",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385672",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラ百日咳菌"
+      },
+      {
+        "result_code": "",
+        "item_name": "FilmArray呼吸器パネル2.1",
+        "jlac10": "6B653000006385600",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "103168",
+        "item_name": "SARS-CoV-2",
+        "jlac10": "6B653000006385671",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2",
+        "cs": ""
+      },
+      {
+        "result_code": "103169",
+        "item_name": "インフルA",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "103170",
+        "item_name": "インフルA/H1",
+        "jlac10": "6B653000006385653",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1",
+        "cs": ""
+      },
+      {
+        "result_code": "103171",
+        "item_name": "インフルA/H1-2009",
+        "jlac10": "6B653000006385655",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1-2009",
+        "cs": ""
+      },
+      {
+        "result_code": "103172",
+        "item_name": "インフルA/H3",
+        "jlac10": "6B653000006385654",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H3",
+        "cs": ""
+      },
+      {
+        "result_code": "103174",
+        "item_name": "インフルB",
+        "jlac10": "6B653000006385656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "103175",
+        "item_name": "RSウイルス",
+        "jlac10": "6B653000006385661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "103176",
+        "item_name": "アデノウイルス",
+        "jlac10": "6B653000006385651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "103177",
+        "item_name": "ヒトメタニューモ",
+        "jlac10": "6B653000006385666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "103178",
+        "item_name": "ヒトライノ/エンテロ",
+        "jlac10": "6B653000006385667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "103179",
+        "item_name": "パラインフル1",
+        "jlac10": "6B653000006385657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "103180",
+        "item_name": "パラインフル2",
+        "jlac10": "6B653000006385658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "103181",
+        "item_name": "パラインフル3",
+        "jlac10": "6B653000006385659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "103182",
+        "item_name": "パラインフル4",
+        "jlac10": "6B653000006385660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "103183",
+        "item_name": "コロナ229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "103184",
+        "item_name": "コロナHKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "103185",
+        "item_name": "コロナOC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "103186",
+        "item_name": "コロナNL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "103188",
+        "item_name": "百日咳菌",
+        "jlac10": "6B653000006385668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "103189",
+        "item_name": "肺炎クラミジア",
+        "jlac10": "6B653000006385669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "103190",
+        "item_name": "肺炎マイコプラズマ",
+        "jlac10": "6B653000006385670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "依頼",
+        "item_name": "項目名称",
+        "jlac10": "LCS",
+        "jlac10_standard_name": "JLAC10",
+        "cs": "JLAC10標準名称"
+      },
+      {
+        "result_code": "L06894",
+        "item_name": "呼吸器パネル",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385649",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_別紙報告"
+      },
+      {
+        "result_code": "L06895",
+        "item_name": "血液培養パネル",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B652000009785649",
+        "cs": "核酸同定（グラム陽性菌・グラム陰性菌・酵母様真菌・薬剤耐性遺伝子）_培養液_multiplex PCR法_別紙報告"
+      },
+      {
+        "result_code": "L06896",
+        "item_name": "髄膜炎・脳炎パネル",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B654000004185649",
+        "cs": "核酸同定（一般細菌・ウイルス・酵母様真菌）_　髄液_multiplex PCR法_別紙報告"
+      },
+      {
+        "result_code": "結果",
+        "item_name": "項目名称",
+        "jlac10": "LCS",
+        "jlac10_standard_name": "JLAC10",
+        "cs": "JLAC10標準名称"
+      },
+      {
+        "result_code": "0689400",
+        "item_name": "呼吸器パネル",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B653000006385649",
+        "cs": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_別紙報告"
+      },
+      {
+        "result_code": "0689500",
+        "item_name": "血液培養パネル",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B652000009785649",
+        "cs": "核酸同定（グラム陽性菌・グラム陰性菌・酵母様真菌・薬剤耐性遺伝子）_培養液_multiplex PCR法_別紙報告"
+      },
+      {
+        "result_code": "0689600",
+        "item_name": "髄膜炎・脳炎パネル",
+        "jlac10": "99Z14",
+        "jlac10_standard_name": "6B654000004185649",
+        "cs": "核酸同定（一般細菌・ウイルス・酵母様真菌）_　髄液_multiplex PCR法_別紙報告"
+      },
+      {
+        "result_code": "L00377",
+        "item_name": "COVID-19鼻咽(院内)",
+        "jlac10": "6B653000006385600",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "0037700",
+        "item_name": "COVID-19 PCR(院内)",
+        "jlac10": "6B653000006385600",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_核酸同定（一般細菌・ウイルス）",
+        "cs": ""
+      },
+      {
+        "result_code": "0037701",
+        "item_name": "SARS-COV2",
+        "jlac10": "6B653000006385671",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_SARS-CoV-2",
+        "cs": ""
+      },
+      {
+        "result_code": "0037702",
+        "item_name": "アデノ",
+        "jlac10": "6B653000006385651",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_アデノウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0037703",
+        "item_name": "コロナ 229E",
+        "jlac10": "6B653000006385662",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス 229E",
+        "cs": ""
+      },
+      {
+        "result_code": "0037704",
+        "item_name": "コロナ HKU1",
+        "jlac10": "6B653000006385663",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス HKU1",
+        "cs": ""
+      },
+      {
+        "result_code": "0037705",
+        "item_name": "コロナ NL63",
+        "jlac10": "6B653000006385664",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス NL63",
+        "cs": ""
+      },
+      {
+        "result_code": "0037706",
+        "item_name": "コロナ OC43",
+        "jlac10": "6B653000006385665",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_コロナウイルス OC43",
+        "cs": ""
+      },
+      {
+        "result_code": "0037707",
+        "item_name": "ヒトメタニューモ",
+        "jlac10": "6B653000006385666",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトメタニューモウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0037708",
+        "item_name": "ライノ / エンテロ",
+        "jlac10": "6B653000006385667",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_ヒトライノウイルス/エンテロウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0037709",
+        "item_name": "インフル A",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037710",
+        "item_name": "-インフル A H1",
+        "jlac10": "6B653000006385653",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1",
+        "cs": ""
+      },
+      {
+        "result_code": "0037711",
+        "item_name": "-インフル A H1-2009",
+        "jlac10": "6B653000006385654",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H3",
+        "cs": ""
+      },
+      {
+        "result_code": "0037712",
+        "item_name": "-インフル A H3",
+        "jlac10": "6B653000006385655",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型 H1-2009",
+        "cs": ""
+      },
+      {
+        "result_code": "0037713",
+        "item_name": "-インフル A(サブタイプナシ)",
+        "jlac10": "6B653000006385652",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスA型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037714",
+        "item_name": "インフル B",
+        "jlac10": "6B653000006385656",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_インフルエンザウイルスB型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037715",
+        "item_name": "パラインフル 1",
+        "jlac10": "6B653000006385657",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス1型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037716",
+        "item_name": "パラインフル 2",
+        "jlac10": "6B653000006385658",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス2型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037717",
+        "item_name": "パラインフル 3",
+        "jlac10": "6B653000006385659",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス3型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037718",
+        "item_name": "パラインフル 4",
+        "jlac10": "6B653000006385660",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラインフルエンザウイルス4型",
+        "cs": ""
+      },
+      {
+        "result_code": "0037719",
+        "item_name": "RS",
+        "jlac10": "6B653000006385661",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_RSウイルス",
+        "cs": ""
+      },
+      {
+        "result_code": "0037720",
+        "item_name": "パラ百日咳(研究用)",
+        "jlac10": "6B653000006385672",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_パラ百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0037721",
+        "item_name": "百日咳",
+        "jlac10": "6B653000006385668",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_百日咳菌",
+        "cs": ""
+      },
+      {
+        "result_code": "0037722",
+        "item_name": "肺炎クラミジア",
+        "jlac10": "6B653000006385669",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_クラミドフィラ・ニューモニエ",
+        "cs": ""
+      },
+      {
+        "result_code": "0037723",
+        "item_name": "肺炎マイコプラズマ",
+        "jlac10": "6B653000006385670",
+        "jlac10_standard_name": "核酸同定（一般細菌・ウイルス）_鼻汁，鼻腔・鼻咽頭擦過物_multiplex PCR法_マイコプラズマ・ニューモニエ",
+        "cs": ""
+      }
+    ]
+  }
+}

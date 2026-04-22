@@ -1,0 +1,1217 @@
+{
+  "version": "2026-04-22",
+  "source": "NCDA/JLAC10_検体細菌材料Lookup.xlsx",
+  "schema": {
+    "material_name": "病院側の材料名",
+    "jlac10_material": "JLAC10材料コード(3桁)。運用上組合せ可能なら 'xxx'",
+    "jlac10_standard_name": "JLAC10材料コードの標準名称"
+  },
+  "count": 241,
+  "entries": [
+    {
+      "material_name": "生化　[茶]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ICG 　[茶]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部　[茶]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "CPR",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "FDP　[黒]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血液　[紫]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "NH3　[紫]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "BNP　[紫]2ml",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血型・ｸｰﾑｽ[濃紫]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血糖　[灰]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ﾀｰｹﾞｽ[灰]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "感染症[黄]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "CCｒ－血清[黄]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "凝固[黒]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部　凝固[黒]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "薬物[赤茶]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血沈[橙]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "動脈血",
+      "jlac10_material": "020",
+      "jlac10_standard_name": "動脈血"
+    },
+    {
+      "material_name": "マルク",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "マルク",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "分 秒",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部全血[紫大]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部血漿[紫大]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｱﾌﾟﾛﾁﾆ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "βDｸﾞﾙ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "PCRｳｲﾙｽ用[桃]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "PF4",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "へパリＮａ[黄]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "乳酸・ﾋﾟﾙﾋﾞﾝ酸",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "へパリＮａ[緑]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部血",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "EDTA2K",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "外部　尿",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部　早朝2番尿",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿量",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "2h尿量",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿量",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿量",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿量",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿ＢＪ蛋白",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "男子尿",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "外部[黄]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "鼻腔ぬ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "精液",
+      "jlac10_material": "060",
+      "jlac10_standard_name": "精液"
+    },
+    {
+      "material_name": "外部",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "呼気",
+      "jlac10_material": "098",
+      "jlac10_standard_name": "ペア材料"
+    },
+    {
+      "material_name": "便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "HSVスライド",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｸﾗﾐｼﾞｱ綿棒",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｸﾗﾐｼﾞｱ専用容器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "下痢便",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "咽頭（アデノ）",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "細菌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｽﾗｲﾄﾞ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "細菌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "細菌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "細菌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "ウイルス遺伝子用（紫）",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "HIV専用",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部　負荷[茶]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "遺伝子一般",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "B-28ウイルス用",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "遺伝子診断-濃紫",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "尿室温",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ACD加",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "専用容",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "RSｳｲﾙｽ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "HPV",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "細菌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外部血漿[紫大]◎安静",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血液（青）クエン酸",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血液（緑）ﾍﾊﾟﾘﾝ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血清",
+      "jlac10_material": "023",
+      "jlac10_standard_name": "血清"
+    },
+    {
+      "material_name": "咽頭ﾏｲｺ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "鼻腔hMPV",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "鼻咽頭ｺﾛﾅ･ｲﾝﾌﾙ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "唾液ｺﾛﾅ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "咽頭",
+      "jlac10_material": "064",
+      "jlac10_standard_name": "咽喉からの分泌液"
+    },
+    {
+      "material_name": "鼻腔",
+      "jlac10_material": "063",
+      "jlac10_standard_name": "鼻汁，鼻腔・鼻咽頭擦過物"
+    },
+    {
+      "material_name": "ﾍﾊﾟﾘﾝNa（黄）",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "RAS",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "鼻咽頭ｺﾛﾅ・ｲﾝﾌﾙ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "TDMﾊﾞﾝｺﾄﾗﾌ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "TDMﾊﾞﾝｺﾋﾟｰｸ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "水帯",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "HSV",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｳﾚｱｰｾﾞ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "O-82専用容器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "O-82　専用容器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "B-30 EDTA2K",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血液",
+      "jlac10_material": "019",
+      "jlac10_standard_name": "全血(添加物入り)"
+    },
+    {
+      "material_name": "咽頭溶",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "眼ｱﾃﾞﾉ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "咽頭ｱﾃﾞﾉ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "髄液",
+      "jlac10_material": "041",
+      "jlac10_standard_name": "髄液"
+    },
+    {
+      "material_name": "胸水",
+      "jlac10_material": "042",
+      "jlac10_standard_name": "胸水"
+    },
+    {
+      "material_name": "胸腹水",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "穿刺液",
+      "jlac10_material": "040",
+      "jlac10_standard_name": "穿刺液(含むその他)"
+    },
+    {
+      "material_name": "関節液",
+      "jlac10_material": "044",
+      "jlac10_standard_name": "関節液"
+    },
+    {
+      "material_name": "心嚢液",
+      "jlac10_material": "045",
+      "jlac10_standard_name": "心嚢液"
+    },
+    {
+      "material_name": "分泌液",
+      "jlac10_material": "050",
+      "jlac10_standard_name": "分泌液(含むその他)"
+    },
+    {
+      "material_name": "胃液",
+      "jlac10_material": "052",
+      "jlac10_standard_name": "胃液"
+    },
+    {
+      "material_name": "十二指",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "胆汁",
+      "jlac10_material": "054",
+      "jlac10_standard_name": "胆汁"
+    },
+    {
+      "material_name": "膵液",
+      "jlac10_material": "055",
+      "jlac10_standard_name": "膵液"
+    },
+    {
+      "material_name": "唾液",
+      "jlac10_material": "056",
+      "jlac10_standard_name": "唾液"
+    },
+    {
+      "material_name": "喀痰",
+      "jlac10_material": "061",
+      "jlac10_standard_name": "喀痰"
+    },
+    {
+      "material_name": "乳汁",
+      "jlac10_material": "062",
+      "jlac10_standard_name": "乳汁"
+    },
+    {
+      "material_name": "鼻汁",
+      "jlac10_material": "063",
+      "jlac10_standard_name": "鼻汁，鼻腔・鼻咽頭擦過物"
+    },
+    {
+      "material_name": "組織",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "洗浄液",
+      "jlac10_material": "091",
+      "jlac10_standard_name": "洗浄液"
+    },
+    {
+      "material_name": "培養液",
+      "jlac10_material": "097",
+      "jlac10_standard_name": "培養液"
+    },
+    {
+      "material_name": "気管支",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "滑液",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｸﾗﾐｼﾞｱ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "腟分泌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "カテ先",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "膿瘍",
+      "jlac10_material": "086",
+      "jlac10_standard_name": "膿(含むその他)"
+    },
+    {
+      "material_name": "精液",
+      "jlac10_material": "060",
+      "jlac10_standard_name": "精液"
+    },
+    {
+      "material_name": "BRCA",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "FFPE",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｵﾝｺﾀｲﾌ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "その他",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "喀痰",
+      "jlac10_material": "061",
+      "jlac10_standard_name": "喀痰"
+    },
+    {
+      "material_name": "咽頭粘",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "鼻腔汁",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "扁桃膿",
+      "jlac10_material": "086",
+      "jlac10_standard_name": "膿(含むその他)"
+    },
+    {
+      "material_name": "口腔内",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "気管洗",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "気管内",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "気管支",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "挿管ﾁｭ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "上顎洞",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "呼吸器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "糞便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "胃液",
+      "jlac10_material": "052",
+      "jlac10_standard_name": "胃液"
+    },
+    {
+      "material_name": "胆汁",
+      "jlac10_material": "054",
+      "jlac10_standard_name": "胆汁"
+    },
+    {
+      "material_name": "消化器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "髄液",
+      "jlac10_material": "041",
+      "jlac10_standard_name": "髄液"
+    },
+    {
+      "material_name": "関節液",
+      "jlac10_material": "044",
+      "jlac10_standard_name": "関節液"
+    },
+    {
+      "material_name": "胸水",
+      "jlac10_material": "042",
+      "jlac10_standard_name": "胸水"
+    },
+    {
+      "material_name": "腹水",
+      "jlac10_material": "043",
+      "jlac10_standard_name": "腹水"
+    },
+    {
+      "material_name": "心嚢液",
+      "jlac10_material": "045",
+      "jlac10_standard_name": "心嚢液"
+    },
+    {
+      "material_name": "穿刺液",
+      "jlac10_material": "040",
+      "jlac10_standard_name": "穿刺液(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "カテ尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿道分",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "膣分泌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外陰部",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "羊水",
+      "jlac10_material": "047",
+      "jlac10_standard_name": "羊水"
+    },
+    {
+      "material_name": "悪露",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "泌尿生",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "静脈血",
+      "jlac10_material": "019",
+      "jlac10_standard_name": "全血(添加物入り)"
+    },
+    {
+      "material_name": "動脈血",
+      "jlac10_material": "020",
+      "jlac10_standard_name": "動脈血"
+    },
+    {
+      "material_name": "膿開放",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "膿非開",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "褥瘡",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "眼脂",
+      "jlac10_material": "066",
+      "jlac10_standard_name": "目からの分泌液"
+    },
+    {
+      "material_name": "耳漏",
+      "jlac10_material": "065",
+      "jlac10_standard_name": "耳からの分泌液"
+    },
+    {
+      "material_name": "ｶﾃ先端",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｶﾃ先",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "腹腔ﾄﾞ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "胸腔ﾄﾞ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "心嚢内",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "その他",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "皮膚",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "組織",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "臍",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "その他",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "喀痰",
+      "jlac10_material": "061",
+      "jlac10_standard_name": "喀痰"
+    },
+    {
+      "material_name": "咽頭粘",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "鼻腔汁",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "扁桃膿",
+      "jlac10_material": "086",
+      "jlac10_standard_name": "膿(含むその他)"
+    },
+    {
+      "material_name": "口腔内",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "気管洗",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "気管内",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "気管支",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "挿管ﾁｭ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "上顎洞",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "呼吸器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "糞便",
+      "jlac10_material": "015",
+      "jlac10_standard_name": "便"
+    },
+    {
+      "material_name": "胃液",
+      "jlac10_material": "052",
+      "jlac10_standard_name": "胃液"
+    },
+    {
+      "material_name": "胆汁",
+      "jlac10_material": "054",
+      "jlac10_standard_name": "胆汁"
+    },
+    {
+      "material_name": "消化器",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "髄液",
+      "jlac10_material": "041",
+      "jlac10_standard_name": "髄液"
+    },
+    {
+      "material_name": "関節液",
+      "jlac10_material": "044",
+      "jlac10_standard_name": "関節液"
+    },
+    {
+      "material_name": "胸水",
+      "jlac10_material": "042",
+      "jlac10_standard_name": "胸水"
+    },
+    {
+      "material_name": "腹水",
+      "jlac10_material": "043",
+      "jlac10_standard_name": "腹水"
+    },
+    {
+      "material_name": "心嚢液",
+      "jlac10_material": "045",
+      "jlac10_standard_name": "心嚢液"
+    },
+    {
+      "material_name": "穿刺液",
+      "jlac10_material": "040",
+      "jlac10_standard_name": "穿刺液(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "カテ尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿道分",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "膣分泌",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外陰部",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "羊水",
+      "jlac10_material": "047",
+      "jlac10_standard_name": "羊水"
+    },
+    {
+      "material_name": "悪露",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "泌尿生",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "静脈血",
+      "jlac10_material": "019",
+      "jlac10_standard_name": "全血(添加物入り)"
+    },
+    {
+      "material_name": "動脈血",
+      "jlac10_material": "020",
+      "jlac10_standard_name": "動脈血"
+    },
+    {
+      "material_name": "膿開放",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "膿非開",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "褥瘡",
+      "jlac10_material": "085",
+      "jlac10_standard_name": "擦過物"
+    },
+    {
+      "material_name": "眼脂",
+      "jlac10_material": "066",
+      "jlac10_standard_name": "目からの分泌液"
+    },
+    {
+      "material_name": "耳漏",
+      "jlac10_material": "065",
+      "jlac10_standard_name": "耳からの分泌液"
+    },
+    {
+      "material_name": "ｶﾃ先端",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "ｶﾃ先そ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "腹腔ﾄﾞ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "胸腔ﾄﾞ",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "心嚢内",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "その他",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "皮膚",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "組織",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "臍",
+      "jlac10_material": "070",
+      "jlac10_standard_name": "組織*(含むその他)"
+    },
+    {
+      "material_name": "その他",
+      "jlac10_material": "099",
+      "jlac10_standard_name": "その他の材料"
+    },
+    {
+      "material_name": "ﾀｰｹﾞｽ[灰]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血清",
+      "jlac10_material": "023",
+      "jlac10_standard_name": "血清"
+    },
+    {
+      "material_name": "ICG 　[茶]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血清",
+      "jlac10_material": "023",
+      "jlac10_standard_name": "血清"
+    },
+    {
+      "material_name": "血糖",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血漿",
+      "jlac10_material": "022",
+      "jlac10_standard_name": "血漿"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "尿",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    },
+    {
+      "material_name": "外部[黄]",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "血清",
+      "jlac10_material": "023",
+      "jlac10_standard_name": "血清"
+    },
+    {
+      "material_name": "HPV",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "外注",
+      "jlac10_material": "",
+      "jlac10_standard_name": ""
+    },
+    {
+      "material_name": "?",
+      "jlac10_material": "001",
+      "jlac10_standard_name": "尿(含むその他)"
+    }
+  ]
+}
