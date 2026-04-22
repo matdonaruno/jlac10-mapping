@@ -49,6 +49,13 @@ header .status { font-size:12px; color:var(--text-secondary); font-family:'JetBr
 .tab:hover { color:var(--text-primary); background:var(--bg-hover); }
 .tab.active { color:var(--accent); border-bottom-color:var(--accent); }
 
+/* Sub tabs (specimen / bacteria split within Search and Database) */
+.sub-tabs { display:flex; gap:2px; margin-bottom:12px; border-bottom:1px solid var(--border); }
+.sub-tab { padding:8px 16px; font-size:11px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  background:transparent; border:none; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; }
+.sub-tab:hover { color:var(--text-primary); background:var(--bg-hover); }
+.sub-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
 /* Cards */
 .card { background:var(--bg-card); border:1px solid var(--border); padding:24px; margin-bottom:16px; }
 .card h2 { font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; letter-spacing:1px;
@@ -398,20 +405,53 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 </div>
 
 <!-- ============================================================ -->
-<!-- SEARCH -->
+<!-- SEARCH (検体検査 / 細菌検査 の2サブタブ) -->
 <!-- ============================================================ -->
 <div id="panel-search">
-  <div class="card">
-    <div class="guide">
-      検査項目名、略称(<b>TP</b>,<b>ALB</b>等)、英名(<b>albumin</b>等)で検索できます。<br>
-      スコア: <b>100</b>=完全一致 / <b>95</b>=略称一致 / <b>80+</b>=先頭一致 / <b>60+</b>=部分一致
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="switchSearchSub('specimen')" id="search-sub-specimen">検体検査</button>
+    <button class="sub-tab" onclick="switchSearchSub('bacteria')" id="search-sub-bacteria">細菌検査</button>
+  </div>
+
+  <!-- ===== 検体検索 ===== -->
+  <div id="search-panel-specimen">
+    <div class="card">
+      <div class="guide">
+        検査項目名、略称(<b>TP</b>,<b>ALB</b>等)、英名(<b>albumin</b>等)で検索できます。<br>
+        スコア: <b>100</b>=完全一致 / <b>95</b>=略称一致 / <b>80+</b>=先頭一致 / <b>60+</b>=部分一致
+      </div>
+      <div class="flex-row mb-16">
+        <input id="searchInput" type="text" placeholder="TP / albumin / CRP / HbA1c ..."
+          style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doSearch()">
+        <button onclick="doSearch()" class="btn btn-primary" style="white-space:nowrap">SEARCH</button>
+      </div>
+      <div id="searchResults"></div>
     </div>
-    <div class="flex-row mb-16">
-      <input id="searchInput" type="text" placeholder="TP / albumin / CRP / HbA1c ..."
-        style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doSearch()" placeholder="検査項目名・略称を入力（TP, アルブミン, CRP...）">
-      <button onclick="doSearch()" class="btn btn-primary" style="white-space:nowrap">SEARCH</button>
+  </div>
+
+  <!-- ===== 細菌検索 ===== -->
+  <div id="search-panel-bacteria" class="hidden">
+    <div class="card">
+      <div class="guide">
+        JANIS 菌名 / JANIS 抗菌薬 / 細菌材料 Lookup / 遺伝子パネル から検索します。<br>
+        表記ゆれ（全角/半角、スペース、半角カナ、先頭 <code>*</code>/<code>★</code>、末尾ピリオド等）は正規化してマッチします。
+      </div>
+      <div class="flex-row mb-12">
+        <label style="min-width:60px">対象：</label>
+        <select id="bactSearchScope" style="padding:10px;min-width:180px" onchange="doBactSearch()">
+          <option value="species">菌名（JANIS菌名縦積み）</option>
+          <option value="antibiotics">抗菌薬（JANIS抗菌薬縦積み）</option>
+          <option value="materials">細菌材料 Lookup</option>
+          <option value="genes">遺伝子パネル</option>
+        </select>
+      </div>
+      <div class="flex-row mb-16">
+        <input id="bactSearchInput" type="text" placeholder="菌名・略号・項目名…"
+          style="font-size:18px;padding:14px 18px" onkeydown="if(event.key==='Enter')doBactSearch()">
+        <button onclick="doBactSearch()" class="btn btn-primary" style="white-space:nowrap">SEARCH</button>
+      </div>
+      <div id="bactSearchResults"></div>
     </div>
-    <div id="searchResults"></div>
   </div>
 </div>
 
@@ -824,6 +864,13 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 <!-- DATABASE -->
 <!-- ============================================================ -->
 <div id="panel-data" class="hidden">
+  <div class="sub-tabs">
+    <button class="sub-tab active" onclick="switchDataSub('specimen')" id="data-sub-specimen">検体DB</button>
+    <button class="sub-tab" onclick="switchDataSub('bacteria')" id="data-sub-bacteria">細菌DB</button>
+  </div>
+
+  <!-- ===== 検体DB ===== -->
+  <div id="data-panel-specimen">
   <div class="card">
     <h2>Database
       <span style="font-size:10px;font-weight:400;color:var(--text-secondary);letter-spacing:0;text-transform:none;margin-left:12px">DB管理・統計・バックアップ</span>
@@ -897,6 +944,47 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       <button onclick="exportMergedDb()" class="btn btn-primary" id="btnExportDb">統合DBエクスポート</button>
       <button onclick="reloadFromRepo()" class="btn btn-secondary">リポジトリから再読み込み</button>
       <button onclick="dbCleanup()" class="btn btn-secondary">重複除去</button>
+    </div>
+  </div>
+  </div>
+
+  <!-- ===== 細菌DB ===== -->
+  <div id="data-panel-bacteria" class="hidden">
+    <div class="card">
+      <h2>細菌検査 DB
+        <span style="font-size:10px;font-weight:400;color:var(--text-secondary);letter-spacing:0;text-transform:none;margin-left:12px">JANIS縦積み / 材料Lookup / 遺伝子パネル</span>
+      </h2>
+
+      <!-- 統計 -->
+      <div id="bactDbStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px">
+        <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+          <div style="font-size:24px;font-weight:700;color:var(--accent);font-family:'JetBrains Mono'" id="statBactSpecies">—</div>
+          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">JANIS菌名</div>
+        </div>
+        <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+          <div style="font-size:24px;font-weight:700;color:var(--info);font-family:'JetBrains Mono'" id="statBactAntibiotics">—</div>
+          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">JANIS抗菌薬</div>
+        </div>
+        <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+          <div style="font-size:24px;font-weight:700;color:var(--success);font-family:'JetBrains Mono'" id="statBactMaterials">—</div>
+          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">細菌材料</div>
+        </div>
+        <div style="background:var(--bg-secondary);border:1px solid var(--border);padding:12px;text-align:center">
+          <div style="font-size:24px;font-weight:700;color:var(--warning);font-family:'JetBrains Mono'" id="statBactGenes">—</div>
+          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase">遺伝子パネル</div>
+        </div>
+      </div>
+
+      <div class="status-bar mb-16" id="bactDbInfo">細菌DBロード待機中…</div>
+
+      <div class="guide" style="margin-bottom:12px">
+        参照元: <code>data/janis_species.json</code> / <code>data/janis_antibiotics.json</code> / <code>data/bact_materials.json</code> / <code>data/gene_panels.json</code><br>
+        原本Excelは <code>NCDA/</code> 配下（gitignore対象）。JSON化は <code>scripts/convert_bact_references.py</code> で再生成可能。
+      </div>
+
+      <div class="flex-row">
+        <button onclick="reloadBactDB()" class="btn btn-secondary">リポジトリから再読み込み</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1032,7 +1120,7 @@ var searchIndex = [];
 // DB auto-load from repository
 var DB_URLS = ["./data/merged_jlac10.json", "../data/merged_jlac10.json"];
 
-window.addEventListener("DOMContentLoaded", function() { reloadFromRepo(); });
+window.addEventListener("DOMContentLoaded", function() { reloadFromRepo(); loadBactDB(); });
 
 function reloadFromRepo() {
   document.getElementById("dbStatus").textContent = "LOADING...";
@@ -1059,6 +1147,106 @@ function reloadFromRepo() {
     });
   }
   tryLoad(DB_URLS, 0);
+}
+
+// =====================================================================
+// Bacterial Reference DB (JANIS 菌名/抗菌薬縦積み, 細菌材料Lookup, 遺伝子パネル)
+// 原本 Excel は NCDA/ 配下（gitignore）。JSON は data/ 配下（Git 管理）。
+// =====================================================================
+var BACT_DB = { species: null, antibiotics: null, materials: null, genes: null };
+
+var BACT_URLS = {
+  species:     ["./data/janis_species.json",     "../data/janis_species.json"],
+  antibiotics: ["./data/janis_antibiotics.json", "../data/janis_antibiotics.json"],
+  materials:   ["./data/bact_materials.json",    "../data/bact_materials.json"],
+  genes:       ["./data/gene_panels.json",       "../data/gene_panels.json"]
+};
+
+function _bactTryLoad(urls) {
+  return new Promise(function(resolve, reject) {
+    var i = 0;
+    function next() {
+      if (i >= urls.length) { reject(new Error("all urls failed")); return; }
+      fetch(urls[i]).then(function(r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      }).then(resolve).catch(function() { i++; next(); });
+    }
+    next();
+  });
+}
+
+function loadBactDB() {
+  return Promise.all([
+    _bactTryLoad(BACT_URLS.species).then(function(d) { BACT_DB.species = d; }).catch(function(e){console.warn("species: "+e.message);}),
+    _bactTryLoad(BACT_URLS.antibiotics).then(function(d) { BACT_DB.antibiotics = d; }).catch(function(e){console.warn("antibiotics: "+e.message);}),
+    _bactTryLoad(BACT_URLS.materials).then(function(d) { BACT_DB.materials = d; }).catch(function(e){console.warn("materials: "+e.message);}),
+    _bactTryLoad(BACT_URLS.genes).then(function(d) { BACT_DB.genes = d; }).catch(function(e){console.warn("genes: "+e.message);})
+  ]).then(function() {
+    var geneCount = 0;
+    if (BACT_DB.genes && BACT_DB.genes.counts) {
+      Object.keys(BACT_DB.genes.counts).forEach(function(k){ geneCount += BACT_DB.genes.counts[k]; });
+    }
+    console.log("BACT_DB loaded: species=" + (BACT_DB.species ? BACT_DB.species.count : 0) +
+                ", antibiotics=" + (BACT_DB.antibiotics ? BACT_DB.antibiotics.count : 0) +
+                ", materials=" + (BACT_DB.materials ? BACT_DB.materials.count : 0) +
+                ", gene_panels=" + geneCount);
+  });
+}
+
+// =====================================================================
+// 検体検査 vs 細菌検査 の自動分類
+//   優先度: 分析物コード先頭 > シート名ヒント > 項目名キーワード
+//   細菌検査分析物: 6A系(塗抹鏡検) / 6B系(培養同定/核酸同定) / 6C系(薬剤感受性) / 6Z100(13C尿素呼気)
+// =====================================================================
+var BACT_ANALYTE_5DIGIT = [
+  "6A010","6A105","6A205","6A206",
+  "6B010","6B105","6B305","6B652","6B653",
+  "6C010","6C050","6C105",
+  "6Z100"
+];
+var BACT_KEYWORDS = ["培養","同定","感受性","塗抹","核酸同定","細菌","抗酸菌","菌名","菌量","MIC","薬剤感受性","JANIS"];
+var BACT_SHEET_HINTS = ["細菌","bact","BACT","培養","JANIS","抗菌薬","菌名"];
+
+function classifyBactOrSpecimen(item) {
+  // item: {jlac10?, item_name?, sheet_name?}
+  if (!item) return { type:"specimen", confidence:0, reason:"empty" };
+
+  // 1) JLAC10 分析物5桁で確定判定
+  if (item.jlac10) {
+    var head = String(item.jlac10).slice(0, 5).toUpperCase();
+    if (BACT_ANALYTE_5DIGIT.indexOf(head) !== -1) {
+      return { type:"bacteria", confidence:0.95, reason:"analyte " + head };
+    }
+  }
+
+  // 2) シート名ヒント
+  if (item.sheet_name) {
+    var sn = String(item.sheet_name);
+    for (var i=0; i<BACT_SHEET_HINTS.length; i++) {
+      if (sn.indexOf(BACT_SHEET_HINTS[i]) !== -1) {
+        return { type:"bacteria", confidence:0.8, reason:"sheet '" + sn + "'" };
+      }
+    }
+  }
+
+  // 3) 項目名キーワード
+  if (item.item_name) {
+    var n = String(item.item_name);
+    for (var j=0; j<BACT_KEYWORDS.length; j++) {
+      if (n.indexOf(BACT_KEYWORDS[j]) !== -1) {
+        return { type:"bacteria", confidence:0.6, reason:"keyword '" + BACT_KEYWORDS[j] + "'" };
+      }
+    }
+  }
+
+  return { type:"specimen", confidence:0.5, reason:"no bacterial signal" };
+}
+
+function isBactCode(jlac10) {
+  if (!jlac10) return false;
+  var head = String(jlac10).slice(0, 5).toUpperCase();
+  return BACT_ANALYTE_5DIGIT.indexOf(head) !== -1;
 }
 
 // =====================================================================
@@ -4141,6 +4329,156 @@ function switchTab(name) {
       snSelectCase(snSelectedCase);
     }
   }
+}
+
+// =====================================================================
+// Sub Tabs: Search (specimen / bacteria) + Database (specimen / bacteria)
+// =====================================================================
+function switchSearchSub(sub) {
+  ["specimen","bacteria"].forEach(function(s){
+    var panel = document.getElementById("search-panel-"+s);
+    var btn = document.getElementById("search-sub-"+s);
+    if (panel) panel.classList.toggle("hidden", s !== sub);
+    if (btn) btn.className = "sub-tab" + (s === sub ? " active" : "");
+  });
+}
+
+function switchDataSub(sub) {
+  ["specimen","bacteria"].forEach(function(s){
+    var panel = document.getElementById("data-panel-"+s);
+    var btn = document.getElementById("data-sub-"+s);
+    if (panel) panel.classList.toggle("hidden", s !== sub);
+    if (btn) btn.className = "sub-tab" + (s === sub ? " active" : "");
+  });
+  if (sub === "bacteria") updateBactDbStats();
+}
+
+// =====================================================================
+// Bacterial DB: stats + reload
+// =====================================================================
+function updateBactDbStats() {
+  function setText(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+  var sp = BACT_DB.species, ab = BACT_DB.antibiotics, mt = BACT_DB.materials, gn = BACT_DB.genes;
+  setText("statBactSpecies",     sp ? sp.count.toLocaleString() : "—");
+  setText("statBactAntibiotics", ab ? ab.count.toLocaleString() : "—");
+  setText("statBactMaterials",   mt ? mt.count.toLocaleString() : "—");
+  var gcount = 0;
+  if (gn && gn.counts) Object.keys(gn.counts).forEach(function(k){ gcount += gn.counts[k]; });
+  setText("statBactGenes", gn ? gcount.toLocaleString() : "—");
+  var info = [];
+  if (sp) info.push("species v" + sp.version);
+  if (ab) info.push("antibiotics v" + ab.version);
+  if (mt) info.push("materials v" + mt.version);
+  if (gn) info.push("genes v" + gn.version);
+  var el = document.getElementById("bactDbInfo");
+  if (el) el.textContent = info.length ? info.join("  /  ") : "細菌DB未ロード（リポジトリから再読み込みしてください）";
+}
+
+function reloadBactDB() {
+  var el = document.getElementById("bactDbInfo");
+  if (el) el.textContent = "LOADING...";
+  loadBactDB().then(function(){
+    updateBactDbStats();
+    showToast("細菌DB読込完了");
+  }).catch(function(err){
+    if (el) el.textContent = "BACT DB LOAD FAILED: " + err.message;
+  });
+}
+
+// =====================================================================
+// Bacterial search: normalization + match against BACT_DB
+//   正規化: NFKC(全角→半角, 半角カナ→全角) / 小文字化 / 先頭* や ★ 除去 /
+//           末尾ピリオド除去 / 連続空白の圧縮
+// =====================================================================
+function bactNormalize(s) {
+  if (s === null || s === undefined) return "";
+  var t = String(s).normalize("NFKC");
+  t = t.toLowerCase();
+  t = t.replace(/^\s*[\*★]+\s*/, "");
+  t = t.replace(/\.\s*$/, "");
+  t = t.replace(/\s+/g, " ").trim();
+  return t;
+}
+
+function _bactScoreMatch(qN, fieldN) {
+  if (!qN || !fieldN) return 0;
+  if (fieldN === qN) return 100;
+  if (fieldN.indexOf(qN) === 0) return 80;
+  if (fieldN.indexOf(qN) !== -1) return 60;
+  if (qN.length >= 2 && qN.indexOf(fieldN) !== -1) return 50;
+  return 0;
+}
+
+function doBactSearch() {
+  var scope = document.getElementById("bactSearchScope").value;
+  var q = document.getElementById("bactSearchInput").value.trim();
+  if (!q) { setHtml("bactSearchResults", ""); return; }
+  var db = BACT_DB[scope];
+  if (!db) { setHtml("bactSearchResults", '<div class="status-bar">細菌DBが未ロードです（Databaseタブ→細菌DB→再読み込み）</div>'); return; }
+
+  var qN = bactNormalize(q);
+  var matches = [];
+
+  function scan(entries, fieldPicker) {
+    entries.forEach(function(e){
+      var best = 0;
+      fieldPicker(e).forEach(function(f){
+        var s = _bactScoreMatch(qN, bactNormalize(f));
+        if (s > best) best = s;
+      });
+      if (best > 0) matches.push({ entry:e, score:best });
+    });
+  }
+
+  if (scope === "species") {
+    scan(db.entries, function(e){ return [e.inhouse, e.janis_name, e.janis_code]; });
+  } else if (scope === "antibiotics") {
+    scan(db.entries, function(e){ return [e.inhouse, e.janis_abbr, e.janis_name, e.janis_code]; });
+  } else if (scope === "materials") {
+    scan(db.entries, function(e){ return [e.material_name, e.jlac10_material, e.jlac10_standard_name]; });
+  } else if (scope === "genes") {
+    var all = [];
+    if (db.sheets) {
+      ["code_table","code_table_2","map"].forEach(function(sh){
+        (db.sheets[sh] || []).forEach(function(e){
+          all.push(Object.assign({}, e, { _from: sh }));
+        });
+      });
+    }
+    scan(all, function(e){ return [e.product_name, e.item_name, e.note, e.jlac10, e.jlac10_standard_name, e.generic_name]; });
+  }
+
+  matches.sort(function(a,b){ return b.score - a.score; });
+  var total = matches.length;
+  matches = matches.slice(0, 100);
+
+  if (total === 0) { setHtml("bactSearchResults", '<div class="status-bar">マッチなし（表記ゆれ正規化後も該当なし）</div>'); return; }
+
+  var html = '<div class="status-bar">' + total + '件ヒット（上位' + matches.length + '件表示）</div>';
+  matches.forEach(function(m){
+    var e = m.entry;
+    var cls = m.score >= 90 ? "high" : m.score >= 50 ? "mid" : "low";
+    var scoreCls = m.score >= 90 ? "score-high" : m.score >= 50 ? "score-mid" : "score-low";
+    var body = "";
+    if (scope === "species") {
+      body = '<b>' + esc(e.inhouse) + '</b> → ' + esc(e.janis_name) + ' <code>' + esc(e.janis_code) + '</code>';
+      if (e.note) body += ' <span style="color:var(--text-secondary);font-size:11px">' + esc(e.note) + '</span>';
+    } else if (scope === "antibiotics") {
+      body = '<b>' + esc(e.inhouse) + '</b> → ' + esc(e.janis_name) + ' (' + esc(e.janis_abbr) + ') <code>' + esc(e.janis_code) + '</code>';
+      if (e.note) body += ' <span style="color:var(--text-secondary);font-size:11px">' + esc(e.note) + '</span>';
+    } else if (scope === "materials") {
+      body = '<b>' + esc(e.material_name) + '</b> → <code>' + esc(e.jlac10_material) + '</code> ' + esc(e.jlac10_standard_name);
+    } else if (scope === "genes") {
+      var title = e.product_name || e.item_name || e.note || "(gene panel)";
+      body = '<b>' + esc(title) + '</b>';
+      if (e.jlac10) body += ' <code>' + esc(e.jlac10) + '</code>';
+      if (e.jlac10_standard_name) body += ' ' + esc(e.jlac10_standard_name);
+      body += ' <span style="color:var(--text-secondary);font-size:11px">[' + esc(e._from) + ']</span>';
+    }
+    html += '<div class="result-item ' + cls + '" style="padding:10px 12px">' +
+            '<span class="result-score ' + scoreCls + '">' + m.score + '</span> ' + body + '</div>';
+  });
+  setHtml("bactSearchResults", html);
 }
 
 // =====================================================================
