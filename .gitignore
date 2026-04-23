@@ -29,3 +29,6 @@ NCDA/
 
 # 認証情報を含むテストスクリプト（平文クレデンシャル）
 rochetchat_api_test.py
+
+# Streamlit secrets（実値は絶対にコミットしない。.example のみコミット）
+.streamlit/secrets.toml

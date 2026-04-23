@@ -4581,6 +4581,169 @@ function bactMatchMaterial(name, opts) {
 }
 
 // =====================================================================
+// 細菌検査 付番ロジック（SOP §2.3 準拠）
+//   JLAC10(17) = 分析物(5) + 識別(4=0000固定) + 材料(3) + 測定法(3) + 結果識別(2)
+//   原本: data/136jlac10_1.xlsx、SOP: NCDA/済み6. 標準作業手順書.docx
+// =====================================================================
+
+// SOP明文の禁止コード（使わない）
+var BACT_FORBIDDEN_ANALYTE = ["6C205", "6C106"];  // 6C205=MIC専用, 6C106=3薬剤以下
+var BACT_FORBIDDEN_METHOD  = ["742", "743", "744", "745"];  // 培養関連の未使用コード
+// 部位識別6001-6005 / 薬剤識別6010-6706 も識別=0000固定なので自動的に使わない
+
+// 分析物→デフォルト測定法（SOPに指定なき場合）
+var BACT_DEFAULT_METHOD = {
+  "6A010": "704",  // グラム染色
+  "6A105": "722",  // 真菌染色
+  "6A205": "717",  // チール・ネールゼン（または718蛍光）
+  "6A206": "717",
+  "6B010": "741",  // 培養検査
+  "6B105": "741",
+  "6B305": "746",  // 小川培地（または747液体培地）
+  "6C010": "762",  // 希釈法
+  "6C050": "762",
+  "6C105": "762",
+  "6B652": "856",  // multiplex PCR 等（遺伝子パネルは要資料参照）
+  "6B653": "856",
+  "6Z100": "999"   // 13C尿素呼気: 測定法は資料参照（暫定）
+};
+
+// 結果識別 共通コード（01-49）— 全分析物共通の意味
+var BACT_RESULT_ID_COMMON = {
+  "01": "定量値",
+  "05": "希釈倍率（MIC値等）",
+  "11": "判定（液体培地陽性/陰性等）",
+  "12": "スコア（菌量等）",
+  "14": "型（菌名/薬剤名等）",
+  "49": "別紙報告"
+};
+
+// 塗抹培養の菌量結果識別（検体種別ごと）
+var BACT_QUANTITY_RESULT_ID = {
+  normal: "12",         // 通常（スコア）
+  urine: "01",          // 尿（定量値）
+  "liquid-medium": "11" // 液体培地（判定）
+};
+
+function bactClassifyTest(analyte5) {
+  if (!analyte5) return "unknown";
+  var a = String(analyte5).toUpperCase();
+  if (a === "6Z100") return "urea-breath";
+  if (a.indexOf("6A") === 0) return "smear-microscopy";
+  if (a === "6B652" || a === "6B653") return "gene-panel";
+  if (a.indexOf("6B") === 0) return "culture-identification";
+  if (a.indexOf("6C") === 0) return "susceptibility";
+  return "unknown";
+}
+
+function bactDefaultMethod(analyte5) {
+  return BACT_DEFAULT_METHOD[String(analyte5).toUpperCase()] || "";
+}
+
+function bactValidateJlac10(code17) {
+  var errors = [];
+  var warnings = [];
+  if (!code17) { errors.push("空コード"); return { valid:false, errors:errors, warnings:warnings }; }
+  var s = String(code17);
+  if (s.length !== 17) errors.push("長さが17桁でない: " + s.length);
+  var analyte = s.slice(0, 5);
+  var identifier = s.slice(5, 9);
+  var material = s.slice(9, 12);
+  var method = s.slice(12, 15);
+  var resultId = s.slice(15, 17);
+
+  if (BACT_ANALYTE_5DIGIT.indexOf(analyte) === -1 && !/^6[A-Z]/.test(analyte)) {
+    warnings.push("細菌検査分析物コードではない可能性: " + analyte);
+  }
+  if (BACT_FORBIDDEN_ANALYTE.indexOf(analyte) !== -1) {
+    errors.push("使わない分析物: " + analyte + "（SOP §2.3）");
+  }
+  if (identifier !== "0000") {
+    errors.push("細菌検査の識別は0000固定: " + identifier);
+  }
+  if (BACT_FORBIDDEN_METHOD.indexOf(method) !== -1) {
+    errors.push("使わない測定法: " + method + "（742-745はSOPで未使用）");
+  }
+  if (analyte === "6Z100" && material !== "098") {
+    errors.push("6Z100の材料は098固定: " + material);
+  }
+  if (!/^\d{2}$/.test(resultId) && !/^[0-9][0-9]$/.test(resultId)) {
+    warnings.push("結果識別が数字2桁でない: " + resultId);
+  } else {
+    var n = parseInt(resultId, 10);
+    if (n < 1 || (n >= 50 && n <= 50) || n > 99) {
+      warnings.push("結果識別が有効範囲外(01-49,51-99): " + resultId);
+    }
+  }
+  return {
+    valid: errors.length === 0,
+    errors: errors,
+    warnings: warnings,
+    parts: { analyte:analyte, identifier:identifier, material:material, method:method, resultId:resultId }
+  };
+}
+
+function bactAssembleJlac10(parts) {
+  // parts: { analyte, material, method?, resultId, identifier? }
+  // method 未指定時は BACT_DEFAULT_METHOD から補完、identifier 未指定時は 0000
+  parts = parts || {};
+  var analyte = String(parts.analyte || "").toUpperCase();
+  var identifier = String(parts.identifier || "0000");
+  var material = String(parts.material || "");
+  var method = String(parts.method || bactDefaultMethod(analyte));
+  var resultId = String(parts.resultId || "");
+
+  var autoApplied = [];
+  if (!parts.method && method) autoApplied.push("method(" + method + ") from default");
+  if (!parts.identifier) autoApplied.push("identifier(0000) fixed");
+  // 6Z100 の材料自動補完
+  if (analyte === "6Z100" && !material) {
+    material = "098";
+    autoApplied.push("material(098) fixed for 6Z100");
+  }
+
+  var code = analyte + identifier + material + method + resultId;
+  var v = bactValidateJlac10(code);
+  return {
+    jlac10: code,
+    parts: { analyte:analyte, identifier:identifier, material:material, method:method, resultId:resultId },
+    autoApplied: autoApplied,
+    valid: v.valid,
+    errors: v.errors,
+    warnings: v.warnings
+  };
+}
+
+// 塗抹培養ペア（菌名 + 菌量）
+function bactBuildCulturePair(opts) {
+  // opts: { analyte, material, method?, specimenKind? }
+  // specimenKind: 'normal'|'urine'|'liquid-medium' (菌量の結果識別を切替)
+  opts = opts || {};
+  var kind = opts.specimenKind || "normal";
+  var quantityResultId = BACT_QUANTITY_RESULT_ID[kind] || "12";
+  var species = bactAssembleJlac10({
+    analyte: opts.analyte, material: opts.material, method: opts.method, resultId: "14"
+  });
+  var quantity = bactAssembleJlac10({
+    analyte: opts.analyte, material: opts.material, method: opts.method, resultId: quantityResultId
+  });
+  return { species: species, quantity: quantity, specimenKind: kind };
+}
+
+// 薬剤感受性ペア（薬剤名 + MIC）
+function bactBuildSusceptibilityPair(opts) {
+  // opts: { analyte(6C系), material, method? }
+  opts = opts || {};
+  var drug = bactAssembleJlac10({
+    analyte: opts.analyte, material: opts.material, method: opts.method, resultId: "14"
+  });
+  var mic = bactAssembleJlac10({
+    analyte: opts.analyte, material: opts.material, method: opts.method, resultId: "05"
+  });
+  return { drugName: drug, mic: mic };
+}
+
+// =====================================================================
 // 投稿テンプレート（GitHub Markdown + Rocket.Chat）
 //   - マッピング結果を GitHub Issue コメント用の表Markdownに整形
 //   - Rocket.Chat 簡易通知を生成（GitHub permalink 付き）
@@ -4628,6 +4791,79 @@ function templateRocketChatNotice(opts) {
   lines.push((opts.hospital || "") + " マッピング完了、病院へ依頼済み");
   if (opts.githubPermalink) lines.push(opts.githubPermalink);
   return lines.join("\n");
+}
+
+// =====================================================================
+// ペイロードJSON（Pages → Streamlit 契約）
+//   スキーマ: docs/payload_schema.json
+//   用途: Pages で付番完了後にダウンロード、Streamlit でアップロード→3アクション発火
+// =====================================================================
+var PAYLOAD_SCHEMA_VERSION = "1.0";
+
+function _nowJstIso() {
+  var d = new Date();
+  // JST オフセットを明示（Date の toISOString は UTC）
+  var tzOffsetMin = d.getTimezoneOffset();
+  var local = new Date(d.getTime() - tzOffsetMin * 60 * 1000);
+  var iso = local.toISOString().slice(0, 19);
+  var sign = tzOffsetMin <= 0 ? "+" : "-";
+  var abs = Math.abs(tzOffsetMin);
+  var hh = String(Math.floor(abs / 60)).padStart(2, "0");
+  var mm = String(abs % 60).padStart(2, "0");
+  return iso + sign + hh + ":" + mm;
+}
+
+function buildMappingPayload(opts) {
+  // opts: { hospital, github, vendor, testCategory, rows, notes, powerAutomate }
+  opts = opts || {};
+  var rows = opts.rows || [];
+  var hospital = opts.hospital || { name: "" };
+  var hospitalLabel = (hospital.code || "") + (hospital.name || "");
+  var permalink = "";
+  if (opts.github && opts.github.issue_number && opts.github.repo) {
+    permalink = "https://github.com/" + opts.github.repo + "/issues/" + opts.github.issue_number;
+  }
+  var payload = {
+    version: PAYLOAD_SCHEMA_VERSION,
+    created_at: _nowJstIso(),
+    hospital: hospital,
+    rows: rows
+  };
+  if (opts.github)         payload.github = opts.github;
+  if (opts.vendor)         payload.vendor = opts.vendor;
+  if (opts.testCategory)   payload.test_category = opts.testCategory;
+  if (opts.notes)          payload.notes = opts.notes;
+  if (opts.powerAutomate)  payload.power_automate = opts.powerAutomate;
+
+  payload.templates = {
+    github_markdown: templateGithubIssueComment({
+      hospital: hospitalLabel,
+      rows: rows,
+      vendorNote: opts.vendor ? (opts.vendor.name + (opts.vendor.delivery_format ? "(" + opts.vendor.delivery_format + ")" : "")) : "",
+      requestedAt: _nowJstIso().slice(0, 10)
+    }),
+    rocketchat: templateRocketChatNotice({
+      mention: opts.mention || "@koakutu",
+      hospital: hospitalLabel,
+      githubPermalink: permalink
+    })
+  };
+  return payload;
+}
+
+function downloadMappingPayloadJson(payload, filename) {
+  var name = filename || ("mapping_payload_" + payload.created_at.replace(/[:.]/g, "-") + ".json");
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function() {
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 0);
 }
 
 // =====================================================================

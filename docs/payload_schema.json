@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/matdonaruno/outsourceing_get/docs/payload_schema.json",
+  "title": "マッピング完了ペイロード",
+  "description": "Pages で付番完了後に書き出し、Streamlit 側で3アクション発火に使うペイロード。Pages↔Streamlit の契約書。",
+  "type": "object",
+  "required": ["version", "created_at", "hospital", "rows"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "スキーマバージョン。破壊的変更時にインクリメント"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 JST (+09:00)"
+    },
+    "hospital": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "code": { "type": "string", "description": "病院コード（例: '100'）" },
+        "name": { "type": "string", "description": "病院略称（例: '北がん'）" }
+      }
+    },
+    "github": {
+      "type": "object",
+      "description": "GitHub Issue 連動情報（省略可）",
+      "properties": {
+        "issue_number": { "type": "integer" },
+        "repo": { "type": "string", "description": "owner/repo 形式" }
+      }
+    },
+    "vendor": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "ベンダー名（富士通/NEC/SSI/SBS/KHI/IBM/CSI/NAIS）" },
+        "delivery_format": { "type": "string", "description": "依頼書式名（例: 'JJマスタ更新ツール'）" }
+      }
+    },
+    "test_category": {
+      "type": "string",
+      "enum": ["specimen", "bacteria", "mixed"],
+      "description": "このペイロードが扱う検査種別"
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/row" }
+    },
+    "templates": {
+      "type": "object",
+      "description": "Pages 側で事前整形した投稿用テンプレート文字列",
+      "properties": {
+        "github_markdown": { "type": "string", "description": "Issueコメント本文（Markdown）" },
+        "rocketchat": { "type": "string", "description": "Rocket.Chat 通知本文（プレーン）" }
+      }
+    },
+    "power_automate": {
+      "type": "object",
+      "description": "Power Automate Webhook 発火情報（省略可）",
+      "properties": {
+        "webhook_key": { "type": "string", "description": "secrets.toml のキー名（例: 'vendor_fujitsu'）" },
+        "payload": { "type": "object", "description": "Webhookへ渡すボディ" }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "オペレータ向けメモ（SOP参照、注意喚起等）"
+    }
+  },
+  "definitions": {
+    "row": {
+      "type": "object",
+      "required": ["hospitalCode", "testName", "newJlac10"],
+      "properties": {
+        "hospitalCode":  { "type": "string", "description": "病院側の院内コード" },
+        "testName":      { "type": "string", "description": "病院側の検査名称" },
+        "oldJlac10":     { "type": "string", "description": "変更前のJLAC10(17桁)。新規は空" },
+        "newJlac10":     { "type": "string", "description": "付与する新しいJLAC10(17桁)" },
+        "standardName":  { "type": "string", "description": "JLAC10 正式名称" },
+        "material":      { "type": "string", "description": "JLAC10 材料コード(3桁) 付与時の材料名" },
+        "methodology":   { "type": "string", "description": "JLAC10 測定法コード(3桁)" },
+        "kind":          { "type": "string", "enum": ["specimen", "bacteria-smear", "bacteria-culture", "bacteria-susceptibility", "bacteria-gene", "urea-breath"], "description": "細菌検査パイプラインで判別される種別" },
+        "janis": {
+          "type": "object",
+          "description": "細菌検査時のJANIS情報（検体検査では空）",
+          "properties": {
+            "species_code":    { "type": "string", "description": "JANIS菌名コード(4桁)" },
+            "species_name":    { "type": "string" },
+            "antibiotic_code": { "type": "string", "description": "JANIS抗菌薬コード(4桁)" },
+            "antibiotic_abbr": { "type": "string" },
+            "antibiotic_name": { "type": "string" }
+          }
+        },
+        "pair": {
+          "type": "object",
+          "description": "塗抹培養/感受性の結果1+結果2ペア時の相方",
+          "properties": {
+            "role":          { "type": "string", "enum": ["species", "quantity", "drug-name", "mic"] },
+            "partnerJlac10": { "type": "string" }
+          }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1, "description": "matcher から得た付番の確信度" },
+        "warnings":   { "type": "array", "items": { "type": "string" }, "description": "付番時の警告（略号衝突等）" }
+      }
+    }
+  }
+}
