@@ -26,3 +26,6 @@ data/sop_samples/
 # 一時ファイル
 /tmp/
 NCDA/
+
+# 認証情報を含むテストスクリプト（平文クレデンシャル）
+rochetchat_api_test.py

@@ -4482,6 +4482,155 @@ function doBactSearch() {
 }
 
 // =====================================================================
+// Bacterial matchers: 付番パイプライン用（TOP1 + 信頼度 + 根拠を返す）
+//   - doBactSearch はUI検索向け（全件スコア付き）
+//   - bactMatch* は付番ロジック向け（最適1件 + メタ情報）
+//   - 空コード/空材料のエントリは除外
+// =====================================================================
+function _bactPickBest(entries, qN, fieldPicker, skip) {
+  var best = null;
+  entries.forEach(function(e) {
+    if (skip && skip(e)) return;
+    var score = 0;
+    var matched = "";
+    fieldPicker(e).forEach(function(f) {
+      var s = _bactScoreMatch(qN, bactNormalize(f));
+      if (s > score) { score = s; matched = f; }
+    });
+    if (score > 0 && (!best || score > best.score)) {
+      best = { entry: e, score: score, matchedField: matched };
+    }
+  });
+  return best;
+}
+
+function bactMatchSpecies(inhouse) {
+  if (!BACT_DB.species || !inhouse) return null;
+  var qN = bactNormalize(inhouse);
+  if (!qN) return null;
+  var best = _bactPickBest(
+    BACT_DB.species.entries, qN,
+    function(e){ return [e.inhouse, e.janis_name]; },
+    function(e){ return !e.janis_code; }
+  );
+  if (!best) return null;
+  var e = best.entry;
+  return {
+    janis_name: e.janis_name,
+    janis_code: e.janis_code,
+    confidence: best.score / 100,
+    source: best.matchedField === e.inhouse ? "inhouse縦積み一致" : "janis_name一致",
+    matched_on: best.matchedField,
+    note: e.note || ""
+  };
+}
+
+function bactMatchAntibiotic(inhouse) {
+  if (!BACT_DB.antibiotics || !inhouse) return null;
+  var qN = bactNormalize(inhouse);
+  if (!qN) return null;
+  var best = _bactPickBest(
+    BACT_DB.antibiotics.entries, qN,
+    function(e){ return [e.inhouse, e.janis_abbr, e.janis_name]; },
+    function(e){ return !e.janis_code; }
+  );
+  if (!best) return null;
+  var e = best.entry;
+  var warnings = [];
+  if (e.note && e.note.indexOf("検索注意項目") !== -1) {
+    warnings.push(e.note);
+  }
+  var src = "janis_name一致";
+  if (best.matchedField === e.inhouse) src = "inhouse縦積み一致";
+  else if (best.matchedField === e.janis_abbr) src = "janis_abbr一致";
+  return {
+    janis_abbr: e.janis_abbr,
+    janis_name: e.janis_name,
+    janis_code: e.janis_code,
+    confidence: best.score / 100,
+    source: src,
+    matched_on: best.matchedField,
+    warnings: warnings
+  };
+}
+
+function bactMatchMaterial(name, opts) {
+  opts = opts || {};
+  var allowXxx = opts.allowXxx !== false;  // デフォルトxxx許容
+  if (!BACT_DB.materials || !name) return null;
+  var qN = bactNormalize(name);
+  if (!qN) return null;
+  var best = _bactPickBest(
+    BACT_DB.materials.entries, qN,
+    function(e){ return [e.material_name, e.jlac10_standard_name]; },
+    function(e){
+      if (!e.jlac10_material) return true;
+      if (!allowXxx && String(e.jlac10_material).toLowerCase() === "xxx") return true;
+      return false;
+    }
+  );
+  if (!best) return null;
+  var e = best.entry;
+  return {
+    jlac10_material: e.jlac10_material,
+    jlac10_standard_name: e.jlac10_standard_name,
+    confidence: best.score / 100,
+    is_xxx: String(e.jlac10_material).toLowerCase() === "xxx",
+    matched_on: best.matchedField
+  };
+}
+
+// =====================================================================
+// 投稿テンプレート（GitHub Markdown + Rocket.Chat）
+//   - マッピング結果を GitHub Issue コメント用の表Markdownに整形
+//   - Rocket.Chat 簡易通知を生成（GitHub permalink 付き）
+//   - PAT不要。入力=行配列、出力=文字列。送信側とは疎結合。
+// =====================================================================
+function templateMappingTableMd(rows) {
+  // rows: [{hospitalCode, testName, oldJlac10, newJlac10, standardName}, ...]
+  if (!rows || !rows.length) return "";
+  var header = "| 病院コード | 検査名称 | 現在のJLAC10 | 新しいJLAC10 | JLAC10正式名称 |";
+  var sep    = "|---|---|---|---|---|";
+  var body = rows.map(function(r) {
+    var cells = [
+      r.hospitalCode || "",
+      r.testName || "",
+      r.oldJlac10 || "",
+      r.newJlac10 || "",
+      r.standardName || ""
+    ].map(function(c) {
+      // Markdownテーブルセル内の | と改行をエスケープ
+      return String(c).replace(/\|/g, "\\|").replace(/\n/g, " ");
+    });
+    return "| " + cells.join(" | ") + " |";
+  }).join("\n");
+  return [header, sep, body].join("\n");
+}
+
+function templateGithubIssueComment(opts) {
+  // opts: { hospital, rows, vendorNote, requestedAt }
+  var parts = [];
+  parts.push("**マッピング完了 " + (opts.hospital || "") + "**");
+  parts.push("");
+  parts.push(templateMappingTableMd(opts.rows || []));
+  parts.push("");
+  if (opts.vendorNote) {
+    parts.push("ベンダー: " + opts.vendorNote);
+  }
+  parts.push("病院へ設定依頼済み" + (opts.requestedAt ? "（" + opts.requestedAt + "）" : ""));
+  return parts.join("\n");
+}
+
+function templateRocketChatNotice(opts) {
+  // opts: { mention, hospital, githubPermalink }
+  var lines = [];
+  lines.push((opts.mention || "@koakutu"));
+  lines.push((opts.hospital || "") + " マッピング完了、病院へ依頼済み");
+  if (opts.githubPermalink) lines.push(opts.githubPermalink);
+  return lines.join("\n");
+}
+
+// =====================================================================
 // SN Dashboard Init
 // =====================================================================
 window.addEventListener("DOMContentLoaded", function() {
