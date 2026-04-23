@@ -462,6 +462,19 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <div class="card">
     <h2>Import <span style="font-size:10px;font-weight:400;color:var(--text-secondary);letter-spacing:0;text-transform:none;margin-left:12px">過去マッピング実績の蓄積</span></h2>
 
+    <!-- 対象切替（検体 / 細菌縦積み3種） -->
+    <div class="flex-row mb-12">
+      <button onclick="switchImportTarget('specimen')" class="btn btn-secondary sub-toggle-active" id="impTargetSpecimen">🧪 検体検査</button>
+      <button onclick="switchImportTarget('species')" class="btn btn-secondary" id="impTargetSpecies">🦠 JANIS菌名</button>
+      <button onclick="switchImportTarget('antibiotics')" class="btn btn-secondary" id="impTargetAntibiotics">💊 JANIS抗菌薬</button>
+      <button onclick="switchImportTarget('material')" class="btn btn-secondary" id="impTargetMaterial">🧫 細菌材料</button>
+    </div>
+
+    <!-- 細菌モード ガイドパネル（Pages単独では縦積みJSONを書き換えられないため、手順を誘導） -->
+    <div id="bactImportGuide" class="hidden" style="margin-bottom:12px;padding:12px;background:var(--bg-secondary);border-left:3px solid #c75c5c">
+      <div id="bactImportGuideBody"></div>
+    </div>
+
     <!-- 入力モード切替 -->
     <div class="flex-row mb-12">
       <button onclick="toggleInputSource('excel')" class="btn btn-secondary sub-toggle-active" id="inputSrcExcel">Excel File</button>
@@ -614,11 +627,20 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       <span class="step-num">6</span>[<b>確定分をDBに統合</b>] で蓄積 → [<b>結果Excelダウンロード</b>]
     </div>
     <div class="grid-4 mb-12">
-      <div><label>病院マスター（Excel）</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv"></div>
+      <div><label>病院マスター（Excel）</label><input id="bulkFile" type="file" accept=".xlsx,.xls,.csv" onchange="scanBulkSheets()"></div>
       <div><label>項目名の列</label><input id="bulkColName" type="text" value="A"></div>
       <div><label>病院名</label><input id="bulkHospital" type="text" placeholder="H001"></div>
       <div style="display:flex;align-items:end"><button onclick="doBulkMapping()" class="btn btn-primary" style="width:100%">一括マッピング</button></div>
     </div>
+
+    <!-- シート分類プレビュー（ファイル選択時に自動表示） -->
+    <div id="bulkSheetsPanel" class="hidden" style="margin-bottom:12px">
+      <div class="guide" style="font-size:12px;margin-bottom:6px">
+        検体/細菌を自動判別。両方が混在していればマッピング時にそれぞれのパイプラインへ順次流します（検体→細菌リニア遷移）。
+      </div>
+      <div id="bulkSheetsInfo"></div>
+    </div>
+
     <div class="status-bar" id="bulkStatus"></div>
     <div id="bulkResults" class="overflow-auto"></div>
     <div class="flex-row mt-12">
@@ -795,6 +817,17 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
 
       <!-- Error Items Table -->
       <div id="snErrorItemsTable" class="overflow-auto"></div>
+
+      <!-- 細菌検査グループ（HL7v2入力時のみ表示、OBR/OBX親子） -->
+      <div id="snBactGroupsPanel" class="hidden" style="margin-top:16px">
+        <h4 style="margin:0 0 8px 0;color:var(--text-primary);font-size:13px">
+          🦠 細菌検査グループ（OBR親子構造）
+        </h4>
+        <div class="guide" style="margin-bottom:8px">
+          菌名(14)+菌量(12/01/11)、薬剤名(14)+MIC(05) を SSMIX2 の OBR 単位でペアリング
+        </div>
+        <div id="snBactGroupsTable" class="overflow-auto"></div>
+      </div>
     </div>
 
     <!-- Sub Panel: Actions -->
@@ -1115,6 +1148,7 @@ var DB = { items: [], metadata: {} };
 var lastConvertedJson = null;
 var lastBulkResult = null;
 var lastErrorResult = null;
+var lastBactGroups = null;  // #11: HL7v2 入力時のみ、細菌グループ構造を保持
 var searchIndex = [];
 
 // DB auto-load from repository
@@ -1684,6 +1718,68 @@ function onRepoFileSelect() {
   }).catch(function(err) {
     document.getElementById("repoFileStatus").textContent = "Load failed: " + err.message;
   });
+}
+
+// Import 対象切替（検体 / 細菌縦積み3種）
+// 細菌対象選択時は縦積みJSON向けガイドを表示し、処理は Streamlit Stockpile / CLI に誘導
+var importTarget = "specimen";
+var BACT_IMPORT_SCHEMAS = {
+  species: {
+    title: "JANIS 菌名縦積み",
+    target_json: "data/janis_species.json",
+    columns: ["院内表記", "JANIS菌名", "JANISコード(4桁)", "備考"],
+    sample: "E.coli (ESBL+)\tEscherichia coli\t2002\t\nMRSA\tStaphylococcus aureus (MRSA)\t1303\t",
+    cli_example: 'uv run python scripts/append_stockpile.py species \\\n  --inhouse "E.coli (ESBL+)" --name "Escherichia coli" --code 2002'
+  },
+  antibiotics: {
+    title: "JANIS 抗菌薬縦積み",
+    target_json: "data/janis_antibiotics.json",
+    columns: ["院内表記", "JANIS略号", "JANIS抗菌薬名", "JANISコード(4桁)", "備考"],
+    sample: "*PIPC 100\tPIPC\tピペラシリン(PIPC)\t1266\t",
+    cli_example: 'uv run python scripts/append_stockpile.py antibiotics \\\n  --inhouse "*PIPC 100" --abbr "PIPC" --name "ピペラシリン(PIPC)" --code 1266'
+  },
+  material: {
+    title: "細菌検査材料 Lookup",
+    target_json: "data/bact_materials.json",
+    columns: ["材料名", "JLAC10材料コード(3桁 or 'xxx')", "JLAC10標準名称"],
+    sample: "腹水(検査用)\t043\t腹水",
+    cli_example: 'uv run python scripts/append_stockpile.py material \\\n  --name "腹水(検査用)" --code 043 --standard "腹水"'
+  }
+};
+
+function switchImportTarget(target) {
+  importTarget = target;
+  ["Specimen", "Species", "Antibiotics", "Material"].forEach(function(t) {
+    var el = document.getElementById("impTarget" + t);
+    if (el) el.classList.remove("sub-toggle-active");
+  });
+  var active = target === "specimen" ? "Specimen" :
+               target === "species" ? "Species" :
+               target === "antibiotics" ? "Antibiotics" : "Material";
+  var el = document.getElementById("impTarget" + active);
+  if (el) el.classList.add("sub-toggle-active");
+
+  var guide = document.getElementById("bactImportGuide");
+  if (target === "specimen") {
+    guide.classList.add("hidden");
+    return;
+  }
+  guide.classList.remove("hidden");
+  var schema = BACT_IMPORT_SCHEMAS[target];
+  var html = '<div style="font-weight:600;color:#c75c5c;margin-bottom:6px">🦠 ' + esc(schema.title) + '</div>';
+  html += '<div style="font-size:12px;margin-bottom:8px">';
+  html += '追記先: <code>' + esc(schema.target_json) + '</code><br>';
+  html += '必要な列: ' + schema.columns.map(function(c){ return '<code>' + esc(c) + '</code>'; }).join(' / ');
+  html += '</div>';
+  html += '<div style="font-size:11px;color:var(--text-secondary);margin-bottom:6px">貼り付け形式サンプル（タブ区切り）:</div>';
+  html += '<pre style="font-size:11px;padding:8px;background:var(--bg-primary);border:1px solid var(--border);overflow-x:auto">' + esc(schema.sample) + '</pre>';
+  html += '<div style="font-size:11px;color:var(--text-secondary);margin:6px 0">追記方法（いずれか）:</div>';
+  html += '<ol style="font-size:12px;margin-left:20px">';
+  html += '<li><b>Streamlit Stockpile</b>: ローカルアプリで1件ずつ追記（GUI）</li>';
+  html += '<li><b>CLI</b>: <pre style="font-size:11px;padding:8px;background:var(--bg-primary);border:1px solid var(--border);overflow-x:auto">' + esc(schema.cli_example) + '</pre></li>';
+  html += '<li><b>一括PR起票</b>: 下のプレビューでJSONをダウンロード → PR で data/*.json に統合</li>';
+  html += '</ol>';
+  setHtml("bactImportGuideBody", html);
 }
 
 // 入力ソース切替（Excel / コピペ）
@@ -2463,30 +2559,117 @@ function downloadJson() {
 // =====================================================================
 // UI: Bulk Mapping
 // =====================================================================
+
+// ファイル選択時: 全シートを走査して検体/細菌の分類プレビューを表示
+function scanBulkSheets() {
+  var file = document.getElementById("bulkFile").files[0];
+  var panel = document.getElementById("bulkSheetsPanel");
+  var info = document.getElementById("bulkSheetsInfo");
+  if (!file) { panel.classList.add("hidden"); return; }
+  var colIdx = colToIndex(document.getElementById("bulkColName").value);
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var wb = XLSX.read(e.target.result, { type: "array" });
+    var html = '<table style="width:100%;font-size:12px;border-collapse:collapse">';
+    html += '<tr style="background:var(--bg-secondary)"><th style="padding:6px;text-align:left">#</th><th style="padding:6px;text-align:left">シート名</th><th style="padding:6px;text-align:left">分類</th><th style="padding:6px;text-align:right">行数</th><th style="padding:6px;text-align:left">根拠</th></tr>';
+    var specimenCount = 0, bactCount = 0;
+    wb.SheetNames.forEach(function(sn, i) {
+      var ws = wb.Sheets[sn];
+      var rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      // 先頭5行の項目名をサンプルに分類を決定
+      var sample = "";
+      for (var k = 1; k < Math.min(6, rows.length); k++) {
+        var row = rows[k];
+        if (row && row[colIdx] != null) { sample = String(row[colIdx]).trim(); break; }
+      }
+      var cls = classifyBactOrSpecimen({ sheet_name: sn, item_name: sample });
+      var color = cls.type === "bacteria" ? "#c75c5c" : "#7ab87a";
+      var label = cls.type === "bacteria" ? "🦠 細菌" : "🧪 検体";
+      if (cls.type === "bacteria") bactCount++; else specimenCount++;
+      html += '<tr style="border-bottom:1px solid var(--border)">';
+      html += '<td style="padding:6px">' + (i + 1) + '</td>';
+      html += '<td style="padding:6px"><code>' + esc(sn) + '</code></td>';
+      html += '<td style="padding:6px;color:' + color + ';font-weight:600">' + label + '</td>';
+      html += '<td style="padding:6px;text-align:right">' + (rows.length - 1) + '</td>';
+      html += '<td style="padding:6px;color:var(--text-secondary);font-size:11px">' + esc(cls.reason) + '</td>';
+      html += '</tr>';
+    });
+    html += '</table>';
+    html += '<div style="margin-top:6px;font-size:12px;color:var(--text-secondary)">' +
+            '検体シート: <b style="color:#7ab87a">' + specimenCount + '</b> / ' +
+            '細菌シート: <b style="color:#c75c5c">' + bactCount + '</b>' +
+            '</div>';
+    setHtml("bulkSheetsInfo", html);
+    panel.classList.remove("hidden");
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// 細菌分析物コードキーワード（細菌行の自動判定に使用）
+function _rowLikelyBact(name) {
+  if (!name) return false;
+  for (var i = 0; i < BACT_KEYWORDS.length; i++) {
+    if (name.indexOf(BACT_KEYWORDS[i]) !== -1) return true;
+  }
+  return false;
+}
+
 function doBulkMapping() {
   var file = document.getElementById("bulkFile").files[0];
   if (!file) { showToast("ファイルを選択してください"); return; }
   var colIdx = colToIndex(document.getElementById("bulkColName").value);
   var reader = new FileReader();
   reader.onload = function(e) {
-    var wb = XLSX.read(e.target.result,{type:"array"});
-    var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1});
-    var results=[], auto=0, cand=0, manual=0;
-    for (var i=1;i<rows.length;i++) {
-      var row=rows[i]; var name=colIdx>=0&&row?String(row[colIdx]==null?"":row[colIdx]).trim():"";
-      if(!name)continue;
-      var matches=search(name,5); var status,best;
-      if(matches.length>0&&matches[0].score>=90){status="auto";best=matches[0];auto++;}
-      else if(matches.length>0&&matches[0].score>=50){status="candidate";best=matches[0];cand++;}
-      else{status="manual";best=null;manual++;}
-      results.push({row:i+1,itemName:name,status:status,matches:matches,bestMatch:best,
-        confirmed:false,selectedIdx:0});
-    }
-    lastBulkResult=results;
+    var wb = XLSX.read(e.target.result, { type: "array" });
+    var results = [], auto = 0, cand = 0, manual = 0;
+    var bacteriaRows = 0, specimenRows = 0;
+
+    wb.SheetNames.forEach(function(sn) {
+      var ws = wb.Sheets[sn];
+      var rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      var sheetCls = classifyBactOrSpecimen({ sheet_name: sn, item_name: rows[1] ? String(rows[1][colIdx] || "").trim() : "" });
+      for (var i = 1; i < rows.length; i++) {
+        var row = rows[i];
+        var name = colIdx >= 0 && row ? String(row[colIdx] == null ? "" : row[colIdx]).trim() : "";
+        if (!name) continue;
+
+        // 行単位の細菌判定（シート分類 + 行名キーワード）
+        var rowKind = sheetCls.type;
+        if (rowKind === "specimen" && _rowLikelyBact(name)) rowKind = "bacteria";
+        if (rowKind === "bacteria") bacteriaRows++; else specimenRows++;
+
+        // 検体: 既存 search、細菌: species/antibiotic/material matcher を順次試す
+        var matches = search(name, 5);
+        var bactHits = null;
+        if (rowKind === "bacteria") {
+          bactHits = {
+            species:    bactMatchSpecies(name),
+            antibiotic: bactMatchAntibiotic(name),
+            material:   bactMatchMaterial(name)
+          };
+        }
+
+        var status, best;
+        if (matches.length > 0 && matches[0].score >= 90) { status = "auto"; best = matches[0]; auto++; }
+        else if (matches.length > 0 && matches[0].score >= 50) { status = "candidate"; best = matches[0]; cand++; }
+        else { status = "manual"; best = null; manual++; }
+
+        results.push({
+          row: i + 1, sheet: sn, kind: rowKind,
+          itemName: name, status: status,
+          matches: matches, bestMatch: best,
+          bactHits: bactHits,
+          confirmed: false, selectedIdx: 0
+        });
+      }
+    });
+
+    lastBulkResult = results;
     document.getElementById("bulkStatus").textContent =
-      "Done: "+results.length+" | Auto: "+auto+" | Review: "+cand+" | Manual: "+manual;
-    document.getElementById("btnBulkDL").disabled=false;
-    document.getElementById("btnConfirmAuto").disabled=false;
+      "Done: " + results.length + " | Auto: " + auto + " | Review: " + cand + " | Manual: " + manual +
+      " | 🧪検体: " + specimenRows + " / 🦠細菌: " + bacteriaRows;
+    document.getElementById("btnBulkDL").disabled = false;
+    document.getElementById("btnConfirmAuto").disabled = false;
     renderBulkTable();
   };
   reader.readAsArrayBuffer(file);
@@ -2501,7 +2684,7 @@ function renderBulkTable() {
   var table = document.createElement("table");
   // Header
   var thead = document.createElement("tr");
-  ["","項目名","JLAC10候補","スコア","アクション"].forEach(function(t){
+  ["","分類","項目名","JLAC10候補","スコア","アクション"].forEach(function(t){
     var th = document.createElement("th"); th.textContent = t; thead.appendChild(th);
   });
   table.appendChild(thead);
@@ -2513,15 +2696,38 @@ function renderBulkTable() {
       var cls = r.confirmed ? "row-confirmed" : r.status==="auto" ? "row-ok" : r.status==="candidate" ? "row-warn" : "row-ng";
       tr.className = cls;
       tr.setAttribute("data-idx", idx);
+      if (r.kind === "bacteria") {
+        tr.style.borderLeft = "3px solid #c75c5c";
+      }
 
       // Col 1: Status icon
       var td0 = document.createElement("td");
       td0.textContent = r.confirmed ? "OK" : r.status==="auto" ? "OK" : r.status==="candidate" ? "??" : "--";
       tr.appendChild(td0);
 
-      // Col 2: Item name
+      // Col 2: Kind (検体/細菌 + シート名)
+      var tdKind = document.createElement("td");
+      var kindLabel = r.kind === "bacteria" ? "🦠細菌" : "🧪検体";
+      tdKind.innerHTML = '<span style="font-size:11px;color:' + (r.kind === "bacteria" ? "#c75c5c" : "#7ab87a") + '">' + kindLabel + '</span>' +
+                         (r.sheet ? '<div style="font-size:10px;color:var(--text-secondary)">' + esc(r.sheet) + '</div>' : '');
+      tr.appendChild(tdKind);
+
+      // Col 3: Item name + 細菌DB hits
       var td1 = document.createElement("td");
       td1.textContent = r.itemName;
+      if (r.bactHits) {
+        var h = r.bactHits;
+        var hits = [];
+        if (h.species)    hits.push("菌: "    + h.species.janis_name    + " " + h.species.janis_code);
+        if (h.antibiotic) hits.push("薬: "    + h.antibiotic.janis_name + " " + h.antibiotic.janis_code);
+        if (h.material)   hits.push("材料: "  + (h.material.jlac10_standard_name || h.material.material_name || "") + " " + h.material.jlac10_material);
+        if (hits.length > 0) {
+          var sub = document.createElement("div");
+          sub.style.cssText = "font-size:10px;color:var(--text-secondary);margin-top:2px";
+          sub.textContent = "→ " + hits.join(" / ");
+          td1.appendChild(sub);
+        }
+      }
       tr.appendChild(td1);
 
       // Col 3: JLAC10 candidate (select for candidate/manual, text for auto/confirmed)
@@ -3218,6 +3424,198 @@ function parseSsmix2Data(text) {
   return { segments: segments, errors: errors, summary: summary };
 }
 
+// =====================================================================
+// SSMIX2 親子構造パーサー（細菌検査対応）
+//   SPM(検体材料) → OBR(オーダー) → OBX*(結果) を親子でまとめる
+//   細菌グルーピング: 菌名(14)+菌量(12/01/11), 薬剤(14)+MIC(05) をペア検出
+// =====================================================================
+function _parseSpm(line) {
+  // SPM|1|||JC10^^JC10^local^名称^CS| または 3コンポーネント版
+  var fields = line.split("|");
+  var spm4 = (fields[4] || "").split("^");
+  return {
+    raw: line,
+    jc10: spm4[0] || "",
+    local_code: spm4[3] || spm4[0] || "",
+    name: spm4[4] || spm4[1] || "",
+    cs: spm4[5] || spm4[2] || ""
+  };
+}
+
+function _parseObr(line) {
+  // OBR|seq|placer|filler|code^name^CS|...
+  var fields = line.split("|");
+  var obr4 = (fields[4] || "").split("^");
+  var code = obr4[0] || "";
+  var order_type = "unknown";
+  if (code.indexOf("E0") === 0 || code.indexOf("e0") === 0) order_type = "request";
+  else if (code.indexOf("ER") === 0 || code.indexOf("er") === 0) order_type = "result";
+  return {
+    raw: line,
+    sequence: fields[1] || "",
+    order_code: code,
+    order_name: obr4[1] || "",
+    cs: obr4[2] || "",
+    order_type: order_type,
+    observations: []
+  };
+}
+
+function _parseObxObservation(line, lineNumber) {
+  // 既存 parseSsmix2Data と同じ構造を1件返す（再利用目的）
+  var fields = line.split("|");
+  var obx3 = (fields[3] || "").split("^");
+  var seg = { line_number: lineNumber, raw: line, sequence: fields[1] || "", data_type: fields[2] || "" };
+  if (obx3.length >= 6 && obx3[2] === "JC10") {
+    seg.jlac10 = obx3[0] || "";
+    seg.jlac10_name = obx3[1] || "";
+    seg.local_code = obx3[3] || "";
+    seg.item_name = obx3[4] || "";
+    seg.cs_name = obx3[5] || "";
+    seg.has_jlac10 = true;
+  } else {
+    seg.jlac10 = "";
+    seg.jlac10_name = "";
+    seg.local_code = obx3[0] || "";
+    seg.item_name = obx3[1] || "";
+    seg.cs_name = obx3[2] || "";
+    seg.has_jlac10 = false;
+  }
+  seg.sub_id = fields[4] || "";
+  seg.value = fields[5] || "";
+  seg.unit = fields[6] || "";
+  seg.ref_range = fields[7] || "";
+  seg.abnormal_flag = fields[8] || "";
+  seg.vendor = detectVendorFromCs(seg.cs_name);
+  return seg;
+}
+
+function parseSsmix2Grouped(text) {
+  // 返却: { specimens:[], orders:[{...observations:[]}] }
+  // OBX は直前の OBR 配下に入れる。OBR が無い OBX は orphan 扱い。
+  var specimens = [];
+  var orders = [];
+  var orphan = [];
+  var currentOrder = null;
+  var lines = text.split("\n");
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line) continue;
+    if (line.indexOf("SPM|") === 0) {
+      specimens.push(_parseSpm(line));
+    } else if (line.indexOf("OBR|") === 0) {
+      currentOrder = _parseObr(line);
+      currentOrder.line_number = i + 1;
+      orders.push(currentOrder);
+    } else if (line.indexOf("OBX|") === 0) {
+      var obs = _parseObxObservation(line, i + 1);
+      if (currentOrder) currentOrder.observations.push(obs);
+      else orphan.push(obs);
+    }
+  }
+  return { specimens: specimens, orders: orders, orphan: orphan };
+}
+
+// 結果識別2桁から細菌検査の役割を判定
+function _bactRoleOfResultId(resultId, analytePrefix) {
+  // analytePrefix: '6A'/'6B'/'6C'/'6Z' など
+  if (!resultId) return null;
+  if (resultId === "14") {
+    if (analytePrefix === "6B") return "species";    // 菌名
+    if (analytePrefix === "6C") return "drug-name";  // 薬剤名
+    return "label-14";
+  }
+  if (resultId === "12") return "quantity";         // 菌量スコア
+  if (resultId === "01") return "quantity-urine";   // 菌量(尿、定量値)
+  if (resultId === "11") return "quantity-liquid";  // 菌量(液体培地、判定)
+  if (resultId === "05") return "mic";              // MIC値
+  if (resultId === "49") return "separate-report";  // 別紙報告
+  return null;
+}
+
+function classifyBactGroups(grouped) {
+  // 各 order を走査、細菌検査なら observations をペアにグルーピング
+  // 返却: { bactOrders: [...], specimenOrders: [...] }
+  var bactOrders = [];
+  var specimenOrders = [];
+
+  function isBactObs(o) {
+    var head = String(o.jlac10 || "").slice(0, 5).toUpperCase();
+    return BACT_ANALYTE_5DIGIT.indexOf(head) !== -1;
+  }
+
+  grouped.orders.forEach(function(order) {
+    var bactObs = order.observations.filter(isBactObs);
+    var isBactOrder = bactObs.length > 0 ||
+      /培養|細菌|菌|感受性|MIC|抗酸菌|遺伝子/.test(order.order_name);
+
+    if (!isBactOrder) {
+      specimenOrders.push(order);
+      return;
+    }
+
+    // 細菌検査: observations を役割別に振り分け
+    var group = {
+      order: order,
+      species: [],
+      quantities: [],
+      drugNames: [],
+      mics: [],
+      unresolved: []  // JLAC10 未設定 or 役割不明
+    };
+
+    order.observations.forEach(function(o) {
+      if (!o.jlac10) {
+        group.unresolved.push(o);
+        return;
+      }
+      var head = String(o.jlac10).slice(0, 5).toUpperCase();
+      var prefix = head.slice(0, 2);
+      var resultId = String(o.jlac10).slice(15, 17);
+      var role = _bactRoleOfResultId(resultId, prefix);
+      o._role = role;
+      o._analyte = head;
+      if (role === "species") group.species.push(o);
+      else if (role === "quantity" || role === "quantity-urine" || role === "quantity-liquid") group.quantities.push(o);
+      else if (role === "drug-name") group.drugNames.push(o);
+      else if (role === "mic") group.mics.push(o);
+      else group.unresolved.push(o);
+    });
+
+    // ペア化: sub_id（OBX-4）で関連づけ、無ければ出現順
+    group.culturePairs = _pairBy(group.species, group.quantities);
+    group.susceptibilityPairs = _pairBy(group.drugNames, group.mics);
+
+    bactOrders.push(group);
+  });
+
+  return { bactOrders: bactOrders, specimenOrders: specimenOrders };
+}
+
+function _pairBy(firstList, secondList) {
+  // sub_id (OBX-4) が両方にあればそれで結合、なければ順序マッチ
+  var pairs = [];
+  var seconds = secondList.slice();
+  firstList.forEach(function(a) {
+    var idx = -1;
+    if (a.sub_id) {
+      for (var j = 0; j < seconds.length; j++) {
+        if (seconds[j].sub_id && seconds[j].sub_id === a.sub_id) { idx = j; break; }
+      }
+    }
+    if (idx === -1 && seconds.length > 0) idx = 0;  // 先頭と組ませる
+    if (idx !== -1) {
+      pairs.push({ primary: a, secondary: seconds[idx] });
+      seconds.splice(idx, 1);
+    } else {
+      pairs.push({ primary: a, secondary: null });
+    }
+  });
+  // 余った secondary は単独として追加
+  seconds.forEach(function(s) { pairs.push({ primary: null, secondary: s }); });
+  return pairs;
+}
+
 // フォーマット自動検知
 function detectErrorFormat(text) {
   var lines = text.split("\n");
@@ -3242,8 +3640,19 @@ function parseErrorRows(callback) {
     if (format === "hl7") {
       // HL7v2 OBXセグメント解析
       rows = parseHL7Segments(text);
-      showToast("HL7v2 format detected: " + rows.length + " OBX segments");
+      // #11: 細菌検査の親子構造も並行抽出（UIで後で表示）
+      try {
+        var grouped = parseSsmix2Grouped(text);
+        lastBactGroups = classifyBactGroups(grouped);
+      } catch (e) {
+        console.warn("bact grouping failed:", e);
+        lastBactGroups = null;
+      }
+      var bactNote = (lastBactGroups && lastBactGroups.bactOrders.length > 0)
+        ? " / 細菌オーダー: " + lastBactGroups.bactOrders.length + "件" : "";
+      showToast("HL7v2 format detected: " + rows.length + " OBX segments" + bactNote);
     } else {
+      lastBactGroups = null;
       // TSV / CSV / 単一列
       var ccIdx = parseInt(document.getElementById("pasteColCode").value);
       var cnIdx = parseInt(document.getElementById("pasteColName").value);
@@ -3301,11 +3710,88 @@ function analyzeErrors(callback) {
       results.push({ row: i + 1, code: code, name: name, status: status, matches: matches, bestMatch: best });
     }
     lastErrorResult = results;
+    var bactCount = (lastBactGroups && lastBactGroups.bactOrders) ? lastBactGroups.bactOrders.length : 0;
     document.getElementById("errorStatus").textContent =
-      results.length + " errors | Assignable: " + ok + " | Inquiry: " + ng;
+      results.length + " errors | Assignable: " + ok + " | Inquiry: " + ng +
+      (bactCount > 0 ? " | 細菌オーダー: " + bactCount : "");
     document.getElementById("btnErrorDL").disabled = false;
+    renderBactGroups();
     if (callback) callback(results);
   });
+}
+
+function renderBactGroups() {
+  var panel = document.getElementById("snBactGroupsPanel");
+  var table = document.getElementById("snBactGroupsTable");
+  if (!panel || !table) return;
+  if (!lastBactGroups || !lastBactGroups.bactOrders || lastBactGroups.bactOrders.length === 0) {
+    panel.classList.add("hidden");
+    setHtml("snBactGroupsTable", "");
+    return;
+  }
+  panel.classList.remove("hidden");
+
+  var html = "";
+  lastBactGroups.bactOrders.forEach(function(g, idx) {
+    var order = g.order;
+    html += '<div class="result-item" style="padding:10px 12px;margin-bottom:8px;border-left:3px solid var(--warning)">';
+    html += '<div style="font-weight:600;margin-bottom:6px">';
+    html += '#' + (idx + 1) + ' ' + esc(order.order_name || "(名称なし)") +
+            ' <code>' + esc(order.order_code) + '</code>' +
+            ' <span style="color:var(--text-secondary);font-size:11px">type=' + esc(order.order_type) + '</span>';
+    html += '</div>';
+
+    // 培養ペア
+    if (g.culturePairs.length > 0) {
+      html += '<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">🧫 培養（菌名+菌量）</div>';
+      html += '<table style="width:100%;font-size:12px;border-collapse:collapse">';
+      html += '<tr style="background:var(--bg-secondary)"><th style="padding:4px;text-align:left">菌名</th><th style="padding:4px;text-align:left">菌量</th><th style="padding:4px;text-align:left">sub_id</th></tr>';
+      g.culturePairs.forEach(function(p) {
+        var a = p.primary, b = p.secondary;
+        html += '<tr style="border-bottom:1px solid var(--border)">';
+        html += '<td style="padding:4px">' + (a ? esc(a.value || a.item_name) : '<em>(なし)</em>') + '</td>';
+        html += '<td style="padding:4px">' + (b ? esc(b.value || b.item_name) : '<em>(なし)</em>') + '</td>';
+        html += '<td style="padding:4px;color:var(--text-secondary);font-size:11px">' +
+                esc((a && a.sub_id) || (b && b.sub_id) || "") + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+    }
+
+    // 感受性ペア
+    if (g.susceptibilityPairs.length > 0) {
+      html += '<div style="font-size:12px;color:var(--text-secondary);margin-top:6px">💊 感受性（薬剤+MIC）</div>';
+      html += '<table style="width:100%;font-size:12px;border-collapse:collapse">';
+      html += '<tr style="background:var(--bg-secondary)"><th style="padding:4px;text-align:left">薬剤名</th><th style="padding:4px;text-align:left">MIC</th><th style="padding:4px;text-align:left">sub_id</th></tr>';
+      g.susceptibilityPairs.forEach(function(p) {
+        var a = p.primary, b = p.secondary;
+        html += '<tr style="border-bottom:1px solid var(--border)">';
+        html += '<td style="padding:4px">' + (a ? esc(a.value || a.item_name) : '<em>(なし)</em>') + '</td>';
+        html += '<td style="padding:4px">' + (b ? esc(b.value || b.item_name) : '<em>(なし)</em>') + '</td>';
+        html += '<td style="padding:4px;color:var(--text-secondary);font-size:11px">' +
+                esc((a && a.sub_id) || (b && b.sub_id) || "") + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+    }
+
+    // 未解決（JLAC10なし or 役割不明）
+    if (g.unresolved.length > 0) {
+      html += '<div style="font-size:12px;color:var(--danger);margin-top:6px">⚠ 未解決 ' + g.unresolved.length + '件（JLAC10未設定 or 結果識別不明）</div>';
+      html += '<ul style="margin:4px 0 0 20px;font-size:11px;color:var(--text-secondary)">';
+      g.unresolved.forEach(function(o) {
+        html += '<li>' + esc(o.item_name || o.local_code) +
+                (o.value ? ' = ' + esc(o.value) : '') +
+                (o.jlac10 ? ' <code>' + esc(o.jlac10) + '</code>' : ' <em>(JLAC10なし)</em>') +
+                '</li>';
+      });
+      html += '</ul>';
+    }
+
+    html += '</div>';
+  });
+
+  setHtml("snBactGroupsTable", html);
 }
 
 // --- Dashboard: Import Errors into selected case ---
