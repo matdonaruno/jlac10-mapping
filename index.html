@@ -6,6 +6,9 @@
 <title>JLAC10 MAPPER</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bwip-js@4.5.1/dist/bwip-js-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /*
@@ -401,6 +404,7 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
   <button class="tab" onclick="switchTab('bulk')" id="tab-bulk">Bulk Map</button>
   <button class="tab" onclick="switchTab('error')" id="tab-error">SN Error</button>
   <button class="tab" onclick="switchTab('data')" id="tab-data">Database</button>
+  <button class="tab" onclick="switchTab('barcode')" id="tab-barcode">Barcode</button>
   <button class="tab" onclick="switchTab('help')" id="tab-help">Help</button>
 </div>
 
@@ -1019,6 +1023,66 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
         <button onclick="reloadBactDB()" class="btn btn-secondary">リポジトリから再読み込み</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- BARCODE -->
+<!-- ============================================================ -->
+<div id="panel-barcode" class="hidden">
+  <div class="card">
+    <h2>Barcode PDF Generator</h2>
+    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">
+      Excelの設定依頼一覧をコピペすると、Code128バーコード付きPDFを生成します（A4 / クライアント完結 / サーバー送信なし）。
+    </p>
+
+    <label>テーブル貼り付け（ヘッダー行を含めてください）</label>
+    <textarea id="bcPaste" rows="8"
+      style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);padding:10px;width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;"
+      placeholder="例:&#10;設定依頼&#9;項目名称&#9;JLAC10&#10;020832&#9;総蛋白&#9;3A0150000002327101&#10;020833&#9;アルブミン&#9;3A015000000232710..."></textarea>
+
+    <div class="grid-3" style="margin-top:12px">
+      <div>
+        <label>設定依頼コード列</label>
+        <select id="bcColRequest" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);padding:8px;width:100%;font-size:13px;"></select>
+      </div>
+      <div>
+        <label>項目名称列（任意）</label>
+        <select id="bcColName" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);padding:8px;width:100%;font-size:13px;"></select>
+      </div>
+      <div>
+        <label>JLAC10列</label>
+        <select id="bcColJlac" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);padding:8px;width:100%;font-size:13px;"></select>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:12px;align-items:end">
+      <div>
+        <label>レイアウト</label>
+        <select id="bcLayout" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);padding:8px;width:100%;font-size:13px;">
+          <option value="auto" selected>自動（最大12件/ページ・余白圧縮）</option>
+          <option value="6">6 件 / ページ（ゆったり）</option>
+          <option value="8">8 件 / ページ</option>
+          <option value="10">10 件 / ページ</option>
+          <option value="12">12 件 / ページ（詰め込み）</option>
+        </select>
+      </div>
+      <div>
+        <label>バーコード高さ (mm)</label>
+        <input type="text" id="bcHeight" value="14" style="background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);padding:8px;width:100%;font-size:13px;">
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary" onclick="bcParseInput()" style="flex:1">プレビュー</button>
+        <button class="btn btn-primary" onclick="bcGeneratePdf()" style="flex:1">PDFダウンロード</button>
+      </div>
+    </div>
+
+    <div id="bcStatus" style="font-size:12px;color:var(--text-secondary);margin-top:12px;font-family:'JetBrains Mono',monospace"></div>
+  </div>
+
+  <div class="card" id="bcPreviewCard" style="display:none">
+    <h2>Preview</h2>
+    <div id="bcPreview" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
   </div>
 </div>
 
@@ -4785,16 +4849,17 @@ function knowledgeModalSave() {
 // Tab Switch
 // =====================================================================
 var TAB_COLORS = {
-  "search": "#d4a853",
-  "import": "#6a9ec7",
-  "bulk":   "#7ab87a",
-  "error":  "#c75c5c",
-  "data":   "#d4a853",
-  "help":   "#9a9590"
+  "search":  "#d4a853",
+  "import":  "#6a9ec7",
+  "bulk":    "#7ab87a",
+  "error":   "#c75c5c",
+  "data":    "#d4a853",
+  "barcode": "#b88ec7",
+  "help":    "#9a9590"
 };
 
 function switchTab(name) {
-  var tabs=["search","import","bulk","error","data","help"];
+  var tabs=["search","import","bulk","error","data","barcode","help"];
   for(var t of tabs){
     document.getElementById("panel-"+t).classList.toggle("hidden",t!==name);
     var btn=document.getElementById("tab-"+t);
@@ -5358,6 +5423,410 @@ function downloadMappingPayloadJson(payload, filename) {
 window.addEventListener("DOMContentLoaded", function() {
   snLoadCases();
   snRenderCaseList("all");
+});
+
+// =====================================================================
+// Barcode PDF Generator
+// =====================================================================
+var BC_ROWS = []; // {request, name, jlac}
+
+function bcClear(el) {
+  if (!el) return;
+  while (el.firstChild) el.removeChild(el.firstChild);
+}
+
+function bcNormalize(v) {
+  if (v === null || v === undefined) return "";
+  var s = String(v);
+  if (typeof s.normalize === "function") s = s.normalize("NFKC");
+  return s.replace(/[^0-9A-Za-z]/g, "").trim();
+}
+
+function bcSetStatus(msg, isError) {
+  var el = document.getElementById("bcStatus");
+  if (!el) return;
+  el.style.color = isError ? "var(--danger)" : "var(--text-secondary)";
+  el.textContent = msg;
+}
+
+function bcParseClipboardText(raw) {
+  var text = (raw || "").trim();
+  if (!text) return [];
+  var tsv = (typeof htmlTableToTsv === "function") ? htmlTableToTsv(text) : null;
+  if (tsv) text = tsv;
+  var lines = text.split(/\r?\n/).filter(function(l){ return l.trim().length > 0; });
+
+  // 全行を見て最頻区切りを決定
+  var tabCount = 0, commaCount = 0, multiSpaceCount = 0;
+  lines.forEach(function(l) {
+    tabCount        += (l.match(/\t/g)    || []).length;
+    commaCount      += (l.match(/,/g)     || []).length;
+    multiSpaceCount += (l.match(/ {2,}/g) || []).length;
+  });
+
+  var splitter;
+  if (tabCount > 0)        splitter = function(l){ return l.split("\t"); };
+  else if (commaCount > 0) splitter = function(l){ return l.split(","); };
+  else if (multiSpaceCount > 0) splitter = function(l){ return l.split(/ {2,}/); };
+  else splitter = function(l){ return [l]; };
+
+  return lines.map(function(l){ return splitter(l).map(function(s){ return s.trim(); }); });
+}
+
+// 1列の行から「設定依頼/項目名/JLAC10」を内容ベースで抽出
+// 例: "020832 総蛋白 3A015000000232710" → {request, name, jlac}
+function bcExtractFromMixedLine(line) {
+  if (!line) return null;
+  // 行頭の "#N" 装飾を除去
+  var clean = String(line).replace(/^\s*#\d+\s*/, "").trim();
+  if (!clean) return null;
+  // 空白（半角/全角）で分割
+  var tokens = clean.split(/[\s　]+/).filter(function(t){ return t.length > 0; });
+  if (tokens.length === 0) return null;
+
+  var request = "", jlac = "", nameParts = [];
+  tokens.forEach(function(t) {
+    if (/^[0-9A-Za-z]{12,}$/.test(t) && /[A-Za-z]/.test(t)) {
+      // 12文字以上で英字混じり → JLAC10 候補
+      if (!jlac) jlac = t;
+      else nameParts.push(t);
+    } else if (/^\d{4,11}$/.test(t)) {
+      // 4-11桁の純数字 → 設定依頼コード候補
+      if (!request) request = t;
+      else nameParts.push(t);
+    } else {
+      // それ以外は項目名
+      nameParts.push(t);
+    }
+  });
+  if (!request && !jlac) return null;
+  return { request: request, name: nameParts.join(" "), jlac: jlac };
+}
+
+function bcGuessColumn(headers, patterns) {
+  for (var i = 0; i < headers.length; i++) {
+    var h = String(headers[i] || "").toLowerCase();
+    for (var j = 0; j < patterns.length; j++) {
+      if (h.indexOf(patterns[j]) >= 0) return i;
+    }
+  }
+  return -1;
+}
+
+function bcPopulateSelect(selectId, headers, selectedIdx, allowEmpty) {
+  var sel = document.getElementById(selectId);
+  if (!sel) return;
+  bcClear(sel);
+  if (allowEmpty) {
+    var optEmpty = document.createElement("option");
+    optEmpty.value = "-1";
+    optEmpty.textContent = "(なし)";
+    sel.appendChild(optEmpty);
+  }
+  headers.forEach(function(h, i) {
+    var opt = document.createElement("option");
+    opt.value = String(i);
+    opt.textContent = (i+1) + ": " + (h || "(列" + (i+1) + ")");
+    if (i === selectedIdx) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  if (allowEmpty && selectedIdx < 0) sel.value = "-1";
+}
+
+function bcParseInput() {
+  var raw = document.getElementById("bcPaste").value;
+  var grid = bcParseClipboardText(raw);
+  if (grid.length === 0) {
+    bcSetStatus("入力が空です", true);
+    return;
+  }
+  // 列数の最頻値
+  var maxCols = 0;
+  grid.forEach(function(r){ if (r.length > maxCols) maxCols = r.length; });
+
+  // === 1列フォールバックモード ===
+  // タブ/カンマで分割できなかった or 全行1列 → 内容ベースで自動分解
+  if (maxCols < 2) {
+    BC_ROWS = [];
+    grid.forEach(function(row) {
+      var res = bcExtractFromMixedLine(row[0]);
+      if (res && (res.request || res.jlac)) {
+        BC_ROWS.push({
+          request: bcNormalize(res.request),
+          name:    res.name || "",
+          jlac:    bcNormalize(res.jlac)
+        });
+      }
+    });
+    // 列割当UIは無効化（ヘッダー1セルだけ表示）
+    bcPopulateSelect("bcColRequest", ["(自動検出)"], 0, false);
+    bcPopulateSelect("bcColName",    ["(自動検出)"], 0, true);
+    bcPopulateSelect("bcColJlac",    ["(自動検出)"], 0, false);
+    if (BC_ROWS.length === 0) {
+      bcSetStatus("自動分解に失敗。タブ区切りで貼り付けるか列を明示してください", true);
+      return;
+    }
+    bcSetStatus("1列入力を自動分解しました（" + BC_ROWS.length + " 件）。タブ区切り推奨");
+    bcRenderPreview();
+    return;
+  }
+
+  // === 通常モード ===
+  var headers = grid[0];
+  var idxReq  = bcGuessColumn(headers, ["設定依頼", "依頼コード", "request"]);
+  var idxName = bcGuessColumn(headers, ["項目名", "検査名", "name", "item"]);
+  var idxJlac = bcGuessColumn(headers, ["jlac"]);
+  if (idxReq  < 0) idxReq  = 0;
+  if (idxJlac < 0 && headers.length >= 3) idxJlac = 2;
+  // 設定依頼とJLAC10が同じ列を指していたら、JLAC10を別の列に振り直す
+  if (idxJlac === idxReq) {
+    for (var k = 0; k < headers.length; k++) {
+      if (k !== idxReq) { idxJlac = k; break; }
+    }
+  }
+  bcPopulateSelect("bcColRequest", headers, idxReq,  false);
+  bcPopulateSelect("bcColName",    headers, idxName, true);
+  bcPopulateSelect("bcColJlac",    headers, idxJlac, false);
+
+  var iReq  = parseInt(document.getElementById("bcColRequest").value, 10);
+  var iName = parseInt(document.getElementById("bcColName").value, 10);
+  var iJlac = parseInt(document.getElementById("bcColJlac").value, 10);
+
+  BC_ROWS = [];
+  for (var r = 1; r < grid.length; r++) {
+    var row = grid[r];
+    var req  = bcNormalize(row[iReq]);
+    var jlac = bcNormalize(row[iJlac]);
+    var name = (iName >= 0 && row[iName]) ? String(row[iName]).trim() : "";
+    if (!req && !jlac) continue;
+    BC_ROWS.push({ request: req, name: name, jlac: jlac });
+  }
+  if (BC_ROWS.length === 0) {
+    bcSetStatus("有効な行が見つかりませんでした。列割当を確認してください", true);
+    return;
+  }
+  bcSetStatus(BC_ROWS.length + " 件を読み込みました（" + maxCols + " 列検出）");
+  bcRenderPreview();
+}
+
+function bcDrawBarcode(canvas, text, opts) {
+  if (!text) return false;
+  try {
+    bwipjs.toCanvas(canvas, {
+      bcid: "code128",
+      text: text,
+      scale: (opts && opts.scale) || 2,
+      height: (opts && opts.height) || 12,
+      includetext: true,
+      textxalign: "center",
+      textsize: (opts && opts.textsize) || 8,
+      paddingwidth: 4,
+      paddingheight: 4
+    });
+    return true;
+  } catch (e) {
+    console.error("bwip-js error", e, "text=", text);
+    return false;
+  }
+}
+
+function bcRenderPreview() {
+  var card = document.getElementById("bcPreviewCard");
+  var box  = document.getElementById("bcPreview");
+  if (!card || !box) return;
+  bcClear(box);
+  var max = Math.min(BC_ROWS.length, 12);
+  for (var i = 0; i < max; i++) {
+    var row = BC_ROWS[i];
+    var item = document.createElement("div");
+    item.style.cssText = "background:var(--bg-secondary);border:1px solid var(--border);padding:10px;font-size:11px";
+    var title = document.createElement("div");
+    title.style.cssText = "color:var(--text-secondary);margin-bottom:6px;font-family:'JetBrains Mono',monospace";
+    title.textContent = "#" + (i+1) + (row.name ? " " + row.name : "");
+    item.appendChild(title);
+
+    if (row.request) {
+      var lbl = document.createElement("div");
+      lbl.style.cssText = "color:var(--text-secondary);margin-bottom:2px";
+      lbl.textContent = "設定依頼: " + row.request;
+      item.appendChild(lbl);
+      var c1 = document.createElement("canvas");
+      item.appendChild(c1);
+      bcDrawBarcode(c1, row.request, { scale: 2, height: 14 });
+    }
+    if (row.jlac) {
+      var lbl2 = document.createElement("div");
+      lbl2.style.cssText = "color:var(--text-secondary);margin:6px 0 2px";
+      lbl2.textContent = "JLAC10: " + row.jlac;
+      item.appendChild(lbl2);
+      var c2 = document.createElement("canvas");
+      item.appendChild(c2);
+      bcDrawBarcode(c2, row.jlac, { scale: 2, height: 14 });
+    }
+    box.appendChild(item);
+  }
+  card.style.display = "block";
+  var more = (BC_ROWS.length > max) ? " (+" + (BC_ROWS.length - max) + " 件は PDF にのみ出力)" : "";
+  bcSetStatus(BC_ROWS.length + " 件を読み込み済み。プレビューは先頭 " + max + " 件" + more);
+}
+
+// 1ページ分のDOM要素をオフスクリーンで構築（A4 210x297mm = 794x1123px@96dpi）
+// 1件 = 横一列: [番号/項目名] [REQUEST バーコード] [JLAC10 バーコード]
+function bcBuildPageElement(rows, bcHeightMm) {
+  var page = document.createElement("div");
+  page.style.cssText = [
+    "width:794px",
+    "height:1123px",
+    "background:#ffffff",
+    "color:#1a1a1a",
+    "padding:24px 28px",
+    "box-sizing:border-box",
+    "font-family:'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif",
+    "display:flex",
+    "flex-direction:column",
+    "gap:6px"
+  ].join(";");
+
+  rows.forEach(function(row) {
+    var slot = document.createElement("div");
+    slot.style.cssText = [
+      "flex:1",
+      "border:1px solid #d8d8d8",
+      "padding:6px 10px",
+      "display:flex",
+      "flex-direction:row",
+      "align-items:center",
+      "gap:14px",
+      "min-height:0"
+    ].join(";");
+
+    // 左: 番号 + 項目名
+    var head = document.createElement("div");
+    head.style.cssText = "flex:0 0 130px;display:flex;flex-direction:column;gap:2px;min-width:0";
+    var num = document.createElement("div");
+    num.style.cssText = "font-weight:700;font-size:11px;color:#888;font-family:monospace;letter-spacing:0.5px";
+    num.textContent = "#" + row._idx;
+    var nm = document.createElement("div");
+    nm.style.cssText = "font-size:13px;color:#111;font-weight:600;line-height:1.25;word-break:break-all";
+    nm.textContent = row.name || "";
+    head.appendChild(num);
+    head.appendChild(nm);
+    slot.appendChild(head);
+
+    function addBarcodeBlock(label, value, flexBasis) {
+      var block = document.createElement("div");
+      block.style.cssText = "flex:" + flexBasis + ";display:flex;flex-direction:column;gap:1px;min-width:0;align-items:flex-start";
+
+      var caption = document.createElement("div");
+      caption.style.cssText = "display:flex;align-items:baseline;gap:6px;font-size:9px;line-height:1";
+      var lbl = document.createElement("span");
+      lbl.style.cssText = "color:#888;letter-spacing:0.8px;font-weight:600";
+      lbl.textContent = label;
+      var code = document.createElement("span");
+      code.style.cssText = "font-family:monospace;font-size:11px;color:#222";
+      code.textContent = value || "—";
+      caption.appendChild(lbl);
+      caption.appendChild(code);
+      block.appendChild(caption);
+
+      var canvas = document.createElement("canvas");
+      canvas.style.cssText = "display:block;max-width:100%";
+      block.appendChild(canvas);
+
+      if (value) {
+        bcDrawBarcode(canvas, value, { scale: 2, height: bcHeightMm, textsize: 8 });
+      } else {
+        // 値なしのときは見えないようcanvasを空のまま
+        canvas.style.visibility = "hidden";
+      }
+      slot.appendChild(block);
+    }
+
+    // 中央: REQUEST (短い数字なので狭め) / 右: JLAC10 (長いので広め)
+    addBarcodeBlock("REQUEST", row.request, "1 1 0");
+    addBarcodeBlock("JLAC10",  row.jlac,    "2 1 0");
+
+    page.appendChild(slot);
+  });
+
+  return page;
+}
+
+async function bcGeneratePdf() {
+  if (!BC_ROWS || BC_ROWS.length === 0) {
+    bcParseInput();
+    if (!BC_ROWS || BC_ROWS.length === 0) return;
+  }
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    bcSetStatus("jsPDF が読み込めていません。ネットワーク接続を確認してください", true);
+    return;
+  }
+  if (typeof html2canvas !== "function") {
+    bcSetStatus("html2canvas が読み込めていません。ネットワーク接続を確認してください", true);
+    return;
+  }
+  var jsPDF = window.jspdf.jsPDF;
+  var layoutVal = document.getElementById("bcLayout").value;
+  var perPage;
+  if (layoutVal === "auto") {
+    // 全件を 1 ページに収める（上限12件・余白は均等分割で自動圧縮）
+    perPage = Math.min(BC_ROWS.length, 12);
+  } else {
+    perPage = parseInt(layoutVal, 10) || 10;
+  }
+  var bcHeightMm = parseFloat(document.getElementById("bcHeight").value) || 18;
+
+  var doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+
+  // オフスクリーン用ホスト
+  var host = document.createElement("div");
+  host.style.cssText = "position:fixed;left:-10000px;top:0;z-index:-1;pointer-events:none";
+  document.body.appendChild(host);
+
+  try {
+    var totalPages = Math.ceil(BC_ROWS.length / perPage);
+    for (var p = 0; p < totalPages; p++) {
+      bcSetStatus("PDF生成中… " + (p+1) + " / " + totalPages + " ページ");
+      var pageRows = [];
+      for (var k = 0; k < perPage; k++) {
+        var idx = p * perPage + k;
+        if (idx >= BC_ROWS.length) break;
+        var r = Object.assign({}, BC_ROWS[idx], { _idx: idx + 1 });
+        pageRows.push(r);
+      }
+      var pageEl = bcBuildPageElement(pageRows, bcHeightMm);
+      host.appendChild(pageEl);
+      // 次フレームまで待ってフォントとレイアウトを確定
+      await new Promise(function(res){ requestAnimationFrame(function(){ res(); }); });
+
+      var canvas = await html2canvas(pageEl, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        logging: false,
+        useCORS: true
+      });
+      var imgData = canvas.toDataURL("image/png");
+      if (p > 0) doc.addPage();
+      doc.addImage(imgData, "PNG", 0, 0, 210, 297, undefined, "FAST");
+
+      host.removeChild(pageEl);
+    }
+  } finally {
+    document.body.removeChild(host);
+  }
+
+  var stamp = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+  doc.save("barcode_" + stamp + ".pdf");
+  bcSetStatus("PDFを保存しました (" + BC_ROWS.length + " 件 / " + Math.ceil(BC_ROWS.length / perPage) + " ページ)");
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+  var ta = document.getElementById("bcPaste");
+  if (ta) {
+    ta.addEventListener("paste", function() {
+      setTimeout(bcParseInput, 50);
+    });
+  }
 });
 </script>
 </body>

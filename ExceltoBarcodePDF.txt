@@ -1,0 +1,243 @@
+目的（最重要）
+
+Excel（Web/Desktopどちらでもよい）にある設定依頼・JLAC10コード一覧から
+Code128バーコード付きPDFを自動生成する
+JavaScriptを使わない（Power Automateの制約回避）
+LISの据え置きバーコードリーダーで確実に読めること
+
+
+背景（説明しておくと理解が早い）
+
+Power Automate の HTML→PDF 変換では JavaScript / canvas は一切実行されない
+そのため bwip-js や <script> を使う方法は 白紙PDFになる
+今後は 「静的な画像（PNG / SVG）」のみをPDFに貼り込む方針に切り替える
+
+
+方針（Claudeに設計させたい方向性）
+方針A（Power Automate完結型・推奨）
+
+Power Automate内で Code128 バーコード画像（PNG 또는 SVG）を生成
+画像は Base64 で保持
+HTMLでは data:image/png;base64,XXXX のみ使用
+それを Power Automate の Convert file → PDF に渡す
+
+※ JavaScript・Canvas・外部CDNは使用しない
+
+Claudeにお願いする具体タスク
+① Code128 バーコード生成ロジックの提示
+
+JavaScript不要
+Power Automateで実行可能
+以下のいずれかで検討してほしい：
+
+Azure Function（Node / Python）
+Power Automate HTTP アクションで叩ける軽量API
+純粋に Power Automate 内で完結する方式（もし可能なら）
+
+
+
+② 入力仕様
+
+入力：英数字のみの文字列
+
+例：
+
+設定依頼コード 020832
+JLAC10コード 2A160000001931062
+
+
+
+
+出力：
+
+Code128（LIS向け）
+読み取り安定性優先（quiet zone含む）
+
+
+
+③ 生成物
+
+PNG もしくは SVG
+Base64 文字列として返却可能な形式
+
+④ Power Automate フロー構成案
+
+トリガー（ファイル作成 or 手動）
+Excel 行取得
+バーコード生成
+HTML組み立て（<img> のみ）
+PDF変換
+OneDrive保存
+
+⑤ HTMLテンプレート（JSなし）
+
+1件＝1ページ
+バーコード＋平文併記
+A4 / 印刷前提
+
+目的：
+Power Automateで、Excelにある設定依頼コード・JLAC10コードから、
+Code128バーコード付きPDFを生成したい。
+
+制約：
+- Power AutomateのHTML→PDF変換ではJavaScriptは実行されない
+- canvasや<script>は使用不可
+- フォント依存も避けたい
+
+要件：
+- Code128（LISの据え置きバーコードリーダーで読める）
+- バーコードはPNGまたはSVGの静的画像
+- Base64で扱えると嬉しい
+- PDF化時は<img>タグのみ利用
+
+お願い：
+1. Code128バーコードをPNG/SVGとして生成する実装案
+   （Azure Function、HTTP API、Power Automate完結のいずれでも可）
+2. Power Automateフロー全体の設計
+3. JavaScript不要のHTMLテンプレート例
+4. 実運用で安定するポイントの注意点
+
+
+
+office script
+function main(workbook: ExcelScript.Workbook) {
+
+    const srcSheet = workbook.getActiveWorksheet();
+    const srcName: string = srcSheet.getName();
+    const dstName: string = `${srcName}_Barcode`;
+
+    // 既存シート削除
+    const oldSheet = workbook.getWorksheet(dstName);
+    if (oldSheet) {
+        oldSheet.delete();
+    }
+
+    const dstSheet = workbook.addWorksheet(dstName);
+
+    // ===== 設定 =====
+    const START_ROW = 3;
+    const ROW_HEIGHT = 120;
+    const BARCODE_FONT = "Code 128";
+
+    // 元シート列
+    const COL_REQUEST = 1; // B
+    const COL_ITEMNAME = 2; // C
+    const COL_JLAC10 = 4; // E
+
+    const srcRange = srcSheet.getUsedRange();
+    if (!srcRange) return;
+
+    const rowCount: number = srcRange.getRowCount();
+
+    // ===== ヘッダー =====
+    dstSheet.getRange("A1").setValue("設定依頼");
+    dstSheet.getRange("B1").setValue("設定依頼（Barcode）");
+    dstSheet.getRange("C1").setValue("項目名称");
+    dstSheet.getRange("D1").setValue("JLAC10");
+    dstSheet.getRange("E1").setValue("JLAC10（Barcode）");
+
+    let outRow = 1;
+
+    for (let r = START_ROW; r < rowCount; r++) {
+
+        const reqValue = srcSheet.getCell(r, COL_REQUEST).getValue();
+        const itemValue = srcSheet.getCell(r, COL_ITEMNAME).getValue();
+        const jlacValue = srcSheet.getCell(r, COL_JLAC10).getValue();
+
+        // どちらも空ならスキップ
+        if (reqValue === "" && jlacValue === "") continue;
+
+        const reqNorm = normalizeToAlphaNumeric(reqValue);
+        const jlacNorm = normalizeToAlphaNumeric(jlacValue);
+
+        // 通常文字
+        dstSheet.getCell(outRow, 0).setValue(reqNorm);
+        dstSheet.getCell(outRow, 2).setValue(
+            typeof itemValue === "string" ? itemValue : ""
+        );
+        dstSheet.getCell(outRow, 3).setValue(jlacNorm);
+
+        // バーコード
+        if (reqNorm !== "") {
+            const cell = dstSheet.getCell(outRow, 1);
+            cell.setValue(toCode128(reqNorm));
+            applyBarcodeStyle(cell, BARCODE_FONT);
+        }
+
+        if (jlacNorm !== "") {
+            const cell = dstSheet.getCell(outRow, 4);
+            cell.setValue(toCode128(jlacNorm));
+            applyBarcodeStyle(cell, BARCODE_FONT);
+        }
+
+        // 行高さ固定
+        dstSheet.getRangeByIndexes(outRow, 0, 1, 5)
+            .getFormat()
+            .setRowHeight(ROW_HEIGHT);
+
+        outRow++;
+    }
+
+    // 列幅
+    dstSheet.getRange("A:A").getFormat().setColumnWidth(120);
+    dstSheet.getRange("B:B").getFormat().setColumnWidth(280);
+    dstSheet.getRange("C:C").getFormat().setColumnWidth(200);
+    dstSheet.getRange("D:D").getFormat().setColumnWidth(260);
+    dstSheet.getRange("E:E").getFormat().setColumnWidth(300);
+
+    // ページ設定
+    const pageLayout = dstSheet.getPageLayout();
+    pageLayout.setOrientation(ExcelScript.PageOrientation.portrait);
+    pageLayout.setZoom({ scale: 100 });
+    pageLayout.setLeftMargin(10);
+    pageLayout.setRightMargin(10);
+    pageLayout.setTopMargin(10);
+    pageLayout.setBottomMargin(10);
+    pageLayout.setHeaderMargin(5);
+    pageLayout.setFooterMargin(5);
+
+
+    dstSheet.activate();
+}
+
+
+/**
+ * Excel値を安全に英数字へ正規化
+ */
+function normalizeToAlphaNumeric(
+    value: string | number | boolean
+): string {
+    if (typeof value !== "string") return "";
+
+    return value
+        .normalize("NFKC")            // 全角→半角
+        .replace(/[^0-9A-Za-z]/g, "") // 英数字以外除外
+        .trim();
+}
+
+/**
+ * Code128 ラッパー
+ */
+function toCode128(value: string): string {
+    return `Ì${value}Î`;
+}
+
+/**
+ * バーコード書式
+ */
+function applyBarcodeStyle(
+    cell: ExcelScript.Range,
+    fontName: string
+): void {
+    const f = cell.getFormat();
+    f.getFont().setName(fontName);
+    f.getFont().setSize(24);
+    f.setHorizontalAlignment(ExcelScript.HorizontalAlignment.center);
+    f.setVerticalAlignment(ExcelScript.VerticalAlignment.center);
+}
+
+OneDrive>Excel online>office script バーコードフォントないので作れず
+OneDrive>Excel>PowerAutomate>JS動かず
+
+なので
+ローカルpython>Streamlit>UI テーブルコピペ>ヘッダー見つけて、ExceltoBarcodePDFを実行。ローカルにできたPDFをOneDriveへ
