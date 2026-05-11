@@ -46,6 +46,7 @@ srl-scraper search
 | 一括マッピング | 病院マスター Excel → 全件自動マッチ → 結果 Excel DL | 実装済 |
 | SNエラー対応 | SSMIX エラーリスト分析 → 付番可否判定 → 問い合わせメール生成 | 実装済 |
 | DB管理 | JSON 読み込み / 病院データ追加 / 統合DB ダウンロード | 実装済 |
+| Barcode | Excel貼り付け → Code128 バーコード付き PDF 生成（A4 / 最大12件/ページ / クライアント完結） | 実装済 |
 
 ### Python CLI（`srl-scraper`）
 
