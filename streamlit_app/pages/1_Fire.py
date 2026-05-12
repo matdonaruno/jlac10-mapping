@@ -108,7 +108,10 @@ with col_a:
     issue_in = st.number_input("Issue番号", value=int(issue_no), step=1, key="gh_issue")
     if st.button("GitHub Issue へ投稿", disabled=not cfg.github.ready(), use_container_width=True):
         with st.spinner("投稿中..."):
-            res = gh.post_issue_comment(cfg.github.token, repo_in, int(issue_in), github_body_edit)
+            res = gh.post_issue_comment(
+                cfg.github.token, repo_in, int(issue_in), github_body_edit,
+                api_base=cfg.github.api_base, verify_tls=cfg.github.verify_tls,
+            )
         if res.ok:
             st.success(res.message)
             if res.html_url:
@@ -161,7 +164,10 @@ if st.button("🚀 全て順次発火", type="primary", use_container_width=True
     # GitHub
     if cfg.github.ready() and repo_in and issue_in:
         with st.spinner("GitHub 投稿中..."):
-            r = gh.post_issue_comment(cfg.github.token, repo_in, int(issue_in), github_body_edit)
+            r = gh.post_issue_comment(
+                cfg.github.token, repo_in, int(issue_in), github_body_edit,
+                api_base=cfg.github.api_base, verify_tls=cfg.github.verify_tls,
+            )
         log.append(("GitHub", r.ok, r.message, r.html_url if r.ok else ""))
         gh_url = r.html_url if r.ok else ""
     else:

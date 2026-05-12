@@ -34,6 +34,8 @@ def _from_env(key: str, default: str = "") -> str:
 class GitHubConfig:
     token: str = ""
     default_repo: str = ""
+    api_base: str = "https://api.github.com"   # GHE の場合: https://<GHE_HOST>/api/v3
+    verify_tls: bool = True                    # GHE 自己署名証明書なら False
 
     def ready(self) -> bool:
         return bool(self.token)
@@ -72,6 +74,8 @@ def load_config() -> AppConfig:
     github = GitHubConfig(
         token=_from_secrets("github", "token") or _from_env("GITHUB_TOKEN"),
         default_repo=_from_secrets("github", "default_repo") or _from_env("GITHUB_REPO"),
+        api_base=_from_secrets("github", "api_base") or _from_env("GITHUB_API_BASE") or "https://api.github.com",
+        verify_tls=(_from_secrets("github", "verify_tls", "true").lower() != "false"),
     )
     rc = RocketChatConfig(
         url=_from_secrets("rocketchat", "url") or _from_env("RC_URL"),
