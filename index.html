@@ -652,6 +652,34 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
       <button onclick="mergeBulkToDb()" class="btn btn-secondary" id="btnBulkMerge" disabled>確定分をDBに統合</button>
       <button onclick="downloadBulkResult()" class="btn btn-secondary" id="btnBulkDL" disabled>結果Excelダウンロード</button>
     </div>
+
+    <!-- ペイロードJSON（Streamlit Fire 連携用） -->
+    <div style="margin-top:16px;padding:12px;background:var(--bg-secondary);border-left:3px solid #6a9ec7">
+      <div style="font-weight:600;margin-bottom:6px">📤 ペイロードJSON エクスポート（Streamlit Fire 連携）</div>
+      <div class="guide" style="font-size:11px;margin-bottom:8px">
+        付番結果を JSON 化 → 仕事PC の Streamlit Fire でアップロードして3アクション発火
+      </div>
+      <div class="grid-4 mb-12">
+        <div><label>Issue 番号</label><input id="bulkIssueNumber" type="number" placeholder="1234"></div>
+        <div><label>Repo (owner/name)</label><input id="bulkRepo" type="text" value="umetani/jlac10-mapping"></div>
+        <div><label>ベンダー</label>
+          <select id="bulkVendor" class="candidate-select" style="width:100%;padding:10px">
+            <option value="">(未指定)</option>
+            <option value="Fujitsu">Fujitsu</option>
+            <option value="NEC">NEC</option>
+            <option value="SSI">SSI</option>
+            <option value="SBS">SBS</option>
+            <option value="KHI">KHI</option>
+            <option value="IBM">IBM</option>
+            <option value="CSI">CSI</option>
+            <option value="NAIS">NAIS</option>
+          </select>
+        </div>
+        <div style="display:flex;align-items:end">
+          <button onclick="downloadBulkPayload()" class="btn btn-primary" id="btnBulkPayload" disabled style="width:100%">ペイロードJSON ダウンロード</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -852,6 +880,10 @@ select.sn-status-select { font-family:'JetBrains Mono',monospace; font-size:12px
         <button onclick="snGenerateEmail()" class="btn btn-primary btn-xs">メール生成</button>
         <button onclick="snGenerateGheComment()" class="btn btn-primary btn-xs">GHEコメント生成</button>
         <button onclick="snGenerateChatMsg()" class="btn btn-primary btn-xs">チャット文生成</button>
+        <button onclick="downloadCasePayload()" class="btn btn-primary btn-xs" style="background:#6a9ec7">📤 ペイロードJSON ダウンロード</button>
+      </div>
+      <div class="guide" style="font-size:11px">
+        ペイロードJSON = 仕事PC の Streamlit Fire でアップロードして3アクション（GitHub Issue + Rocket.Chat + Power Automate）を一括発火する用
       </div>
 
       <!-- Email Output -->
@@ -2734,6 +2766,8 @@ function doBulkMapping() {
       " | 🧪検体: " + specimenRows + " / 🦠細菌: " + bacteriaRows;
     document.getElementById("btnBulkDL").disabled = false;
     document.getElementById("btnConfirmAuto").disabled = false;
+    var btnPayload = document.getElementById("btnBulkPayload");
+    if (btnPayload) btnPayload.disabled = false;
     renderBulkTable();
   };
   reader.readAsArrayBuffer(file);
@@ -5415,6 +5449,122 @@ function downloadMappingPayloadJson(payload, filename) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }, 0);
+}
+
+// Bulk タブ: lastBulkResult → ペイロードJSON
+function downloadBulkPayload() {
+  if (!lastBulkResult || lastBulkResult.length === 0) {
+    showToast("先に「一括マッピング」を実行してください");
+    return;
+  }
+  var hospitalCode = (document.getElementById("bulkHospital").value || "").trim();
+  var issueStr = (document.getElementById("bulkIssueNumber").value || "").trim();
+  var repo = (document.getElementById("bulkRepo").value || "").trim();
+  var vendor = (document.getElementById("bulkVendor").value || "").trim();
+
+  var kindMap = { specimen: "specimen", bacteria: "bacteria-culture" };
+  var rows = lastBulkResult
+    .filter(function(r) { return r.bestMatch; })
+    .map(function(r) {
+      var row = {
+        hospitalCode: hospitalCode,
+        testName: r.itemName,
+        oldJlac10: "",
+        newJlac10: r.bestMatch.jlac10 || "",
+        standardName: r.bestMatch.matchedName || "",
+        kind: kindMap[r.kind] || "specimen",
+        confidence: typeof r.bestMatch.score === "number" ? r.bestMatch.score / 100 : 0
+      };
+      if (r.bactHits) {
+        var j = {};
+        if (r.bactHits.species)    { j.species_code = r.bactHits.species.janis_code; j.species_name = r.bactHits.species.janis_name; }
+        if (r.bactHits.antibiotic) { j.antibiotic_code = r.bactHits.antibiotic.janis_code; j.antibiotic_abbr = r.bactHits.antibiotic.janis_abbr; j.antibiotic_name = r.bactHits.antibiotic.janis_name; }
+        if (Object.keys(j).length > 0) row.janis = j;
+      }
+      return row;
+    });
+  if (rows.length === 0) { showToast("確定済みの行がありません"); return; }
+
+  var hasBact = rows.some(function(r) { return r.kind !== "specimen"; });
+  var hasSpec = rows.some(function(r) { return r.kind === "specimen"; });
+  var category = hasBact && hasSpec ? "mixed" : hasBact ? "bacteria" : "specimen";
+
+  var opts = {
+    hospital: { code: hospitalCode, name: "" },
+    testCategory: category,
+    rows: rows
+  };
+  if (issueStr && repo) {
+    opts.github = { issue_number: parseInt(issueStr, 10), repo: repo };
+  }
+  if (vendor) {
+    opts.vendor = { name: vendor };
+  }
+  var payload = buildMappingPayload(opts);
+  var fname = "bulk_" + (hospitalCode || "noid") +
+              (issueStr ? "_issue" + issueStr : "") +
+              "_" + payload.created_at.replace(/[:.]/g, "-").slice(0, 19) + ".json";
+  downloadMappingPayloadJson(payload, fname);
+  showToast("ペイロードJSON を保存: " + rows.length + " 行");
+}
+
+// SN Error タブ: 選択中ケース → ペイロードJSON
+function downloadCasePayload() {
+  if (!snSelectedCase || !snCases[snSelectedCase]) {
+    showToast("ケースを選択してください");
+    return;
+  }
+  var c = snCases[snSelectedCase];
+  var items = c.error_items || [];
+  if (items.length === 0) {
+    showToast("このケースにエラー項目がありません");
+    return;
+  }
+  var hospitalCode = c.hospital_id || "";
+  var hospitalName = c.hospital_name || "";
+  var issueNumber = c.issue_number || null;
+  var repo = "umetani/jlac10-mapping";
+
+  var rows = items
+    .filter(function(it) { return it.bestMatch || it.assigned_jlac10; })
+    .map(function(it) {
+      var newJ = (it.bestMatch && it.bestMatch.jlac10) || it.assigned_jlac10 || "";
+      var stdName = (it.bestMatch && it.bestMatch.matchedName) || it.standard_name || "";
+      var head = String(newJ).slice(0, 5).toUpperCase();
+      var isBact = BACT_ANALYTE_5DIGIT.indexOf(head) !== -1;
+      return {
+        hospitalCode: it.code || hospitalCode,
+        testName: it.name || "",
+        oldJlac10: it.original_jlac10 || "",
+        newJlac10: newJ,
+        standardName: stdName,
+        kind: isBact ? "bacteria-culture" : "specimen",
+        confidence: (it.bestMatch && typeof it.bestMatch.score === "number") ? it.bestMatch.score / 100 : 0
+      };
+    });
+  if (rows.length === 0) {
+    showToast("マッピング済みの項目がありません（マッピングを先に実行）");
+    return;
+  }
+
+  var hasBact = rows.some(function(r) { return r.kind !== "specimen"; });
+  var hasSpec = rows.some(function(r) { return r.kind === "specimen"; });
+  var category = hasBact && hasSpec ? "mixed" : hasBact ? "bacteria" : "specimen";
+
+  var opts = {
+    hospital: { code: hospitalCode, name: hospitalName },
+    testCategory: category,
+    rows: rows
+  };
+  if (issueNumber) {
+    opts.github = { issue_number: parseInt(issueNumber, 10), repo: repo };
+  }
+  var payload = buildMappingPayload(opts);
+  var fname = "case_" + (hospitalCode || "noid") +
+              (issueNumber ? "_issue" + issueNumber : "") +
+              "_" + payload.created_at.replace(/[:.]/g, "-").slice(0, 19) + ".json";
+  downloadMappingPayloadJson(payload, fname);
+  showToast("ペイロードJSON を保存: " + rows.length + " 行");
 }
 
 // =====================================================================
